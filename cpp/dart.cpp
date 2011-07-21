@@ -6,66 +6,40 @@ See main.cpp for details. */
 
 #include "dart.hpp"
 #include "io.hpp"
-#include <qpainter.h>
 #include <QLabel>
 #include <iostream>
 #include <QMouseEvent>
 #include <QResizeEvent>
+#include <QDebug>
     
 using namespace std;
-const int RADIUS=10;
- 
+
+io *clIO;
+
 dart::dart(QMainWindow *parent) : QMainWindow(parent){
+	iPaddingTop=0;
+	dZoomFactor=1;
+	
+	clIO = new io(this);
+	
 	setupUi(this);
-	
+	iPaddingTop=toolBar->height()+menubar->height(); //TODO put it in a suitable function
 	resize(600,600+toolBar->height()+menubar->height());
-	
 	toolBar->setMovable(FALSE);
 	
-	vDrawCircle(0,0,0);
+	
+// 	circleLabel = new QCircleLabel(this);
+// 	circleLabel->setGeometry(50,50,50,50);
+	
+	clIO->iReadQcf("dummyfile");
+	vDrawPoint(qlAllPlaces[0].x,qlAllPlaces[0].y);
+	
+	
 }
- 
+
 dart::~dart(){
 } 
 
-QLabel *circleLabel;
-QLabel *circleLabel1;
-QLabel *MouseLabel1;
-class QCircleLabel : public QLabel {
-	public:
-		QCircleLabel(QWidget *parent = 0, Qt::WindowFlags f = 0) :
-		QLabel(parent, f) {}
-// 		QCircleLabel(const QString &text, QWidget *parent = 0,
-// 		Qt::WindowFlags f = 0) : QLabel(text, parent, f) {}
-		~QCircleLabel() {}
-		
-		void paintEvent(QPaintEvent *event)
-		{
-			const int PENWIDTH=5;
-			QPainter p(this);
-			QPen pen;
-			pen.setWidth(PENWIDTH);
-			pen.setColor(QColor(0,0,255, 255-width()));
-			p.setRenderHint(QPainter::Antialiasing);
-			p.setPen(pen);
-			p.drawEllipse(PENWIDTH, PENWIDTH, width()-2*PENWIDTH, height()-2*PENWIDTH);
-			p.end();
-			QLabel::paintEvent(event);
-		}
-};
-
-class QMouseReleaseLabel : public QLabel {
-	public:
-		QMouseReleaseLabel(QWidget *parent = 0, Qt::WindowFlags f = 0) :
-		QLabel(parent, f) {}/*
-		QMouseReleaseLabel(const QString &text, QWidget *parent = 0,
-		Qt::WindowFlags f = 0) : QLabel(text, parent, f) {}*/
-		~QMouseReleaseLabel() {}
-		
-		void mouseReleaseEvent(QMouseEvent * event) {
-			cout << event->x() << " - " << event->y() << endl;
-		}
-};
 
 //draws distance circles around P(x|y), using the saved click-coordinates of place n, iteratin #count [recursion]
 void dart::vDrawCircle(int x, int y, int n, int count){
@@ -98,11 +72,21 @@ void dart::vDrawCircle(int x, int y, int n, int count){
 	}
 }
 
-void dart::resizeEvent ( QResizeEvent * event ) {
-	MouseLabel1->setText(QString("<img src=\"/home/markus/Dokumente/GitHub/QeoDart/qcf/de/border.png\" height=\"%1\" width=\"%1\"/>").arg(this->width()<this->height()-toolBar->height()-menubar->height()?this->width():this->height()-toolBar->height()-menubar->height()));
-	MouseLabel1->setGeometry(0, 0, this->width(), this->height());
+void dart::resizeEvent(QResizeEvent *event) {
+// 	MouseLabel1->setText(QString("<img src=\"/home/markus/Dokumente/GitHub/QeoDart/qcf/de/border.png\" height=\"%1\" width=\"%1\"/>").arg(this->width()<this->height()-toolBar->height()-menubar->height()?this->width():this->height()-toolBar->height()-menubar->height()));
+// 	MouseLabel1->setGeometry(0, 0, this->width(), this->height());
 	//maybe we want to preserve the shape of the window
 // 	int w=this->width(), h=this->height()-toolBar->height()-menubar->height(), n=this->width()<this->height()-toolBar->height()-menubar->height()?this->width():this->height()-toolBar->height()-menubar->height();
 // 	cout << w << " " << h << endl;
 // 	if(w!=h) resize(n,n+toolBar->height()+menubar->height());
+	
+	dZoomFactor=width()/600.0;
+	
+	qDebug() << "[i] iPaddingTop" << iPaddingTop << "dZoomFactor" << dZoomFactor;
+}
+
+void dart::vDrawPoint(int x, int y) {
+	qlCurrentPlace = new QPointLabel(this, this);
+	qlCurrentPlace->setGeometry(x,y+iPaddingTop,50,50);
+	qDebug() << "[i] drew point " << x << y << "+" << iPaddingTop;
 }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>740</width>
+    <height>535</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>740</width>
      <height>21</height>
     </rect>
    </property>
@@ -74,6 +74,9 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionNew_Game"/>
+   <addaction name="separator"/>
+   <addaction name="actionQuit"/>
   </widget>
   <action name="actionNew_Game">
    <property name="text">

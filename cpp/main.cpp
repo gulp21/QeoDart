@@ -13,7 +13,7 @@ You should have received a copy of the GNU General Public License along with thi
 #include <stdlib.h>
 #include <QApplication>
 #include "dart.hpp"
- 
+
 int main(int argc, char* argv[]) {
         QApplication a(argc, argv);
         dart w;

@@ -11,7 +11,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 #include <iostream>
 #include <stdlib.h>
-#include <QtGui>
+// #include <QtGui>
 #include <math.h>
 
 using namespace std; 
