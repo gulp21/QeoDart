@@ -6,115 +6,49 @@ See main.cpp for details. */
 
 #include <qstring.h>
 #include <qlist.h>
-#include "myLabels.hpp"
+#include <QLabel>
 
 #ifndef DART_HPP
 #define DART_HPP
 
-enum enPlaceType {state=10, capital=11};
-
 struct place {
    int x, y, dimx, dimy;
-   QString name;
+   QString name, placeType;
 };
 
 #include "ui_mainWindow.h"
  
-class dart : public QMainWindow, public Ui::MainWindow{
-	Q_OBJECT
+class dart : public QMainWindow, public Ui::MainWindow {
+Q_OBJECT
 
 	public:
 		dart (QMainWindow *parent = 0);
 		~dart();
-		
-		QList<place> qlAllPlaces;	//contains all places of the current map
-		QList<place*> qlCurrentPlaces;	//contains pointers pointing on the places in qlAllPlaces which fit the current placetype
-		
+
+		QList<place> qlAllPlaces; //contains all places of the current map
+		QList<place*> qlCurrentTypePlaces; //contains pointers pointing on the places in qlAllPlaces which fit the current placetype
+
 		double dZoomFactor;
+		int iPaddingTop;
+		QString qsCurrentPlaceType;
 		
+		void vMouseClickEvent(int x, int y);
+
 	private:
+		QList<QLabel*> qlPointLabels;
+		QList<QLabel*> qlCircleLabels;
+		
 		void resizeEvent ( QResizeEvent * event );
 		void vDrawCircle(int x, int y, int n, int count=0);
-		void vDrawPoint(int x, int y);
+		void vDrawPoint(int x, int y, QString name="");
+		void vShowAllPlaces();
 		
-		int iPaddingTop;
-		
-		QLabel *circleLabel;
-		QLabel *circleLabel1;
-		QLabel *MouseLabel1;
-		QLabel *qlCurrentPlace;
+		int iGetWindowSize();
+
+		QLabel *qlMouseClickOverlay;
+		QLabel *qlMapBackground;
 };
 
-const int RADIUS=10, PENWIDTH=5;
-
-// class dart;
-
-class QCircleLabel : public QLabel{
-	
-	dart *myDart;
-	
-	public:
-		QCircleLabel( dart *TDart, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), QLabel(parent, f) {}
-		QCircleLabel(const QString &text, QWidget *parent = 0,Qt::WindowFlags f = 0) : QLabel(text, parent, f) {}
-		~QCircleLabel() {}
-		
-		void paintEvent(QPaintEvent *event) {
-			QPainter p(this);
-			QPen pen;
-			pen.setWidth(PENWIDTH);
-			pen.setColor(QColor(0,0,255, 255-width()));
-			p.setRenderHint(QPainter::Antialiasing);
-			p.setPen(pen);
-			p.drawEllipse(PENWIDTH*myDart->dZoomFactor, PENWIDTH*myDart->dZoomFactor, width()-2*PENWIDTH, height()-2*PENWIDTH);
-			p.end();
-			QLabel::paintEvent(event);
-		}
-};
-
-class QPointLabel : public QLabel{
-	
-	dart *myDart;
-	
-	public:
-		QPointLabel( dart *TDart, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), QLabel(parent, f) {}
-// 		io::io(dart *TDart) : myDart(TDart){
-		QPointLabel(const QString &text, QWidget *parent = 0,Qt::WindowFlags f = 0) : QLabel(text, parent, f) {}
-		~QPointLabel() {}
-		
-		void paintEvent(QPaintEvent *event) {
-// 			QPainter p(this);
-// 			p.setBackgroundMode(Qt::OpaqueMode);
-// 			QBrush brush;
-// 			brush.setColor(QColor(100,0,255,200));
-// // 			p.setRenderHint(QPainter::Antialiasing);
-// 			p.setBackground(brush);
-// // 			p.background.color();
-// 			p.drawEllipse(QPointF(0, 0), width(), height());
-// 			p.end();
-// 			QLabel::paintEvent(event);
-//TODO Text
-			QPainter p(this);
-			QPen pen;
-			pen.setWidth(PENWIDTH);
-			pen.setColor(QColor(0,0,255, 255));
-			p.setRenderHint(QPainter::Antialiasing);
-			p.setPen(pen);
-			p.drawEllipse(PENWIDTH*myDart->dZoomFactor, PENWIDTH*myDart->dZoomFactor, PENWIDTH*myDart->dZoomFactor, PENWIDTH*myDart->dZoomFactor);
-			p.end();
-			QLabel::paintEvent(event);
-		}
-};
-
-class QMouseReleaseLabel : public QLabel{
-	public:
-		QMouseReleaseLabel(QWidget *parent = 0, Qt::WindowFlags f = 0) :
-		QLabel(parent, f) {}
-		~QMouseReleaseLabel() {}
-		
-		void mouseReleaseEvent(QMouseEvent * event) {
-			cout << event->x() << " - " << event->y() << endl;
-		}
-}; 
-
+#include "myLabels.hpp"
 
 #endif //DART_HPP 

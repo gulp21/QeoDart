@@ -11,7 +11,7 @@ See main.cpp for details. */
 using namespace std;
  
 io::io(dart *TDart) : myDart(TDart){
-	
+
 }
  
 io::~io(){
@@ -20,18 +20,28 @@ io::~io(){
 int io::iReadQcf(QString filename){
 	qDebug() << "[i] Reading file" << filename;
 	
-	place one;
-	one.x=50;
-	one.y=50;
-	one.dimx=10;
-	one.dimy=10;
-	one.name="bla";
-	myDart->qlAllPlaces.append(one);
+	for(int i=0;i<2;i++){
+		place one;
+		one.x=50+50*i;
+		one.y=50+20*i;
+		one.dimx=10;
+		one.dimy=10;
+		one.name="bla";
+		one.placeType="capitalOfLand;land";
+		myDart->qlAllPlaces.append(one);
+	}
 	
-	place entry;
+	
 	qDebug() << "[i] Read" << myDart->qlAllPlaces.count() << "places";
-	foreach(entry, myDart->qlAllPlaces){
-		qDebug() << entry.x << entry.y << entry.dimx << entry.dimy << entry.name;
+	qDebug() << "[i] current placetype is" << myDart->qsCurrentPlaceType;
+	
+	int max=myDart->qlAllPlaces.count();
+	myDart->qlCurrentTypePlaces.clear();
+	for(int i=0;i<max;i++){
+		if(myDart->qlAllPlaces[i].placeType.contains(myDart->qsCurrentPlaceType)){
+			myDart->qlCurrentTypePlaces.append(&(myDart->qlAllPlaces[i]));
+			qDebug() << myDart->qlAllPlaces[i].x << myDart->qlAllPlaces[i].y << myDart->qlAllPlaces[i].dimx << myDart->qlAllPlaces[i].dimy << myDart->qlAllPlaces[i].name;
+		}
 	}
 	
 	return 0;
