@@ -11,3 +11,4 @@ INCLUDEPATH += . cpp
 HEADERS += cpp/dart.hpp cpp/io.hpp ccp/myLabels.hpp
 FORMS += ui/mainWindow.ui
 SOURCES += cpp/dart.cpp cpp/io.cpp cpp/main.cpp
+QT += xml

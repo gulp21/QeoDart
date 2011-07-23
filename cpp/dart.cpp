@@ -50,6 +50,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	clIO->iReadQcf("dummyfile");
 // 	vDrawPoint(qlAllPlaces[0].x,qlAllPlaces[0].y);
 	vShowAllPlaces();
+	
+	clIO->iReadOsm("/home/markus/Dokumente/GitHub/QeoDart/cpp/test.svg");
 
 }
 

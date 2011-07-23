@@ -20,6 +20,7 @@ class io : public QWidget {
 		io(dart*);
 		~io();
 		int iReadQcf(QString filename);
+		int iReadOsm(QString filename);
 // 	private:
 };
 #endif //IO_HPP 
