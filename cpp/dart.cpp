@@ -51,7 +51,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 // 	vDrawPoint(qlAllPlaces[0].x,qlAllPlaces[0].y);
 	vShowAllPlaces();
 	
-	vDrawCircle(1,1,1,1);
+	clIO->iReadOsm("/home/markus/Dokumente/GitHub/QeoDart/cpp/test.svg");
 
 }
 
