@@ -60,7 +60,7 @@ class QPointLabel : public QLabel{
 			p.drawEllipse(a,a,a,a);
 			p.end();
 			
-			QString spaces="&nbsp;&nbsp;&nbsp;&nbsp;"; //WORKAROUND don't know another way for setting padding-left
+			QString spaces="&nbsp;&nbsp;&nbsp;&nbsp;"; //TODO WORKAROUND don't know another way for setting padding-left
 			for(int i=4;i<a;i++){
 				spaces+="&nbsp;";
 			}

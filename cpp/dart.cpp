@@ -50,6 +50,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	clIO->iReadQcf("dummyfile");
 // 	vDrawPoint(qlAllPlaces[0].x,qlAllPlaces[0].y);
 	vShowAllPlaces();
+	
+	vDrawCircle(1,1,1,1);
 
 }
 
@@ -59,25 +61,25 @@ dart::~dart(){
 
 //draws distance circles around P(x|y), using the saved click-coordinates of place n, iterating #count [recursion]
 void dart::vDrawCircle(int x, int y, int n, int count){
-// if(count*10 < dblGetDistance(x,y,QLscoreHistory[0][n].x(),QLscoreHistory[0][n].y())){ //TODO check all players
-if(count*10 < 55){ //TODO check all players
-// this->setAttribute(Qt::WA_PaintOutsidePaintEvent );
-// QPainter painter(this); painter.setPen(Qt::blue);
-// painter.drawEllipse(50,50,20,20);
-// if(count<7) vDrawCircle(x,y,n,count++);
+	// if(count*10 < dblGetDistance(x,y,QLscoreHistory[0][n].x(),QLscoreHistory[0][n].y())){ //TODO check all players
+	if(count*10 < 55){ //TODO check all players
+		// this->setAttribute(Qt::WA_PaintOutsidePaintEvent );
+		// QPainter painter(this); painter.setPen(Qt::blue);
+		// painter.drawEllipse(50,50,20,20);
+		// if(count<7) vDrawCircle(x,y,n,count++);
 
 
-// circleLabel = new QCircleLabel(this);
-//
-//
-// circleLabel->setGeometry(40, 40, 240, 240);
-//
-// circleLabel1 = new QCircleLabel(this);
-//
-// circleLabel1->setGeometry(50, 50, 200, 200);
-//
+		QLabel *circleLabel = new QCircleLabel(this,this);
+		
+		
+		circleLabel->setGeometry(40, 40, 40, 40);
+		//
+		// circleLabel1 = new QCircleLabel(this);
+		//
+		// circleLabel1->setGeometry(50, 50, 200, 200);
+		//
 
-}
+	}
 }
 
 void dart::resizeEvent(QResizeEvent *event) {
