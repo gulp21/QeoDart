@@ -49,35 +49,44 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 
 	clIO->iReadQcf("dummyfile");
 // 	vDrawPoint(qlAllPlaces[0].x,qlAllPlaces[0].y);
-	vShowAllPlaces();
+// 	vShowAllPlaces();
 	
-	clIO->iReadOsm("/home/markus/Dokumente/GitHub/QeoDart/cpp/test.svg");
+	connect(actionQuit,SIGNAL (triggered()), this, SLOT(vShowAllPlaces()));
+	connect(actionNew_Game,SIGNAL (triggered()), this, SLOT(vDrawDistanceCircles()));
+	
+// 	clIO->iReadOsm("/home/markus/Dokumente/GitHub/QeoDart/cpp/test.svg");
+	
+// 	vDrawCircle(1,1,1,1);
 
 }
 
 dart::~dart(){
 }
 
+void dart::vDrawDistanceCircles() {
+// 	vDrawCircle()
+}
 
 //draws distance circles around P(x|y), using the saved click-coordinates of place n, iterating #count [recursion]
-void dart::vDrawCircle(int x, int y, int n, int count){
+void dart::vDrawCircle(int x, int y, int n, int count) {
 	// if(count*10 < dblGetDistance(x,y,QLscoreHistory[0][n].x(),QLscoreHistory[0][n].y())){ //TODO check all players
-	if(count*10 < 55){ //TODO check all players
-		// this->setAttribute(Qt::WA_PaintOutsidePaintEvent );
-		// QPainter painter(this); painter.setPen(Qt::blue);
-		// painter.drawEllipse(50,50,20,20);
-		// if(count<7) vDrawCircle(x,y,n,count++);
+	if(count*10 < 55) { //TODO check all players
+
+		QLabel *circleLabel;
+		circleLabel = new QCircleLabel(this,x,y,(count+1)*10,this);
+		qDebug()<<count;
+		if(count<7) vDrawCircle(x,y,n,++count);
 
 
-		QLabel *circleLabel = new QCircleLabel(this,this);
 		
 		
-		circleLabel->setGeometry(40, 40, 40, 40);
+// 		circleLabel->setGeometry(40, 40, 40, 40);
 		//
-		// circleLabel1 = new QCircleLabel(this);
-		//
-		// circleLabel1->setGeometry(50, 50, 200, 200);
-		//
+// 		QLabel *circleLabel1;
+// 		circleLabel1 = new QCircleLabel(this, 200, 200, 40, this);
+		
+// 		circleLabel1->setGeometry(50, 50, 200, 200);
+		
 
 	}
 }
@@ -102,20 +111,32 @@ void dart::vDrawPoint(int x, int y, QString name) {
 	qlCurrentPlace = new QPointLabel(this, name, x, y, this);
 	qlPointLabels.append(qlCurrentPlace);
 // 	qlCurrentPlace->setGeometry(x,y+iPaddingTop,50,50);
+// 	qlCurrentPlace->setVisible(TRUE);
 	qDebug() << "[i] drew point " << x << y << "+" << iPaddingTop;
 }
 
 void dart::vShowAllPlaces() {
-	int max=qlCurrentTypePlaces.count();
-	for(int i=0;i<max;i++){ //TODO WITH?
+	for(int i=0, max=qlCurrentTypePlaces.count(); i<max; i++){ //TODO WITH?
 		vDrawPoint(qlCurrentTypePlaces[i]->x,qlCurrentTypePlaces[i]->y,qlCurrentTypePlaces[i]->name);
 	}
 }
 
 void dart::vMouseClickEvent(int x, int y) {
+	vDrawPoint(iGetUnzoomed(x),iGetUnzoomed(y),"s"); //TODO function get unzoomed
+// 	vShowAllPlaces();
 	
+	vDrawPoint(44,56);
+	vDrawCircle(iGetUnzoomed(x), iGetUnzoomed(y), 0);
 }
 
 int dart::iGetWindowSize() {
 	return width()<height()-iPaddingTop ? width() : height()-iPaddingTop;
+}
+
+void dart::vClose() {
+	close();
+}
+
+int dart::iGetUnzoomed(double x) {
+	return x/dZoomFactor;
 }

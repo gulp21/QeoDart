@@ -40,13 +40,18 @@ Q_OBJECT
 		
 		void resizeEvent ( QResizeEvent * event );
 		void vDrawCircle(int x, int y, int n, int count=0);
+		void vDrawDistanceCircles();
 		void vDrawPoint(int x, int y, QString name="");
-		void vShowAllPlaces();
 		
 		int iGetWindowSize();
+		int iGetUnzoomed(double x);
 
 		QLabel *qlMouseClickOverlay;
 		QLabel *qlMapBackground;
+	
+	private slots:
+		void vClose();
+		void vShowAllPlaces();
 };
 
 #include "myLabels.hpp"
