@@ -29,19 +29,28 @@ Q_OBJECT
 		QList<place*> qlCurrentTypePlaces; //contains pointers pointing on the places in qlAllPlaces which fit the current placetype
 
 		double dZoomFactor;
-		int iPaddingTop;
+		int iPaddingTop; // px between toolbar and map
+		int iMarginTop; // px between window decoration and toolbar
 		QString qsCurrentPlaceType;
 		
 		void vMouseClickEvent(int x, int y);
+		void mySleep(int ms);
 
 	private:
+		
+		int iNumberOfPlayers;
+		
 		QList<QLabel*> qlPointLabels;
 		QList<QLabel*> qlCircleLabels;
+// 		QList<QLabel*> qlPlayerLabel;
+		QList<QList<QLabel*> > qlPlayerLabels;
 		
 		void resizeEvent ( QResizeEvent * event );
-		void vDrawCircle(int x, int y, int n, int count=0);
-		void vDrawDistanceCircles();
+		void vDrawCircle(int x, int y,  int r);
+		void vDrawDistanceCircles(int x, int y, int n, int count=0);
 		void vDrawPoint(int x, int y, QString name="");
+		void vRemoveAllCircles();
+		void vSetNumberOfPlayers(int n);
 		
 		int iGetWindowSize();
 		int iGetUnzoomed(double x);
