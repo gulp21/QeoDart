@@ -8,7 +8,7 @@ DEPENDPATH += . cpp ui
 INCLUDEPATH += . cpp
 
 # Input
-HEADERS += cpp/dart.hpp cpp/io.hpp ccp/myLabels.hpp
+HEADERS += cpp/dart.hpp cpp/io.hpp ccp/myLabels.hpp cpp/qtwin.h
 FORMS += ui/mainWindow.ui
-SOURCES += cpp/dart.cpp cpp/io.cpp cpp/main.cpp
+SOURCES += cpp/dart.cpp cpp/io.cpp cpp/main.cpp cpp/qtwin.cpp
 QT += xml

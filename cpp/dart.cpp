@@ -12,6 +12,7 @@ See main.cpp for details. */
 #include <QResizeEvent>
 #include <QDebug>
 #include <QTime>
+#include "qtwin.h"
     
 using namespace std;
 
@@ -22,7 +23,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	iMarginTop=0;
 	dZoomFactor=1;
 	qsCurrentPlaceType="land";
-	
+	//QtWin::enableBlurBehindWindow(this, true);
+	QtWin::extendFrameIntoClientArea(this);
 	clIO = new io(this);
 
 	setupUi(this);
