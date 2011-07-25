@@ -5,6 +5,8 @@
 ** Use, modification and distribution is allowed without limitation,
 ** warranty, liability or support of any kind.
 **
+** http://labs.qt.nokia.com/2009/09/15/using-blur-behind-on-windows/
+**
 ****************************************************************************/
 
 #ifndef QTWIN_H

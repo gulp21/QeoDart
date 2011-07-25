@@ -18,9 +18,10 @@ class QCircleLabel : public QLabel{
 	
 	private:
 		int x, y, r;
+		QColor color;
 	
 	public:
-		QCircleLabel( dart *TDart, int X, int Y, int R, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), x(X), y(Y), r(R), QLabel(parent, f) {
+		QCircleLabel( dart *TDart, int X, int Y, int R, QColor COlor, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), x(X), y(Y), r(R), color(COlor), QLabel(parent, f) {
 			resize(1,1); // otherwise the circles would be visible at the wrong position, as paintEvent hasn't been triggered yet
 			setParent(myDart->centralwidget);
 			setVisible(TRUE);
@@ -36,7 +37,9 @@ class QCircleLabel : public QLabel{
 			double circleWidth=r*2*myDart->dZoomFactor;
 			
 			pen.setWidth(penWidth);
-			pen.setColor(QColor(0,0,255, 255-r*2)); //TODO *what?
+			QColor c=color;
+			c.setAlpha(255-r*2); //TODO *what?
+			pen.setColor(c);
 			p.setRenderHint(QPainter::Antialiasing);
 			p.setPen(pen);
 			p.drawEllipse(QRectF(penWidth/2, penWidth/2, circleWidth, circleWidth)); //x,y,w,h

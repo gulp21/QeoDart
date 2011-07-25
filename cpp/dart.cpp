@@ -6,13 +6,16 @@ See main.cpp for details. */
 
 #include "dart.hpp"
 #include "io.hpp"
+#include "qtwin.h"
 #include <QLabel>
 #include <iostream>
 #include <QMouseEvent>
 #include <QResizeEvent>
 #include <QDebug>
 #include <QTime>
-#include "qtwin.h"
+#include <math.h>
+#include <QDesktopWidget>
+#include <time.h>
     
 using namespace std;
 
@@ -23,15 +26,19 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	iMarginTop=0;
 	dZoomFactor=1;
 	qsCurrentPlaceType="land";
+	
 	//QtWin::enableBlurBehindWindow(this, true);
-	QtWin::extendFrameIntoClientArea(this);
+// 	QtWin::extendFrameIntoClientArea(this);
+	
+	srand(time(NULL));
+	
 	clIO = new io(this);
 
 	setupUi(this);
 	toolBar->setMovable(FALSE);
 	iMarginTop=toolBar->height()+menubar->height(); //TODO put it in a suitable function
 	
-	resize(600,600+iPaddingTop+iMarginTop);
+	resize(600,600+iMarginTop);
 	
 	qlMapBackground = new QLabel(this);
 	qlMapBackground->setAlignment(Qt::AlignTop);
@@ -60,18 +67,6 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	
 	vSetNumberOfPlayers(2);
 	
-	mySleep(2000);
-	
-	vSetNumberOfPlayers(3);
-	
-	mySleep(2000);
-	
-	vSetNumberOfPlayers(1);
-	
-	mySleep(2000);
-	
-	vSetNumberOfPlayers(2);
-	
 // 	QList<QList<QString> > field;
 // // 	for (int i = 0; i < 4; i++)
 // // 	{
@@ -96,16 +91,16 @@ dart::~dart(){
 void dart::vDrawDistanceCircles(int x, int y, int n, int count) {
 	// if(count*10 < dblGetDistance(x,y,QLscoreHistory[0][n].x(),QLscoreHistory[0][n].y())){ //TODO check all players
 	if(count*10 < 55) { //TODO check all players
-		vDrawCircle(x,y,(count+1)*10);
+		vDrawCircle(x,y,(count+1)*10,qlColorsOfPlayers[0]);
 		
 		qDebug()<<count;
 		vDrawDistanceCircles(x,y,n,++count);
 	}
 }
 
-void dart::vDrawCircle(int x, int y, int r) {
+void dart::vDrawCircle(int x, int y, int r, QColor color) {
 	QLabel *circleLabel;
-	circleLabel = new QCircleLabel(this,x,y,r,this);
+	circleLabel = new QCircleLabel(this,x,y,r,color,this);
 	qlCircleLabels << circleLabel;
 }
 
@@ -153,18 +148,16 @@ void dart::vSetNumberOfPlayers(int n) {
 			QList<QLabel*> qlPlayerLabel;
 			qlPlayerLabel << qlPlayer;
 			
-			for(int i=0,max=qlPlayerLabel.count(); i<max; i++) {
-				qlPlayerLabel[i]->setStyleSheet(QString("color:blue;font-size:%1px;font-family:arial,sans-serif").arg(20*dZoomFactor));
-				qlPlayerLabel[i]->show();
-			}
-			
 			qlPlayerLabels.append(qlPlayerLabel);
-			qDebug() << "ddd " << qlPlayerLabels[0].count();
+			
+			qlColorsOfPlayers.append(qcGetColorOfPlayer(qlPlayerLabels.count()-1));
 		}
 	}
 	gridLayout->setGeometry(QRect(0, 0, 10, 10));
 	gridLayout->setSpacing(1);
 	gridLayout->setContentsMargins(0,0,0,0);
+	
+	resizeEvent(0); // the label's font size and iPaddingTop must be recalculated
 // 	/*qDebug() << "ddddd " <<*/ qlPlayerLabels[0][0]->setText("te");
 }
 
@@ -173,21 +166,33 @@ void dart::resizeEvent(QResizeEvent *event) {
 // 	int w=this->width(), h=this->height()-toolBar->height()-menubar->height(), n=this->width()<this->height()-toolBar->height()-menubar->height()?this->width():this->height()-toolBar->height()-menubar->height();
 // 	cout << w << " " << h << endl;
 // 	if(w!=h) resize(n,n+toolBar->height()+menubar->height());
+
+// 	QRect qr availableGeometry(screenNumber(this));
+// 	int availableHeight=qr.height();
+// 	int availableWidth=qr.width();
+
 	dZoomFactor=iGetWindowSize()/600.0;
 	
-	qlMouseClickOverlay->resize(600*dZoomFactor,600*dZoomFactor);
-	qlMapBackground->resize(600*dZoomFactor,600*dZoomFactor);
-	qlMapBackground->setText(QString("<img src=\"/home/markus/Dokumente/GitHub/QeoDart/qcf/de/border.png\" height=\"%1\" width=\"%1\"/>").arg(600*dZoomFactor));
-	
 	int fontSize=20*dZoomFactor<10 ? 10 : 20*dZoomFactor;
-	for(int i=0,max=qlPlayerLabels.count(); i<max; i++) {
-			
+	iPaddingTop=0;
+	int max=qlPlayerLabels.count();
+	for(int i=0; i<max; i++) {
 		for(int j=0,max=qlPlayerLabels[i].count(); j<max; j++) {
 			qlPlayerLabels[i][j]->setStyleSheet(QString("color:blue;font-size:%1px;font-family:arial,sans-serif").arg(fontSize));
 		}
 	}
+	iPaddingTop=max*(fontSize+6);
 	
-	qDebug() << "[i] iPaddingTop" << iPaddingTop << "iMarginTop" << iMarginTop << "dZoomFactor" << dZoomFactor;
+	dZoomFactor=iGetWindowSize()/600.0;
+	
+	qlMouseClickOverlay->resize(600*dZoomFactor,600*dZoomFactor);
+	qlMouseClickOverlay->move(0,iPaddingTop);
+	
+	qlMapBackground->resize(600*dZoomFactor,600*dZoomFactor);
+	qlMapBackground->setText(QString("<img src=\"/home/markus/Dokumente/GitHub/QeoDart/qcf/de/border.png\" height=\"%1\" width=\"%1\"/>").arg(600*dZoomFactor));
+	qlMapBackground->move(0,iPaddingTop);
+	
+	qDebug() << "[i] iPaddingTop" << iPaddingTop << "iMarginTop" << iMarginTop << "dZoomFactor" << dZoomFactor << "fontSize" << fontSize;
 }
 
 void dart::vDrawPoint(int x, int y, QString name) {
@@ -206,11 +211,13 @@ void dart::vShowAllPlaces() {
 }
 
 void dart::vMouseClickEvent(int x, int y) {
-	vDrawPoint(iGetUnzoomed(x),iGetUnzoomed(y),"s"); //TODO function get unzoomed
+	x=iGetUnzoomed(x);
+	y=iGetUnzoomed(y);
+	vDrawPoint(x,y,"s");
 // 	vShowAllPlaces();
 	
 	vDrawPoint(44,56);
-	vDrawDistanceCircles(iGetUnzoomed(x), iGetUnzoomed(y), 0);
+	vDrawDistanceCircles(x, y, 0);
 }
 
 int dart::iGetWindowSize() {
@@ -241,4 +248,36 @@ void dart::mySleep(int ms) {
 		_sleep(10);
 		#endif
 	} while (timer.elapsed() < ms);
+}
+
+QColor dart::qcGetColorOfPlayer(int player) {
+	int m=player%6, i=255/pow(2,player/6);
+	QColor c=QColor(0,0,0,255);
+	
+	if(m==0 || m==3 || m==5) c.setBlue(i);
+	if(m==1 || m==3 || m==4) c.setGreen(i);
+	if(m==2 || m==4 || m==5) c.setRed(i);
+	
+	qDebug()<<c;
+	
+	return c;
+}
+
+void dart::vSetGameMode(enGameModes mode) {
+	iGameMode=mode;
+	switch(mode) {
+		case enLocal:
+			vSetNumberOfPlayers(iNumberOfPlayers);
+			vNextRound();
+			break;
+	};
+}
+
+void dart::vNextRound() {
+	int pn = rand() % qlCurrentTypePlaces.count();
+	
+	switch(iGameMode) {
+		case enLocal:
+			break;
+	};
 }

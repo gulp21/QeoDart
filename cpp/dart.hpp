@@ -16,6 +16,21 @@ struct place {
    QString name, placeType;
 };
 
+enum enGameModes {
+	enTraining=0,
+	enLocal=1,
+	enNetwork=2,
+};
+
+enum enPlaceTypes {
+	enLand=10,
+};
+
+enum enAskForModes {
+	enPositions=0,
+	enNames=1,
+};
+
 #include "ui_mainWindow.h"
  
 class dart : public QMainWindow, public Ui::MainWindow {
@@ -38,22 +53,27 @@ Q_OBJECT
 
 	private:
 		
-		int iNumberOfPlayers;
+		int iNumberOfPlayers, iCurrentPlayer, iGameMode, iAskForMode, iAskForPlaceType;
 		
 		QList<QLabel*> qlPointLabels;
 		QList<QLabel*> qlCircleLabels;
 // 		QList<QLabel*> qlPlayerLabel;
 		QList<QList<QLabel*> > qlPlayerLabels;
+		QList<QColor> qlColorsOfPlayers;
 		
 		void resizeEvent ( QResizeEvent * event );
-		void vDrawCircle(int x, int y,  int r);
+		void vDrawCircle(int x, int y,  int r, QColor color);
 		void vDrawDistanceCircles(int x, int y, int n, int count=0);
 		void vDrawPoint(int x, int y, QString name="");
 		void vRemoveAllCircles();
-		void vSetNumberOfPlayers(int n);
+		void vSetNumberOfPlayers(int player);
+		void vSetGameMode(enGameModes mode);
+		void vNextRound();
 		
 		int iGetWindowSize();
 		int iGetUnzoomed(double x);
+		
+		QColor qcGetColorOfPlayer(int n);
 
 		QLabel *qlMouseClickOverlay;
 		QLabel *qlMapBackground;

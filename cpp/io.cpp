@@ -24,10 +24,10 @@ int io::iReadQcf(QString filename) {
 	
 	for(int i=0;i<2;i++){
 		place one;
-		one.x=50+50*i;
-		one.y=50+20*i;
-		one.dimx=10;
-		one.dimy=10;
+		one.x=327+50*i;
+		one.y=52+20*i;
+		one.dimx=10*i;
+		one.dimy=10*i;
 		one.name="bla";
 		one.placeType="capitalOfLand;land";
 		myDart->qlAllPlaces.append(one);
