@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>554</width>
-    <height>530</height>
+    <width>600</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>QeoDart</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="gridLayoutWidget">
@@ -25,7 +25,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>551</width>
+      <width>602</width>
       <height>151</height>
      </rect>
     </property>
@@ -33,6 +33,82 @@
      <property name="sizeConstraint">
       <enum>QLayout::SetFixedSize</enum>
      </property>
+     <item row="0" column="4">
+      <widget class="QLabel" name="lblCurrentRound">
+       <property name="text">
+        <string notr="true">&lt;Round&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLabel" name="lblComment">
+       <property name="text">
+        <string notr="true">&lt;Comment&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="4">
+      <widget class="QLabel" name="lblCurrentPlayer">
+       <property name="text">
+        <string notr="true">&lt;Player&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblCurrentPlace">
+       <property name="text">
+        <string notr="true">&lt;Place&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="3">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="2" column="0" colspan="5">
+      <spacer name="spGridLayout">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>400</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
     </layout>
    </widget>
   </widget>
@@ -41,8 +117,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>554</width>
-     <height>20</height>
+     <width>600</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSpiel">
@@ -59,6 +135,11 @@
     <property name="title">
      <string>Settings</string>
     </property>
+    <widget class="QMenu" name="menuSettings">
+     <property name="title">
+      <string>Settings…</string>
+     </property>
+    </widget>
     <widget class="QMenu" name="menuAsk_for">
      <property name="title">
       <string>Ask for</string>
@@ -67,11 +148,6 @@
      <addaction name="actionName_of_Place"/>
      <addaction name="separator"/>
      <addaction name="actionCyties"/>
-    </widget>
-    <widget class="QMenu" name="menuSettings">
-     <property name="title">
-      <string>Settings…</string>
-     </property>
     </widget>
     <addaction name="menuSettings"/>
     <addaction name="actionGame_Mode"/>

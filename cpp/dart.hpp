@@ -12,8 +12,12 @@ See main.cpp for details. */
 #define DART_HPP
 
 struct place {
-   int x, y, dimx, dimy;
-   QString name, placeType;
+	int x, y, dimx, dimy;
+	QString name, placeType;
+};
+
+struct scoreHistory {
+	int x, y, score, diffPx, diffKm, mark;
 };
 
 enum enGameModes {
@@ -53,30 +57,39 @@ Q_OBJECT
 
 	private:
 		
-		int iNumberOfPlayers, iCurrentPlayer, iGameMode, iAskForMode, iAskForPlaceType;
+		int iNumberOfPlayers, iCurrentPlayer, iGameMode, iAskForMode, iAskForPlaceType, iMaxPlaceCount, iPlaceCount;
+		int iDelayNextCircle, iDelayBeforeShowingMark, iDelayBeforeNextPlayer;
 		
 		QList<QLabel*> qlPointLabels;
-		QList<QLabel*> qlCircleLabels;
+		QList<QList<QLabel*> > qlCircleLabels; //contains all circles (incl. points) for each user
 // 		QList<QLabel*> qlPlayerLabel;
 		QList<QList<QLabel*> > qlPlayerLabels;
 		QList<QColor> qlColorsOfPlayers;
+		QList<int> qlPlacesHistory;
+		QList<QList<scoreHistory> > qlScoreHistory;
 		
-		void resizeEvent ( QResizeEvent * event );
-		void vDrawCircle(int x, int y,  int r, QColor color);
+		QLabel *lblMouseClickOverlay;
+		QLabel *lblMapBackground;
+		
+		void resizeEvent(QResizeEvent *event);
+		void vRepaintCommonLabels();
+		void vDrawCircle(int x, int y,  int r, int player);
 		void vDrawDistanceCircles(int x, int y, int n, int count=0);
-		void vDrawPoint(int x, int y, QString name="");
+		void vDrawPoint(int x, int y, QList<QLabel*> &list, QString name="");
 		void vRemoveAllCircles();
 		void vSetNumberOfPlayers(int player);
 		void vSetGameMode(enGameModes mode);
 		void vNextRound();
+		void vReset();
+		
+		double dGetDistanceInPxBetween(int a, int b, int x, int y);
+		double dGetMark(double distance);
+		double dGetDistanceInKm(int px);
 		
 		int iGetWindowSize();
 		int iGetUnzoomed(double x);
 		
 		QColor qcGetColorOfPlayer(int n);
-
-		QLabel *qlMouseClickOverlay;
-		QLabel *qlMapBackground;
 	
 	private slots:
 		void vClose();

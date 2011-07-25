@@ -25,7 +25,14 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	iPaddingTop=0;
 	iMarginTop=0;
 	dZoomFactor=1;
+	iMaxPlaceCount=10;
+	iPlaceCount=0;
+	iCurrentPlayer=0;
 	qsCurrentPlaceType="land";
+	
+	iDelayNextCircle=200;
+	iDelayBeforeShowingMark=500;
+	iDelayBeforeNextPlayer=1000;
 	
 	//QtWin::enableBlurBehindWindow(this, true);
 // 	QtWin::extendFrameIntoClientArea(this);
@@ -40,48 +47,37 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	
 	resize(600,600+iMarginTop);
 	
-	qlMapBackground = new QLabel(this);
-	qlMapBackground->setAlignment(Qt::AlignTop);
-	qlMapBackground->setParent(centralwidget);
-	qlMapBackground->show();
-	qlMapBackground->setGeometry(0, 0, this->width(), this->width());
-	qlMapBackground->setText(QString("<img src=\"/home/markus/Dokumente/GitHub/QeoDart/qcf/de/border.png\" height=\"%1\" width=\"%1\"/>").arg(600*dZoomFactor));
+	lblMapBackground = new QLabel(this);
+	lblMapBackground->setAlignment(Qt::AlignTop);
+	lblMapBackground->setParent(centralwidget);
+	lblMapBackground->show();
+	lblMapBackground->setGeometry(0, 0, this->width(), this->width());
+	lblMapBackground->setText(QString("<img src=\"/home/markus/Dokumente/GitHub/QeoDart/qcf/de/border.png\" height=\"%1\" width=\"%1\"/>").arg(600*dZoomFactor));
 	
-	qlMouseClickOverlay = new QMouseReleaseLabel(this);
+	lblMouseClickOverlay = new QMouseReleaseLabel(this);
 	//mouseReleaseEvent 75 | 38 
-	qlMouseClickOverlay->setParent(centralwidget); //we want the label to be placed under the toolbar
-	qlMouseClickOverlay->setAlignment(Qt::AlignTop);
-	qlMouseClickOverlay->show();
-	qlMouseClickOverlay->setGeometry(0, 0, iGetWindowSize(), iGetWindowSize());
+	lblMouseClickOverlay->setParent(centralwidget); //we want the label to be placed under the toolbar
+	lblMouseClickOverlay->setAlignment(Qt::AlignTop);
+	lblMouseClickOverlay->show();
+	lblMouseClickOverlay->setGeometry(0, 0, iGetWindowSize(), iGetWindowSize());
 	qDebug()<<iGetWindowSize();
-
-
+	
 	clIO->iReadQcf("dummyfile");
 // 	vDrawPoint(qlAllPlaces[0].x,qlAllPlaces[0].y);
 // 	vShowAllPlaces();
 	
-	connect(actionQuit,SIGNAL (triggered()), this, SLOT(vRemoveAllCircles()));
+	connect(actionQuit,SIGNAL (triggered()), this, SLOT(vClose()));
 	connect(actionNew_Game,SIGNAL (triggered()), this, SLOT(vShowAllPlaces()));
 	
 	show();
 	
-	vSetNumberOfPlayers(2);
+// 	vSetNumberOfPlayers(2);
+	iNumberOfPlayers=3;
 	
-// 	QList<QList<QString> > field;
-// // 	for (int i = 0; i < 4; i++)
-// // 	{
-// 		QList<QString> list;
-// 		field.append(list);
-// // 		for (int j = 0; j < 4; j++)
-// // 		{
-// 			field[0].append("bla");
-// 			qDebug()<<field[0][0];
-// // 		}
-// // 	}
+	vSetGameMode(enLocal);
 	
 // 	clIO->iReadOsm("/home/markus/Dokumente/GitHub/QeoDart/cpp/test.svg");
 	
-
 }
 
 dart::~dart(){
@@ -91,29 +87,33 @@ dart::~dart(){
 void dart::vDrawDistanceCircles(int x, int y, int n, int count) {
 	// if(count*10 < dblGetDistance(x,y,QLscoreHistory[0][n].x(),QLscoreHistory[0][n].y())){ //TODO check all players
 	if(count*10 < 55) { //TODO check all players
-		vDrawCircle(x,y,(count+1)*10,qlColorsOfPlayers[0]);
-		
-		qDebug()<<count;
+		mySleep(iDelayNextCircle);
+		vDrawCircle(x,y,(count+1)*10,iCurrentPlayer);
 		vDrawDistanceCircles(x,y,n,++count);
 	}
 }
 
-void dart::vDrawCircle(int x, int y, int r, QColor color) {
+void dart::vDrawCircle(int x, int y, int r, int player) {
 	QLabel *circleLabel;
-	circleLabel = new QCircleLabel(this,x,y,r,color,this);
-	qlCircleLabels << circleLabel;
+	circleLabel = new QCircleLabel(this,x,y,r,qlColorsOfPlayers[player],this);
+	qlCircleLabels[player].append(circleLabel);
 }
 
 void dart::vRemoveAllCircles() {
-	while(qlCircleLabels.count()>0) {
-		delete qlCircleLabels[0];
-		qlCircleLabels.removeAt(0);
+	for(int i=0,max=qlCircleLabels.count();i<max;i++){
+		qDebug()<<i;
+		while(qlCircleLabels[i].count()!=0) {
+			qDebug()<<"j"<<qlCircleLabels[i].count();
+			delete qlCircleLabels[i][0];
+			qlCircleLabels[i].removeAt(0);
+		}
 	}
 }
 
 void dart::vSetNumberOfPlayers(int n) {
 	iNumberOfPlayers=n;
 	qDebug() << "[i] iNumberOfPlayers" << iNumberOfPlayers;
+	if(iNumberOfPlayers>15) qDebug() << "[w] very much players";
 	
 	if(qlPlayerLabels.count()>n) {
 		
@@ -123,36 +123,56 @@ void dart::vSetNumberOfPlayers(int n) {
 			qDebug()<<"f"<<i;
 			qDebug() << "fdddfff" << qlPlayerLabels[0].count();
 			for(int j=0,max=qlPlayerLabels[i].count(); j<max; j++) {
-				
-				qDebug()<<"ff";
 				delete qlPlayerLabels[i][j];
 				qDebug()<<"ff";
 			}
 			qlPlayerLabels[i].clear();
 // 			~qlPlayerLabels[i];			//TODO we should do it somehow, shouldn't we?
 			qlPlayerLabels.removeAt(i);
+			
+			qlScoreHistory[i].clear();
+			qlScoreHistory.removeAt(i);
 		}
 		
 	} else if(qlPlayerLabels.count()<n) {
 		
 		while(qlPlayerLabels.count()<iNumberOfPlayers){
+			int i=qlPlayerLabels.count();
+			qDebug()<<"player labels available"<<i;
 			
-			qDebug()<<qlPlayerLabels.count();
+			QLabel *lblScore;
+			lblScore = new QLabel(this);
+			gridLayout->addWidget(lblScore,i,0);
+			lblScore->setText(QString(tr("<span>%1 Points &#8960; %2, %3</span>")).arg(0).arg(0).arg(0));
 			
-			QLabel *qlPlayer;
-			qlPlayer = new QLabel(this);
-			
-			gridLayout->addWidget(qlPlayer);
-			qlPlayer->setText(QString(tr("Player %1")).arg(qlPlayerLabels.count()+1));
+			QLabel *lblRating;
+			lblRating = new QLabel(this);
+			gridLayout->addWidget(lblRating,i,2);
 			
 			QList<QLabel*> qlPlayerLabel;
-			qlPlayerLabel << qlPlayer;
-			
+			qlPlayerLabel << lblScore << lblRating;
 			qlPlayerLabels.append(qlPlayerLabel);
+			
+			QList<QLabel*> qlCircleLabel;
+			qlCircleLabels.append(qlCircleLabel);
+			
+			QList<scoreHistory> qlHistory;
+			qlScoreHistory.append(qlHistory);
 			
 			qlColorsOfPlayers.append(qcGetColorOfPlayer(qlPlayerLabels.count()-1));
 		}
 	}
+	if(iNumberOfPlayers==1) {
+		gridLayout->addWidget(lblCurrentPlace,1,0);
+		gridLayout->addWidget(lblCurrentPlayer,1,4);
+		lblComment->setText("");
+		lblComment->show();
+	} else {
+		gridLayout->addWidget(lblCurrentPlace,iNumberOfPlayers,0);
+		gridLayout->addWidget(lblCurrentPlayer,iNumberOfPlayers,4);
+		lblComment->hide();
+	}
+	
 	gridLayout->setGeometry(QRect(0, 0, 10, 10));
 	gridLayout->setSpacing(1);
 	gridLayout->setContentsMargins(0,0,0,0);
@@ -171,53 +191,82 @@ void dart::resizeEvent(QResizeEvent *event) {
 // 	int availableHeight=qr.height();
 // 	int availableWidth=qr.width();
 
-	dZoomFactor=iGetWindowSize()/600.0;
+	dZoomFactor=iGetWindowSize()/600.0; //TODO must be calculated in another way
 	
 	int fontSize=20*dZoomFactor<10 ? 10 : 20*dZoomFactor;
 	iPaddingTop=0;
 	int max=qlPlayerLabels.count();
 	for(int i=0; i<max; i++) {
 		for(int j=0,max=qlPlayerLabels[i].count(); j<max; j++) {
-			qlPlayerLabels[i][j]->setStyleSheet(QString("color:blue;font-size:%1px;font-family:arial,sans-serif").arg(fontSize));
+			qlPlayerLabels[i][j]->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(i).name()));
 		}
 	}
-	iPaddingTop=max*(fontSize+6);
+	vRepaintCommonLabels();
+	iPaddingTop=(max+1)*(fontSize+6);
 	
 	dZoomFactor=iGetWindowSize()/600.0;
 	
-	qlMouseClickOverlay->resize(600*dZoomFactor,600*dZoomFactor);
-	qlMouseClickOverlay->move(0,iPaddingTop);
+	lblMouseClickOverlay->resize(600*dZoomFactor,600*dZoomFactor);
+	lblMouseClickOverlay->move(0,iPaddingTop);
 	
-	qlMapBackground->resize(600*dZoomFactor,600*dZoomFactor);
-	qlMapBackground->setText(QString("<img src=\"/home/markus/Dokumente/GitHub/QeoDart/qcf/de/border.png\" height=\"%1\" width=\"%1\"/>").arg(600*dZoomFactor));
-	qlMapBackground->move(0,iPaddingTop);
+	lblMapBackground->resize(600*dZoomFactor,600*dZoomFactor);
+	lblMapBackground->setText(QString("<img src=\"/home/markus/Dokumente/GitHub/QeoDart/qcf/de/border.png\" height=\"%1\" width=\"%1\"/>").arg(600*dZoomFactor));
+	lblMapBackground->move(0,iPaddingTop);
+	
+	gridLayoutWidget->resize(600,gridLayoutWidget->height()); //TODO not working
 	
 	qDebug() << "[i] iPaddingTop" << iPaddingTop << "iMarginTop" << iMarginTop << "dZoomFactor" << dZoomFactor << "fontSize" << fontSize;
 }
 
-void dart::vDrawPoint(int x, int y, QString name) {
-	QLabel *qlCurrentPlace;
-	qlCurrentPlace = new QPointLabel(this, name, x, y, this);
-	qlPointLabels.append(qlCurrentPlace);
-// 	qlCurrentPlace->setGeometry(x,y+iPaddingTop,50,50);
-// 	qlCurrentPlace->setVisible(TRUE);
+void dart::vRepaintCommonLabels() {
+	int fontSize=20*dZoomFactor<10 ? 10 : 20*dZoomFactor;
+	lblCurrentPlace->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
+	lblComment->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
+	lblCurrentRound->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
+	lblCurrentPlayer->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
+}
+
+// draws a point at P(x|y) with the label name, and adds it to the list list
+void dart::vDrawPoint(int x, int y, QList<QLabel*> &list, QString name) {
+	QLabel *lblCurrentPlacePosition;
+	lblCurrentPlacePosition = new QPointLabel(this, name, x, y, this);
+	list.append(lblCurrentPlacePosition);
+// 	lblCurrentPlace->setGeometry(x,y+iPaddingTop,50,50);
+// 	lblCurrentPlace->setVisible(TRUE);
 	qDebug() << "[i] drew point " << x << y << "+" << iMarginTop;
 }
 
 void dart::vShowAllPlaces() {
 	for(int i=0, max=qlCurrentTypePlaces.count(); i<max; i++){ //TODO WITH?
-		vDrawPoint(qlCurrentTypePlaces[i]->x,qlCurrentTypePlaces[i]->y,qlCurrentTypePlaces[i]->name);
+		vDrawPoint(qlCurrentTypePlaces[i]->x,qlCurrentTypePlaces[i]->y,qlCircleLabels[0],qlCurrentTypePlaces[i]->name);
 	}
 }
 
 void dart::vMouseClickEvent(int x, int y) {
+	if(iAskForMode!=enPositions) return;
+	
 	x=iGetUnzoomed(x);
 	y=iGetUnzoomed(y);
-	vDrawPoint(x,y,"s");
+	vDrawPoint(x,y,qlCircleLabels[iCurrentPlayer]);
 // 	vShowAllPlaces();
+	scoreHistory score;
+	score.x=x;
+	score.y=y;
+	score.diffPx=dGetDistanceInPxBetween(x,y,qlCurrentTypePlaces[iPlaceCount]->x,qlCurrentTypePlaces[iPlaceCount]->y); //TODO area
+	score.diffKm=dGetDistanceInKm(score.diffPx);
+	score.mark=dGetMark(score.diffPx);
+	qlScoreHistory[iCurrentPlayer].append(score);
 	
-	vDrawPoint(44,56);
+	mySleep(iDelayNextCircle);
 	vDrawDistanceCircles(x, y, 0);
+	
+	if(iCurrentPlayer<iNumberOfPlayers-1) {
+		iCurrentPlayer++;
+		vRemoveAllCircles();
+// 		delete qlPointLabels/*[iCurrentPlayer]*/[qlPointLabels.count()-1];
+// 		qlPointLabels.removeAt(qlPointLabels.count()-1);
+		
+	}
 }
 
 int dart::iGetWindowSize() {
@@ -258,13 +307,16 @@ QColor dart::qcGetColorOfPlayer(int player) {
 	if(m==1 || m==3 || m==4) c.setGreen(i);
 	if(m==2 || m==4 || m==5) c.setRed(i);
 	
-	qDebug()<<c;
+// 	qDebug()<<c;
 	
 	return c;
 }
 
 void dart::vSetGameMode(enGameModes mode) {
 	iGameMode=mode;
+	
+	vReset();
+	
 	switch(mode) {
 		case enLocal:
 			vSetNumberOfPlayers(iNumberOfPlayers);
@@ -273,11 +325,44 @@ void dart::vSetGameMode(enGameModes mode) {
 	};
 }
 
+void dart::vReset() {
+	vRemoveAllCircles();
+	qlPlacesHistory.clear();
+}
+
 void dart::vNextRound() {
-	int pn = rand() % qlCurrentTypePlaces.count();
+	int pn, i=0;
+	do {
+		pn = rand() % qlCurrentTypePlaces.count();
+	} while(qlPlacesHistory.contains(pn) && i++<10);
+	qlPlacesHistory.append(pn);
+	
+	qDebug() << "[i] next place:" << pn << qlCurrentTypePlaces[pn]->name << ++iPlaceCount << "/" << iMaxPlaceCount;
 	
 	switch(iGameMode) {
 		case enLocal:
+			lblCurrentPlace->setText(qlCurrentTypePlaces[pn]->name);
+			lblCurrentRound->setText(QString(tr("Round %1")).arg(iPlaceCount));
 			break;
 	};
+}
+
+//returns the distance between P(a|b) and Q(x|y); a,b,x,y should be unzoomed
+double dart::dGetDistanceInPxBetween(int a, int b, int x, int y) {
+	return sqrt( pow(a-x,2) + pow(b-y,2) ); //thx Pythagoras
+}
+
+double dart::dGetDistanceInKm(int px) {
+	return px*1; //TODO var
+}
+
+//calculate the mark (German system TODO other systems) using unzoomed distance
+double dart::dGetMark(double distance) {
+	double mark=distance/RADIUS; //TODO check radius
+	if(mark<4) {
+		return mark<1 ? 1 : mark;
+	} else {
+		mark=4+(mark-4)/2;
+		return mark>6 ?  6 : mark;
+	}
 }
