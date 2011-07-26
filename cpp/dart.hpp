@@ -17,7 +17,12 @@ struct place {
 };
 
 struct scoreHistory {
-	int x, y, score, diffPx, diffKm, mark;
+	int x, y, score;
+	double diffPx, diffKm, mark;
+};
+
+struct totalScore {
+	double mark, score;
 };
 
 enum enGameModes {
@@ -54,11 +59,14 @@ Q_OBJECT
 		
 		void vMouseClickEvent(int x, int y);
 		void mySleep(int ms);
+		void vShowCurrentPlace();
 
 	private:
 		
+		bool bAcceptingClickEvent;
+		
 		int iNumberOfPlayers, iCurrentPlayer, iGameMode, iAskForMode, iAskForPlaceType, iMaxPlaceCount, iPlaceCount;
-		int iDelayNextCircle, iDelayBeforeShowingMark, iDelayBeforeNextPlayer;
+		int iDelayNextCircle, iDelayBeforeShowingMark, iDelayBeforeNextPlayer, iDelayBeforeNextPlace;
 		
 		QList<QLabel*> qlPointLabels;
 		QList<QList<QLabel*> > qlCircleLabels; //contains all circles (incl. points) for each user
@@ -66,28 +74,39 @@ Q_OBJECT
 		QList<QList<QLabel*> > qlPlayerLabels;
 		QList<QColor> qlColorsOfPlayers;
 		QList<int> qlPlacesHistory;
-		QList<QList<scoreHistory> > qlScoreHistory;
+		QList<QList<scoreHistory> > qlScoreHistory; // [player][round].scores
+		QList<totalScore> qlTotalScores;
 		
 		QLabel *lblMouseClickOverlay;
 		QLabel *lblMapBackground;
 		
 		void resizeEvent(QResizeEvent *event);
 		void vRepaintCommonLabels();
+		void vRepaintPlayerLabels();
 		void vDrawCircle(int x, int y,  int r, int player);
-		void vDrawDistanceCircles(int x, int y, int n, int count=0);
-		void vDrawPoint(int x, int y, QList<QLabel*> &list, QString name="");
+		void vDrawDistanceCircles(int n, int count=0);
+		void vDrawPoint(int x, int y, QList<QLabel*> &list, QString name="", QColor color=QColor(249,199,65));
+		void vDrawPoint(int x, int y, QList<QLabel*> &list, QColor color, QString name="");
+		void vDrawClickPositions(int n);
 		void vRemoveAllCircles();
+		void vRemoveAllCommonPoints();
 		void vSetNumberOfPlayers(int player);
 		void vSetGameMode(enGameModes mode);
 		void vNextRound();
-		void vReset();
+		void vResetForNewGame();
+		void vShowTotalScores();
+		void vShowScores();
+		void vResetScoreLabels();
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetMark(double distance);
-		double dGetDistanceInKm(int px);
+		double dGetScore(double mark);
+		double dGetDistanceInKm(double px);
+		double dGetAverageMarkOfPlayer(int player);
 		
 		int iGetWindowSize();
 		int iGetUnzoomed(double x);
+		int iGetFontSize();
 		
 		QColor qcGetColorOfPlayer(int n);
 	

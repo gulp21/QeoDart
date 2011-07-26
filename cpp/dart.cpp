@@ -16,23 +16,30 @@ See main.cpp for details. */
 #include <math.h>
 #include <QDesktopWidget>
 #include <time.h>
-    
+
 using namespace std;
 
 io *clIO;
 
 dart::dart(QMainWindow *parent) : QMainWindow(parent){
+	qDebug()<<dGetMark(1) << dGetScore(1);
+	
 	iPaddingTop=0;
 	iMarginTop=0;
 	dZoomFactor=1;
 	iMaxPlaceCount=10;
+	iMaxPlaceCount=2;
 	iPlaceCount=0;
 	iCurrentPlayer=0;
+	iAskForMode=enPositions;
+	iNumberOfPlayers=2;
 	qsCurrentPlaceType="land";
+	bAcceptingClickEvent=TRUE;
 	
 	iDelayNextCircle=200;
 	iDelayBeforeShowingMark=500;
 	iDelayBeforeNextPlayer=1000;
+	iDelayBeforeNextPlace=2000;
 	
 	//QtWin::enableBlurBehindWindow(this, true);
 // 	QtWin::extendFrameIntoClientArea(this);
@@ -68,28 +75,45 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	
 	connect(actionQuit,SIGNAL (triggered()), this, SLOT(vClose()));
 	connect(actionNew_Game,SIGNAL (triggered()), this, SLOT(vShowAllPlaces()));
+	connect(actionAbout_Qt,SIGNAL (triggered()), qApp, SLOT(aboutQt()));
+	actionNew_Game->setIcon(QIcon::fromTheme("document-new"));
+	actionFind_Place->setIcon(QIcon::fromTheme("edit-find"));
+	actionQuit->setIcon(QIcon::fromTheme("application-exit"));
 	
 	show();
 	
 // 	vSetNumberOfPlayers(2);
-	iNumberOfPlayers=3;
+	gridLayout->setSpacing(1);
+	resize(600,600+iMarginTop+iPaddingTop);
 	
 	vSetGameMode(enLocal);
 	
 // 	clIO->iReadOsm("/home/markus/Dokumente/GitHub/QeoDart/cpp/test.svg");
+	
+	vRepaintCommonLabels();
+	vRepaintPlayerLabels();
+	
+	gridLayout->addWidget(lblCurrentRound,0,4);
 	
 }
 
 dart::~dart(){
 }
 
-//draws distance circles around P(x|y) [unzoomed], using the saved click-coordinates of place n, iterating #count [recursion]
-void dart::vDrawDistanceCircles(int x, int y, int n, int count) {
-	// if(count*10 < dblGetDistance(x,y,QLscoreHistory[0][n].x(),QLscoreHistory[0][n].y())){ //TODO check all players
-	if(count*10 < 55) { //TODO check all players
+//draws distance circles using the saved click-coordinates of place n, iterating #count [recursion]
+void dart::vDrawDistanceCircles(int n, int count) {
+	bool drewCircle=FALSE;
+	
+	for(int i=0; i<iNumberOfPlayers; i++) {//draw circles for every player
+		if(count*RADIUS+3*PENWIDTH < qlScoreHistory[i][n-1].diffPx) {
+			vDrawCircle(qlScoreHistory[i][n-1].x,qlScoreHistory[i][n-1].y,(count+1)*RADIUS,i);
+			drewCircle=TRUE;
+		}
+	}
+	
+	if(drewCircle && count<8) {
 		mySleep(iDelayNextCircle);
-		vDrawCircle(x,y,(count+1)*10,iCurrentPlayer);
-		vDrawDistanceCircles(x,y,n,++count);
+		vDrawDistanceCircles(n,++count);
 	}
 }
 
@@ -107,6 +131,13 @@ void dart::vRemoveAllCircles() {
 			delete qlCircleLabels[i][0];
 			qlCircleLabels[i].removeAt(0);
 		}
+	}
+}
+
+void dart::vRemoveAllCommonPoints() {
+	while(qlPointLabels.count()!=0){
+		delete qlPointLabels[0];
+		qlPointLabels.removeAt(0);
 	}
 }
 
@@ -130,7 +161,7 @@ void dart::vSetNumberOfPlayers(int n) {
 // 			~qlPlayerLabels[i];			//TODO we should do it somehow, shouldn't we?
 			qlPlayerLabels.removeAt(i);
 			
-			qlScoreHistory[i].clear();
+			qlScoreHistory[i].clear(); //TODO must delete sub-lists?
 			qlScoreHistory.removeAt(i);
 		}
 		
@@ -173,12 +204,12 @@ void dart::vSetNumberOfPlayers(int n) {
 		lblComment->hide();
 	}
 	
-	gridLayout->setGeometry(QRect(0, 0, 10, 10));
-	gridLayout->setSpacing(1);
-	gridLayout->setContentsMargins(0,0,0,0);
+// 	gridLayout->setGeometry(QRect(0, 0, 10, 10));
+// 	gridLayout->setSpacing(1);
+// 	gridLayout->setContentsMargins(0,0,0,0);
+	gridLayout->addItem(spGridLayoutVertical,iNumberOfPlayers+1,0);
 	
 	resizeEvent(0); // the label's font size and iPaddingTop must be recalculated
-// 	/*qDebug() << "ddddd " <<*/ qlPlayerLabels[0][0]->setText("te");
 }
 
 void dart::resizeEvent(QResizeEvent *event) {
@@ -193,16 +224,10 @@ void dart::resizeEvent(QResizeEvent *event) {
 
 	dZoomFactor=iGetWindowSize()/600.0; //TODO must be calculated in another way
 	
-	int fontSize=20*dZoomFactor<10 ? 10 : 20*dZoomFactor;
-	iPaddingTop=0;
-	int max=qlPlayerLabels.count();
-	for(int i=0; i<max; i++) {
-		for(int j=0,max=qlPlayerLabels[i].count(); j<max; j++) {
-			qlPlayerLabels[i][j]->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(i).name()));
-		}
-	}
+	vRepaintPlayerLabels();
 	vRepaintCommonLabels();
-	iPaddingTop=(max+1)*(fontSize+6);
+	int fontSize=iGetFontSize();
+	iPaddingTop=(qlPlayerLabels.count()+1)*(fontSize+6);
 	
 	dZoomFactor=iGetWindowSize()/600.0;
 	
@@ -214,26 +239,54 @@ void dart::resizeEvent(QResizeEvent *event) {
 	lblMapBackground->move(0,iPaddingTop);
 	
 	gridLayoutWidget->resize(600,gridLayoutWidget->height()); //TODO not working
+		gridLayoutWidget->setGeometry(QRect(0,0,600*dZoomFactor+1,111));
+
 	
 	qDebug() << "[i] iPaddingTop" << iPaddingTop << "iMarginTop" << iMarginTop << "dZoomFactor" << dZoomFactor << "fontSize" << fontSize;
 }
 
+//repaints all labels which are player-specific
+void dart::vRepaintPlayerLabels() {
+	int fontSize=iGetFontSize();
+	for(int i=0,max=qlPlayerLabels.count(); i<max; i++) {
+		for(int j=0,max=qlPlayerLabels[i].count(); j<max; j++) {
+			qlPlayerLabels[i][j]->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(i).name()));
+		}
+	}
+}
+
+//repaint all label which are not player-specific
 void dart::vRepaintCommonLabels() {
-	int fontSize=20*dZoomFactor<10 ? 10 : 20*dZoomFactor;
+	int fontSize=iGetFontSize();
 	lblCurrentPlace->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
 	lblComment->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
 	lblCurrentRound->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
 	lblCurrentPlayer->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
+	lblCurrentPlayer->setText(QString(tr("Player %1")).arg(iCurrentPlayer));
+}
+
+int dart::iGetFontSize() {
+	return 20*dZoomFactor<10 ? 10 : 20*dZoomFactor;
 }
 
 // draws a point at P(x|y) with the label name, and adds it to the list list
-void dart::vDrawPoint(int x, int y, QList<QLabel*> &list, QString name) {
+void dart::vDrawPoint(int x, int y, QList<QLabel*> &list, QString name, QColor color) {
 	QLabel *lblCurrentPlacePosition;
-	lblCurrentPlacePosition = new QPointLabel(this, name, x, y, this);
+	lblCurrentPlacePosition = new QPointLabel(this, name, x, y, color, this);
 	list.append(lblCurrentPlacePosition);
 // 	lblCurrentPlace->setGeometry(x,y+iPaddingTop,50,50);
 // 	lblCurrentPlace->setVisible(TRUE);
 	qDebug() << "[i] drew point " << x << y << "+" << iMarginTop;
+}
+void dart::vDrawPoint(int x, int y, QList<QLabel*> &list, QColor color, QString name) {
+	vDrawPoint(x, y, list, name, color);
+}
+
+// draws the click positions of all players for round n
+void dart::vDrawClickPositions(int n) {
+	for(int i=0; i<iNumberOfPlayers; i++) { //draw circles for every player
+		vDrawPoint(qlScoreHistory[i][n-1].x,qlScoreHistory[i][n-1].y,qlCircleLabels[i],qlColorsOfPlayers[i]);
+	}
 }
 
 void dart::vShowAllPlaces() {
@@ -243,29 +296,90 @@ void dart::vShowAllPlaces() {
 }
 
 void dart::vMouseClickEvent(int x, int y) {
+	if(!bAcceptingClickEvent) return;
+	bAcceptingClickEvent=FALSE;
 	if(iAskForMode!=enPositions) return;
 	
 	x=iGetUnzoomed(x);
 	y=iGetUnzoomed(y);
-	vDrawPoint(x,y,qlCircleLabels[iCurrentPlayer]);
+	vDrawPoint(x,y,qlCircleLabels[iCurrentPlayer],qlColorsOfPlayers[iCurrentPlayer]);
 // 	vShowAllPlaces();
 	scoreHistory score;
 	score.x=x;
 	score.y=y;
-	score.diffPx=dGetDistanceInPxBetween(x,y,qlCurrentTypePlaces[iPlaceCount]->x,qlCurrentTypePlaces[iPlaceCount]->y); //TODO area
+	score.diffPx=dGetDistanceInPxBetween(x,y,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y); //TODO area
 	score.diffKm=dGetDistanceInKm(score.diffPx);
 	score.mark=dGetMark(score.diffPx);
+	score.score=dGetScore(score.mark);
 	qlScoreHistory[iCurrentPlayer].append(score);
 	
-	mySleep(iDelayNextCircle);
-	vDrawDistanceCircles(x, y, 0);
+	qlTotalScores[iCurrentPlayer].score+=score.score;
+	qlTotalScores[iCurrentPlayer].mark=dGetAverageMarkOfPlayer(iCurrentPlayer);
 	
-	if(iCurrentPlayer<iNumberOfPlayers-1) {
+	qDebug() << "Score for Player" << iCurrentPlayer << score.diffPx << "px" << score.diffKm << "km" << score.score << "p"  << score.mark << "TOTAL" << qlTotalScores[iCurrentPlayer].score << "p" << qlTotalScores[iCurrentPlayer].mark;
+	
+	if(iCurrentPlayer<iNumberOfPlayers-1) { // next player
+		
+		mySleep(iDelayBeforeNextPlayer);
 		iCurrentPlayer++;
 		vRemoveAllCircles();
-// 		delete qlPointLabels/*[iCurrentPlayer]*/[qlPointLabels.count()-1];
-// 		qlPointLabels.removeAt(qlPointLabels.count()-1);
+		qDebug()<<"f";
+		vRepaintPlayerLabels();
+		vRepaintCommonLabels();
 		
+		bAcceptingClickEvent=TRUE;
+		
+	} else { // show results
+		
+		iCurrentPlayer=0;
+		
+		vRemoveAllCircles();
+		vDrawClickPositions(iPlaceCount);
+		mySleep(iDelayNextCircle);
+		vDrawDistanceCircles(iPlaceCount, 0);
+		
+		// show real position
+		vShowCurrentPlace();
+		
+		vShowScores();
+		
+		mySleep(iDelayBeforeNextPlace);
+		
+		vShowTotalScores();
+		
+		vRemoveAllCircles();
+		vRemoveAllCommonPoints();
+		
+		vResetScoreLabels();
+		
+		vRepaintCommonLabels();
+		
+		bAcceptingClickEvent=TRUE;
+		
+		vNextRound();
+		
+	}
+}
+
+void dart::vResetScoreLabels() {
+	for(int i=0; i<iNumberOfPlayers; i++) { // reset score labels of each player
+		qlPlayerLabels[i][1]->setText("");
+	}
+}
+
+void dart::vShowCurrentPlace() {
+	vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels);
+}
+
+void dart::vShowScores() {
+	for(int i=0; i<iNumberOfPlayers; i++) { // show score for each player
+		qlPlayerLabels[i][1]->setText(QString(tr("Missed by %1km (%2) +%3")).arg(qlScoreHistory[i][iPlaceCount-1].diffKm,0,'f',1).arg(qlScoreHistory[i][iPlaceCount-1].mark,0,'f',1).arg(qlScoreHistory[i][iPlaceCount-1].score));
+	}
+}
+
+void dart::vShowTotalScores() {
+	for(int i=0; i<iNumberOfPlayers; i++) { // show score for each player
+		qlPlayerLabels[i][0]->setText(QString(tr("<span>%1 Points &#8960; %2, %3</span>")).arg(qlTotalScores[i].score).arg(qlTotalScores[i].score/iPlaceCount,0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
 	}
 }
 
@@ -315,7 +429,7 @@ QColor dart::qcGetColorOfPlayer(int player) {
 void dart::vSetGameMode(enGameModes mode) {
 	iGameMode=mode;
 	
-	vReset();
+	vResetForNewGame();
 	
 	switch(mode) {
 		case enLocal:
@@ -325,12 +439,26 @@ void dart::vSetGameMode(enGameModes mode) {
 	};
 }
 
-void dart::vReset() {
+void dart::vResetForNewGame() {
 	vRemoveAllCircles();
 	qlPlacesHistory.clear();
+	qlTotalScores.clear();
+	for(int i=0; i<iNumberOfPlayers; i++) {
+		totalScore ts;
+		ts.score=0;
+		ts.mark=0;
+		qlTotalScores.append(ts);
+	}
 }
 
 void dart::vNextRound() {
+	iCurrentPlayer=0;
+	
+	if(iPlaceCount==iMaxPlaceCount) {
+		qDebug() << "What shall we do?";
+		return;
+	}
+	
 	int pn, i=0;
 	do {
 		pn = rand() % qlCurrentTypePlaces.count();
@@ -342,27 +470,46 @@ void dart::vNextRound() {
 	switch(iGameMode) {
 		case enLocal:
 			lblCurrentPlace->setText(qlCurrentTypePlaces[pn]->name);
-			lblCurrentRound->setText(QString(tr("Round %1")).arg(iPlaceCount));
+			lblCurrentRound->setText(QString(tr("Place %1 of %2")).arg(iPlaceCount).arg(iMaxPlaceCount));
 			break;
 	};
 }
 
 //returns the distance between P(a|b) and Q(x|y); a,b,x,y should be unzoomed
 double dart::dGetDistanceInPxBetween(int a, int b, int x, int y) {
+	qDebug()<<"!!!!"<<a<<b<<x<<y << sqrt( pow(a-x,2) + pow(b-y,2) );
 	return sqrt( pow(a-x,2) + pow(b-y,2) ); //thx Pythagoras
 }
 
-double dart::dGetDistanceInKm(int px) {
+double dart::dGetDistanceInKm(double px) {
 	return px*1; //TODO var
 }
 
-//calculate the mark (German system TODO other systems) using unzoomed distance
+//calculate the mark (German system TODO other systems) using unzoomed distance in px
 double dart::dGetMark(double distance) {
-	double mark=distance/RADIUS; //TODO check radius
+	if(distance>1) distance--; // a difference of 1px is OK 
+	double mark=distance/RADIUS;
 	if(mark<4) {
 		return mark<1 ? 1 : mark;
 	} else {
 		mark=4+(mark-4)/2;
 		return mark>6 ?  6 : mark;
 	}
+}
+
+double dart::dGetScore(double mark) {
+	double score;
+	if(mark<4) score=-16.66*mark+116.66;
+	else score=-25*mark+150;
+	if(score<0) score=0;
+	return score;
+}
+
+double dart::dGetAverageMarkOfPlayer(int player) {
+	double mark=0;
+	int max=qlScoreHistory[player].count();
+	for(int i=0; i<max; i++) {
+		mark+=qlScoreHistory[player][i].mark;
+	}
+	return mark/max;
 }

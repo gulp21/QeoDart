@@ -38,7 +38,7 @@ class QCircleLabel : public QLabel{
 			
 			pen.setWidth(penWidth);
 			QColor c=color;
-			c.setAlpha(255-r*2); //TODO *what?
+			c.setAlpha(255-r*3); //TODO *what?
 			pen.setColor(c);
 			p.setRenderHint(QPainter::Antialiasing);
 			p.setPen(pen);
@@ -66,9 +66,10 @@ class QPointLabel : public QLabel{
 	private:
 		QString name;
 		int x, y;
+		QColor color;
 
 	public:
-		QPointLabel( dart *TDart, QString Name, int X, int Y, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), name(Name), x(X), y(Y),  QLabel(parent, f) {
+		QPointLabel( dart *TDart, QString Name, int X, int Y, QColor COlor, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), name(Name), x(X), y(Y), color(COlor), QLabel(parent, f) {
 			resize(1,1);
 			setParent(myDart->centralwidget);
 			setVisible(TRUE);
@@ -83,7 +84,7 @@ class QPointLabel : public QLabel{
 			double penWidth=PENWIDTH*myDart->dZoomFactor<2 ? 2 : PENWIDTH*myDart->dZoomFactor;
 			
 			pen.setWidth(penWidth); //TODO WORKAROUND We should setBackground
-			pen.setColor(QColor(0,0,255,255));
+			pen.setColor(color);
 			p.setRenderHint(QPainter::Antialiasing);
 			p.setPen(pen);
 // 			p.drawEllipse(penWidth/2,penWidth/2,penWidth,penWidth); //x,y,w,h
@@ -129,6 +130,8 @@ class QMouseReleaseLabel : public QLabel{
 			//we do not accept release events which are outside of the Label or triggered by a mouse button other than LeftButton
 			if(! (event->button()!=Qt::LeftButton || event->x()<0 || event->y()<0 || event->x()>width() || event->y()>height()))
 				myDart->vMouseClickEvent(event->x(), event->y());
+			else if (event->button()==Qt::RightButton && event->y()<0 && event->x()<10)
+				myDart->vShowCurrentPlace();
 		}
 };
 
