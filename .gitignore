@@ -1,0 +1,10 @@
+QeoDart
+cpp/dart1.cpp
+cpp/dart1.hpp
+cpp/io1.cpp
+*.o
+moc_*.cpp
+ui*.h
+*.out
+.~lock*
+*-swp

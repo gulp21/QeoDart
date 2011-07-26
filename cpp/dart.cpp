@@ -16,6 +16,7 @@ See main.cpp for details. */
 #include <math.h>
 #include <QDesktopWidget>
 #include <time.h>
+#include <QDialog>
 
 using namespace std;
 
@@ -40,9 +41,6 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	iDelayBeforeShowingMark=500;
 	iDelayBeforeNextPlayer=1000;
 	iDelayBeforeNextPlace=2000;
-	
-	//QtWin::enableBlurBehindWindow(this, true);
-// 	QtWin::extendFrameIntoClientArea(this);
 	
 	srand(time(NULL));
 	
@@ -361,6 +359,18 @@ void dart::vMouseClickEvent(int x, int y) {
 	}
 }
 
+void dart::vShowResultWindows() {
+	QDialog dialog(this);
+	
+	if(!QtWin::enableBlurBehindWindow(&dialog, true)) dialog.setWindowOpacity(0.8);
+	else QtWin::extendFrameIntoClientArea(&dialog);
+	
+	dialog.setWindowFlags(dialog.windowFlags() | Qt::FramelessWindowHint);
+	
+	dialog.exec();
+
+}
+
 void dart::vResetScoreLabels() {
 	for(int i=0; i<iNumberOfPlayers; i++) { // reset score labels of each player
 		qlPlayerLabels[i][1]->setText("");
@@ -456,6 +466,7 @@ void dart::vNextRound() {
 	
 	if(iPlaceCount==iMaxPlaceCount) {
 		qDebug() << "What shall we do?";
+		vShowResultWindows();
 		return;
 	}
 	

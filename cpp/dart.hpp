@@ -97,6 +97,7 @@ Q_OBJECT
 		void vShowTotalScores();
 		void vShowScores();
 		void vResetScoreLabels();
+		void vShowResultWindows();
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetMark(double distance);
