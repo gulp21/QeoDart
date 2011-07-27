@@ -34,7 +34,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	iPlaceCount=0;
 	iCurrentPlayer=0;
 	iAskForMode=enPositions;
-	iNumberOfPlayers=2;
+	iNumberOfPlayers=1;
 	qsCurrentPlaceType="land";
 	bAcceptingClickEvent=TRUE;
 	
@@ -93,7 +93,6 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	vRepaintPlayerLabels();
 	
 	gridLayout->addWidget(lblCurrentRound,0,4);
-	
 }
 
 dart::~dart(){
@@ -506,6 +505,8 @@ double dart::dGetDistanceInKm(double px) {
 //calculate the mark (German system TODO other systems) using unzoomed distance in px
 double dart::dGetMark(double distance) {
 	if(distance>1) distance--; // a difference of 1px is OK 
+	else distance=0;
+
 	double mark=distance/RADIUS;
 	if(mark<4) {
 		return mark<1 ? 1 : mark;

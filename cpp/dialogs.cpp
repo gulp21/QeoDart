@@ -5,15 +5,16 @@ using namespace std;
 
 resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TDart), player(PLayer), QDialog(parent) {
 	const int R1=15, G1=135, B1=28, R2=255, G2=25, B2=25;
-	
+
+	setParent(myDart);
 	setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint);
-	
+
 	setupUi(this);
 	
 	connect(btOk, SIGNAL(clicked()), this, SLOT(close())); // TODO we should save the name
 	
-	if(!QtWin::enableBlurBehindWindow(this, true)) { // if we can have Aero glass…
-		//dialog.setWindowOpacity(1.0);
+	if(QtWin::enableBlurBehindWindow(this, true)) { // if we can have Aero glass…
+		setWindowOpacity(1.0);
 		QtWin::extendFrameIntoClientArea(this); // TODO doesn't work // …we should use it
 	}
 	
@@ -42,8 +43,12 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 	
 	lblPlaces->setText(places.left(places.length()-2)); // remove the last ", "
 	
-	//TODO WORKAROUND we resize the window so that the text fits (better)
+
+	#ifdef Q_OS_LINUX
+	//WORKAROUND for https://bugreports.qt.nokia.com/browse/QTBUG-691
+	//we resize the window so that the text fits (better)
 	if(places.size()*7/width()*7>65) resize(width(),height()-65+places.size()*7/width()*7);
+	#endif
 	
 }
 

@@ -28,7 +28,7 @@ int io::iReadQcf(QString filename) {
 		one.y=52+20*i;
 		one.dimx=10*i;
 		one.dimy=10*i;
-		one.name="bla"+i;
+		one.name="bla very long caption chisfh dsfjslkdf sdfjsdjflsd fsjfklj sdlkjsdfl sjf sdjfksldjf sjf sdfjksdlfj skdlfj sdklfj sklfj skdfj sdkljfdskljf"+i;
 		one.placeType="capitalOfLand;land";
 		myDart->qlAllPlaces.append(one);
 	}
