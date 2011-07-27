@@ -51,10 +51,17 @@ Q_OBJECT
 
 		QList<place> qlAllPlaces; //contains all places of the current map
 		QList<place*> qlCurrentTypePlaces; //contains pointers pointing on the places in qlAllPlaces which fit the current placetype
+		QList<int> qlPlacesHistory;
+		QList<QList<scoreHistory> > qlScoreHistory; // [player][round].scores
+		QList<totalScore> qlTotalScores;
+		QList<QLabel*> qlPointLabels;
 
 		double dZoomFactor;
+		
 		int iPaddingTop; // px between toolbar and map
 		int iMarginTop; // px between window decoration and toolbar
+		int iNumberOfPlayers, iMaxPlaceCount;
+		
 		QString qsCurrentPlaceType;
 		
 		void vMouseClickEvent(int x, int y);
@@ -65,17 +72,13 @@ Q_OBJECT
 		
 		bool bAcceptingClickEvent;
 		
-		int iNumberOfPlayers, iCurrentPlayer, iGameMode, iAskForMode, iAskForPlaceType, iMaxPlaceCount, iPlaceCount;
+		int iCurrentPlayer, iGameMode, iAskForMode, iAskForPlaceType, iPlaceCount;
 		int iDelayNextCircle, iDelayBeforeShowingMark, iDelayBeforeNextPlayer, iDelayBeforeNextPlace;
 		
-		QList<QLabel*> qlPointLabels;
 		QList<QList<QLabel*> > qlCircleLabels; //contains all circles (incl. points) for each user
 // 		QList<QLabel*> qlPlayerLabel;
 		QList<QList<QLabel*> > qlPlayerLabels;
 		QList<QColor> qlColorsOfPlayers;
-		QList<int> qlPlacesHistory;
-		QList<QList<scoreHistory> > qlScoreHistory; // [player][round].scores
-		QList<totalScore> qlTotalScores;
 		
 		QLabel *lblMouseClickOverlay;
 		QLabel *lblMapBackground;
@@ -85,8 +88,8 @@ Q_OBJECT
 		void vRepaintPlayerLabels();
 		void vDrawCircle(int x, int y,  int r, int player);
 		void vDrawDistanceCircles(int n, int count=0);
-		void vDrawPoint(int x, int y, QList<QLabel*> &list, QString name="", QColor color=QColor(249,199,65));
 		void vDrawPoint(int x, int y, QList<QLabel*> &list, QColor color, QString name="");
+		void vDrawPoint(int x, int y, QList<QLabel*> &list, QString name="", QColor color=QColor(249,199,65));
 		void vDrawClickPositions(int n);
 		void vRemoveAllCircles();
 		void vRemoveAllCommonPoints();

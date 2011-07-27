@@ -7,6 +7,7 @@ See main.cpp for details. */
 #include "dart.hpp"
 #include "io.hpp"
 #include "qtwin.h"
+#include "dialogs.hpp"
 #include <QLabel>
 #include <iostream>
 #include <QMouseEvent>
@@ -352,23 +353,23 @@ void dart::vMouseClickEvent(int x, int y) {
 		
 		vRepaintCommonLabels();
 		
-		bAcceptingClickEvent=TRUE;
-		
 		vNextRound();
 		
 	}
 }
 
-void dart::vShowResultWindows() {
-	QDialog dialog(this);
+void dart::vShowResultWindows() { // TODO all players
+	bAcceptingClickEvent=FALSE;
 	
-	if(!QtWin::enableBlurBehindWindow(&dialog, true)) dialog.setWindowOpacity(0.8);
-	else QtWin::extendFrameIntoClientArea(&dialog);
 	
-	dialog.setWindowFlags(dialog.windowFlags() | Qt::FramelessWindowHint);
+	for(int i=0,max=qlPlacesHistory.count(); i<max; i++) {
+		vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[i]]->x, qlCurrentTypePlaces[qlPlacesHistory[i]]->y, qlPointLabels, qlCurrentTypePlaces[qlPlacesHistory[i]]->name);
+	}
 	
-	dialog.exec();
-
+	for(int i=0; i<iNumberOfPlayers; i++) {
+		resultWindow dialog(this,i);
+		dialog.exec();
+	}
 }
 
 void dart::vResetScoreLabels() {
@@ -477,6 +478,12 @@ void dart::vNextRound() {
 	qlPlacesHistory.append(pn);
 	
 	qDebug() << "[i] next place:" << pn << qlCurrentTypePlaces[pn]->name << ++iPlaceCount << "/" << iMaxPlaceCount;
+	
+	switch(iAskForMode) {
+		case enPositions:
+			bAcceptingClickEvent=TRUE;
+			break;
+	}
 	
 	switch(iGameMode) {
 		case enLocal:

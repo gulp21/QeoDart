@@ -28,7 +28,7 @@ int io::iReadQcf(QString filename) {
 		one.y=52+20*i;
 		one.dimx=10*i;
 		one.dimy=10*i;
-		one.name="bla";
+		one.name="bla"+i;
 		one.placeType="capitalOfLand;land";
 		myDart->qlAllPlaces.append(one);
 	}
