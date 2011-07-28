@@ -8,6 +8,8 @@ See main.cpp for details. */
 #define IO_HPP
 
 #include <QWidget>
+#include <QDomDocument>
+#include <QFile>
 
 class dart;
 
@@ -21,6 +23,9 @@ class io : public QWidget {
 		~io();
 		int iReadQcf(QString filename);
 		int iReadOsm(QString filename);
+		int iFindQcf();
+		int iCheckQcf(QFile &file, QDomDocument &doc);
+		void vFillCurrentTypePlaces();
 // 	private:
 };
 #endif //IO_HPP 

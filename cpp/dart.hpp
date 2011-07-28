@@ -7,6 +7,8 @@ See main.cpp for details. */
 #include <qstring.h>
 #include <qlist.h>
 #include <QLabel>
+#include <QMessageBox>
+#include "ui_mainWindow.h"
 
 #ifndef DART_HPP
 #define DART_HPP
@@ -31,16 +33,14 @@ enum enGameModes {
 	enNetwork=2,
 };
 
-enum enPlaceTypes {
-	enLand=10,
-};
+//enum enPlaceTypes {
+//	enLand=10,
+//};
 
 enum enAskForModes {
 	enPositions=0,
 	enNames=1,
 };
-
-#include "ui_mainWindow.h"
  
 class dart : public QMainWindow, public Ui::MainWindow {
 Q_OBJECT
@@ -48,19 +48,22 @@ Q_OBJECT
 	public:
 		dart (QMainWindow *parent = 0);
 		~dart();
-
+		
+		QList<QString> qlQcfxFiles;
 		QList<place> qlAllPlaces; //contains all places of the current map
 		QList<place*> qlCurrentTypePlaces; //contains pointers pointing on the places in qlAllPlaces which fit the current placetype
 		QList<int> qlPlacesHistory;
 		QList<QList<scoreHistory> > qlScoreHistory; // [player][round].scores
 		QList<totalScore> qlTotalScores;
 		QList<QLabel*> qlPointLabels;
+		QList<QString> qlImageLayers;
+		QList<QLabel*> qlMapLayers;
 
-		double dZoomFactor;
+		double dZoomFactor, dPxToKm;
 		
 		int iPaddingTop; // px between toolbar and map
 		int iMarginTop; // px between window decoration and toolbar
-		int iNumberOfPlayers, iMaxPlaceCount;
+		int iNumberOfPlayers, iMaxPlaceCount, iCurrentQcf;
 		
 		QString qsCurrentPlaceType;
 		
@@ -72,7 +75,10 @@ Q_OBJECT
 		
 		bool bAcceptingClickEvent;
 		
-		int iCurrentPlayer, iGameMode, iAskForMode, iAskForPlaceType, iPlaceCount;
+		enGameModes iGameMode;
+		enAskForModes iAskForMode;
+		
+		int iCurrentPlayer, iPlaceCount;
 		int iDelayNextCircle, iDelayBeforeShowingMark, iDelayBeforeNextPlayer, iDelayBeforeNextPlace;
 		
 		QList<QList<QLabel*> > qlCircleLabels; //contains all circles (incl. points) for each user
@@ -81,11 +87,11 @@ Q_OBJECT
 		QList<QColor> qlColorsOfPlayers;
 		
 		QLabel *lblMouseClickOverlay;
-		QLabel *lblMapBackground;
 		
 		void resizeEvent(QResizeEvent *event);
 		void vRepaintCommonLabels();
 		void vRepaintPlayerLabels();
+		void vRepaintMap();
 		void vDrawCircle(int x, int y,  int r, int player);
 		void vDrawDistanceCircles(int n, int count=0);
 		void vDrawPoint(int x, int y, QList<QLabel*> &list, QColor color, QString name="");
@@ -103,10 +109,12 @@ Q_OBJECT
 		void vShowResultWindows();
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
-		double dGetMark(double distance);
+		double dGetMarkFromDistance(double distance);
+		double dGetMarkFromScore(double score);
 		double dGetScore(double mark);
 		double dGetDistanceInKm(double px);
 		double dGetAverageMarkOfPlayer(int player);
+		double dGetAverageScoreOfPlayer(int player);
 		
 		int iGetWindowSize();
 		int iGetUnzoomed(double x);
@@ -117,6 +125,7 @@ Q_OBJECT
 	private slots:
 		void vClose();
 		void vShowAllPlaces();
+		void vNewGame();
 };
 
 #include "myLabels.hpp"

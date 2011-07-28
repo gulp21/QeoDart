@@ -14,9 +14,8 @@ const int RADIUS=10, PENWIDTH=5;
 
 class QCircleLabel : public QLabel{
 
-	dart *myDart;
-	
 	private:
+		dart *myDart;
 		int x, y, r;
 		QColor color;
 	
@@ -38,7 +37,7 @@ class QCircleLabel : public QLabel{
 			
 			pen.setWidth(penWidth);
 			QColor c=color;
-			c.setAlpha(255-r*3); //TODO *what?
+			c.setAlpha(255-r*3);
 			pen.setColor(c);
 			p.setRenderHint(QPainter::Antialiasing);
 			p.setPen(pen);

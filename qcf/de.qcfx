@@ -1,0 +1,250 @@
+<!DOCTYPE QeoDartCoordinates>
+<coordinates version="0.2">
+<!-- This file is a part of QeoDart, released under the terms of the GNU General Public License.
+See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
+	<name default="Deutschland" de="Deutschland" en="Germany" la="Germania" />
+	<pxtokm value="0.68" />
+	<author name="gulp21" source="wikimedia commons?" licence="GPL" licence:background="CC?"/>
+	<!--.....lands.....-->
+	<place
+	x="161" y="274" y2="40" x2="50"
+	name="&lt;nobr>Nordrhein-Westfalen&lt;/nobr>"
+	name:de="#?"
+	name:en="&lt;nobr>North Rhine-Westphalia&lt;/nobr>"
+	name:la="&lt;nobr>Rhenania Septentrionalis-Guestfalia&lt;/nobr>"
+	placetype="state"
+	/>
+	<place
+	x="245" y="167" y2="35" x2="70"
+	name="Niedersachsen"
+	name:de="#?"
+	name:en="&lt;nobr>Lower Saxony&lt;/nobr>"
+	name:la="&lt;nobr>Saxonia Inferior&lt;/nobr>"
+	placetype="state"
+	/>
+	<place
+	x="389" y="104" y2="25" x2="60"
+	name="&lt;nobr>Mecklenburg-Vorpommern&lt;/nobr>"
+	name:de="#?"
+	name:en="#?"
+	name:la="&lt;nobr>Megapolis et Pomerania Citerior&lt;/nobr>"
+	placetype="state"
+	/>
+	<place
+	x="273" y="77" diffy="20" diffx="35"
+	name="&lt;nobr>Schleswig-Holstein&lt;/nobr>"
+	name:de="&lt;nobr>Schleswig-Holstein&lt;/nobr>"
+	name:en="&lt;nobr>Schleswig-Holstein&lt;/nobr>"
+	name:la="&lt;nobr>Slesvicum et Holsatia&lt;/nobr>"
+	placetype="state"
+	/>
+	<place
+	x="445" y="205" dimy="70" dimx="25"
+	name="Brandenburg"
+	name:de="#?"
+	name:en="#?"
+	name:la="Brandenburgum"
+	placetype="state"
+	/>
+	<place
+	x="356" y="235" dimy="70" dimx="25"
+	name="&lt;nobr>Sachsen-Anhalt&lt;/nobr>"
+	name:de="#?"
+	name:en="&lt;nobr>Saxony-Anhalt&lt;/nobr>"
+	name:la="&lt;nobr>Saxonia-Anhaltinum&lt;/nobr>"
+	placetype="state"
+	/>
+	<place
+	x="442" y="308" dimy="30" dimx="35"
+	name="Sachsen"
+	name:de="#?"
+	name:en="Saxon"
+	name:la="Saxonia"
+	placetype="state"
+	/>
+	<place
+	x="328" y="326" dimy="25" dimx="50"
+	name="Thüringen"
+	name:de="#?"
+	name:en="Thuringia"
+	name:la="Thuringia"
+	placetype="state"
+	/>
+	<place
+	x="231" y="339" dimy="60" dimx="30"
+	name="Hessen"
+	name:de="#?"
+	name:en="Hesse"
+	name:la="Hessia"
+	placetype="state"
+	/>
+	<!--10-->
+	<place
+	x="149" y="395" dimy="35" dimx="30"
+	name="&lt;nobr>Rheinland-Pfalz&lt;/nobr>"
+	name:de="#?"
+	name:en="&lt;nobr>Rhineland-Palatinate&lt;/nobr>"
+	name:la="&lt;nobr>Rhenania Septentrionalis-Guestfalia&lt;/nobr>"
+	placetype="state"
+	/>
+	<place
+	x="125" y="433" dimy="10" dimx="10"
+	name="Saarland"
+	name:de="#?"
+	name:en="#?"
+	name:la="Saravia"
+	placetype="state"
+	/>
+	<place
+	x="356" y="471" dimy="100" dimx="50"
+	name="Bayern"
+	name:de="#?"
+	name:en="Bavaria"
+	name:la="Bavaria"
+	placetype="state"
+	/>
+	<place
+	x="229" y="504" dimy="65" dimx="50"
+	name="&lt;nobr>Baden-Württemberg&lt;/nobr>"
+	name:de="#?"
+	name:en="#?"
+	name:la="&lt;nobr>Badenia-Virtembergia&lt;/nobr>"
+	placetype="state"
+	/>
+	<!--.....both.....-->
+	<place
+	x="437" y="194" dimy="6" dimx="6"
+	name="Berlin"
+	name:de="#?"
+	name:en="#?"
+	name:la="Berolinum"
+	placetype="state;city;CapitalOfState"
+	/>
+<!-- 	216 | 147 -->
+	<place
+	x="224" y="152" dimy="2" dimx="2"
+	
+	
+	name="Bremen"
+	name:de="#?"
+	name:en="#?"
+	name:la="Brema"
+	placetype="state;city;CapitalOfState"
+	/>
+	<place
+	x="278" y="116" dimy="6" dimx="8"
+	name="Hamburg"
+	name:de="#?"
+	name:en="#?"
+	name:la="Hamburgum"
+	placetype="state;city;CapitalOfState"
+	/>
+	<!--.....capitalslands.....-->
+	<place
+	x="119" y="290"
+	name="Düsseldorf"
+	name:de="#?"
+	name:en="#?"
+	name:la="Dusseldorpium"
+	placetype="city;CapitalOfState"
+	/>
+	<place
+	x="271" y="204"
+	name="Hannover"
+	name:de="#?"
+	name:en="#?"
+	name:la="Hannovera"
+	placetype="city;CapitalOfState"
+	/>
+	<place
+	x="342" y="114"
+	name="Schwerin"
+	name:de="#?"
+	name:en="#?"
+	name:la="Schwerinum"
+	placetype="town;CapitalOfState"
+	/>
+	<!--20-->
+	<place
+	x="285" y="57"
+	name="Kiel"
+	name:de="#?"
+	name:en="#?"
+	name:la="Kielia"
+	placetype="city;CapitalOfState"
+	/>
+	<place
+	x="419" y="202"
+	name="Potsdam"
+	name:de="#?"
+	name:en="#?"
+	name:la="Potestampium"
+	placetype="city;CapitalOfState"
+	/>
+	<place
+	x="357" y="220"
+	name="Magdeburg"
+	name:de="#?"
+	name:en="#?"
+	name:la="Magdeburgum"
+	placetype="city;CapitalOfState"
+	/>
+	<place
+	x="453" y="296"
+	name="Dresden"
+	name:de="#?"
+	name:en="#?"
+	name:la="Dresda"
+	placetype="city;CapitalOfState"
+	/>
+	<place
+	x="324" y="313"
+	name="Erfurt"
+	name:de="#?"
+	name:en="#?"
+	name:la="Erfordia"
+	placetype="city;CapitalOfState"
+	/>
+	<place
+	x="192" y="382"
+	name="Wiesbaden"
+	name:de="#?"
+	name:en="#?"
+	name:la="&lt;nobr>Aquae Mattiacae&lt;/nobr>"
+	placetype="city;CapitalOfState"
+	/>
+	<place
+	x="191" y="393"
+	name="Mainz"
+	name:de="#?"
+	name:en="#?"
+	name:la="Moguntiacum"
+	placetype="city;CapitalOfState"
+	/>
+	<place
+	x="131" y="438"
+	name="Saarbrücken"
+	name:de="#?"
+	name:en="#?"
+	name:la="Saravipontus"
+	placetype="city;CapitalOfState"
+	/>
+	<place
+	x="367" y="527"
+	name="München"
+	name:de="#?"
+	name:en="Munich"
+	name:la="Mon&aacute;cum"
+	placetype="city;CapitalOfState"
+	/>
+	<place
+	x="242" y="488"
+	name="Stuttgart"
+	name:de="#?"
+	name:en="#?"
+	name:la="Stutgardia"
+	placetype="city;CapitalOfState"
+	/>
+	<!--30-->
+	<!--  -52 -->
+</coordinates> 
