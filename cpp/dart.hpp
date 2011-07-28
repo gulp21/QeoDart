@@ -105,6 +105,7 @@ Q_OBJECT
 		void vResetForNewGame();
 		void vShowTotalScores();
 		void vShowScores();
+                void vShowComment();
 		void vResetScoreLabels();
 		void vShowResultWindows();
 		

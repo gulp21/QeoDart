@@ -105,8 +105,8 @@ class QPointLabel : public QLabel{
 // 			move(x*myDart->dZoomFactor-a,y*myDart->dZoomFactor+myDart->iPaddingTop-a-a);
 			
 			resize(
-				100*myDart->dZoomFactor, // text must be visible
-				penWidth+penWidth
+				(20+name.length()*7)*myDart->dZoomFactor, // text must be visible
+				3*penWidth
 			);
 			move(
 				x*myDart->dZoomFactor-penWidth/2-penWidth/2,

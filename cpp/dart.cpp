@@ -34,7 +34,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	iPlaceCount=0;
 	iCurrentPlayer=0;
 	iAskForMode=enPositions;
-	iNumberOfPlayers=2;
+	iNumberOfPlayers=1;
 	qsCurrentPlaceType="land";
 	bAcceptingClickEvent=TRUE;
 	dPxToKm=1;
@@ -204,6 +204,7 @@ void dart::vSetNumberOfPlayers(int n) {
 	if(iNumberOfPlayers==1) {
 		gridLayout->addWidget(lblCurrentPlace,1,0);
 		gridLayout->addWidget(lblCurrentPlayer,1,4);
+                gridLayout->addWidget(lblComment,1,2);
 		lblComment->setText("");
 		lblComment->show();
 	} else {
@@ -278,7 +279,7 @@ void dart::vRepaintCommonLabels() {
 	lblComment->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
 	lblCurrentRound->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
 	lblCurrentPlayer->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
-	lblCurrentPlayer->setText(QString(tr("Player %1")).arg(iCurrentPlayer));
+	lblCurrentPlayer->setText(QString(tr("Player %1")).arg(iCurrentPlayer+1));
 }
 
 int dart::iGetFontSize() {
@@ -358,8 +359,12 @@ void dart::vMouseClickEvent(int x, int y) {
 		vShowCurrentPlace();
 		
 		vShowScores();
+                
+                vShowComment();
 		
 		mySleep(iDelayBeforeNextPlace);
+                
+                lblComment->setText("");
 		
 		vShowTotalScores();
 		
@@ -373,6 +378,12 @@ void dart::vMouseClickEvent(int x, int y) {
 		vNextRound();
 		
 	}
+}
+
+void dart::vShowComment() {
+        if(iNumberOfPlayers==1) {
+                lblComment->setText("whatever"); // 2d array; ;-seperated?; w/ translater comment
+        }
 }
 
 void dart::vShowResultWindows() { // TODO all players
@@ -566,6 +577,6 @@ double dart::dGetAverageMarkOfPlayer(int player) {
 }
 
 double dart::dGetAverageScoreOfPlayer(int player) {
-	if(iPlaceCount<=1) return 0;
+	if(iPlaceCount<1) return 0;
 	return qlTotalScores[player].score/iPlaceCount;
 }
