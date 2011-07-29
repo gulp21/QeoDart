@@ -24,7 +24,15 @@ using namespace std;
 io *clIO;
 
 dart::dart(QMainWindow *parent) : QMainWindow(parent){
+	
 	qlImageLayers << "background" << "borders" << "rivers" << "elevations";
+	
+	qlComments << tr("Very Good!") << tr("Super!") << tr("Very Fine!")
+	           << tr("Well Done!") << tr("Good!") << tr("That was good!")
+	           << tr("Well.") << tr("That was OK.") << tr("That was reasonable.")
+	           << tr("Oh boy!") << tr("Not really…") << tr("Not quite…")
+	           << tr("Completely Wrong!") << tr("That wasn't much of a hit…") << tr("Missed completely!")
+	           << tr("Read wrongly?") << tr("Clicked wrongly?") << tr("D'oh!");
 	
 	iPaddingTop=0;
 	iMarginTop=0;
@@ -53,8 +61,6 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	toolBar->setMovable(FALSE);
 	iMarginTop=toolBar->height()+menubar->height(); //TODO put it in a suitable function
 	
-	resize(600,600+iMarginTop);
-	
 	for(int i=0; i<4; i++) {
 		QLabel *lblMap = new QLabel(this);
 		lblMap->setAlignment(Qt::AlignTop);
@@ -73,12 +79,13 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	qDebug()<<iGetWindowSize();
 	
 	connect(actionQuit,SIGNAL (triggered()), this, SLOT(vClose()));
-	connect(actionNew_Game,SIGNAL (triggered()), this, SLOT(vNewGame()));
-	connect(actionFind_Place,SIGNAL (triggered()), this, SLOT(vShowAllPlaces()));
-	connect(actionAbout_Qt,SIGNAL (triggered()), qApp, SLOT(aboutQt()));
-	actionNew_Game->setIcon(QIcon::fromTheme("document-new"));
-	actionFind_Place->setIcon(QIcon::fromTheme("edit-find"));
 	actionQuit->setIcon(QIcon::fromTheme("application-exit"));
+	connect(actionNew_Game,SIGNAL (triggered()), this, SLOT(vNewGame()));
+	actionNew_Game->setIcon(QIcon::fromTheme("document-new"));
+	connect(actionFind_Place,SIGNAL (triggered()), this, SLOT(vShowAllPlaces()));
+	actionFind_Place->setIcon(QIcon::fromTheme("edit-find"));
+	connect(action100,SIGNAL (triggered()), this, SLOT(vResize()));
+	connect(actionAbout_Qt,SIGNAL (triggered()), qApp, SLOT(aboutQt()));
 	
 	if(clIO->iFindQcf()==0) {
 		qDebug() << "[E] No valid qcfx files found, exiting";
@@ -92,18 +99,16 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	
 	show();
 	
-// 	vSetNumberOfPlayers(2);
 	gridLayout->setSpacing(1);
-	resize(600,600+iMarginTop+iPaddingTop);
 	
 	vSetGameMode(enLocal);
-	
-// 	clIO->iReadOsm("/home/markus/Dokumente/GitHub/QeoDart/cpp/test.svg");
 	
 	vRepaintCommonLabels();
 	vRepaintPlayerLabels();
 	
 	gridLayout->addWidget(lblCurrentRound,0,4);
+	
+	vResize(1); // TODO saved value?
 }
 
 dart::~dart(){
@@ -248,11 +253,23 @@ void dart::resizeEvent(QResizeEvent *event) {
 	
 	vRepaintMap();
 	
-	gridLayoutWidget->resize(600,gridLayoutWidget->height()); //TODO not working
-		gridLayoutWidget->setGeometry(QRect(0,0,600*dZoomFactor+1,111));
+	gridLayoutWidget->setGeometry(QRect(0,0,600*dZoomFactor+1,111));
 
-	
 	qDebug() << "[i] iPaddingTop" << iPaddingTop << "iMarginTop" << iMarginTop << "dZoomFactor" << dZoomFactor << "fontSize" << fontSize;
+}
+
+void dart::vResize(double dNewZoomFactor) {
+	if(QObject::sender()==action100) { // this is unneceassary as there's only 1 caller
+		dNewZoomFactor=1;
+		qDebug()<<"TODO doesn't work when maximized";
+	}
+	
+	dZoomFactor=dNewZoomFactor;
+	vRepaintPlayerLabels();
+	vRepaintCommonLabels();
+	int fontSize=iGetFontSize();
+	iPaddingTop=(qlPlayerLabels.count()+1)*(fontSize+6);
+	resize(600*dZoomFactor,iMarginTop+iPaddingTop+600*dZoomFactor);
 }
 
 void dart::vRepaintMap() {
@@ -386,7 +403,9 @@ void dart::vMouseClickEvent(int x, int y) {
 
 void dart::vShowComment() {
         if(iNumberOfPlayers==1) {
-                lblComment->setText("whatever"); // 2d array; ;-seperated?; w/ translater comment
+		int i = rand() % 3 + 3*(static_cast<int>(qlScoreHistory[0][iPlaceCount-1].mark)-1);
+		qDebug() << qlScoreHistory[0][iPlaceCount-1].mark << i;
+                lblComment->setText(qlComments[i]);
         }
 }
 

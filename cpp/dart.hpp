@@ -86,9 +86,11 @@ Q_OBJECT
 // 		QList<QLabel*> qlPlayerLabel;
 		QList<QList<QLabel*> > qlPlayerLabels;
 		QList<QColor> qlColorsOfPlayers;
+		QList<QString> qlComments;
 		
 		QLabel *lblMouseClickOverlay;
 		
+		void closeEvent(QCloseEvent *event);
 		void resizeEvent(QResizeEvent *event);
 		void vRepaintCommonLabels();
 		void vRepaintPlayerLabels();
@@ -110,8 +112,6 @@ Q_OBJECT
 		void vResetScoreLabels();
 		void vShowResultWindows();
 		
-		void closeEvent(QCloseEvent *event);
-		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetDistanceInPx(int a, int b, int n);
 		double dGetMarkFromDistance(double distance);
@@ -131,6 +131,7 @@ Q_OBJECT
 		void vClose();
 		void vShowAllPlaces();
 		void vNewGame();
+		void vResize(double dNewZoomFactor=1);
 };
 
 #include "myLabels.hpp"

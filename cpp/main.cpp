@@ -12,9 +12,13 @@ You should have received a copy of the GNU General Public License along with thi
 #include <iostream>
 #include <stdlib.h>
 #include <QApplication>
+#include <QTextCodec>
+
 #include "dart.hpp"
 
 int main(int argc, char* argv[]) {
+	QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8")); 
+	
         QApplication a(argc, argv);
         dart w;
         w.show();
