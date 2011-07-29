@@ -20,7 +20,7 @@ struct place {
 
 struct scoreHistory {
 	int x, y, score;
-	double diffPx, diffKm, mark;
+	double diffPx, diffPxArea, diffKm, mark;
 };
 
 struct totalScore {
@@ -64,6 +64,7 @@ Q_OBJECT
 		int iPaddingTop; // px between toolbar and map
 		int iMarginTop; // px between window decoration and toolbar
 		int iNumberOfPlayers, iMaxPlaceCount, iCurrentQcf;
+		int iScoreAreaMode;
 		
 		QString qsCurrentPlaceType;
 		
@@ -109,7 +110,10 @@ Q_OBJECT
 		void vResetScoreLabels();
 		void vShowResultWindows();
 		
+		void closeEvent(QCloseEvent *event);
+		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
+		double dGetDistanceInPx(int a, int b, int n);
 		double dGetMarkFromDistance(double distance);
 		double dGetMarkFromScore(double score);
 		double dGetScore(double mark);

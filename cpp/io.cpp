@@ -42,9 +42,9 @@ int io::iCheckQcf(QFile &file, QDomDocument &doc) {
 		qDebug() << "     root.tagName is" << root.tagName();
 		return -3;
 	}
-	if(root.attribute("version", "NUL")!="0.2") {
+	if(root.attribute("version", "NULL")!="0.2") {
 		qDebug() << "[W] " << file.fileName() << "is not qcfx-version 0.2";
-		qDebug() << "     version is" << root.attribute("version", "NUL");
+		qDebug() << "     version is" << root.attribute("version", "NULL");
 		return -4;
 	}
 	return 0;
@@ -107,15 +107,17 @@ int io::iReadQcf(QString filename) {
 				newPlace.dimx=e.attribute("dimx","0").toInt();
 				newPlace.dimy=e.attribute("dimy","0").toInt();
 				newPlace.name=e.attribute("name","NONAME");
+				newPlace.placeType=e.attribute("placetype","everything");
 				myDart->qlAllPlaces.append(newPlace);
 				
 				if(newPlace.name=="NONAME") {
-					qDebug() << "[W] place has no name";
-					qDebug() << "    " << e.text();
+					qDebug() << "[W] place" << myDart->qlAllPlaces.count() << "has no name";
+				}
+				if(newPlace.placeType=="everything") {
+					qDebug() << "[W] place" << myDart->qlAllPlaces.count() << "has no placetype";
 				}
 				if(newPlace.x==-1 || newPlace.y==-1) {
-					qDebug() << "[W] place has incomplete coordinates";
-					qDebug() << "    " << e.text();
+					qDebug() << "[W] place" << myDart->qlAllPlaces.count() << "has incomplete coordinates";
 				}
 				
 			} else {

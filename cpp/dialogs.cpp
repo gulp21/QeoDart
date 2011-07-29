@@ -19,9 +19,9 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 	}
 	
 	if(myDart->iNumberOfPlayers==1) {
-		lblScore->setText(QString(tr("<span>You have a score of %1 points (&#8960; %2).</span>")).arg(myDart->qlTotalScores[0].score).arg(myDart->qlTotalScores[0].score/myDart->iMaxPlaceCount));
+		lblScore->setText(QString(tr("<span>You have a score of %1 points (&#8960; %2).</span>")).arg(myDart->qlTotalScores[0].score).arg(myDart->qlTotalScores[0].score/myDart->iMaxPlaceCount,0,'f',1));
 	} else {
-		lblScore->setText(QString(tr("<span>Player %1 has a score of %2 points (&#8960; %3).</span>")).arg(player+1).arg(myDart->qlTotalScores[player].score).arg(myDart->qlTotalScores[player].score/myDart->iMaxPlaceCount));
+		lblScore->setText(QString(tr("<span>Player %1 has a score of %2 points (&#8960; %3).</span>")).arg(player+1).arg(myDart->qlTotalScores[player].score).arg(myDart->qlTotalScores[player].score/myDart->iMaxPlaceCount,0,'f',1));
 	}
 	
 	lblMark->setText(QString(tr("That equals grade %1.")).arg(myDart->qlTotalScores[player].mark,0,'f',1));

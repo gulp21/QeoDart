@@ -3,164 +3,161 @@
 <!-- This file is a part of QeoDart, released under the terms of the GNU General Public License.
 See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	<name default="Deutschland" de="Deutschland" en="Germany" la="Germania" />
-	<pxtokm value="0.68" />
+	<pxtokm value="1.438" />
 	<author name="gulp21" source="wikimedia commons?" licence="GPL" licence:background="CC?"/>
-	<!--.....lands.....-->
+	<!--.....state.....-->
 	<place
-	x="161" y="274" y2="40" x2="50"
-	name="&lt;nobr>Nordrhein-Westfalen&lt;/nobr>"
-	name:de="#?"
-	name:en="&lt;nobr>North Rhine-Westphalia&lt;/nobr>"
-	name:la="&lt;nobr>Rhenania Septentrionalis-Guestfalia&lt;/nobr>"
+	x="154" y="288" dimx="174" dimy="166"
+	name="Nordrhein-Westfalen"
+	name:de="Nordrhein-Westfalen"
+	name:en="North Rhine-Westphalia"
+	name:la="Rhenania Septentrionalis-Guestfalia"
 	placetype="state"
 	/>
 	<place
-	x="245" y="167" y2="35" x2="70"
+	x="238" y="188" dimx="228" dimy="201"
 	name="Niedersachsen"
-	name:de="#?"
-	name:en="&lt;nobr>Lower Saxony&lt;/nobr>"
-	name:la="&lt;nobr>Saxonia Inferior&lt;/nobr>"
+	name:de="Niedersachsen"
+	name:en="Lower Saxony"
+	name:la="Saxonia Inferior"
 	placetype="state"
 	/>
 	<place
-	x="389" y="104" y2="25" x2="60"
-	name="&lt;nobr>Mecklenburg-Vorpommern&lt;/nobr>"
-	name:de="#?"
-	name:en="#?"
-	name:la="&lt;nobr>Megapolis et Pomerania Citerior&lt;/nobr>"
+	x="393" y="89" dimx="175" dimy="126"
+	name="Mecklenburg-Vorpommern"
+	name:de="Mecklenburg-Vorpommern"
+	name:en="Mecklenburg-Vorpommern"
+	name:la="Megapolis et Pomerania Citerior"
 	placetype="state"
 	/>
 	<place
-	x="273" y="77" diffy="20" diffx="35"
-	name="&lt;nobr>Schleswig-Holstein&lt;/nobr>"
-	name:de="&lt;nobr>Schleswig-Holstein&lt;/nobr>"
-	name:en="&lt;nobr>Schleswig-Holstein&lt;/nobr>"
-	name:la="&lt;nobr>Slesvicum et Holsatia&lt;/nobr>"
+	x="270" y="66" dimx="136" dimy="130"
+	name="Schleswig-Holstein"
+	name:de="Schleswig-Holstein"
+	name:en="Schleswig-Holstein"
+	name:la="Slesvicum et Holsatia"
 	placetype="state"
 	/>
 	<place
-	x="445" y="205" dimy="70" dimx="25"
+	x="420" y="196" dimx="170" dimy="172"
 	name="Brandenburg"
-	name:de="#?"
-	name:en="#?"
+	name:de="Brandenburg"
+	name:en="Brandenburg"
 	name:la="Brandenburgum"
 	placetype="state"
 	/>
 	<place
-	x="356" y="235" dimy="70" dimx="25"
-	name="&lt;nobr>Sachsen-Anhalt&lt;/nobr>"
-	name:de="#?"
-	name:en="&lt;nobr>Saxony-Anhalt&lt;/nobr>"
-	name:la="&lt;nobr>Saxonia-Anhaltinum&lt;/nobr>"
+	x="367" y="237" dimx="127" dimy="160"
+	name="Sachsen-Anhalt"
+	name:de="Sachsen-Anhalt"
+	name:en="Saxony-Anhalt"
+	name:la="Saxonia-Anhaltinum"
 	placetype="state"
 	/>
 	<place
-	x="442" y="308" dimy="30" dimx="35"
+	x="446" y="316" dimx="155" dimy="117"
 	name="Sachsen"
-	name:de="#?"
+	name:de="Sachsen"
 	name:en="Saxon"
 	name:la="Saxonia"
 	placetype="state"
 	/>
 	<place
-	x="328" y="326" dimy="25" dimx="50"
+	x="338" y="319" dimx="135" dimy="112"
 	name="Thüringen"
-	name:de="#?"
+	name:de="Thüringen"
 	name:en="Thuringia"
 	name:la="Thuringia"
 	placetype="state"
 	/>
 	<place
-	x="231" y="339" dimy="60" dimx="30"
+	x="228" y="348" dimx="122" dimy="177"
 	name="Hessen"
-	name:de="#?"
+	name:de="Hessen"
 	name:en="Hesse"
 	name:la="Hessia"
 	placetype="state"
 	/>
 	<!--10-->
 	<place
-	x="149" y="395" dimy="35" dimx="30"
-	name="&lt;nobr>Rheinland-Pfalz&lt;/nobr>"
-	name:de="#?"
-	name:en="&lt;nobr>Rhineland-Palatinate&lt;/nobr>"
-	name:la="&lt;nobr>Rhenania Septentrionalis-Guestfalia&lt;/nobr>"
+	x="144" y="392" dimx="116" dimy="153"
+	name="Rheinland-Pfalz"
+	name:de="Rheinland-Pfalz"
+	name:en="Rhineland-Palatinate"
+	name:la="Rhenania Septentrionalis-Guestfalia"
 	placetype="state"
 	/>
 	<place
-	x="125" y="433" dimy="10" dimx="10"
+	x="122" y="435" dimx="52" dimy="42"
 	name="Saarland"
-	name:de="#?"
-	name:en="#?"
+	name:de="Saarland"
+	name:en="Saarland"
 	name:la="Saravia"
 	placetype="state"
 	/>
 	<place
-	x="356" y="471" dimy="100" dimx="50"
+	x="355" y="475" dimx="246" dimy="254"
 	name="Bayern"
-	name:de="#?"
+	name:de="Bayern"
 	name:en="Bavaria"
 	name:la="Bavaria"
 	placetype="state"
 	/>
 	<place
-	x="229" y="504" dimy="65" dimx="50"
-	name="&lt;nobr>Baden-Württemberg&lt;/nobr>"
-	name:de="#?"
-	name:en="#?"
-	name:la="&lt;nobr>Badenia-Virtembergia&lt;/nobr>"
+	x="227" y="490" dimx="154" dimy="172"
+	name="Baden-Württemberg"
+	name:de="Baden-Württemberg"
+	name:en="Baden-Württemberg"
+	name:la="Badenia-Virtembergia"
 	placetype="state"
 	/>
 	<!--.....both.....-->
 	<place
-	x="437" y="194" dimy="6" dimx="6"
+	x="437" y="192" dimx="30" dimy="25"
 	name="Berlin"
-	name:de="#?"
-	name:en="#?"
+	name:de="Berlin"
+	name:en="Berlin"
 	name:la="Berolinum"
-	placetype="state;city;CapitalOfState"
+	placetype="state;city;CapitalOfState;CapitalOfCountry"
 	/>
-<!-- 	216 | 147 -->
 	<place
-	x="224" y="152" dimy="2" dimx="2"
-	
-	
+	x="221" y="151" dimx="23" dimy="18"
 	name="Bremen"
-	name:de="#?"
-	name:en="#?"
+	name:de="Bremen"
+	name:en="Bremen"
 	name:la="Brema"
 	placetype="state;city;CapitalOfState"
 	/>
 	<place
-	x="278" y="116" dimy="6" dimx="8"
+	x="279" y="116" dimx="27" dimy="28"
 	name="Hamburg"
-	name:de="#?"
-	name:en="#?"
+	name:de="Hamburg"
+	name:en="Hamburg"
 	name:la="Hamburgum"
 	placetype="state;city;CapitalOfState"
 	/>
-	<!--.....capitalslands.....-->
+	<!--.....CapitalOfState.....-->
 	<place
-	x="119" y="290"
+	x="120" y="300"
 	name="Düsseldorf"
-	name:de="#?"
-	name:en="#?"
+	name:de="Düsseldorf"
+	name:en="Düsseldorf"
 	name:la="Dusseldorpium"
 	placetype="city;CapitalOfState"
 	/>
 	<place
-	x="271" y="204"
+	x="266" y="210"
 	name="Hannover"
-	name:de="#?"
-	name:en="#?"
+	name:de="Hannover"
+	name:en="Hannover"
 	name:la="Hannovera"
 	placetype="city;CapitalOfState"
 	/>
 	<place
-	x="342" y="114"
+	x="342" y="109"
 	name="Schwerin"
-	name:de="#?"
-	name:en="#?"
+	name:de="Schwerin"
+	name:en="Schwerin"
 	name:la="Schwerinum"
 	placetype="town;CapitalOfState"
 	/>
@@ -168,80 +165,80 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	<place
 	x="285" y="57"
 	name="Kiel"
-	name:de="#?"
-	name:en="#?"
+	name:de="Kiel"
+	name:en="Kiel"
 	name:la="Kielia"
 	placetype="city;CapitalOfState"
 	/>
 	<place
 	x="419" y="202"
 	name="Potsdam"
-	name:de="#?"
-	name:en="#?"
+	name:de="Potsdam"
+	name:en="Potsdam"
 	name:la="Potestampium"
 	placetype="city;CapitalOfState"
 	/>
 	<place
-	x="357" y="220"
+	x="355" y="225"
 	name="Magdeburg"
-	name:de="#?"
-	name:en="#?"
+	name:de="Magdeburg"
+	name:en="Magdeburg"
 	name:la="Magdeburgum"
 	placetype="city;CapitalOfState"
 	/>
 	<place
-	x="453" y="296"
+	x="456" y="296"
 	name="Dresden"
-	name:de="#?"
-	name:en="#?"
+	name:de="Dresden"
+	name:en="Dresden"
 	name:la="Dresda"
 	placetype="city;CapitalOfState"
 	/>
 	<place
-	x="324" y="313"
+	x="328" y="315"
 	name="Erfurt"
-	name:de="#?"
-	name:en="#?"
+	name:de="Erfurt"
+	name:en="Erfurt"
 	name:la="Erfordia"
 	placetype="city;CapitalOfState"
 	/>
 	<place
 	x="192" y="382"
 	name="Wiesbaden"
-	name:de="#?"
-	name:en="#?"
-	name:la="&lt;nobr>Aquae Mattiacae&lt;/nobr>"
+	name:de="Wiesbaden"
+	name:en="Wiesbaden"
+	name:la="Aquae Mattiacae"
 	placetype="city;CapitalOfState"
 	/>
 	<place
 	x="191" y="393"
 	name="Mainz"
-	name:de="#?"
-	name:en="#?"
+	name:de="Mainz"
+	name:en="Mainz"
 	name:la="Moguntiacum"
 	placetype="city;CapitalOfState"
 	/>
 	<place
-	x="131" y="438"
+	x="126" y="440"
 	name="Saarbrücken"
-	name:de="#?"
-	name:en="#?"
+	name:de="Saarbrücken"
+	name:en="Saarbrücken"
 	name:la="Saravipontus"
 	placetype="city;CapitalOfState"
 	/>
 	<place
-	x="367" y="527"
+	x="365" y="527"
 	name="München"
-	name:de="#?"
+	name:de="München"
 	name:en="Munich"
 	name:la="Mon&aacute;cum"
 	placetype="city;CapitalOfState"
 	/>
 	<place
-	x="242" y="488"
+	x="240" y="486"
 	name="Stuttgart"
-	name:de="#?"
-	name:en="#?"
+	name:de="Stuttgart"
+	name:en="Stuttgart"
 	name:la="Stutgardia"
 	placetype="city;CapitalOfState"
 	/>

@@ -29,16 +29,16 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	iPaddingTop=0;
 	iMarginTop=0;
 	dZoomFactor=1;
-	iMaxPlaceCount=10;
-	iMaxPlaceCount=10;
+	iMaxPlaceCount=3;
 	iPlaceCount=0;
 	iCurrentPlayer=0;
 	iAskForMode=enPositions;
 	iNumberOfPlayers=1;
-	qsCurrentPlaceType="land";
+	qsCurrentPlaceType="state";
 	bAcceptingClickEvent=TRUE;
 	dPxToKm=1;
 	iCurrentQcf=0;
+	iScoreAreaMode=1;
 	
 	iDelayNextCircle=200;
 	iDelayBeforeShowingMark=500;
@@ -84,7 +84,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 		qDebug() << "[E] No valid qcfx files found, exiting";
 		QMessageBox msgBox;
 		msgBox.setText(tr("Sorry, no valid qcfx files could be found."));
-		msgBox.setInformativeText(tr("You might want to add a file through Maps → Add map"));
+		msgBox.setInformativeText(tr("You might want to add a file through Maps → Add map")); // TODO -> symbol
 		msgBox.exec();
 	} else {
 		clIO->iReadQcf(qlQcfxFiles[iCurrentQcf]);
@@ -107,6 +107,9 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 }
 
 dart::~dart(){
+	vRemoveAllCircles();
+	vRemoveAllCommonPoints();
+	vSetNumberOfPlayers(0);
 }
 
 //draws distance circles using the saved click-coordinates of place n, iterating #count [recursion]
@@ -324,16 +327,17 @@ void dart::vMouseClickEvent(int x, int y) {
 	scoreHistory score;
 	score.x=x;
 	score.y=y;
-	score.diffPx=dGetDistanceInPxBetween(x,y,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y); //TODO area
-	score.diffKm=dGetDistanceInKm(score.diffPx);
-	score.mark=dGetMarkFromDistance(score.diffPx);
+	score.diffPxArea=dGetDistanceInPx(x,y,iPlaceCount-1); // respects area // TODO what about shown distance?
+	score.diffPx=dGetDistanceInPxBetween(x,y,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y);
+	score.diffKm=dGetDistanceInKm(score.diffPxArea);
+	score.mark=dGetMarkFromDistance(score.diffPxArea);
 	score.score=dGetScore(score.mark);
 	qlScoreHistory[iCurrentPlayer].append(score);
 	
 	qlTotalScores[iCurrentPlayer].score+=score.score;
 	qlTotalScores[iCurrentPlayer].mark=dGetAverageMarkOfPlayer(iCurrentPlayer);
 	
-	qDebug() << "Score for Player" << iCurrentPlayer << score.diffPx << "px" << score.diffKm << "km" << score.score << "p"  << score.mark << "TOTAL" << qlTotalScores[iCurrentPlayer].score << "p" << qlTotalScores[iCurrentPlayer].mark;
+	qDebug() << "Score for Player" << iCurrentPlayer << score.diffPx << "px" << score.diffPxArea << "px (area)" << score.diffKm << "km" << score.score << "p"  << score.mark << "TOTAL" << qlTotalScores[iCurrentPlayer].score << "p" << qlTotalScores[iCurrentPlayer].mark;
 	
 	if(iCurrentPlayer<iNumberOfPlayers-1) { // next player
 		
@@ -389,7 +393,6 @@ void dart::vShowComment() {
 void dart::vShowResultWindows() { // TODO all players
 	bAcceptingClickEvent=FALSE;
 	
-	
 	for(int i=0,max=qlPlacesHistory.count(); i<max; i++) {
 		vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[i]]->x, qlCurrentTypePlaces[qlPlacesHistory[i]]->y, qlPointLabels, qlCurrentTypePlaces[qlPlacesHistory[i]]->name);
 	}
@@ -398,6 +401,8 @@ void dart::vShowResultWindows() { // TODO all players
 		resultWindow dialog(this,i);
 		dialog.exec();
 	}
+	
+	iPlaceCount=0; // needed for quit?-dialog
 }
 
 void dart::vResetScoreLabels() {
@@ -428,6 +433,21 @@ int dart::iGetWindowSize() {
 
 void dart::vClose() {
 	close();
+}
+
+void dart::closeEvent(QCloseEvent *event) {
+	if(iPlaceCount>1 ) {
+		QMessageBox msgBox;
+		msgBox.setWindowTitle(tr("Quit QeoDart"));
+		msgBox.setText(tr("Do you really want to quit QeoDart?"));
+		msgBox.setInformativeText(tr("Your current score will be lost."));
+		msgBox.setStandardButtons(QMessageBox::Yes	 | QMessageBox::Cancel);
+		msgBox.setDefaultButton(QMessageBox::Cancel);
+		if(msgBox.exec()==QMessageBox::Yes) event->accept();
+		else event->ignore();
+	} else {
+		event->accept();
+	}
 }
 
 int dart::iGetUnzoomed(double x) {
@@ -541,6 +561,24 @@ double dart::dGetDistanceInPxBetween(int a, int b, int x, int y) {
 	return sqrt( pow(a-x,2) + pow(b-y,2) ); //thx Pythagoras
 }
 
+//returns the distance between P(a|b) and place #n [>=0], respecting iScoreAreaMode
+double dart::dGetDistanceInPx(int a, int b, int n) {
+	int x=qlCurrentTypePlaces[qlPlacesHistory[n]]->x;
+	int y=qlCurrentTypePlaces[qlPlacesHistory[n]]->y;
+	int dim2x=qlCurrentTypePlaces[qlPlacesHistory[n]]->dimx*(iScoreAreaMode/2.0)/2;
+	int dim2y=qlCurrentTypePlaces[qlPlacesHistory[n]]->dimx*(iScoreAreaMode/2.0)/2;
+	
+	if(a>x+dim2x) a-=dim2x;
+	else if(a<x-dim2x) a+=dim2x;
+	else a=x;
+	
+	if(b>y+dim2y) b-=dim2y;
+	else if(b<y-dim2y) b+=dim2y;
+	else b=y;
+	
+	return dGetDistanceInPxBetween(a,b,x,y);
+}
+
 double dart::dGetDistanceInKm(double px) {
 	return px*dPxToKm;
 }
@@ -561,6 +599,7 @@ double dart::dGetMarkFromDistance(double distance) {
 
 double dart::dGetScore(double mark) {
 	double score;
+	cout<<-16.66*mark+116.66; // I really don't know why, but w/o this line the function never returns 100
 	if(mark<4) score=-16.66*mark+116.66;
 	else score=-25*mark+150;
 	if(score<0) score=0;
