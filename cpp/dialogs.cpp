@@ -37,7 +37,7 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 		int g=G1-(G1-G2)*x;
 		int b=B1-(B1-B2)*x;
 		
-		places+=QString(tr("<span style=\"color:rgb(%4,%5,%6)\">%1&nbsp;(%2,&nbsp;%3)</span>, ")).arg(myDart->qlCurrentTypePlaces[myDart->qlPlacesHistory[i]]->name).arg(myDart->qlScoreHistory[player][i].score).arg(myDart->qlScoreHistory[player][i].mark,0,'f',1).arg(r).arg(g).arg(b);
+		places+=QString(tr("<span style=\"color:rgb(%5,%6,%7)\">%1&nbsp;(%2&nbsp;km,&nbsp;%3&nbsp;P.,&nbsp;%4)</span>, ")).arg(myDart->qlCurrentTypePlaces[myDart->qlPlacesHistory[i]]->name).arg(myDart->qlScoreHistory[player][i].diffKm).arg(myDart->qlScoreHistory[player][i].score).arg(myDart->qlScoreHistory[player][i].mark,0,'f',1).arg(r).arg(g).arg(b);
 		
 	}
 	

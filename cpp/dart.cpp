@@ -261,12 +261,11 @@ void dart::resizeEvent(QResizeEvent *event) {
 void dart::vResize(double dNewZoomFactor) {
 	if(QObject::sender()==action100) { // this is unneceassary as there's only 1 caller
 		dNewZoomFactor=1;
-		qDebug()<<"TODO doesn't work when maximized";
 	}
+        
+        showNormal();
 	
 	dZoomFactor=dNewZoomFactor;
-	vRepaintPlayerLabels();
-	vRepaintCommonLabels();
 	int fontSize=iGetFontSize();
 	iPaddingTop=(qlPlayerLabels.count()+1)*(fontSize+6);
 	resize(600*dZoomFactor,iMarginTop+iPaddingTop+600*dZoomFactor);
@@ -303,7 +302,7 @@ void dart::vRepaintCommonLabels() {
 }
 
 int dart::iGetFontSize() {
-	return 20*dZoomFactor<10 ? 10 : 20*dZoomFactor;
+	return 20*dZoomFactor<10 ? 10 : 20*ZoomFactor;
 }
 
 // draws a point at P(x|y) with the label name, and adds it to the list list
@@ -436,7 +435,7 @@ void dart::vShowCurrentPlace() {
 
 void dart::vShowScores() {
 	for(int i=0; i<iNumberOfPlayers; i++) { // show score for each player
-		qlPlayerLabels[i][1]->setText(QString(tr("Missed by %1km (%2) +%3")).arg(qlScoreHistory[i][iPlaceCount-1].diffKm,0,'f',1).arg(qlScoreHistory[i][iPlaceCount-1].mark,0,'f',1).arg(qlScoreHistory[i][iPlaceCount-1].score));
+		qlPlayerLabels[i][1]->setText(QString(tr("Missed by %1 km (%2) +%3")).arg(qlScoreHistory[i][iPlaceCount-1].diffKm,0,'f',1).arg(qlScoreHistory[i][iPlaceCount-1].mark,0,'f',1).arg(qlScoreHistory[i][iPlaceCount-1].score));
 	}
 }
 

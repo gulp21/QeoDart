@@ -19,6 +19,28 @@ io::~io(){
 
 // looks for .qcfx files and adds valid files to qlQcfxFiles;
 int io::iFindQcf() {
+        myDart->qlQcfxFiles.clear();
+        
+        QList<QDir> qlQcfDirs;
+        qlQcfDirs.append(); //get execution path; add relative acf path (if available) + $home/%userprofile% + /usr/%programfiles% [Qt API]
+                        
+        QDir dir(qcfdir.c_str());
+        QStringList filters;
+        filters << "*.qcfx";
+        dir.setNameFilters(filters);
+        
+        qDebug() << "Found " << dir.entryList() << " in " << qcfdir.c_str();
+        
+        
+        for(int i=0; i<dir.entryList().count(); i++){
+                bool namespaceProcessing; QString errorMsg; int errorLine, errorColumn;
+                QDomDocument doc("QeoDartCoordinates");
+                QFile file( QString("%1%2").arg(qcfdir.c_str()).arg(dir.entryList()[i]) );
+                if(!file.open(QIODevice::ReadOnly)) {
+                        file.close();
+                        qDebug() << "QeoDartCoordinates: Read only";
+                }
+                        
 	myDart->qlQcfxFiles << "/home/markus/Dokumente/GitHub/QeoDart/qcf/de.qcfx"; //TODO
 }
 

@@ -27,15 +27,15 @@ struct totalScore {
 	double mark, score;
 };
 
+struct qcfFile {
+	QString name, path;
+};
+
 enum enGameModes {
 	enTraining=0,
 	enLocal=1,
 	enNetwork=2,
 };
-
-//enum enPlaceTypes {
-//	enLand=10,
-//};
 
 enum enAskForModes {
 	enPositions=0,
@@ -49,7 +49,7 @@ Q_OBJECT
 		dart (QMainWindow *parent = 0);
 		~dart();
 		
-		QList<QString> qlQcfxFiles;
+		QList<qcfFile> qlQcfxFiles;
 		QList<place> qlAllPlaces; //contains all places of the current map
 		QList<place*> qlCurrentTypePlaces; //contains pointers pointing on the places in qlAllPlaces which fit the current placetype
 		QList<int> qlPlacesHistory;
