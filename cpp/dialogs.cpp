@@ -13,9 +13,8 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 	
 	connect(btOk, SIGNAL(clicked()), this, SLOT(close())); // TODO we should save the name
 	
-	if(QtWin::enableBlurBehindWindow(this, true)) { // if we can have Aero glass…
-		setWindowOpacity(1.0);
-		QtWin::extendFrameIntoClientArea(this); // TODO doesn't work // …we should use it
+	if(QtWin::extendFrameIntoClientArea(this)) { // use aero glass if possible
+		setWindowOpacity(1.0); // otherwise there would be artifact
 	}
 	
 	if(myDart->iNumberOfPlayers==1) {

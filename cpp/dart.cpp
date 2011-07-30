@@ -37,7 +37,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	iPaddingTop=0;
 	iMarginTop=0;
 	dZoomFactor=1;
-	iMaxPlaceCount=3;
+	iMaxPlaceCount=1;
 	iPlaceCount=0;
 	iCurrentPlayer=0;
 	iAskForMode=enPositions;
@@ -97,7 +97,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 		qDebug() << "[E] No valid qcfx files found, exiting";
 		QMessageBox msgBox;
 		msgBox.setText(tr("Sorry, no valid qcfx files could be found."));
-		msgBox.setInformativeText(tr("You might want to add a file through Maps → Add map")); // TODO -> symbol
+		msgBox.setInformativeText(tr("You might want to add a file through Maps → Add map")); // TODO crash
 		msgBox.setIcon(QMessageBox::Warning);
 		msgBox.exec();
 	} else {
