@@ -178,8 +178,15 @@
      <addaction name="separator"/>
      <addaction name="action100"/>
     </widget>
+    <widget class="QMenu" name="menuGame_Mode">
+     <property name="title">
+      <string>Game Mode</string>
+     </property>
+     <addaction name="actionTraining"/>
+     <addaction name="actionLocal"/>
+    </widget>
     <addaction name="menuSettings"/>
-    <addaction name="actionGame_Mode"/>
+    <addaction name="menuGame_Mode"/>
     <addaction name="menuAsk_for"/>
     <addaction name="menuView"/>
    </widget>
@@ -222,6 +229,8 @@
    <addaction name="separator"/>
    <addaction name="actionQuit"/>
    <addaction name="action100"/>
+   <addaction name="actionTraining"/>
+   <addaction name="actionLocal"/>
    <addaction name="actionAd"/>
   </widget>
   <action name="actionNew_Game">
@@ -232,11 +241,6 @@
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
-   </property>
-  </action>
-  <action name="actionGame_Mode">
-   <property name="text">
-    <string>Game Mode</string>
    </property>
   </action>
   <action name="actionHigh_Score_List">
@@ -286,6 +290,19 @@
   <action name="action100">
    <property name="text">
     <string>100%</string>
+   </property>
+  </action>
+  <action name="actionTraining">
+   <property name="text">
+    <string>Training</string>
+   </property>
+  </action>
+  <action name="actionLocal">
+   <property name="text">
+    <string>Local</string>
+   </property>
+   <property name="toolTip">
+    <string>Local RADIO</string>
    </property>
   </action>
  </widget>

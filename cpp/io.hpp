@@ -21,11 +21,12 @@ class io : public QWidget {
 	public:
 		io(dart*);
 		~io();
-		int iReadQcf(QString filename);
+		int iReadQcf(QString mapname);
 		int iReadOsm(QString filename);
 		int iFindQcf();
 		int iCheckQcf(QFile &file, QDomDocument &doc);
 		void vFillCurrentTypePlaces();
+		QString qsGetMapName(QDomDocument &doc);
 // 	private:
 };
 #endif //IO_HPP 

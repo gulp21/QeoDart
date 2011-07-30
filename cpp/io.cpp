@@ -7,6 +7,7 @@ See main.cpp for details. */
 #include "dart.hpp"
 #include "io.hpp"
 #include <QDebug>
+#include <QDir>
 
 using namespace std;
 
@@ -19,29 +20,48 @@ io::~io(){
 
 // looks for .qcfx files and adds valid files to qlQcfxFiles;
 int io::iFindQcf() {
-        myDart->qlQcfxFiles.clear();
-        
-        QList<QDir> qlQcfDirs;
-        qlQcfDirs.append(); //get execution path; add relative acf path (if available) + $home/%userprofile% + /usr/%programfiles% [Qt API]
-                        
-        QDir dir(qcfdir.c_str());
-        QStringList filters;
-        filters << "*.qcfx";
-        dir.setNameFilters(filters);
-        
-        qDebug() << "Found " << dir.entryList() << " in " << qcfdir.c_str();
-        
-        
-        for(int i=0; i<dir.entryList().count(); i++){
-                bool namespaceProcessing; QString errorMsg; int errorLine, errorColumn;
-                QDomDocument doc("QeoDartCoordinates");
-                QFile file( QString("%1%2").arg(qcfdir.c_str()).arg(dir.entryList()[i]) );
-                if(!file.open(QIODevice::ReadOnly)) {
-                        file.close();
-                        qDebug() << "QeoDartCoordinates: Read only";
-                }
-                        
-	myDart->qlQcfxFiles << "/home/markus/Dokumente/GitHub/QeoDart/qcf/de.qcfx"; //TODO
+	myDart->qlQcfxFiles.clear();
+	
+	QList<QDir> qlQcfDirs;
+	qlQcfDirs.append(QDir(QCoreApplication::applicationDirPath ()+"/qcf"));
+	qlQcfDirs.append(QDir(QDir::homePath()+"/.config/QeoDart/qcf"));
+	#ifdef Q_OS_UNIX
+	qlQcfDirs.append(QDir("/usr/share/QeoDart/qcf"));
+	#endif
+	#ifdef Q_OS_WIN32
+	qlQcfDirs.append(QDir(getenv("PROGRAMFILES"));
+	#endif
+	
+	for(int i=0; i<qlQcfDirs.count(); i++) {
+		QStringList filters;
+		filters << "*.qcfx";
+		qlQcfDirs[i].setNameFilters(filters);
+		
+		qDebug() << "[i] Found" << qlQcfDirs[i].entryList() << "in" << qlQcfDirs[i].absolutePath();
+		
+		for(int j=0; j<qlQcfDirs[i].entryList().count(); j++){
+//			bool namespaceProcessing; QString errorMsg; int errorLine, errorColumn;
+//			QDomDocument doc("QeoDartCoordinates");
+//			QFile file( QString("%1%2").arg(qcfdir.c_str()).arg(dir.entryList()[i]) );
+//			if(!file.open(QIODevice::ReadOnly)) {
+//				file.close();
+//				qDebug() << "QeoDartCoordinates: Read only";
+//			}
+			
+			QDomDocument doc("coordinates");
+			QFile file(qlQcfDirs[i].absolutePath()+"/"+qlQcfDirs[i].entryList()[j]);
+			
+			if(iCheckQcf(file, doc)==0) {
+				qcfFile f;
+				f.path=file.fileName().left(file.fileName().length()-5);
+				f.mapName=qsGetMapName(doc);
+				qDebug() << f.path;
+				myDart->qlQcfxFiles << f;
+			}
+		}
+	}
+	
+	
 }
 
 int io::iCheckQcf(QFile &file, QDomDocument &doc) {
@@ -72,20 +92,39 @@ int io::iCheckQcf(QFile &file, QDomDocument &doc) {
 	return 0;
 }
 
-int io::iReadQcf(QString filename) {
-	qDebug() << "[i] Reading file" << filename;
+QString io::qsGetMapName(QDomDocument &doc) {
+	QDomElement docElem = doc.documentElement();
 	
-	/*for(int i=0;i<2;i++){
-		place one;
-		one.x=327+50*i;
-		one.y=52+20*i;
-		one.dimx=10*i;
-		one.dimy=10*i;
-		one.name="bla very long caption chisfh dsfjslkdf sdfjsdjflsd fsjfklj sdlkjsdfl sjf sdjfksldjf sjf sdfjksdlfj skdlfj sdklfj sklfj skdfj sdkljfdskljf"+i;
-		one.placeType="capitalOfLand;land";
-		myDart->qlAllPlaces.append(one);
-	}*/
+	QDomNode n = docElem.firstChildElement("name");
+	if(!n.isNull()) {
+		QDomElement e = n.toElement();
+		if(!e.isNull()) {
+			if(e.tagName()=="name") {
+				return e.attribute("default","NONAME"); // TODO lang through setting
+			}
+		} else {
+			qDebug() << "[W] file has broken <name>";
+			return "NONAME";
+		}
+	} else {
+		qDebug() << "[W] file has no <name>";
+		return "NONAME";
+	}
+}
+
+int io::iReadQcf(QString mapname) {
 	
+	QString filename;
+	
+	//find the file with the given mapname in the list
+	for(int i=0; i<myDart->qlQcfxFiles.count(); i++) {
+		if(myDart->qlQcfxFiles[i].mapName==mapname) {
+			filename=myDart->qlQcfxFiles[i].path+".qcfx";
+			myDart->iCurrentQcf=i;
+		}
+	}
+	
+	qDebug() << "[i] Reading file" << filename << "with mapName" << mapname;
 	
 	QDomDocument doc("coordinates");
 	QFile file(filename);
@@ -94,8 +133,10 @@ int io::iReadQcf(QString filename) {
 		qDebug() << "[E] File" << filename << "is not valid";
 		QMessageBox msgBox;
 		msgBox.setText(QString(tr("An unexpected error occured while reading %1. QeoDart will be quit.")).arg(filename));
+		msgBox.setIcon(QMessageBox::Critical);
 		msgBox.exec();
 		myDart->close(); // TODO doesn't work
+		return -1;
 	}
 	
 	myDart->qlAllPlaces.clear();
@@ -109,9 +150,7 @@ int io::iReadQcf(QString filename) {
 		
 		if(!e.isNull()) {
 			
-			if(e.tagName()=="name") {
-				
-			} else if(e.tagName()=="pxtokm") {
+			if(e.tagName()=="pxtokm") {
 				
 				myDart->dPxToKm=e.attribute("value","-1").toDouble();
 				if(myDart->dPxToKm==-1) {
@@ -142,7 +181,7 @@ int io::iReadQcf(QString filename) {
 					qDebug() << "[W] place" << myDart->qlAllPlaces.count() << "has incomplete coordinates";
 				}
 				
-			} else {
+			} else if(e.tagName()!="name") {
 				
 				qDebug() << "[w] unknown tagName" << e.tagName();
 				
@@ -169,7 +208,7 @@ int io::iReadQcf(QString filename) {
 	
 	vFillCurrentTypePlaces();
 	
-	QString path=myDart->qlQcfxFiles[myDart->iCurrentQcf].left(myDart->qlQcfxFiles[myDart->iCurrentQcf].length()-5);
+	QString path=myDart->qlQcfxFiles[myDart->iCurrentQcf].path;
 	
 	for(int i=0; i<4; i++) {
 		QFile file(QString("%1/%2.png").arg(path).arg(myDart->qlImageLayers[i]));
@@ -194,15 +233,20 @@ void io::vFillCurrentTypePlaces() {
 	for(int i=0;i<max;i++) {
 		if(myDart->qlAllPlaces[i].placeType.contains(myDart->qsCurrentPlaceType) || myDart->qsCurrentPlaceType=="everything") {
 			myDart->qlCurrentTypePlaces.append(&(myDart->qlAllPlaces[i]));
-			qDebug() << myDart->qlAllPlaces[i].x << myDart->qlAllPlaces[i].y << myDart->qlAllPlaces[i].dimx << myDart->qlAllPlaces[i].dimy << myDart->qlAllPlaces[i].name;
+//			qDebug() << myDart->qlAllPlaces[i].x << myDart->qlAllPlaces[i].y << myDart->qlAllPlaces[i].dimx << myDart->qlAllPlaces[i].dimy << myDart->qlAllPlaces[i].name;
 		}
 	}
 	
 	if(myDart->qlCurrentTypePlaces.count()==0) {
-		qDebug() << "[i] there is no place for placetype" << myDart->qsCurrentPlaceType;
-		qDebug() << "    falling back to everything";
-		myDart->qsCurrentPlaceType="everything";
-		vFillCurrentTypePlaces();
+		if(myDart->qsCurrentPlaceType!="everything") {
+			qDebug() << "[i] there is no place for placetype" << myDart->qsCurrentPlaceType;
+			qDebug() << "    falling back to everything";
+			myDart->qsCurrentPlaceType="everything";
+			vFillCurrentTypePlaces();
+		} else {
+			qDebug() << "[E] No place in list";
+			myDart->close();
+		}
 	}
 }
 

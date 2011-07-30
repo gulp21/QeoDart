@@ -28,7 +28,7 @@ struct totalScore {
 };
 
 struct qcfFile {
-	QString name, path;
+	QString mapName, path; // path: e.g. qcf/de
 };
 
 enum enGameModes {
@@ -79,8 +79,8 @@ Q_OBJECT
 		enGameModes iGameMode;
 		enAskForModes iAskForMode;
 		
-		int iCurrentPlayer, iPlaceCount;
-		int iDelayNextCircle, iDelayBeforeShowingMark, iDelayBeforeNextPlayer, iDelayBeforeNextPlace;
+		int iCurrentPlayer, iPlaceCount, iTrainingPlaceNumber;
+		int iDelayNextCircle, iDelayBeforeShowingMark, iDelayBeforeNextPlayer, iDelayBeforeNextPlace, iDelayBeforeNextPlaceTraining;
 		
 		QList<QList<QLabel*> > qlCircleLabels; //contains all circles (incl. points) for each user
 // 		QList<QLabel*> qlPlayerLabel;
@@ -132,6 +132,7 @@ Q_OBJECT
 		void vShowAllPlaces();
 		void vNewGame();
 		void vResize(double dNewZoomFactor=1);
+		void vSetGameMode();
 };
 
 #include "myLabels.hpp"
