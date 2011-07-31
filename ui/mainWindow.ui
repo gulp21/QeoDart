@@ -147,7 +147,7 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSpiel">
@@ -234,7 +234,6 @@
    </attribute>
    <addaction name="actionNew_Game"/>
    <addaction name="separator"/>
-   <addaction name="actionQuit"/>
    <addaction name="action100"/>
    <addaction name="actionTraining"/>
    <addaction name="actionLocal"/>

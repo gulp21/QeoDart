@@ -321,6 +321,7 @@ void dart::vRepaintCommonLabels() {
 	lblCurrentRound->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
 	lblCurrentPlayer->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
 	lblCurrentPlayer->setText(QString(tr("Player %1")).arg(iCurrentPlayer+1));
+        lineEdit->setMaximumHeight(fontSize+2);
 }
 
 int dart::iGetFontSize() {
@@ -334,7 +335,7 @@ void dart::vDrawPoint(int x, int y, QList<QLabel*> &list, QString name, QColor c
 	list.append(lblCurrentPlacePosition);
 // 	lblCurrentPlace->setGeometry(x,y+iPaddingTop,50,50);
 // 	lblCurrentPlace->show();
-	qDebug() << "[i] drew point " << x << y << "+" << iMarginTop;
+	qDebug() << "[i] drew point" << x << y << "+" << iMarginTop;
 }
 void dart::vDrawPoint(int x, int y, QList<QLabel*> &list, QColor color, QString name) {
 	vDrawPoint(x, y, list, name, color);
@@ -428,8 +429,8 @@ void dart::vMouseClickEvent(int x, int y) {
 
 void dart::vShowComment() {
         if(iNumberOfPlayers==1 && iGameMode!=enTraining) {
-		int i = rand() % 3 + 3*(static_cast<int>(qlScoreHistory[0][iPlaceCount-1].mark)-1);
-		qDebug() << qlScoreHistory[0][iPlaceCount-1].mark << i;
+                int i = rand() % 3 + 3*(static_cast<int>(qlScoreHistory[0][iPlaceCount-1].mark)-1);
+                qDebug() << "[i]" << qlScoreHistory[0][iPlaceCount-1].mark << "comment #" << i;
                 lblComment->setText(qlComments[i]);
         }
 }
@@ -787,8 +788,14 @@ double dart::dGetScore(double mark) {
 }
 
 double dart::dGetMarkFromScore(double score) {
-	if(score>=50) return (score-116.66)/-16.66;
-	else return (score-150)/-25;
+        double mark;
+	if(score>=50) {
+                mark=(score-116.66)/-16.66;
+                return mark<1 ? 1 : mark;
+	} else {
+                mark=(score-150)/-25;
+                return mark>6 ? 6 : mark;
+        }
 }
 
 double dart::dGetAverageMarkOfPlayer(int player) {
@@ -840,27 +847,37 @@ QString dart::qsSimplifyString(QString str, int l) {
 			str=str.replace("_", "");
 			str=str.replace("_", "");
 			str=str.replace(".", "");
+			str=str.replace(QRegExp("([aou])e"), "\\1");
 			str=str.replace(QRegExp(QString::fromUtf8("[äáàã]")), "a");
 			str=str.replace(QRegExp(QString::fromUtf8("[éèẽ]")), "e");
 			str=str.replace(QRegExp(QString::fromUtf8("[íìĩ]")), "i");
 			str=str.replace(QRegExp(QString::fromUtf8("[öṏø]")), "o");
 			str=str.replace(QRegExp(QString::fromUtf8("[üǘǜ]")), "u");
 			str=str.replace(QRegExp(QString::fromUtf8("[ßś]")), "s");
-			//remove double letters and lengthening
-			for(int i=0; i<str.length()-1; i++) {
-				if(str[i]==str[i+1] || (QString(str[i]).contains(QRegExp("[aeiou]")) && str[i+1]=='h') )
-					str=str.remove(i+1,1);
-			}
+			str=str.replace("ss", "s");
 			
 			if(l>=2) {
-				str=str.replace("ie", "i");
 				str=str.replace("ai", "ei");
 				str=str.replace("ay", "ei");
+				str=str.replace("ie", "i");
 				str=str.replace("d", "t");
 				str=str.replace("ck", "k");
 				str=str.replace("c", "k");
+				str=str.replace("g", "k");
 				str=str.replace("w", "v");
 				str=str.replace("f", "v");
+                                //remove double letters and lengthening
+                                for(int i=0; i<str.length()-1; i++) {
+                                        if(
+                                           str[i]==str[i+1] ||
+                                           (QString(str[i]).contains(QRegExp("[aeiou]")) && str[i+1]=='h') ||
+                                           (QString(str[i]).contains(QRegExp("[ae]")) && str[i+1]=='r')
+                                          ) {
+                                                str=str.remove(i+1,1);
+                                                i--;
+                                        }
+                                }
+                                qDebug()<<str;
 			} // 2
 		} // 1
 	} // 0
