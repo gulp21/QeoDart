@@ -18,9 +18,13 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 	}
 	
 	if(myDart->iNumberOfPlayers==1) {
-		lblScore->setText(QString(tr("<span>You have a score of %1 points (&#8960; %2).</span>")).arg(myDart->qlTotalScores[0].score).arg(myDart->qlTotalScores[0].score/myDart->iMaxPlaceCount,0,'f',1));
+		lblScore->setText(QString(tr("<span>You have a score of %1 points (&#8960; %2).</span>"))
+		                  .arg(myDart->qlTotalScores[0].score)
+		                  .arg(myDart->qlTotalScores[0].score/myDart->iMaxPlaceCount,0,'f',1));
 	} else {
-		lblScore->setText(QString(tr("<span>Player %1 has a score of %2 points (&#8960; %3).</span>")).arg(player+1).arg(myDart->qlTotalScores[player].score).arg(myDart->qlTotalScores[player].score/myDart->iMaxPlaceCount,0,'f',1));
+		lblScore->setText(QString(tr("<span>Player %1 has a score of %2 points (&#8960; %3).</span>"))
+		                  .arg(player+1).arg(myDart->qlTotalScores[player].score)
+		                  .arg(myDart->qlTotalScores[player].score/myDart->iMaxPlaceCount,0,'f',1));
 	}
 	
 	lblMark->setText(QString(tr("That equals grade %1.")).arg(myDart->qlTotalScores[player].mark,0,'f',1));
@@ -36,7 +40,16 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 		int g=G1-(G1-G2)*x;
 		int b=B1-(B1-B2)*x;
 		
-		places+=QString(tr("<span style=\"color:rgb(%5,%6,%7)\">%1&nbsp;(%2&nbsp;km,&nbsp;%3&nbsp;P.,&nbsp;%4)</span>, ")).arg(myDart->qlCurrentTypePlaces[myDart->qlPlacesHistory[i]]->name).arg(myDart->qlScoreHistory[player][i].diffKm).arg(myDart->qlScoreHistory[player][i].score).arg(myDart->qlScoreHistory[player][i].mark,0,'f',1).arg(r).arg(g).arg(b);
+		QString km;
+		if(myDart->qlScoreHistory[player][i].diffKm==-1) km=tr("∞");
+		else km=QString("%1").arg(myDart->qlScoreHistory[player][i].diffKm,0,'f',1);
+		
+		places+=QString(tr("<span style=\"color:rgb(%5,%6,%7)\">%1&nbsp;(%2&nbsp;km,&nbsp;%3&nbsp;P.,&nbsp;%4)</span>, "))
+		                .arg(myDart->qlCurrentTypePlaces[myDart->qlPlacesHistory[i]]->name)
+		                .arg(km)
+		                .arg(myDart->qlScoreHistory[player][i].score)
+		                .arg(myDart->qlScoreHistory[player][i].mark,0,'f',1)
+		                .arg(r).arg(g).arg(b);
 		
 	}
 	

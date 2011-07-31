@@ -29,6 +29,8 @@ class QCircleLabel : public QLabel{
 		~QCircleLabel() {}
 
 		void paintEvent(QPaintEvent *event) {
+			if(x==-1 && y==-1) return;
+			
 			QPainter p(this);
 			QPen pen;
 			
@@ -77,6 +79,8 @@ class QPointLabel : public QLabel{
 		~QPointLabel() {}
 		
 		void paintEvent(QPaintEvent *event) {
+			if(x==-1 && y==-1) return;
+			
 			QPainter p(this);
 			QPen pen;
 			

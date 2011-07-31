@@ -104,6 +104,7 @@ Q_OBJECT
 		void vRemoveAllCommonPoints();
 		void vSetNumberOfPlayers(int player);
 		void vSetGameMode(enGameModes mode);
+		void vSetAskForMode(enAskForModes mode);
 		void vNextRound();
 		void vResetForNewGame();
 		void vShowTotalScores();
@@ -124,15 +125,20 @@ Q_OBJECT
 		int iGetWindowSize();
 		int iGetUnzoomed(double x);
 		int iGetFontSize();
+		int iFindInputInList(double &f);
 		
 		QColor qcGetColorOfPlayer(int n);
-	
+		
+		QString qsSimplifyString(QString str, int l);
+		
 	private slots:
 		void vClose();
 		void vShowAllPlaces();
 		void vNewGame();
 		void vResize(double dNewZoomFactor=1);
 		void vSetGameMode();
+		void vSetAskForMode();
+		void vReturnPressedEvent();
 };
 
 #include "myLabels.hpp"
