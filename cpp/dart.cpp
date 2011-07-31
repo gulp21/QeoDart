@@ -37,12 +37,12 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	iPaddingTop=0;
 	iMarginTop=0;
 	dZoomFactor=1;
-	iMaxPlaceCount=3;
+	iMaxPlaceCount=10;
 	iPlaceCount=0;
 	iCurrentPlayer=0;
 	iAskForMode=enPositions;
-	iNumberOfPlayers=2; // we shouldn't change it in training mode (iNumberOfPlayers==1 || enTraining)
-	qsCurrentPlaceType="everything";
+	iNumberOfPlayers=1; // we shouldn't change it in training mode (iNumberOfPlayers==1 || enTraining)
+	qsCurrentPlaceType="town";
 	bAcceptingClickEvent=TRUE;
 	dPxToKm=1;
 	iCurrentQcf=0;
@@ -696,7 +696,7 @@ double dart::dGetMarkFromDistance(double distance) {
 	if(distance>1) distance--; // a difference of 1px is OK 
 	else distance=0;
 
-	double mark=distance/RADIUS;
+	double mark=distance/RADIUS+1;
 	if(mark<4) {
 		return mark<1 ? 1 : mark;
 	} else {

@@ -118,7 +118,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Berlin"
 	name:en="Berlin"
 	name:la="Berolinum"
-	placetype="state;city;CapitalOfState;CapitalOfCountry"
+	placetype="state;city;town;CapitalOfState;CapitalOfCountry"
 	/>
 	<place
 	x="221" y="151" dimx="23" dimy="18"
@@ -126,7 +126,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Bremen"
 	name:en="Bremen"
 	name:la="Brema"
-	placetype="state;city;CapitalOfState"
+	placetype="state;city;town;CapitalOfState"
 	/>
 	<place
 	x="279" y="116" dimx="27" dimy="28"
@@ -134,7 +134,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Hamburg"
 	name:en="Hamburg"
 	name:la="Hamburgum"
-	placetype="state;city;CapitalOfState"
+	placetype="state;city;town;CapitalOfState"
 	/>
 	<!--.....CapitalOfState.....-->
 	<place
@@ -143,7 +143,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Düsseldorf"
 	name:en="Düsseldorf"
 	name:la="Dusseldorpium"
-	placetype="city;CapitalOfState"
+	placetype="city;town;CapitalOfState"
 	/>
 	<place
 	x="266" y="210"
@@ -151,7 +151,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Hannover"
 	name:en="Hannover"
 	name:la="Hannovera"
-	placetype="city;CapitalOfState"
+	placetype="city;town;CapitalOfState"
 	/>
 	<place
 	x="342" y="109"
@@ -168,7 +168,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Kiel"
 	name:en="Kiel"
 	name:la="Kielia"
-	placetype="city;CapitalOfState"
+	placetype="city;town;CapitalOfState"
 	/>
 	<place
 	x="419" y="202"
@@ -176,7 +176,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Potsdam"
 	name:en="Potsdam"
 	name:la="Potestampium"
-	placetype="city;CapitalOfState"
+	placetype="city;town;CapitalOfState"
 	/>
 	<place
 	x="355" y="225"
@@ -184,7 +184,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Magdeburg"
 	name:en="Magdeburg"
 	name:la="Magdeburgum"
-	placetype="city;CapitalOfState"
+	placetype="city;town;CapitalOfState"
 	/>
 	<place
 	x="456" y="296"
@@ -192,7 +192,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Dresden"
 	name:en="Dresden"
 	name:la="Dresda"
-	placetype="city;CapitalOfState"
+	placetype="city;town;CapitalOfState"
 	/>
 	<place
 	x="328" y="315"
@@ -200,7 +200,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Erfurt"
 	name:en="Erfurt"
 	name:la="Erfordia"
-	placetype="city;CapitalOfState"
+	placetype="city;town;CapitalOfState"
 	/>
 	<place
 	x="192" y="382"
@@ -208,7 +208,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Wiesbaden"
 	name:en="Wiesbaden"
 	name:la="Aquae Mattiacae"
-	placetype="city;CapitalOfState"
+	placetype="city;town;CapitalOfState"
 	/>
 	<place
 	x="191" y="393"
@@ -216,7 +216,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Mainz"
 	name:en="Mainz"
 	name:la="Moguntiacum"
-	placetype="city;CapitalOfState"
+	placetype="city;town;CapitalOfState"
 	/>
 	<place
 	x="126" y="440"
@@ -224,7 +224,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Saarbrücken"
 	name:en="Saarbrücken"
 	name:la="Saravipontus"
-	placetype="city;CapitalOfState"
+	placetype="city;town;CapitalOfState"
 	/>
 	<place
 	x="365" y="527"
@@ -232,7 +232,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="München"
 	name:en="Munich"
 	name:la="Mon&aacute;cum"
-	placetype="city;CapitalOfState"
+	placetype="city;town;CapitalOfState"
 	/>
 	<place
 	x="240" y="486"
@@ -240,7 +240,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Stuttgart"
 	name:en="Stuttgart"
 	name:la="Stutgardia"
-	placetype="city;CapitalOfState"
+	placetype="city;town;CapitalOfState"
 	/>
 	<!--30-->
 	<!--  -52 -->
