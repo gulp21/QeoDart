@@ -29,7 +29,7 @@ int io::iFindQcf() {
 	qlQcfDirs.append(QDir("/usr/share/QeoDart/qcf"));
 	#endif
 	#ifdef Q_OS_WIN32
-	qlQcfDirs.append(QDir(getenv("PROGRAMFILES"));
+	qlQcfDirs.append(QDir(getenv("PROGRAMFILES")));
 	#endif
 	
 	for(int i=0; i<qlQcfDirs.count(); i++) {
@@ -61,7 +61,7 @@ int io::iFindQcf() {
 		}
 	}
 	
-	
+	return myDart->qlQcfxFiles.count();
 }
 
 int io::iCheckQcf(QFile &file, QDomDocument &doc) {

@@ -40,9 +40,9 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	iMaxPlaceCount=10;
 	iPlaceCount=0;
 	iCurrentPlayer=0;
-	iAskForMode=enPositions;
-	iNumberOfPlayers=1; // we shouldn't change it in training mode (iNumberOfPlayers==1 || enTraining)
-	qsCurrentPlaceType="town";
+	iAskForMode=enNames;
+	iNumberOfPlayers=2; // we shouldn't change it in training mode (iNumberOfPlayersTrainingCache)
+	qsCurrentPlaceType="everything";
 	bAcceptingClickEvent=TRUE;
 	dPxToKm=1;
 	iCurrentQcf=0;
@@ -91,13 +91,19 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	actionTraining->setIcon(QIcon::fromTheme("user-identity"));
 	connect(actionLocal,SIGNAL (triggered()), this, SLOT(vSetGameMode()));
 	actionLocal->setIcon(QIcon::fromTheme("system-users"));
+	connect(actionName_of_Place,SIGNAL (triggered()), this, SLOT(vSetAskForMode()));
+//	actionName_of_Place->setIcon(QIcon::fromTheme("user-identity"));
+	connect(actionPosition_of_Place,SIGNAL (triggered()), this, SLOT(vSetAskForMode()));
+//	actionPosition_of_Place->setIcon(QIcon::fromTheme("user-identity"));
 	connect(actionAbout_Qt,SIGNAL (triggered()), qApp, SLOT(aboutQt()));
+	
+	connect(lineEdit,SIGNAL (returnPressed()), this, SLOT(vReturnPressedEvent()));
 	
 	if(clIO->iFindQcf()==0) {
 		qDebug() << "[E] No valid qcfx files found, exiting";
 		QMessageBox msgBox;
 		msgBox.setText(tr("Sorry, no valid qcfx files could be found."));
-		msgBox.setInformativeText(tr("You might want to add a file through Maps → Add map")); // TODO -> symbol
+		msgBox.setInformativeText(tr("You might want to add a file through Maps → Add map")); // TODO crash
 		msgBox.setIcon(QMessageBox::Warning);
 		msgBox.exec();
 	} else {
@@ -111,6 +117,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	gridLayout->setSpacing(1);
 	
 	vSetGameMode(enLocal);
+	vSetAskForMode(enNames);
 	
 	vRepaintCommonLabels();
 	vRepaintPlayerLabels();
@@ -223,23 +230,27 @@ void dart::vSetNumberOfPlayers(int n) {
 	
 	gridLayout->removeWidget(lblCurrentPlace);
 	gridLayout->removeWidget(lblCurrentPlayer);
+	gridLayout->removeWidget(lineEdit);
 	if(iNumberOfPlayers==1) {
 		gridLayout->removeWidget(lblComment);
-		gridLayout->addWidget(lblCurrentPlace,1,0);
+		gridLayout->addWidget(lblCurrentPlace,1*(iGameMode!=enTraining),0);
 		gridLayout->addWidget(lblCurrentPlayer,1,4);
 		gridLayout->addWidget(lblComment,1,2);
+		gridLayout->addWidget(lineEdit,1*(iGameMode!=enTraining),0);
 		lblComment->setText("");
 		lblComment->show();
 	} else {
 		gridLayout->addWidget(lblCurrentPlace,iNumberOfPlayers,0);
 		gridLayout->addWidget(lblCurrentPlayer,iNumberOfPlayers,4);
+		gridLayout->addWidget(lineEdit,iNumberOfPlayers,0);
 		lblComment->hide();
 	}
 	
 // 	gridLayout->setGeometry(QRect(0, 0, 10, 10));
 // 	gridLayout->setSpacing(1);
 // 	gridLayout->setContentsMargins(0,0,0,0);
-//	gridLayout->addItem(spGridLayoutVertical,iNumberOfPlayers+1,0);
+	gridLayout->removeItem(spGridLayoutVertical);
+	gridLayout->addItem(spGridLayoutVertical,iNumberOfPlayers+1,0);
 	
 	resizeEvent(0); // the label's font size and iPaddingTop must be recalculated
 }
@@ -259,7 +270,7 @@ void dart::resizeEvent(QResizeEvent *event) {
 	vRepaintPlayerLabels();
 	vRepaintCommonLabels();
 	int fontSize=iGetFontSize();
-	iPaddingTop=(qlPlayerLabels.count()+1)*(fontSize+6);
+	iPaddingTop= (qlPlayerLabels.count()+1*(iGameMode!=enTraining)) * (fontSize+6); // TODO function
 	
 	dZoomFactor=iGetWindowSize()/600.0;
 	
@@ -268,7 +279,7 @@ void dart::resizeEvent(QResizeEvent *event) {
 	
 	vRepaintMap();
 	
-	gridLayoutWidget->setGeometry(QRect(0,0,600*dZoomFactor+1,111));
+	gridLayoutWidget->setGeometry(QRect(0,0,600*dZoomFactor+1,iPaddingTop+50));
 
 	qDebug() << "[i] iPaddingTop" << iPaddingTop << "iMarginTop" << iMarginTop << "dZoomFactor" << dZoomFactor << "fontSize" << fontSize;
 }
@@ -278,7 +289,7 @@ void dart::vResize(double dNewZoomFactor) {
 	
 	dZoomFactor=dNewZoomFactor;
 	int fontSize=iGetFontSize();
-	iPaddingTop=(qlPlayerLabels.count()+1)*(fontSize+6);
+	iPaddingTop= (qlPlayerLabels.count()+1*(iGameMode!=enTraining)) * (fontSize+6);
 	resize(600*dZoomFactor,iMarginTop+iPaddingTop+600*dZoomFactor);
 }
 
@@ -322,7 +333,7 @@ void dart::vDrawPoint(int x, int y, QList<QLabel*> &list, QString name, QColor c
 	lblCurrentPlacePosition = new QPointLabel(this, name, x, y, color, this);
 	list.append(lblCurrentPlacePosition);
 // 	lblCurrentPlace->setGeometry(x,y+iPaddingTop,50,50);
-// 	lblCurrentPlace->setVisible(TRUE);
+// 	lblCurrentPlace->show();
 	qDebug() << "[i] drew point " << x << y << "+" << iMarginTop;
 }
 void dart::vDrawPoint(int x, int y, QList<QLabel*> &list, QColor color, QString name) {
@@ -445,12 +456,21 @@ void dart::vResetScoreLabels() {
 }
 
 void dart::vShowCurrentPlace() {
-	vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels);
+	iAskForMode==enPositions ?
+	                        vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels)
+	                        :
+	                        vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels, qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->name);
 }
 
 void dart::vShowScores() {
 	for(int i=0; i<iNumberOfPlayers; i++) { // show score for each player
-		qlPlayerLabels[i][1]->setText(QString(tr("Missed by %1 km (%2) +%3")).arg(qlScoreHistory[i][iPlaceCount-1].diffKm,0,'f',1).arg(qlScoreHistory[i][iPlaceCount-1].mark,0,'f',1).arg(qlScoreHistory[i][iPlaceCount-1].score));
+		QString km;
+		if(qlScoreHistory[i][iPlaceCount-1].diffKm==-1) km=tr("∞");
+		else km=QString("%1").arg(qlScoreHistory[i][iPlaceCount-1].diffKm,0,'f',1);
+		qlPlayerLabels[i][1]->setText(QString(tr("Missed by %1 km (%2) +%3"))
+		                              .arg(km)
+		                              .arg(qlScoreHistory[i][iPlaceCount-1].mark,0,'f',1)
+		                              .arg(qlScoreHistory[i][iPlaceCount-1].score));
 	}
 }
 
@@ -537,36 +557,76 @@ void dart::vSetGameMode() {
 }
 
 void dart::vSetGameMode(enGameModes mode) {
-	switch(mode) {
+	switch(iGameMode) {
 		case enTraining:
-			lblCurrentRound->setVisible(TRUE);	//TODO not working //must we readd to layout?
-			lblCurrentPlayer->setVisible(TRUE);
-			qlPlayerLabels[0][0]->setVisible(TRUE);	//TODO resize
+			lblCurrentRound->show();
+			lblCurrentPlayer->show();
+			qlPlayerLabels[0][0]->show();
 			vResetScoreLabels();
-			qDebug()<<"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ttt"; //<<heh?
 			break;
 		case enLocal:
 			break;
-	};
+	}
 	
 	iGameMode=mode;
 	
 	vResetForNewGame();
 	
-	switch(mode) {
+	switch(iGameMode) {
 		case enTraining:
-			lblCurrentRound->setVisible(FALSE);
-			lblCurrentPlayer->setVisible(FALSE);
-			qlPlayerLabels[0][0]->setVisible(FALSE);
+			lblCurrentRound->hide();
+			lblCurrentPlayer->hide();
+			qlPlayerLabels[0][0]->hide();
 			
 			vSetNumberOfPlayers(1);
-			vNextRound();
 			break;
 		case enLocal:
 			vSetNumberOfPlayers(iNumberOfPlayers);
-			vNextRound();
 			break;
-	};
+	}
+	
+	vNextRound();
+}
+
+void dart::vSetAskForMode() {
+	if(iPlaceCount!=1 && iGameMode!=enTraining) {
+		QMessageBox msgBox;
+		msgBox.setWindowTitle(tr("Chance Mode"));
+		msgBox.setText(tr("When you change this setting, your current score will be lost.\nDo you want to continue?"));
+		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+		msgBox.setDefaultButton(QMessageBox::Cancel);
+		if(msgBox.exec()==QMessageBox::Cancel) return;
+	}
+	if(QObject::sender()==actionName_of_Place) {
+		vSetAskForMode(enNames);
+	} else if(QObject::sender()==actionPosition_of_Place) {
+		vSetAskForMode(enPositions);
+	} else {
+		qDebug() << "[E] vSetAskForMode: unknown sender";
+	}
+}
+
+void dart::vSetAskForMode(enAskForModes mode) {
+	iAskForMode=mode;
+	
+	vResetForNewGame();
+	
+	iAskForMode==mode;
+	
+	switch(iAskForMode) {
+		case enPositions:
+			lineEdit->hide();
+			lblCurrentPlace->show();
+			break;
+		case enNames:
+			lineEdit->show();
+			lblCurrentPlace->hide();
+			break;
+	}
+	
+	vSetNumberOfPlayers(iNumberOfPlayers);
+	
+	vNextRound();
 }
 
 void dart::vResetForNewGame() {
@@ -616,7 +676,6 @@ void dart::vNextRound() {
 					//we shouldn't ask for the last place immediatly
 					//so we keep it in mind
 					iTrainingPlaceNumber=qlPlacesHistory[i];
-					
 				} else {
 					qlScoreHistory[0][i].mark=0;
 					pn=qlPlacesHistory[i];
@@ -643,21 +702,26 @@ void dart::vNextRound() {
 	iPlaceCount++;
 	qlPlacesHistory.append(pn);
 	
-	
 	qDebug() << "[i] next place:" << pn << qlCurrentTypePlaces[pn]->name << iPlaceCount << "/" << iMaxPlaceCount;
 	
 	switch(iAskForMode) {
 		case enPositions:
 			bAcceptingClickEvent=TRUE;
+			lblCurrentPlace->setText(qlCurrentTypePlaces[pn]->name);
 			break;
-	}
+		case enNames:
+			vDrawPoint(qlCurrentTypePlaces[pn]->x, qlCurrentTypePlaces[pn]->y, qlPointLabels);
+			lineEdit->clear();
+			lineEdit->setStyleSheet("");
+			lineEdit->setEnabled(TRUE);
+			lineEdit->setFocus(Qt::OtherFocusReason);
+			break;
+	};
 	
 	switch(iGameMode) {
 		case enTraining:
-			lblCurrentPlace->setText(qlCurrentTypePlaces[pn]->name);
 			break;
 		case enLocal:
-			lblCurrentPlace->setText(qlCurrentTypePlaces[pn]->name);
 			lblCurrentRound->setText(QString(tr("Place %1 of %2")).arg(iPlaceCount).arg(iMaxPlaceCount));
 			break;
 	};
@@ -665,14 +729,19 @@ void dart::vNextRound() {
 
 //returns the distance between P(a|b) and Q(x|y); a,b,x,y should be unzoomed
 double dart::dGetDistanceInPxBetween(int a, int b, int x, int y) {
-	qDebug()<<"!!!!"<<a<<b<<x<<y << sqrt( pow(a-x,2) + pow(b-y,2) );
+	if( (a==-1 && b==-1) || (x==-1 && y==-1) ) return -1;
 	return sqrt( pow(a-x,2) + pow(b-y,2) ); //thx Pythagoras
 }
 
 //returns the distance between P(a|b) and place #n [>=0], respecting iScoreAreaMode
 double dart::dGetDistanceInPx(int a, int b, int n) {
+	if(a==-1 && b==-1) return -1;
+	
 	int x=qlCurrentTypePlaces[qlPlacesHistory[n]]->x;
 	int y=qlCurrentTypePlaces[qlPlacesHistory[n]]->y;
+	
+	if(iAskForMode==enNames) return dGetDistanceInPxBetween(a,b,x,y);
+	
 	int dim2x=qlCurrentTypePlaces[qlPlacesHistory[n]]->dimx*(iScoreAreaMode/2.0)/2;
 	int dim2y=qlCurrentTypePlaces[qlPlacesHistory[n]]->dimx*(iScoreAreaMode/2.0)/2;
 	
@@ -688,11 +757,14 @@ double dart::dGetDistanceInPx(int a, int b, int n) {
 }
 
 double dart::dGetDistanceInKm(double px) {
+	if(px==-1) return -1;
 	return px*dPxToKm;
 }
 
 //calculate the mark (German system TODO other systems) using unzoomed distance in px
 double dart::dGetMarkFromDistance(double distance) {
+	if(distance==-1) return 6;
+	
 	if(distance>1) distance--; // a difference of 1px is OK 
 	else distance=0;
 
@@ -726,4 +798,173 @@ double dart::dGetAverageMarkOfPlayer(int player) {
 double dart::dGetAverageScoreOfPlayer(int player) {
 	if(iPlaceCount<1) return 0;
 	return qlTotalScores[player].score/iPlaceCount;
+}
+
+// looks for lineEdit->text() in the list of places; returns the index for place in qlAllPlaces
+int dart::iFindInputInList(double &f) {
+	QString input=lineEdit->text();
+	qDebug() << "[i] input" << input;
+	
+	int index=-1;
+	
+	for(int l=0; (l<3 && index==-1); l++) {
+		qDebug() << "l" << l;
+		
+		if(l==0) f=1;
+		else if(l==1) f=0.75;
+		else if(l==2) f=0.5; //TODO setting
+		
+		input=qsSimplifyString(input, l);
+		
+		for(int i=0,max=qlAllPlaces.count(); (i<max && index==-1); i++) {
+			if(qsSimplifyString(qlAllPlaces[i].name,l)==input) index=i;
+		}
+	}
+	
+	if(index!=-1) qDebug() << "[i] found" << qlAllPlaces[index].name << f;
+	else qDebug() << "[i] not found" << f;
+	
+	return index;
+}
+
+QString dart::qsSimplifyString(QString str, int l) {
+	if(l>=0) {
+		str=str.toLower();
+		str=str.replace("am ", "a");
+		str=str.replace("an ", "a");
+		str=str.replace("der ", "d");
+		str=str.replace(" ", "");
+		
+		if(l>=1) {
+			str=str.replace("-", "");
+			str=str.replace("_", "");
+			str=str.replace("_", "");
+			str=str.replace(".", "");
+			str=str.replace(QRegExp(QString::fromUtf8("[äáàã]")), "a");
+			str=str.replace(QRegExp(QString::fromUtf8("[éèẽ]")), "e");
+			str=str.replace(QRegExp(QString::fromUtf8("[íìĩ]")), "i");
+			str=str.replace(QRegExp(QString::fromUtf8("[öṏø]")), "o");
+			str=str.replace(QRegExp(QString::fromUtf8("[üǘǜ]")), "u");
+			str=str.replace(QRegExp(QString::fromUtf8("[ßś]")), "s");
+			//remove double letters and lengthening
+			for(int i=0; i<str.length()-1; i++) {
+				if(str[i]==str[i+1] || (QString(str[i]).contains(QRegExp("[aeiou]")) && str[i+1]=='h') )
+					str=str.remove(i+1,1);
+			}
+			
+			if(l>=2) {
+				str=str.replace("ie", "i");
+				str=str.replace("ai", "ei");
+				str=str.replace("ay", "ei");
+				str=str.replace("d", "t");
+				str=str.replace("ck", "k");
+				str=str.replace("c", "k");
+				str=str.replace("w", "v");
+				str=str.replace("f", "v");
+			} // 2
+		} // 1
+	} // 0
+	
+	return str;
+}
+
+void dart::vReturnPressedEvent() { // TODO split (net!)
+	if(iAskForMode!=enNames) {
+		qDebug() << "[E] vReturnPressedEvent";
+		return;
+	}
+	lineEdit->setEnabled(FALSE);
+	
+	double f;
+	int iIndexOfPlace=iFindInputInList(f);
+	
+	lineEdit->setStyleSheet("color:black");
+	if(f<1) {
+		lineEdit->setStyleSheet("text-decoration:underline;color:black");
+		if(f<0.75) {
+			lineEdit->setStyleSheet("text-decoration:underline;color:red");
+			if(iIndexOfPlace==-1) {
+				lineEdit->setStyleSheet("text-decoration:underline;color:red;background:black");
+			}
+		}
+	}
+	
+	int x,y;
+	if(iIndexOfPlace!=-1) {
+		x=qlAllPlaces[iIndexOfPlace].x;
+		y=qlAllPlaces[iIndexOfPlace].y;
+	} else {
+		x=-1;
+		y=-1;
+	}
+
+	scoreHistory score;
+	score.x=x;
+	score.y=y;
+	score.diffPxArea=dGetDistanceInPx(x,y,iPlaceCount-1); // respects area // TODO what about shown distance?
+	score.diffPx=dGetDistanceInPxBetween(x,y,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y);
+	score.diffKm=dGetDistanceInKm(score.diffPxArea);
+	score.mark=dGetMarkFromDistance(score.diffPxArea);
+	qDebug()<< "ppp"<<score.mark;
+	score.score=dGetScore(score.mark)*f;
+	score.mark=dGetMarkFromScore(score.score);
+	qDebug()<< "ppp"<<score.mark;
+	qlScoreHistory[iCurrentPlayer].append(score);
+	
+	if(! (iGameMode==enTraining && iPlaceCount>=5) ) {
+		qlTotalScores[iCurrentPlayer].score+=score.score;
+		qlTotalScores[iCurrentPlayer].mark=dGetAverageMarkOfPlayer(iCurrentPlayer);
+	}
+	
+	
+	qDebug() << "Score for Player" << iCurrentPlayer << score.diffPx << "px" << score.diffPxArea << "px (area)" << score.diffKm << "km" << score.score << "p"  << score.mark << "TOTAL" << qlTotalScores[iCurrentPlayer].score << "p" << qlTotalScores[iCurrentPlayer].mark;
+	
+	if(iCurrentPlayer<iNumberOfPlayers-1) { // next player
+		
+		mySleep(iDelayBeforeNextPlayer);
+		iCurrentPlayer++;
+		vRemoveAllCircles();
+		qDebug()<<"f";
+		vRepaintPlayerLabels();
+		vRepaintCommonLabels();
+		
+		lineEdit->clear();
+		lineEdit->setStyleSheet("");
+		lineEdit->setEnabled(TRUE); //c//
+		lineEdit->setFocus(Qt::OtherFocusReason);
+		
+	} else { // show results
+		
+		iCurrentPlayer=0;
+		
+		vRemoveAllCircles();
+		vDrawClickPositions(iPlaceCount);
+		mySleep(iDelayNextCircle);
+		vDrawDistanceCircles(iPlaceCount, 0);
+		
+		// show real position
+		vShowCurrentPlace();
+		
+		vShowScores();
+                
+                vShowComment();
+		
+		if(iGameMode==enTraining) mySleep(iDelayBeforeNextPlaceTraining);
+		else mySleep(iDelayBeforeNextPlace);
+                
+                lblComment->setText("");
+		
+		vShowTotalScores();
+		
+		vRemoveAllCircles();
+		vRemoveAllCommonPoints();
+		
+		if(iGameMode!=enTraining) vResetScoreLabels();
+		
+		vRepaintCommonLabels();
+		
+		vNextRound();
+		
+	}
+	//cE//
 }
