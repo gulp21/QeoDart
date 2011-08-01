@@ -60,6 +60,15 @@ int io::iFindQcf() {
 			}
 		}
 	}
+        
+        if(myDart->qlQcfxFiles.count()==0) {
+                qcfFile f;
+                f.path="NULL";
+                f.mapName="dummyfile";
+                myDart->qlQcfxFiles.append(f);
+                qDebug() << "[I] added dummyfile";
+                return 0;
+        }
 	
 	return myDart->qlQcfxFiles.count();
 }
@@ -113,6 +122,22 @@ QString io::qsGetMapName(QDomDocument &doc) {
 }
 
 int io::iReadQcf(QString mapname) {
+        
+        if(mapname=="dummyfile") {
+                place newPlace;
+                newPlace.x=0;
+                newPlace.y=0;
+                newPlace.dimx=0;
+                newPlace.dimy=0;
+                newPlace.name="DUMMYFILE";
+                newPlace.placeType="everything";
+                myDart->qlAllPlaces.append(newPlace);
+                myDart->iCurrentQcf=0;
+                
+                vFillCurrentTypePlaces();
+                
+                return 0;
+        }
 	
 	QString filename;
 	
@@ -158,7 +183,7 @@ int io::iReadQcf(QString mapname) {
 					myDart->dPxToKm=1;
 				}
 				
-			} else if(e.tagName()=="author") {
+			} else if(e.tagName()=="author") { // TODO
 				
 			} else if(e.tagName()=="place") {
 				

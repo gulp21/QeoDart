@@ -202,10 +202,17 @@
      <addaction name="separator"/>
      <addaction name="actionCyties"/>
     </widget>
+    <widget class="QMenu" name="menuMap">
+     <property name="title">
+      <string>Map</string>
+     </property>
+     <addaction name="actionAdd_Map"/>
+    </widget>
     <addaction name="menuSettings"/>
     <addaction name="menuGame_Mode"/>
     <addaction name="menuAsk_for"/>
     <addaction name="menuView"/>
+    <addaction name="menuMap"/>
    </widget>
    <widget class="QMenu" name="menuHilfe">
     <property name="title">
@@ -321,6 +328,11 @@
    </property>
    <property name="toolTip">
     <string>Local</string>
+   </property>
+  </action>
+  <action name="actionAdd_Map">
+   <property name="text">
+    <string>Add Map…</string>
    </property>
   </action>
  </widget>

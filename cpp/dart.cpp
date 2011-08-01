@@ -51,6 +51,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	iTrainingPlaceNumber=-1;
         bAgainstTime=TRUE;
         iMaxTime=20;
+        iGameMode=enLocal;
         
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
@@ -112,10 +113,9 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 		msgBox.setInformativeText(tr("You might want to add a file through Maps → Add map")); // TODO crash
 		msgBox.setIcon(QMessageBox::Warning);
 		msgBox.exec();
-	} else {
-		if(clIO->iReadQcf(qlQcfxFiles[iCurrentQcf].mapName)!=0) {
-			exit(-1);
-		}
+	}
+	if(clIO->iReadQcf(qlQcfxFiles[iCurrentQcf].mapName)!=0) {
+		exit(-1);
 	}
 	
 	show();
@@ -733,6 +733,7 @@ void dart::vNextRound() {
 	if(pn<=-1) {
 		int i=0;
 		do {
+			qDebug() << qlCurrentTypePlaces.count();
 			pn = rand() % qlCurrentTypePlaces.count();
 		} while(qlPlacesHistory.contains(pn) && i++<10);
 		
