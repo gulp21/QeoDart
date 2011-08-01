@@ -58,13 +58,15 @@ Q_OBJECT
 		QList<QLabel*> qlPointLabels;
 		QList<QString> qlImageLayers;
 		QList<QLabel*> qlMapLayers;
+                
+                bool bAgainstTime;
 
 		double dZoomFactor, dPxToKm;
 		
 		int iPaddingTop; // px between toolbar and map
 		int iMarginTop; // px between window decoration and toolbar
 		int iNumberOfPlayers, iMaxPlaceCount, iCurrentQcf;
-		int iScoreAreaMode;
+		int iScoreAreaMode, iMaxTime;
 		
 		QString qsCurrentPlaceType;
 		
@@ -81,7 +83,8 @@ Q_OBJECT
 		
 		int iCurrentPlayer, iPlaceCount, iTrainingPlaceNumber;
 		int iDelayNextCircle, iDelayBeforeShowingMark, iDelayBeforeNextPlayer, iDelayBeforeNextPlace, iDelayBeforeNextPlaceTraining;
-		
+                int iTimerElapsed;
+                
 		QList<QList<QLabel*> > qlCircleLabels; //contains all circles (incl. points) for each user
 // 		QList<QLabel*> qlPlayerLabel;
 		QList<QList<QLabel*> > qlPlayerLabels;
@@ -89,6 +92,8 @@ Q_OBJECT
 		QList<QString> qlComments;
 		
 		QLabel *lblMouseClickOverlay;
+                
+                QTimer *timer;
 		
 		void closeEvent(QCloseEvent *event);
 		void resizeEvent(QResizeEvent *event);
@@ -105,6 +110,7 @@ Q_OBJECT
 		void vSetNumberOfPlayers(int player);
 		void vSetGameMode(enGameModes mode);
 		void vSetAskForMode(enAskForModes mode);
+                void vSetAgainstTime(bool enable);
 		void vNextRound();
 		void vResetForNewGame();
 		void vShowTotalScores();
@@ -139,6 +145,7 @@ Q_OBJECT
 		void vSetGameMode();
 		void vSetAskForMode();
 		void vReturnPressedEvent();
+                void vTimeout();
 };
 
 #include "myLabels.hpp"

@@ -18,6 +18,7 @@ See main.cpp for details. */
 #include <QDesktopWidget>
 #include <time.h>
 #include <QDialog>
+#include <QTimer>
 
 using namespace std;
 
@@ -48,6 +49,11 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	iCurrentQcf=0;
 	iScoreAreaMode=1;
 	iTrainingPlaceNumber=-1;
+        bAgainstTime=TRUE;
+        iMaxTime=20;
+        
+        timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
 	
 	iDelayNextCircle=200;
 	iDelayBeforeShowingMark=500;
@@ -132,6 +138,9 @@ dart::~dart(){
 	vRemoveAllCircles();
 	vRemoveAllCommonPoints();
 	vSetNumberOfPlayers(0);
+        timer->stop();
+        delete timer;
+        delete clIO;
 }
 
 //draws distance circles using the saved click-coordinates of place n, iterating #count [recursion]
@@ -172,6 +181,25 @@ void dart::vRemoveAllCommonPoints() {
 		delete qlPointLabels[0];
 		qlPointLabels.removeAt(0);
 	}
+}
+
+void dart::vTimeout() {
+        if(iTimerElapsed==iMaxTime) return;
+        qDebug() << ++iTimerElapsed;
+        lblTime->setText(QString("%1").arg(iMaxTime-iTimerElapsed));
+}
+
+// enables/disables "against time"; used for resetting timer, too
+void dart::vSetAgainstTime(bool enable) {
+        bAgainstTime=enable;
+        iTimerElapsed=0;
+        if(bAgainstTime) {
+                lblTime->setText(QString("%1").arg(iMaxTime-iTimerElapsed));
+                timer->start(1000);
+        } else {
+                lblTime->setText("");
+                timer->stop();
+        }
 }
 
 void dart::vSetNumberOfPlayers(int n) {
@@ -231,19 +259,24 @@ void dart::vSetNumberOfPlayers(int n) {
 	gridLayout->removeWidget(lblCurrentPlace);
 	gridLayout->removeWidget(lblCurrentPlayer);
 	gridLayout->removeWidget(lineEdit);
+	gridLayout->removeWidget(lblTime);
 	if(iNumberOfPlayers==1) {
 		gridLayout->removeWidget(lblComment);
 		gridLayout->addWidget(lblCurrentPlace,1*(iGameMode!=enTraining),0);
 		gridLayout->addWidget(lblCurrentPlayer,1,4);
 		gridLayout->addWidget(lblComment,1,2);
 		gridLayout->addWidget(lineEdit,1*(iGameMode!=enTraining),0);
+                gridLayout->addWidget(lblTime,1*(iGameMode!=enTraining),4);
 		lblComment->setText("");
 		lblComment->show();
+                lblCurrentPlayer->hide();
 	} else {
 		gridLayout->addWidget(lblCurrentPlace,iNumberOfPlayers,0);
 		gridLayout->addWidget(lblCurrentPlayer,iNumberOfPlayers,4);
 		gridLayout->addWidget(lineEdit,iNumberOfPlayers,0);
+                gridLayout->addWidget(lblTime,iNumberOfPlayers-1,4);
 		lblComment->hide();
+                lblCurrentPlayer->show();
 	}
 	
 // 	gridLayout->setGeometry(QRect(0, 0, 10, 10));
@@ -316,10 +349,14 @@ void dart::vRepaintPlayerLabels() {
 //repaint all label which are not player-specific
 void dart::vRepaintCommonLabels() {
 	int fontSize=iGetFontSize();
-	lblCurrentPlace->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
-	lblComment->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
-	lblCurrentRound->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
-	lblCurrentPlayer->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(iCurrentPlayer).name()));
+        QString stylesheet=QString("color:%2;font-size:%1px;font-family:arial,sans-serif")
+                        .arg(fontSize)
+                        .arg(qcGetColorOfPlayer(iCurrentPlayer).name());
+	lblCurrentPlace->setStyleSheet(stylesheet);
+	lblComment->setStyleSheet(stylesheet);
+	lblCurrentRound->setStyleSheet(stylesheet);
+        lblTime->setStyleSheet(stylesheet);
+	lblCurrentPlayer->setStyleSheet(stylesheet);
 	lblCurrentPlayer->setText(QString(tr("Player %1")).arg(iCurrentPlayer+1));
         lineEdit->setMaximumHeight(fontSize+2);
 }
@@ -371,6 +408,10 @@ void dart::vMouseClickEvent(int x, int y) {
 	score.diffKm=dGetDistanceInKm(score.diffPxArea);
 	score.mark=dGetMarkFromDistance(score.diffPxArea);
 	score.score=dGetScore(score.mark);
+        if(bAgainstTime) {
+                score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
+                score.mark=dGetMarkFromScore(score.score);
+        }
 	qlScoreHistory[iCurrentPlayer].append(score);
 	
 	if(! (iGameMode==enTraining && iPlaceCount>=5) ) {
@@ -389,6 +430,7 @@ void dart::vMouseClickEvent(int x, int y) {
 		qDebug()<<"f";
 		vRepaintPlayerLabels();
 		vRepaintCommonLabels();
+                vSetAgainstTime(bAgainstTime);
 		
 		bAcceptingClickEvent=TRUE;
 		
@@ -726,6 +768,8 @@ void dart::vNextRound() {
 			lblCurrentRound->setText(QString(tr("Place %1 of %2")).arg(iPlaceCount).arg(iMaxPlaceCount));
 			break;
 	};
+        
+        if(bAgainstTime) vSetAgainstTime(TRUE);
 }
 
 //returns the distance between P(a|b) and Q(x|y); a,b,x,y should be unzoomed
@@ -922,10 +966,16 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 	score.diffPx=dGetDistanceInPxBetween(x,y,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y);
 	score.diffKm=dGetDistanceInKm(score.diffPxArea);
 	score.mark=dGetMarkFromDistance(score.diffPxArea);
-	qDebug()<< "ppp"<<score.mark;
-	score.score=dGetScore(score.mark)*f;
+        score.score=dGetScore(score.mark)*f;
+        if(bAgainstTime) {
+                //typing against time can be hard, so there are some bonusSeconds
+                double bonusSeconds=lineEdit->text().length()/8.0;
+                iTimerElapsed-=bonusSeconds;
+                if(iTimerElapsed<0) iTimerElapsed=0;
+                score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
+        }
 	score.mark=dGetMarkFromScore(score.score);
-	qDebug()<< "ppp"<<score.mark;
+        
 	qlScoreHistory[iCurrentPlayer].append(score);
 	
 	if(! (iGameMode==enTraining && iPlaceCount>=5) ) {
@@ -949,6 +999,8 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 		lineEdit->setStyleSheet("");
 		lineEdit->setEnabled(TRUE); //c//
 		lineEdit->setFocus(Qt::OtherFocusReason);
+                
+                vSetAgainstTime(bAgainstTime);
 		
 	} else { // show results
 		
