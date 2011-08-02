@@ -117,6 +117,13 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	if(clIO->iReadQcf(qlQcfxFiles[iCurrentQcf].mapName)!=0) {
 		exit(-1);
 	}
+	for(int i=qlQcfxFiles.count()-1; i>-1; i--) {
+		QAction *menuItem;
+		menuItem = new QAction(QIcon("TODO BACKGROUND"), qlQcfxFiles[i].mapName, this);
+		menuItem->setStatusTip(QString(tr("Load map %1")).arg(qlQcfxFiles[i].mapName));
+		connect(menuItem, SIGNAL(triggered()), this, SLOT(vReadQcf()));
+		menuMap->addAction(menuItem);
+	}
 	
 	show();
 	
@@ -654,8 +661,6 @@ void dart::vSetAskForMode(enAskForModes mode) {
 	
 	vResetForNewGame();
 	
-	iAskForMode==mode;
-	
 	switch(iAskForMode) {
 		case enPositions:
 			lineEdit->hide();
@@ -1037,4 +1042,18 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 		
 	}
 	//cE//
+}
+
+void dart::vReadQcf() {
+	if(iPlaceCount!=1) {
+		QMessageBox msgBox;
+		msgBox.setWindowTitle(tr("Chance Map"));
+		msgBox.setText(tr("When you change the map, your current score will be lost.\nDo you want to continue?"));
+		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+		msgBox.setDefaultButton(QMessageBox::Cancel);
+		if(msgBox.exec()==QMessageBox::Cancel) return;
+	}
+	clIO->iReadQcf(static_cast<QAction*>(QObject::sender())->text());
+	vResetForNewGame();
+	vNextRound();
 }

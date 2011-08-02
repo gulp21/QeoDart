@@ -12,7 +12,6 @@ See main.cpp for details. */
 using namespace std;
 
 io::io(dart *TDart) : myDart(TDart){
-
 }
  
 io::~io(){
@@ -39,15 +38,7 @@ int io::iFindQcf() {
 		
 		qDebug() << "[i] Found" << qlQcfDirs[i].entryList() << "in" << qlQcfDirs[i].absolutePath();
 		
-		for(int j=0; j<qlQcfDirs[i].entryList().count(); j++){
-//			bool namespaceProcessing; QString errorMsg; int errorLine, errorColumn;
-//			QDomDocument doc("QeoDartCoordinates");
-//			QFile file( QString("%1%2").arg(qcfdir.c_str()).arg(dir.entryList()[i]) );
-//			if(!file.open(QIODevice::ReadOnly)) {
-//				file.close();
-//				qDebug() << "QeoDartCoordinates: Read only";
-//			}
-			
+		for(int j=0; j<qlQcfDirs[i].entryList().count(); j++) {
 			QDomDocument doc("coordinates");
 			QFile file(qlQcfDirs[i].absolutePath()+"/"+qlQcfDirs[i].entryList()[j]);
 			

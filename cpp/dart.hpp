@@ -146,6 +146,9 @@ Q_OBJECT
 		void vSetAskForMode();
 		void vReturnPressedEvent();
                 void vTimeout();
+		
+	public slots:
+		void vReadQcf();
 };
 
 #include "myLabels.hpp"
