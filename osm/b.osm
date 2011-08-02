@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <bounds minlat='51.189941499999996' minlon='6.5936851999999995' maxlat='51.2036569' maxlon='6.622610099999999' origin='CGImap 0.0.2' />
+  <bounds minlat='53.6064827' minlon='7.142451299999999' maxlat='53.6284553' maxlon='7.1863966999999995' origin='CGImap 0.0.2' />
+  <bounds minlat='51.1954819' minlon='6.6814256' maxlat='51.1981712' maxlon='6.6870904' origin='CGImap 0.0.2' />
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25849' visible='true' lat='51.197401219950784' lon='6.609106941205833' />
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25846' action='modify' visible='true' lat='51.18966885967338' lon='6.613669420940562' />
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25844' visible='true' lat='51.19547577296399' lon='6.61302449658662' />
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25843' action='modify' visible='true' lat='51.20251028424731' lon='6.608625248326087' />
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25840' action='modify' visible='true' lat='51.19682359430377' lon='6.611206546050437'>
+    <tag k='amenity' v='restaurant' />
+    <tag k='name' v='test' />
+  </node>
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25822' visible='true' lat='51.19878513791658' lon='6.612261549475595' />
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25820' visible='true' lat='51.19483649925053' lon='6.607060546621202' />
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25818' visible='true' lat='51.19615274974145' lon='6.6013594473385' />
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25817' visible='true' lat='51.20010127560155' lon='6.603209804123236' />
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25812' visible='true' lat='51.201354705105366' lon='6.603909939122866' />
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25810' visible='true' lat='51.20245142794437' lon='6.62111325625663' />
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25808' visible='true' lat='51.19217254391375' lon='6.619112870543402' />
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25806' visible='true' lat='51.191169603175474' lon='6.611011308404827' />
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25804' visible='true' lat='51.19358289239496' lon='6.597158637340722' />
+  <node version='1' timestamp='2009-02-15T16:13:23Z' id='-25803' visible='true' lat='51.199913258234396' lon='6.598408878411489' />
+  <node version='1'  id='-25799' action='modify' timestamp='2010-12-21T09:31:14Z' visible='true' lat='51.19373959511712' lon='6.610561221619351'>
+    <tag k='name' v='Countr1' />
+    <tag k='place' v='country' />
+  </node>
+  <node version='1' id='-25795' action='modify' timestamp='2010-12-21T09:31:14Z' visible='true' lat='51.19684219927745' lon='6.613861858046177'>
+    <tag k='name' v='Cit1' />
+    <tag k='place' v='city' />
+  </node>
+  <node version='1'  id='-25792' action='modify' timestamp='2010-12-21T09:31:14Z' visible='true' lat='51.19743762466488' lon='6.605310209122126'>
+    <tag k='name' v='Vill2' />
+    <tag k='place' v='village' />
+  </node>
+  <node   id='91334924' action='modify' timestamp='2010-12-21T09:31:14Z' uid='194703' user='gulp21' visible='true' version='11' changeset='6723284' lat='51.19667073956576' lon='6.603620812859575'>
+    <tag k='name' v='Vill1' />
+    <tag k='place' v='village' />
+  </node>
+  <way version='1' timestamp='2009-02-15T16:13:23Z' id='-25819' action='modify' visible='true'>
+    <nd ref='-25817' />
+    <nd ref='-25818' />
+    <nd ref='-25820' />
+    <nd ref='-25822' />
+    <nd ref='-25817' />
+    <tag k='admin_level' v='4' />
+    <tag k='boundary' v='administrative' />
+    <tag k='description' v='border of state?' />
+  </way>
+  <way version='1' timestamp='2009-02-15T16:13:23Z' id='-25805' action='modify' visible='true'>
+    <nd ref='-25803' />
+    <nd ref='-25804' />
+    <nd ref='-25806' />
+    <nd ref='-25808' />
+    <nd ref='-25810' />
+    <nd ref='-25812' />
+    <nd ref='-25803' />
+    <tag k='admin_level' v='2' />
+    <tag k='boundary' v='administrative' />
+    <tag k='description' v='border of country' />
+  </way>
+  <way version='1' timestamp='2009-02-15T16:13:23Z' id='-25845' action='modify' visible='true'>
+    <nd ref='-25843' />
+    <nd ref='-25844' />
+    <nd ref='-25846' />
+    <nd ref='-25849' />
+    <nd ref='-25843' />
+    <tag k='waterway' v='riverbank' />
+  </way>
+</osm>
+

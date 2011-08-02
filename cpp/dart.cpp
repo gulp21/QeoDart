@@ -84,7 +84,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	lblMouseClickOverlay->setAlignment(Qt::AlignTop);
 	lblMouseClickOverlay->show();
 	lblMouseClickOverlay->setGeometry(0, 0, iGetWindowSize(), iGetWindowSize());
-	qDebug()<<iGetWindowSize();
+	//lblMouseClickOverlay->setCursor(QCursor(QPixmap("test.png"),1,1)); TODO
 	
 	connect(actionQuit,SIGNAL (triggered()), this, SLOT(vClose()));
 	actionQuit->setIcon(QIcon::fromTheme("application-exit"));
@@ -506,10 +506,11 @@ void dart::vResetScoreLabels() {
 }
 
 void dart::vShowCurrentPlace() {
-	iAskForMode==enPositions ?
-	                        vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels)
-	                        :
-	                        vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels, qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->name);
+	if(iAskForMode==enPositions) {
+		vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels)
+	} else {
+		vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels, qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->name);
+	}
 }
 
 void dart::vShowScores() {
@@ -531,7 +532,7 @@ void dart::vShowTotalScores() {
 }
 
 int dart::iGetWindowSize() {
-	return width()<height()-iMarginTop-iPaddingTop ? width() : height()-iMarginTop-iPaddingTop;
+	return (width()<height()-iMarginTop-iPaddingTop) ? width() : (height()-iMarginTop-iPaddingTop);
 }
 
 void dart::vClose() {

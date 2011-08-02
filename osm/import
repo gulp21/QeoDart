@@ -1,0 +1,52 @@
+#!/bin/bash
+osmosis="/home/markus/Downloads/osmosis-0.39/bin/osmosis"
+input="/home/markus/Dokumente/GitHub/QeoDart/osm/b.osm"
+osmarender="/home/markus/Dokumente/OSM/osmarender/orp/orp.pl" #perl version
+
+function runosmosis {
+	echo ------------------
+	local start=`date +%H:%M:%S`
+	echo `date +%H:%M:%S` creating test-merge.osm with places, borders, rivers
+	echo ------------------
+	$osmosis \
+		--rx $input \
+		--tf reject-relations \
+		--tf reject-ways \
+		--tf accept-nodes place=* outPipe.0=place \
+		\
+		--rx $input \
+		--tf reject-relations \
+		--tf accept-ways admin_level=* \
+		--used-node outPipe.0=border \
+		\
+		--rx $input \
+		--tf reject-relations \
+		--tf accept-ways waterway=riverbank \
+		--used-node outPipe.0=river \
+		\
+		--merge inPipe.0=place inPipe.1=border outPipe.0=merg \
+		\
+		--merge inPipe.0=river inPipe.1=merg \
+		--wx test-merge.osm
+	
+	echo ------------------
+	echo  $start-`date +%H:%M:%S` test-merge finished
+	echo ------------------
+}
+
+function runosmarender {
+	echo ------------------
+	local start=`date +%H:%M:%S`
+	echo `date +%H:%M:%S` rendering places
+	echo ------------------
+	
+	perl $osmarender -r osm-map-features-dart.xml test-merge.osm
+
+	
+	echo ------------------
+	echo  $start-`date +%H:%M:%S` places finished
+	echo ------------------
+}
+
+# runosmosis
+runosmarender
