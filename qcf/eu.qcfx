@@ -1,0 +1,256 @@
+<!DOCTYPE QeoDartCoordinates>
+<coordinates version="0.2">
+	<name default="Europe" de="Europa" en="Europe" la="Europa" />
+	<pxtokm value="0.09847" /><!--UPDATE TODO padding  capials   support -1-->
+	?
+	<author
+	copyright:file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
+	copyright:background="Turkish Flame: CC-BY-SA-3.0 (derived from http://commons.wikimedia.org/wiki/File:Demographics_of_Europe.svg)"
+	copyright:borders="Turkish Flame: CC-BY-SA-3.0 (derived from http://commons.wikimedia.org/wiki/File:Demographics_of_Europe.svg)"
+	/>
+	<!--.....states.....-->
+	<place
+	x="264" y="463" dimx="35" dimy="25"
+	name="Deutschland"
+	name:de="Deutschland"
+	name:en="Germany"
+	/>
+	<place
+	x="237" y="446" dimx="8" dimy="6"
+	name:de="Niederlande"
+	name:en="Netherlands"
+	/>
+	<place
+	x="229" y="464" dimx="10" dimy="10"
+	name:de="Belgien"
+	name:en="Belgium"
+	/>
+	<place
+	x="209" y="507" dimx="45" dimy="32"
+	name:de="Frankreich"
+	name:en="France"
+	/>
+	<place
+	x="263" y="503" dimx="0" dimy="0"
+	name:de="Liechtenstein"
+	name:en="Liechtenstein"
+	/>
+	<place
+	x="251" y="506" dimx="50" dimy="50"
+	name:de="Schweiz"
+	name:en="Switzerland"
+	/>
+	<place
+	x="267" y="407" dimx="17" dimy="14"
+	name:de="Dänemark"
+	name:en="Denmark"
+	/>
+	<place
+	x="292" y="500" dimx="10" dimy="20"
+	name="Österreich"
+	name:de="Österreich"
+	name:en="Austria"
+	/>
+	<place
+	x="301" y="472" dimx="10" dimy="22"
+	name:de="Tschechien"
+	name:en="Czech Republic"
+	/>
+	<!--10-->
+	<place
+	x="325" y="531" dimx="10" dimy="8"
+	name:de="Bosnien und Herzegowina"
+	name:en="Bosnia-Herzegovina"
+	/>
+	<place
+	x="198" y="548" dimx="1" dimy="1"
+	name:de="Andorra"
+	name:en="Andorra"
+	/>
+	<place
+	x="386" y="539" dimx="11" dimy="20"
+	name:de="Bulgarien"
+	name:en="Bulgaria"
+	/>
+	<place
+	x="347" y="560" dimx="13" dimy="5"
+	name:de="Albanien"
+	name:en="Albania"
+	/>
+	<place
+	x="351" y="368" dimx="9" dimy="15"
+	name:de="Estland"
+	name:en="Estonia"
+	/>
+	<place
+	x="340" y="307" dimx="53" dimy="15"
+	name:de="Finnland"
+	name:en="Finland"
+	/>
+	<place
+	x="374" y="579" dimx="22" dimy="17"
+	name:de="Griechenland"
+	name:en="Greece"
+	/>
+	<place
+	x="150" y="426" dimx="14" dimy="13"
+	name:de="Irland"
+	name:en="Ireland"
+	/>
+	<place
+	x="137" y="285" dimx="21" dimy="17"
+	name:de="Island"
+	name:en="Iceland"
+	/>
+	<place
+	x="287" y="556" dimx="55" dimy="43"
+	name:de="Italien"
+	name:en="Italy"
+	/>
+	<!--20-->
+	<place
+	x="580" y="371" dimx="90" dimy="60"
+	name:de="Kasachstan"
+	name:en="Kazakhstan"
+	/>
+	<place
+	x="352" y="545" dimx="6" dimy="6"
+	name:de="Kosovo"
+	name:en="Kosovo"
+	/>
+	<place
+	x="311" y="520" dimx="20" dimy="20"
+	name:de="Kroatien"
+	name:en="Croatia"
+	/>
+	<place
+	x="349" y="386" dimx="7" dimy="17"
+	name:de="Lettland"
+	name:en="Latvia"
+	/>
+	<place
+	x="348" y="406" dimx="11" dimy="15"
+	name:de="Litauen"
+	name:en="Lithuania"
+	/>
+	<place
+	x="238" y="473" dimx="2" dimy="2"
+	name:de="Luxemburg"
+	name:en="Luxembourg"
+	/>
+	<place
+	x="301" y="621" dimx="0" dimy="0"
+	name:de="Malta"
+	name:en="Malta"
+	/>
+	<place
+	x="359" y="555" dimx="7" dimy="9"
+	name:de="Mazedonien"
+	name:en="Macedonia"
+	/>
+	<place
+	x="400" y="485" dimx="14" dimy="9"
+	name:de="Moldawien"
+	name:en="Moldova"
+	/>
+	<place
+	x="246" y="538" dimx="0" dimy="0"
+	name:de="Monaco"
+	name:en="Monaco"
+	/>
+	<!--30-->
+	<place
+	x="338" y="544" dimx="7" dimy="7"
+	name:de="Montenegro"
+	name:en="Montenegro"
+	/>
+	<place
+	x="275" y="311" dimx="80" dimy="45"
+	name:de="Norwegen"
+	name:en="Norway"
+	/>
+	<place
+	x="326" y="446" dimx="26" dimy="30"
+	name:de="Polen"
+	name:en="Poland"
+	/>
+	<place
+	x="115" y="564" dimx="24" dimy="10"
+	name:de="Portugal"
+	name:en="Portugal"
+	/>
+	<place
+	x="377" y="505" dimx="24" dimy="31"
+	name:de="Rumänien"
+	name:en="Romania"
+	/>
+	<place
+	x="473" y="331" dimx="160" dimy="120"
+	name:de="Russland"
+	name:en="Russia"
+	/>
+	<place
+	x="284" y="535" dimx="0" dimy="0"
+	name:de="San Marino"
+	name:en="San Marino"
+	/>
+	<place
+	x="296" y="336" dimx="75" dimy="15"
+	name:de="Schweden"
+	name:en="Sweden"
+	/>
+	<place
+	x="347" y="528" dimx="20" dimy="13"
+	name:de="Serbien"
+	name:en="Serbia"
+	/>
+	<place
+	x="333" y="481" dimx="8" dimy="20"
+	name:de="Slowakei"
+	name:en="Slovakia"
+	/>
+	<!--40-->
+	<place
+	x="301" y="513" dimx="5" dimy="11"
+	name:de="Slowenien"
+	name:en="Slovenia"
+	/>
+	<place
+	x="155" y="570" dimx="35" dimy="35"
+	name:de="Spanien"
+	name:en="Spain"
+	/>
+	<place
+	x="471" y="554" dimx="40" dimy="75"
+	name:de="Türkei"
+	name:en="Turkey"
+	/>
+	<place
+	x="411" y="458" dimx="30" dimy="58"
+	name:de="Ukraine"
+	name:en="Ukraine"
+	/>
+	<place
+	x="333" y="500" dimx="13" dimy="20"
+	name:de="Ungarn"
+	name:en="Hungary"
+	/>					<!-- genauer erfassen -->
+	<place
+	x="282" y="553" dimx="0" dimy="0"
+	name:de="Vatikanstadt"
+	name:en="Vatican City"
+	/>
+	<place
+	x="185" y="418" dimx="45" dimy="25"
+	name="United Kingdom"
+	name:de="Vereinigtes Königreich"
+	name:en="Vereinigtes Königreich"
+	/>
+	<place
+	x="377" y="420" dimx="25" dimy="28"
+	name:de="Weißrussland"
+	name:en="Belarus"
+	/>
+	<!--48-->
+	<!-- -0 -52 -->
+</coordinates>
