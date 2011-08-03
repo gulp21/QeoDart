@@ -179,13 +179,6 @@
       <string>Settings…</string>
      </property>
     </widget>
-    <widget class="QMenu" name="menuView">
-     <property name="title">
-      <string>View</string>
-     </property>
-     <addaction name="separator"/>
-     <addaction name="action100"/>
-    </widget>
     <widget class="QMenu" name="menuGame_Mode">
      <property name="title">
       <string>Game Mode</string>
@@ -197,10 +190,30 @@
      <property name="title">
       <string>Ask for</string>
      </property>
+     <widget class="QMenu" name="menuPlace_Number">
+      <property name="title">
+       <string>Place Number</string>
+      </property>
+      <addaction name="action1_20"/>
+     </widget>
      <addaction name="actionPosition_of_Place"/>
      <addaction name="actionName_of_Place"/>
      <addaction name="separator"/>
+     <addaction name="actionCountries"/>
+     <addaction name="actionCapitals_of_Countries"/>
+     <addaction name="actionStates"/>
+     <addaction name="actionCapitals_of_States"/>
+     <addaction name="actionCounties"/>
      <addaction name="actionCyties"/>
+     <addaction name="actionTowns"/>
+     <addaction name="menuPlace_Number"/>
+    </widget>
+    <widget class="QMenu" name="menuView">
+     <property name="title">
+      <string>View</string>
+     </property>
+     <addaction name="separator"/>
+     <addaction name="action100"/>
     </widget>
     <widget class="QMenu" name="menuMap">
      <property name="title">
@@ -289,6 +302,9 @@
    </property>
   </action>
   <action name="actionCyties">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Cyties</string>
    </property>
@@ -333,6 +349,62 @@
   <action name="actionAdd_Map">
    <property name="text">
     <string>Add Map…</string>
+   </property>
+  </action>
+  <action name="actionTowns">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Towns</string>
+   </property>
+  </action>
+  <action name="actionCounties">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Counties</string>
+   </property>
+  </action>
+  <action name="actionCountries">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Countries</string>
+   </property>
+  </action>
+  <action name="actionStates">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>States</string>
+   </property>
+  </action>
+  <action name="action1_20">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>1-20</string>
+   </property>
+  </action>
+  <action name="actionCapitals_of_States">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Capitals of States</string>
+   </property>
+  </action>
+  <action name="actionCapitals_of_Countries">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Capitals of Countries</string>
    </property>
   </action>
  </widget>

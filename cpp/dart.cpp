@@ -43,10 +43,10 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iCurrentPlayer=0;
 	iAskForMode=enPositions;
 	iNumberOfPlayers=1; // TODO we shouldn't change it in training mode (iNumberOfPlayersTrainingCache)
-	qsCurrentPlaceType="county";
+	qsCurrentPlaceType="city;state";
 	bAcceptingClickEvent=TRUE;
 	dPxToKm=1;
-	iCurrentQcf=1;
+	iCurrentQcf=0;
 	iScoreAreaMode=1;
 	iTrainingPlaceNumber=-1;
         bAgainstTime=FALSE;
@@ -102,6 +102,13 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 //	actionName_of_Place->setIcon(QIcon::fromTheme("user-identity"));
 	connect(actionPosition_of_Place,SIGNAL (triggered()), this, SLOT(vSetAskForMode()));
 //	actionPosition_of_Place->setIcon(QIcon::fromTheme("user-identity"));
+	connect(actionStates,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionCapitals_of_States,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionCountries,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionCapitals_of_Countries,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionCounties,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionCyties,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionTowns,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionAbout_Qt,SIGNAL (triggered()), qApp, SLOT(aboutQt()));
 	
 	connect(lineEdit,SIGNAL (returnPressed()), this, SLOT(vReturnPressedEvent()));
@@ -129,6 +136,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	gridLayout->setSpacing(1);
 	
+	vSetPlaceType(qsCurrentPlaceType);
 	vSetAgainstTime(bAgainstTime);
 	vSetGameMode(iGameMode);
 	vSetAskForMode(iAskForMode);
@@ -197,6 +205,29 @@ void dart::vTimeout() {
         if(iTimerElapsed==iMaxTime) return;
         qDebug() << ++iTimerElapsed;
         lblTime->setText(QString("%1").arg(iMaxTime-iTimerElapsed));
+}
+
+void dart::vSetPlaceType() {
+	qsCurrentPlaceType="";
+	if(actionStates->isChecked()) qsCurrentPlaceType+="state;";
+	if(actionCapitals_of_States->isChecked()) qsCurrentPlaceType+="captialOfState;";
+	if(actionCountries->isChecked()) qsCurrentPlaceType+="country;";
+	if(actionCapitals_of_Countries->isChecked()) qsCurrentPlaceType+="capitalOfCountry;";
+	if(actionCounties->isChecked()) qsCurrentPlaceType+="county;";
+	if(actionCyties->isChecked()) qsCurrentPlaceType+="city;";
+	if(actionTowns->isChecked()) qsCurrentPlaceType+="town;";
+	clIO->vFillCurrentTypePlaces();
+}
+void dart::vSetPlaceType(QString placetype) {
+	qsCurrentPlaceType=placetype;
+	if(placetype.contains("state")) actionStates->setChecked(TRUE);
+	if(placetype.contains("captialOfState")) actionCapitals_of_States->setChecked(TRUE);
+	if(placetype.contains("country")) actionCountries->setChecked(TRUE);
+	if(placetype.contains("capitalOfCountry")) actionCapitals_of_Countries->setChecked(TRUE);
+	if(placetype.contains("county")) actionCounties->setChecked(TRUE);
+	if(placetype.contains("city")) actionCyties->setChecked(TRUE);
+	if(placetype.contains("town")) actionTowns->setChecked(TRUE);
+	clIO->vFillCurrentTypePlaces();
 }
 
 // enables/disables "against time"; used for resetting timer, too
@@ -1057,6 +1088,7 @@ void dart::vReadQcf() {
 		if(msgBox.exec()==QMessageBox::Cancel) return;
 	}
 	clIO->iReadQcf(static_cast<QAction*>(QObject::sender())->text());
+	
 	vRepaintMap();
 	vResetForNewGame();
 	vNextRound();

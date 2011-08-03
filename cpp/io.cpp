@@ -157,6 +157,14 @@ int io::iReadQcf(QString mapname) {
 	
 	myDart->qlAllPlaces.clear();
 	
+	myDart->actionStates->setVisible(FALSE);
+	myDart->actionCapitals_of_States->setVisible(FALSE);
+	myDart->actionCountries->setVisible(FALSE);
+	myDart->actionCapitals_of_Countries->setVisible(FALSE);
+	myDart->actionCounties->setVisible(FALSE);
+	myDart->actionCyties->setVisible(FALSE);
+	myDart->actionTowns->setVisible(FALSE);
+	
 	QDomElement docElem = doc.documentElement();
 	
 	QDomNode n = docElem.firstChild();
@@ -174,7 +182,7 @@ int io::iReadQcf(QString mapname) {
 					myDart->dPxToKm=1;
 				}
 				
-			} else if(e.tagName()=="author") { // TODO
+			} else if(e.tagName()=="author") { // TODO -> meta data function
 				
 			} else if(e.tagName()=="place") {
 				
@@ -184,18 +192,26 @@ int io::iReadQcf(QString mapname) {
 				newPlace.dimx=e.attribute("dimx","0").toInt();
 				newPlace.dimy=e.attribute("dimy","0").toInt();
 				newPlace.name=e.attribute("name","NONAME");
-				newPlace.placeType=e.attribute("placetype","everything");
+				newPlace.placeType=e.attribute("placetype","");
 				myDart->qlAllPlaces.append(newPlace);
 				
 				if(newPlace.name=="NONAME") {
 					qDebug() << "[W] place" << myDart->qlAllPlaces.count() << "has no name";
 				}
-				if(newPlace.placeType=="everything") {
+				if(newPlace.placeType=="") {
 					qDebug() << "[W] place" << myDart->qlAllPlaces.count() << "has no placetype";
 				}
 				if(newPlace.x==-1 || newPlace.y==-1) {
 					qDebug() << "[W] place" << myDart->qlAllPlaces.count() << "has incomplete coordinates";
 				}
+				
+				if(newPlace.placeType.contains("state")) myDart->actionStates->setVisible(TRUE); // TODO count + show count
+				if(newPlace.placeType.contains("captialOfState")) myDart->actionCapitals_of_States->setVisible(TRUE);
+				if(newPlace.placeType.contains("country")) myDart->actionCountries->setVisible(TRUE);
+				if(newPlace.placeType.contains("capitalOfCountry")) myDart->actionCapitals_of_Countries->setVisible(TRUE);
+				if(newPlace.placeType.contains("county")) myDart->actionCounties->setVisible(TRUE);
+				if(newPlace.placeType.contains("city")) myDart->actionCyties->setVisible(TRUE);
+				if(newPlace.placeType.contains("town")) myDart->actionTowns->setVisible(TRUE);
 				
 			} else if(e.tagName()!="name") {
 				
@@ -246,23 +262,20 @@ void io::vFillCurrentTypePlaces() {
 	int max=myDart->qlAllPlaces.count();
 	myDart->qlCurrentTypePlaces.clear();
 	
+	QString regexp=myDart->qsCurrentPlaceType.replace(";","|");
+	if(regexp[regexp.length()-1]=='|') regexp=regexp.left(regexp.length()-1);
+	
 	for(int i=0;i<max;i++) {
-		if(myDart->qlAllPlaces[i].placeType.contains(myDart->qsCurrentPlaceType) || myDart->qsCurrentPlaceType=="everything") {
+		if(myDart->qlAllPlaces[i].placeType.contains(QRegExp(regexp))) {
 			myDart->qlCurrentTypePlaces.append(&(myDart->qlAllPlaces[i]));
-//			qDebug() << myDart->qlAllPlaces[i].x << myDart->qlAllPlaces[i].y << myDart->qlAllPlaces[i].dimx << myDart->qlAllPlaces[i].dimy << myDart->qlAllPlaces[i].name;
+			qDebug() << myDart->qlAllPlaces[i].x << myDart->qlAllPlaces[i].y << myDart->qlAllPlaces[i].dimx << myDart->qlAllPlaces[i].dimy << myDart->qlAllPlaces[i].name << myDart->qlAllPlaces[i].placeType << regexp;
 		}
 	}
 	
 	if(myDart->qlCurrentTypePlaces.count()==0) {
-		if(myDart->qsCurrentPlaceType!="everything") {
-			qDebug() << "[i] there is no place for placetype" << myDart->qsCurrentPlaceType;
-			qDebug() << "    falling back to everything";
-			myDart->qsCurrentPlaceType="everything";
-			vFillCurrentTypePlaces();
-		} else {
-			qDebug() << "[E] No place in list";
-			myDart->close();
-		}
+		qDebug() << "[i] there is no place for placetype" << myDart->qsCurrentPlaceType; // TODO can this happan at all?
+		qDebug() << "    falling back to everything";
+		myDart->vSetPlaceType("");
 	}
 }
 

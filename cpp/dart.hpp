@@ -79,6 +79,7 @@ Q_OBJECT
 		void vMouseClickEvent(int x, int y);
 		void mySleep(int ms);
 		void vShowCurrentPlace();
+		void vSetPlaceType(QString placetype);
 
 	private:
 		
@@ -152,6 +153,7 @@ Q_OBJECT
 		void vSetAskForMode();
 		void vReturnPressedEvent();
                 void vTimeout();
+		void vSetPlaceType();
 		
 	public slots:
 		void vReadQcf();
