@@ -24,7 +24,7 @@ using namespace std;
 
 io *clIO;
 
-dart::dart(QMainWindow *parent) : QMainWindow(parent){
+dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	qlImageLayers << "background" << "borders" << "rivers" << "elevations";
 	
@@ -139,6 +139,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent){
 	gridLayout->addWidget(lblCurrentRound,0,4);
 	
 	vResize(1); // TODO saved value?
+	
+	clIO->iReadOsm("osm/places.svg");exit(0);
 }
 
 dart::~dart(){
@@ -507,7 +509,7 @@ void dart::vResetScoreLabels() {
 
 void dart::vShowCurrentPlace() {
 	if(iAskForMode==enPositions) {
-		vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels)
+		vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels);
 	} else {
 		vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels, qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->name);
 	}

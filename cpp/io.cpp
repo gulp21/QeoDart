@@ -266,43 +266,71 @@ void io::vFillCurrentTypePlaces() {
 	}
 }
 
-int io::iReadOsm(QString filename) { //TODO function iValidOsm / iValidQcfx / iValidXml NOTE we should parse rendered svg
+int io::iReadOsm(QString filename) {
 	qDebug() << "[i] Reading" << filename;
-	
 	
 	// parsing line-by-line is probably easier than xml parsing
 	
 	//open input file
 	QFile file(filename);
-	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) { cout << "couldn't open" << filename.toStdString() << "\n"; return(2);}
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+		qDebug() << "couldn't open" << filename;
+		return(2);
+	}
 	QTextStream in(&file);
+	
+	int height=1, width=1, count=0;
+	QList<place> places;
 	
 	// loop through all lines
 	while(!in.atEnd()) {
 		QString line = in.readLine();
-		//if there is a place label
-		if(line.contains("<text")){
-// 			node=line;
-			
+		
+		if (line.contains("map-clipping-rect")) { // map size
+		       QStringList list;
+		       list = line.split(line.contains("\"") ? "\"" : "\'"); // support ' as well as "
+		       for(int i=0, max=list.count(); i<max; i++){
+			       if(list[i].contains("height=")) {
+				       i++;
+				       height=list[i].left(list[i].length()-2).toDouble(); // remove "px"
+				       qDebug() << "height" << height;
+			       } else if(list[i].contains("width=")) {
+				       i++;
+				       width=list[i].left(list[i].length()-2).toDouble(); // remove "px"
+				       qDebug() << "width" << width;
+			       }
+		       }
+		       
+	       } else if(line.contains("<text")) { // if there is a place label
 			QStringList list;
 			list = line.split(line.contains("\"") ? "\"" : "\'"); // support ' as well as "
+			
+			place pl;
+			
 			for(int i=0, max=list.count(); i<max; i++){
-				if(list[i].contains("x=")){
-					qDebug() << "x" << list[++i];
-				} else if(list[i].contains("y=")){
-					qDebug() << "y" << list[++i];
-				} else if(list[i].contains("class=")){
-					int n=list[++i].indexOf("-");
-					qDebug() << "placetype" << list[i].left(n);
-				} else if(list[i].contains("/text")){
+				if(list[i].contains("x=")) {
+					pl.x=list[++i].toDouble()*600/width;
+					qDebug() << "x" << pl.x;
+				} else if(list[i].contains("y=")) {
+					pl.y=list[++i].toDouble()*600/height;
+					qDebug() << "y" << pl.y;
+				} else if(list[i].contains("class=")) {
+					int n=list[++i].indexOf("-"); // remove "-caption"
+					pl.placeType=list[i].left(n);
+					qDebug() << "placetype" << pl.placeType;
+				} else if(list[i].contains("/text")) {
 					int n=list[i].indexOf("<");
-					qDebug() << "name" << list[i].mid(1,n-1); //remove > and </text>
+					pl.name=list[i].mid(1,n-1); //remove > and </text>
+					qDebug() << "name" << pl.name;
 				}
-			} //perl ~/Dokumente/OSM/osmarender/orp/orp.pl -r osm-map-features-dart.xml test.osm
-		
+			}
+			
+			places.append(pl);
+			count++;
+			
 		}
-	}
-	
+		
+	} // while(!in.atEnd())
 	
 	return 0;
 }

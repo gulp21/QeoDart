@@ -1,6 +1,6 @@
 #!/bin/bash
 osmosis="/home/markus/Downloads/osmosis-0.39/bin/osmosis"
-input="/home/markus/Dokumente/GitHub/QeoDart/osm/b.osm"
+input="/home/markus/Dokumente/GitHub/QeoDart/osm/map.osm"
 osmarender="/home/markus/Dokumente/OSM/osmarender/orp/orp.pl" #perl version
 
 function runosmosis {
@@ -41,10 +41,23 @@ function runosmarender {
 	echo ------------------
 	
 	perl $osmarender -r osm-map-features-dart.xml test-merge.osm
-
+	mv test-merge.svg places.svg
 	
 	echo ------------------
 	echo  $start-`date +%H:%M:%S` places finished
+	echo ------------------
+	
+	
+	echo ------------------
+	local start=`date +%H:%M:%S`
+	echo `date +%H:%M:%S` rendering borders.xml
+	echo ------------------
+	
+	perl $osmarender -r borders.xml test-merge.osm
+	mv test-merge.svg borders.svg
+	
+	echo ------------------
+	echo  $start-`date +%H:%M:%S` borders.xml finished
 	echo ------------------
 }
 
