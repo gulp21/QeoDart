@@ -81,30 +81,19 @@
 
 		/* Waterways */
 		.waterway-riverbank {
-			fill: #b5d6f1;
-			stroke: #b5d6f1;
-			stroke-width: 16px;
+			fill: #3e6dff;
+			stroke: #3e6dff;
+			stroke-width: 120px;
 		}
 
 		/* Place names */
-		.continent-caption, .country-caption, .state-caption, .region-caption, .county-caption, .city-caption {
-			fill: black;
-			stroke: none;
-			font-family: "DejaVu Sans",sans-serif;
-			font-size: 400px;
-			font-weight: bold;
-			text-anchor: middle;
-			opacity:.3;
-		}
-		
-		.town-caption, .village-caption, .suburb-caption, .church-caption, .island-caption {
-			fill: black;
+		.continent-caption, .country-caption, .state-caption, .region-caption, .county-caption, .city-caption, .town-caption, .village-caption, .suburb-caption, .church-caption, .island-caption {
+			fill: none;
 			stroke: none;
 			font-family: "DejaVu Sans",sans-serif;
 			font-size: 6px;
 			font-weight: bold;
 			text-anchor: middle;
-			opacity:.3;
 		}
 
 		/* Non-physical boundaries */
@@ -112,13 +101,13 @@
 			stroke-linecap: butt;
 			stroke-linejoin: round;
 			fill: none;
-			stroke: #ffff00;
-			stroke-width: 16px;
+			stroke: none;
+			stroke-width: 64px;
 		}
 
 		/* map background */
 		.map-background {
-			fill: #91abff;
+			fill: none;
 			stroke: none;
 		}
 

@@ -92,7 +92,7 @@ int io::iCheckQcf(QFile &file, QDomDocument &doc) {
 	return 0;
 }
 
-QString io::qsGetMapName(QDomDocument &doc) {
+QString io::qsGetMapName(QDomDocument &doc) { // TODO read complete meta data
 	QDomElement docElem = doc.documentElement();
 	
 	QDomNode n = docElem.firstChildElement("name");
@@ -307,6 +307,13 @@ int io::iReadOsm(QString filename) {
 			
 			place pl;
 			
+			pl.x=-1;
+			pl.x=-1;
+			pl.name="-1";
+			pl.dimx=0;
+			pl.dimy=0;
+			pl.placeType="everything";
+			
 			for(int i=0, max=list.count(); i<max; i++){
 				if(list[i].contains("x=")) {
 					pl.x=list[++i].toDouble()*600/width;
@@ -325,12 +332,76 @@ int io::iReadOsm(QString filename) {
 				}
 			}
 			
+			if(pl.x==-1 || pl.y==-1 || pl.name=="-1") {
+				qDebug() << "[E] incomplete place";
+				qDebug() << "    " << pl.name << pl.x << pl.y << pl.placeType;
+				return -1;
+			} else if (pl.placeType=="everything") {
+				qDebug() << "[W] incomplete place";
+				qDebug() << "    " << pl.name << pl.x << pl.y << pl.placeType;
+			}
+			
 			places.append(pl);
 			count++;
 			
 		}
 		
 	} // while(!in.atEnd())
+	
+	qcfFile f;
+	f.path="/home/markus/Dokumente/GitHub/QeoDart/osm/outtest";
+	iWriteQcf(places, f);
+	
+	return 0;
+}
+
+// writes a qcfx-file containing places to the path specified in f
+int io::iWriteQcf(QList<place> &places, qcfFile &f) {
+	
+	qDebug() << "[i] going to write file" << f.path;
+	
+	QDomDocument doc("QeoDartCoordinates");
+	QDomElement root=doc.createElement("coordinates");
+	root.setAttribute("version","0.2");
+	doc.appendChild(root);
+	
+	QDomElement cn;
+	cn=doc.createElement("name");
+	cn.setAttribute("default",f.mapName);
+	root.appendChild(cn);
+	
+	cn=doc.createElement("author");
+	cn.setAttribute("copyright:file",f.copyright.fileCopyright);
+	cn.setAttribute("copyright:background",f.copyright.backgroundCopyright);
+	cn.setAttribute("copyright:borders",f.copyright.bordersCopyright);
+	cn.setAttribute("copyright:rivers",f.copyright.riversCopyright);
+	cn.setAttribute("copyright:elevations",f.copyright.elevationsCopyright);
+	root.appendChild(cn);
+	
+	cn=doc.createElement("pxtokm");
+	cn.setAttribute("value",f.pxtokm);
+	
+	for(int i=places.count()-1; i>-1; i--) {
+		cn=doc.createElement("place");
+		cn.setAttribute("x",places[i].x);
+		cn.setAttribute("y",places[i].y);
+		if(places[i].dimx!=0) cn.setAttribute("dimx",places[i].dimx); // we de not want to bloat the file
+		if(places[i].dimy!=0) cn.setAttribute("dimy",places[i].dimy);
+		cn.setAttribute("name",places[i].name);
+		cn.setAttribute("placetype",places[i].placeType);
+		root.appendChild(cn);
+	}
+	
+	QFile file(f.path+".qcfx");
+	if( !file.open(QIODevice::WriteOnly) ) {
+		qDebug() << "[E] Cannot write file" << file.fileName();
+		return -1;
+	}
+	
+	QTextStream ts( &file );
+	ts << doc.toString();
+	
+	file.close();
 	
 	return 0;
 }

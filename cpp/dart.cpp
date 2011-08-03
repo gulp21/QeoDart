@@ -41,15 +41,15 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iMaxPlaceCount=10;
 	iPlaceCount=0;
 	iCurrentPlayer=0;
-	iAskForMode=enNames;
-	iNumberOfPlayers=2; // we shouldn't change it in training mode (iNumberOfPlayersTrainingCache)
-	qsCurrentPlaceType="everything";
+	iAskForMode=enPositions;
+	iNumberOfPlayers=1; // TODO we shouldn't change it in training mode (iNumberOfPlayersTrainingCache)
+	qsCurrentPlaceType="county";
 	bAcceptingClickEvent=TRUE;
 	dPxToKm=1;
-	iCurrentQcf=0;
+	iCurrentQcf=1;
 	iScoreAreaMode=1;
 	iTrainingPlaceNumber=-1;
-        bAgainstTime=TRUE;
+        bAgainstTime=FALSE;
         iMaxTime=20;
         iGameMode=enLocal;
         
@@ -129,8 +129,9 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	gridLayout->setSpacing(1);
 	
-	vSetGameMode(enLocal);
-	vSetAskForMode(enNames);
+	vSetAgainstTime(bAgainstTime);
+	vSetGameMode(iGameMode);
+	vSetAskForMode(iAskForMode);
 	
 	vRepaintCommonLabels();
 	vRepaintPlayerLabels();
@@ -140,7 +141,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	vResize(1); // TODO saved value?
 	
-	clIO->iReadOsm("osm/places.svg");exit(0);
+//	clIO->iReadOsm("osm/places.svg");exit(0);
 }
 
 dart::~dart(){
@@ -508,11 +509,8 @@ void dart::vResetScoreLabels() {
 }
 
 void dart::vShowCurrentPlace() {
-	if(iAskForMode==enPositions) {
-		vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels);
-	} else {
-		vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels, qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->name);
-	}
+	if(iAskForMode==enPositions) vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels);
+	else vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels, qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->name);
 }
 
 void dart::vShowScores() {
@@ -916,6 +914,7 @@ QString dart::qsSimplifyString(QString str, int l) {
 				str=str.replace("d", "t");
 				str=str.replace("ck", "k");
 				str=str.replace("c", "k");
+				str=str.replace("kh", "ch");
 				str=str.replace("g", "k");
 				str=str.replace("w", "v");
 				str=str.replace("f", "v");
@@ -924,7 +923,8 @@ QString dart::qsSimplifyString(QString str, int l) {
                                         if(
                                            str[i]==str[i+1] ||
                                            (QString(str[i]).contains(QRegExp("[aeiou]")) && str[i+1]=='h') ||
-                                           (QString(str[i]).contains(QRegExp("[ae]")) && str[i+1]=='r')
+                                           (QString(str[i]).contains(QRegExp("[aeou]")) && str[i+1]=='r') ||
+					   (QString(str[i]).contains(QRegExp("[ou]")) && str[i+1]=='i')
                                           ) {
                                                 str=str.remove(i+1,1);
                                                 i--;
@@ -1057,6 +1057,7 @@ void dart::vReadQcf() {
 		if(msgBox.exec()==QMessageBox::Cancel) return;
 	}
 	clIO->iReadQcf(static_cast<QAction*>(QObject::sender())->text());
+	vRepaintMap();
 	vResetForNewGame();
 	vNextRound();
 }

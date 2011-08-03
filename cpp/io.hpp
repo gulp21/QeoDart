@@ -11,6 +11,9 @@ See main.cpp for details. */
 #include <QDomDocument>
 #include <QFile>
 
+struct place;
+struct qcfFile;
+
 class dart;
 
 class io : public QWidget {
@@ -23,6 +26,7 @@ class io : public QWidget {
 		~io();
 		int iReadQcf(QString mapname);
 		int iReadOsm(QString filename);
+		int iWriteQcf(QList<place> &places, qcfFile &f);
 		int iFindQcf();
 		int iCheckQcf(QFile &file, QDomDocument &doc);
 		void vFillCurrentTypePlaces();

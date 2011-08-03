@@ -27,8 +27,14 @@ struct totalScore {
 	double mark, score;
 };
 
+struct qcfCopyright {
+	QString fileCopyright, backgroundCopyright, elevationsCopyright, riversCopyright, bordersCopyright; 
+};
+
 struct qcfFile {
 	QString mapName, path; // path: e.g. qcf/de
+	int pxtokm;
+	qcfCopyright copyright;
 };
 
 enum enGameModes {

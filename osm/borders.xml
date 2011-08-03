@@ -61,13 +61,22 @@
 
         <!-- Non-physical boundaries -->
         <rule e="way" k="boundary" v="administrative" layer="5">
-            <rule e="way" k="border_type" v="state" layer="5">
-                <line class="boundary boundary-administrative-state-casing"/>
+            <rule e="way" k="admin_level" v="6" layer="5">
+<!--                 <line class="boundary boundary-administrative-state-casing"/> -->
                 <line class="boundary boundary-administrative-state-core"/>
             </rule>
-            <else>
+	    <rule e="way" k="admin_level" v="5" layer="5">
                 <line class="boundary boundary-administrative-state-core"/>
-            </else>
+            </rule>
+	    <rule e="way" k="admin_level" v="4" layer="5">
+                <line class="boundary boundary-administrative-state-core"/>
+            </rule>
+	    <rule e="way" k="admin_level" v="2" layer="5">
+                <line class="boundary boundary-administrative-state-core"/>
+            </rule>
+            <!--<else>
+                <line class="boundary boundary-administrative-state-core"/>
+            </else>-->
         </rule>
 
         <rule e="way" k="boundary" v="national_park" layer="5">
@@ -81,30 +90,19 @@
 
 		/* Waterways */
 		.waterway-riverbank {
-			fill: #b5d6f1;
-			stroke: #b5d6f1;
+			fill: none;
+			stroke: none;
 			stroke-width: 16px;
 		}
 
 		/* Place names */
-		.continent-caption, .country-caption, .state-caption, .region-caption, .county-caption, .city-caption {
-			fill: black;
-			stroke: none;
-			font-family: "DejaVu Sans",sans-serif;
-			font-size: 400px;
-			font-weight: bold;
-			text-anchor: middle;
-			opacity:.3;
-		}
-		
-		.town-caption, .village-caption, .suburb-caption, .church-caption, .island-caption {
-			fill: black;
+		.continent-caption, .country-caption, .state-caption, .region-caption, .county-caption, .city-caption, .town-caption, .village-caption, .suburb-caption, .church-caption, .island-caption {
+			fill: none;
 			stroke: none;
 			font-family: "DejaVu Sans",sans-serif;
 			font-size: 6px;
 			font-weight: bold;
 			text-anchor: middle;
-			opacity:.3;
 		}
 
 		/* Non-physical boundaries */
@@ -112,13 +110,13 @@
 			stroke-linecap: butt;
 			stroke-linejoin: round;
 			fill: none;
-			stroke: #ffff00;
-			stroke-width: 16px;
+			stroke: #ffffff;
+			stroke-width: 60px;
 		}
 
 		/* map background */
 		.map-background {
-			fill: #91abff;
+			fill: none;
 			stroke: none;
 		}
 

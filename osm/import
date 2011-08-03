@@ -1,6 +1,6 @@
 #!/bin/bash
 osmosis="/home/markus/Downloads/osmosis-0.39/bin/osmosis"
-input="/home/markus/Dokumente/GitHub/QeoDart/osm/map.osm"
+input="/home/markus/Dokumente/GitHub/QeoDart/osm/nordrhein-westfalen.osm.bz2"
 osmarender="/home/markus/Dokumente/OSM/osmarender/orp/orp.pl" #perl version
 
 function runosmosis {
@@ -8,6 +8,7 @@ function runosmosis {
 	local start=`date +%H:%M:%S`
 	echo `date +%H:%M:%S` creating test-merge.osm with places, borders, rivers
 	echo ------------------
+	
 	$osmosis \
 		--rx $input \
 		--tf reject-relations \
@@ -20,46 +21,128 @@ function runosmosis {
 		--used-node outPipe.0=border \
 		\
 		--rx $input \
+		--tf accept-relations waterway=riverbank \
+		--used-way --used-node outPipe.0=riverr \
+		\
+		--rx $input \
 		--tf reject-relations \
 		--tf accept-ways waterway=riverbank \
 		--used-node outPipe.0=river \
 		\
 		--merge inPipe.0=place inPipe.1=border outPipe.0=merg \
 		\
-		--merge inPipe.0=river inPipe.1=merg \
+		--merge inPipe.0=river inPipe.1=riverr outPipe.0=merg2 \
+		\
+		--merge inPipe.0=merg2 inPipe.1=merg \
 		--wx test-merge.osm
 	
 	echo ------------------
 	echo  $start-`date +%H:%M:%S` test-merge finished
 	echo ------------------
+	
+	
+# 	11:52:47 creating test-merge.osm with places, borders, rivers
+# 	11:52:47-12:09:51 test-merge finished
+	
 }
 
 function runosmarender {
 	echo ------------------
 	local start=`date +%H:%M:%S`
-	echo `date +%H:%M:%S` rendering places
+	echo `date +%H:%M:%S` rendering places.svg
 	echo ------------------
 	
 	perl $osmarender -r osm-map-features-dart.xml test-merge.osm
 	mv test-merge.svg places.svg
 	
 	echo ------------------
-	echo  $start-`date +%H:%M:%S` places finished
+	echo  $start-`date +%H:%M:%S` places.svg finished
 	echo ------------------
 	
 	
 	echo ------------------
 	local start=`date +%H:%M:%S`
-	echo `date +%H:%M:%S` rendering borders.xml
+	echo `date +%H:%M:%S` rendering borders.svg
 	echo ------------------
 	
 	perl $osmarender -r borders.xml test-merge.osm
 	mv test-merge.svg borders.svg
 	
 	echo ------------------
-	echo  $start-`date +%H:%M:%S` borders.xml finished
+	echo  $start-`date +%H:%M:%S` borders.svg finished
+	echo ------------------
+	
+	
+	echo ------------------
+	local start=`date +%H:%M:%S`
+	echo `date +%H:%M:%S` rendering rivers.svg
+	echo ------------------
+	
+	perl $osmarender -r rivers.xml test-merge.osm
+	mv test-merge.svg rivers.svg
+	
+	echo ------------------
+	echo  $start-`date +%H:%M:%S` rivers.svg finished
+	echo ------------------
+	
+	# ------------------
+	# 12:11:16 rendering places
+	# ------------------
+	# ------------------
+	# 12:11:16-12:11:36 places finished
+	# ------------------
+	# ------------------
+	# 12:11:36 rendering borders
+	# ------------------
+	# ------------------
+	# 12:11:36-12:11:56 borders finished
+	# ------------------
+	# ------------------
+	# 12:11:56 rendering rivers
+	# ------------------
+	# ------------------
+	# 12:11:56-12:12:15 rivers finished
+	# ------------------
+
+}
+
+function runinkscape {
+	echo ------------------
+	local start=`date +%H:%M:%S`
+	echo `date +%H:%M:%S` rendering borders.svg
+	echo ------------------
+	
+	inkscape borders.svg --export-png=borders.png -w1000 
+	
+	echo ------------------
+	echo  $start-`date +%H:%M:%S` borders.svg finished
+	echo ------------------
+	
+	
+	echo ------------------
+	local start=`date +%H:%M:%S`
+	echo `date +%H:%M:%S` rendering rivers.svg
+	echo ------------------
+	
+	inkscape rivers.svg --export-png=rivers.png -w1000 
+	
+	echo ------------------
+	echo  $start-`date +%H:%M:%S` rivers.svg finished
+	echo ------------------
+	
+	
+	echo ------------------
+	local start=`date +%H:%M:%S`
+	echo `date +%H:%M:%S` rendering background.svg
+	echo ------------------
+	
+	inkscape places.svg --export-png=background.png -w1000 
+	
+	echo ------------------
+	echo  $start-`date +%H:%M:%S` background.svg finished
 	echo ------------------
 }
 
 # runosmosis
 runosmarender
+runinkscape
