@@ -28,7 +28,7 @@ struct totalScore {
 };
 
 struct qcfCopyright {
-	QString fileCopyright, backgroundCopyright, elevationsCopyright, riversCopyright, bordersCopyright; 
+	QString fileCopyright, backgroundCopyright, elevationsCopyright, riversCopyright, bordersCopyright;
 };
 
 struct qcfFile {

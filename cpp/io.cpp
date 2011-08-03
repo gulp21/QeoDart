@@ -206,7 +206,7 @@ int io::iReadQcf(QString mapname) {
 				}
 				
 				if(newPlace.placeType.contains("state")) myDart->actionStates->setVisible(TRUE); // TODO count + show count
-				if(newPlace.placeType.contains("captialOfState")) myDart->actionCapitals_of_States->setVisible(TRUE);
+				if(newPlace.placeType.contains("capitalOfState")) myDart->actionCapitals_of_States->setVisible(TRUE);
 				if(newPlace.placeType.contains("country")) myDart->actionCountries->setVisible(TRUE);
 				if(newPlace.placeType.contains("capitalOfCountry")) myDart->actionCapitals_of_Countries->setVisible(TRUE);
 				if(newPlace.placeType.contains("county")) myDart->actionCounties->setVisible(TRUE);
@@ -268,7 +268,7 @@ void io::vFillCurrentTypePlaces() {
 	for(int i=0;i<max;i++) {
 		if(myDart->qlAllPlaces[i].placeType.contains(QRegExp(regexp))) {
 			myDart->qlCurrentTypePlaces.append(&(myDart->qlAllPlaces[i]));
-			qDebug() << myDart->qlAllPlaces[i].x << myDart->qlAllPlaces[i].y << myDart->qlAllPlaces[i].dimx << myDart->qlAllPlaces[i].dimy << myDart->qlAllPlaces[i].name << myDart->qlAllPlaces[i].placeType << regexp;
+//			qDebug() << myDart->qlAllPlaces[i].x << myDart->qlAllPlaces[i].y << myDart->qlAllPlaces[i].dimx << myDart->qlAllPlaces[i].dimy << myDart->qlAllPlaces[i].name << myDart->qlAllPlaces[i].placeType << regexp;
 		}
 	}
 	
@@ -362,7 +362,7 @@ int io::iReadOsm(QString filename) {
 	} // while(!in.atEnd())
 	
 	qcfFile f;
-	f.path="/home/markus/Dokumente/GitHub/QeoDart/osm/outtest";
+	f.path=QDir::homePath()+"/Dokumente/GitHub/QeoDart/osm/outtest";
 	iWriteQcf(places, f);
 	
 	return 0;

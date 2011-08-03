@@ -210,7 +210,7 @@ void dart::vTimeout() {
 void dart::vSetPlaceType() {
 	qsCurrentPlaceType="";
 	if(actionStates->isChecked()) qsCurrentPlaceType+="state;";
-	if(actionCapitals_of_States->isChecked()) qsCurrentPlaceType+="captialOfState;";
+	if(actionCapitals_of_States->isChecked()) qsCurrentPlaceType+="capitalOfState;";
 	if(actionCountries->isChecked()) qsCurrentPlaceType+="country;";
 	if(actionCapitals_of_Countries->isChecked()) qsCurrentPlaceType+="capitalOfCountry;";
 	if(actionCounties->isChecked()) qsCurrentPlaceType+="county;";
@@ -221,7 +221,7 @@ void dart::vSetPlaceType() {
 void dart::vSetPlaceType(QString placetype) {
 	qsCurrentPlaceType=placetype;
 	if(placetype.contains("state")) actionStates->setChecked(TRUE);
-	if(placetype.contains("captialOfState")) actionCapitals_of_States->setChecked(TRUE);
+	if(placetype.contains("capitalOfState")) actionCapitals_of_States->setChecked(TRUE);
 	if(placetype.contains("country")) actionCountries->setChecked(TRUE);
 	if(placetype.contains("capitalOfCountry")) actionCapitals_of_Countries->setChecked(TRUE);
 	if(placetype.contains("county")) actionCounties->setChecked(TRUE);
@@ -518,7 +518,7 @@ void dart::vShowComment() {
         }
 }
 
-void dart::vShowResultWindows() { // TODO all players
+void dart::vShowResultWindows() {
 	bAcceptingClickEvent=FALSE;
 	
 	for(int i=0,max=qlPlacesHistory.count(); i<max; i++) {

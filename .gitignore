@@ -8,3 +8,6 @@ ui*.h
 *.out
 .~lock*
 *-swp
+test.png
+osm/
+qcf/*test*

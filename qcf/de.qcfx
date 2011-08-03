@@ -1,10 +1,13 @@
 <!DOCTYPE QeoDartCoordinates>
 <coordinates version="0.2">
-<!-- This file is a part of QeoDart, released under the terms of the GNU General Public License.
-See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	<name default="Deutschland" de="Deutschland" en="Germany" la="Germania" />
 	<pxtokm value="1.438" />
-	<author name="gulp21" source="wikimedia commons?" licence="GPL" licence:background="CC?"/>
+	<author
+	copyright:file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
+	copyright:background="Portal der statistischen Ämter des Bundes und der Länder (DeStatis); David Liuzzo: CC-BY-SA-2.0-DE (derived from http://commons.wikimedia.org/wiki/File:Karte_Bundesrepublik_Deutschland.svg)"
+	copyright:borders="Portal der statistischen Ämter des Bundes und der Länder (DeStatis); David Liuzzo: CC-BY-SA-2.0-DE (derived from http://commons.wikimedia.org/wiki/File:Karte_Bundesrepublik_Deutschland.svg)"
+	copyright:rivers="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
+	/>
 	<!--.....state.....-->
 	<place
 	x="154" y="288" dimx="174" dimy="166"
@@ -118,7 +121,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Berlin"
 	name:en="Berlin"
 	name:la="Berolinum"
-	placetype="state;city;town;CapitalOfState;CapitalOfCountry"
+	placetype="state;city;town;capitalOfState;capitalOfCountry"
 	/>
 	<place
 	x="221" y="151" dimx="23" dimy="18"
@@ -126,7 +129,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Bremen"
 	name:en="Bremen"
 	name:la="Brema"
-	placetype="state;city;town;CapitalOfState"
+	placetype="state;city;town;capitalOfState"
 	/>
 	<place
 	x="279" y="116" dimx="27" dimy="28"
@@ -134,7 +137,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Hamburg"
 	name:en="Hamburg"
 	name:la="Hamburgum"
-	placetype="state;city;town;CapitalOfState"
+	placetype="state;city;town;capitalOfState"
 	/>
 	<!--.....CapitalOfState.....-->
 	<place
@@ -143,7 +146,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Düsseldorf"
 	name:en="Düsseldorf"
 	name:la="Dusseldorpium"
-	placetype="city;town;CapitalOfState"
+	placetype="city;town;capitalOfState"
 	/>
 	<place
 	x="266" y="210"
@@ -151,7 +154,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Hannover"
 	name:en="Hannover"
 	name:la="Hannovera"
-	placetype="city;town;CapitalOfState"
+	placetype="city;town;capitalOfState"
 	/>
 	<place
 	x="342" y="109"
@@ -159,7 +162,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Schwerin"
 	name:en="Schwerin"
 	name:la="Schwerinum"
-	placetype="town;CapitalOfState"
+	placetype="town;capitalOfState"
 	/>
 	<!--20-->
 	<place
@@ -168,7 +171,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Kiel"
 	name:en="Kiel"
 	name:la="Kielia"
-	placetype="city;town;CapitalOfState"
+	placetype="city;town;capitalOfState"
 	/>
 	<place
 	x="419" y="202"
@@ -176,7 +179,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Potsdam"
 	name:en="Potsdam"
 	name:la="Potestampium"
-	placetype="city;town;CapitalOfState"
+	placetype="city;town;capitalOfState"
 	/>
 	<place
 	x="355" y="225"
@@ -184,7 +187,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Magdeburg"
 	name:en="Magdeburg"
 	name:la="Magdeburgum"
-	placetype="city;town;CapitalOfState"
+	placetype="city;town;capitalOfState"
 	/>
 	<place
 	x="456" y="296"
@@ -192,7 +195,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Dresden"
 	name:en="Dresden"
 	name:la="Dresda"
-	placetype="city;town;CapitalOfState"
+	placetype="city;town;capitalOfState"
 	/>
 	<place
 	x="328" y="315"
@@ -200,7 +203,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Erfurt"
 	name:en="Erfurt"
 	name:la="Erfordia"
-	placetype="city;town;CapitalOfState"
+	placetype="city;town;capitalOfState"
 	/>
 	<place
 	x="192" y="382"
@@ -208,7 +211,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Wiesbaden"
 	name:en="Wiesbaden"
 	name:la="Aquae Mattiacae"
-	placetype="city;town;CapitalOfState"
+	placetype="city;town;capitalOfState"
 	/>
 	<place
 	x="191" y="393"
@@ -216,7 +219,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Mainz"
 	name:en="Mainz"
 	name:la="Moguntiacum"
-	placetype="city;town;CapitalOfState"
+	placetype="city;town;capitalOfState"
 	/>
 	<place
 	x="126" y="440"
@@ -224,7 +227,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Saarbrücken"
 	name:en="Saarbrücken"
 	name:la="Saravipontus"
-	placetype="city;town;CapitalOfState"
+	placetype="city;town;capitalOfState"
 	/>
 	<place
 	x="365" y="527"
@@ -232,7 +235,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="München"
 	name:en="Munich"
 	name:la="Mon&aacute;cum"
-	placetype="city;town;CapitalOfState"
+	placetype="city;town;capitalOfState"
 	/>
 	<place
 	x="240" y="486"
@@ -240,7 +243,7 @@ See QeoDart's About window for details or visit gulp21.bplaced.net/dart -->
 	name:de="Stuttgart"
 	name:en="Stuttgart"
 	name:la="Stutgardia"
-	placetype="city;town;CapitalOfState"
+	placetype="city;town;capitalOfState"
 	/>
 	<!--30-->
 	<!--  -52 -->
