@@ -1,8 +1,7 @@
 <!DOCTYPE QeoDartCoordinates>
 <coordinates version="0.2">
 	<name default="Europe" de="Europa" en="Europe" la="Europa" />
-	<pxtokm value="0.09847" /><!--UPDATE TODO padding  capials   support -1-->
-	?
+	<pxtokm value="10.06" />
 	<author
 	copyright:file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
 	copyright:background="Turkish Flame: CC-BY-SA-3.0 (derived from http://commons.wikimedia.org/wiki/File:Demographics_of_Europe.svg)"
@@ -10,247 +9,317 @@
 	/>
 	<!--.....states.....-->
 	<place
-	x="264" y="463" dimx="35" dimy="25"
+	x="268" y="349" dimx="62" dimy="83"
 	name="Deutschland"
 	name:de="Deutschland"
 	name:en="Germany"
+	placetype="country"
 	/>
 	<place
-	x="237" y="446" dimx="8" dimy="6"
+	x="236" y="336" dimx="24" dimy="26"
+	name="Nederland"
 	name:de="Niederlande"
 	name:en="Netherlands"
+	placetype="country"
 	/>
 	<place
-	x="229" y="464" dimx="10" dimy="10"
+	x="229" y="355" dimx="26" dimy="25"
 	name:de="Belgien"
 	name:en="Belgium"
+	placetype="country"
 	/>
 	<place
-	x="209" y="507" dimx="45" dimy="32"
+	x="208" y="395" dimx="93" dimy="94"
+	name="France"
 	name:de="Frankreich"
 	name:en="France"
+	placetype="country"
 	/>
 	<place
-	x="263" y="503" dimx="0" dimy="0"
+	x="262" y="392" dimx="2" dimy="4"
+	name="Liechtenstein"
 	name:de="Liechtenstein"
 	name:en="Liechtenstein"
+	placetype="country"
 	/>
 	<place
-	x="251" y="506" dimx="50" dimy="50"
+	x="252" y="396" dimx="34" dimy="22"
 	name:de="Schweiz"
 	name:en="Switzerland"
+	placetype="country"
 	/>
 	<place
-	x="267" y="407" dimx="17" dimy="14"
+	x="266" y="295" dimx="28" dimy="34"
+	name="Danmark"
 	name:de="Dänemark"
 	name:en="Denmark"
+	placetype="country"
 	/>
 	<place
-	x="292" y="500" dimx="10" dimy="20"
+	x="290" y="385" dimx="55" dimy="28"
 	name="Österreich"
 	name:de="Österreich"
 	name:en="Austria"
+	placetype="country"
 	/>
 	<place
-	x="301" y="472" dimx="10" dimy="22"
+	x="303" y="363" dimx="47" dimy="27"
 	name:de="Tschechien"
 	name:en="Czech Republic"
+	placetype="country"
 	/>
 	<!--10-->
 	<place
-	x="325" y="531" dimx="10" dimy="8"
+	x="324" y="423" dimx="31" dimy="27"
 	name:de="Bosnien und Herzegowina"
 	name:en="Bosnia-Herzegovina"
+	placetype="country"
 	/>
 	<place
-	x="198" y="548" dimx="1" dimy="1"
+	x="198" y="438" dimx="3" dimy="3"
 	name:de="Andorra"
 	name:en="Andorra"
+	placetype="country"
 	/>
 	<place
-	x="386" y="539" dimx="11" dimy="20"
+	x="385" y="427" dimx="48" dimy="37"
+	name="България"
 	name:de="Bulgarien"
 	name:en="Bulgaria"
+	placetype="country"
 	/>
 	<place
-	x="347" y="560" dimx="13" dimy="5"
+	x="348" y="451" dimx="17" dimy="32"
 	name:de="Albanien"
 	name:en="Albania"
+	placetype="country"
 	/>
 	<place
-	x="351" y="368" dimx="9" dimy="15"
+	x="348" y="259" dimx="35" dimy="23"
+	name="Eesti"
 	name:de="Estland"
 	name:en="Estonia"
+	placetype="country"
 	/>
 	<place
-	x="340" y="307" dimx="53" dimy="15"
+	x="338" y="193" dimx="63" dimy="113"
+	name="Suomi"
 	name:de="Finnland"
 	name:en="Finland"
+	placetype="country"
 	/>
 	<place
-	x="374" y="579" dimx="22" dimy="17"
+	x="380" y="473" dimx="61" dimy="75"
+	name="Ελλάδα"
 	name:de="Griechenland"
 	name:en="Greece"
+	placetype="country"
 	/>
 	<place
-	x="150" y="426" dimx="14" dimy="13"
+	x="147" y="309" dimx="31" dimy="37"
+	name="Éire"
 	name:de="Irland"
 	name:en="Ireland"
+	placetype="country"
 	/>
 	<place
-	x="137" y="285" dimx="21" dimy="17"
+	x="138" y="169" dimx="47" dimy="39"
+	name="Ísland"
 	name:de="Island"
 	name:en="Iceland"
+	placetype="country"
 	/>
 	<place
-	x="287" y="556" dimx="55" dimy="43"
+	x="288" y="448" dimx="97" dimy="110"
+	name="Italia"
 	name:de="Italien"
 	name:en="Italy"
+	placetype="country"
 	/>
 	<!--20-->
 	<place
-	x="580" y="371" dimx="90" dimy="60"
+	x="569" y="251" dimx="121" dimy="202"
+	name="Қазақстан"
 	name:de="Kasachstan"
 	name:en="Kazakhstan"
+	placetype="country"
 	/>
 	<place
-	x="352" y="545" dimx="6" dimy="6"
+	x="352" y="434" dimx="15" dimy="13"
 	name:de="Kosovo"
 	name:en="Kosovo"
+	placetype="country"
 	/>
 	<place
-	x="311" y="520" dimx="20" dimy="20"
+	x="311" y="410" dimx="41" dimy="34"
+	name="Hrvatska"
 	name:de="Kroatien"
 	name:en="Croatia"
+	placetype="country"
 	/>
 	<place
-	x="349" y="386" dimx="7" dimy="17"
+	x="351" y="278" dimx="43" dimy="26"
+	name="Latvija"
 	name:de="Lettland"
 	name:en="Latvia"
+	placetype="country"
 	/>
 	<place
-	x="348" y="406" dimx="11" dimy="15"
+	x="349" y="297" dimx="36" dimy="28"
+	name="Lietuva"
 	name:de="Litauen"
 	name:en="Lithuania"
+	placetype="country"
 	/>
 	<place
-	x="238" y="473" dimx="2" dimy="2"
+	x="238" y="362" dimx="7" dimy="8"
 	name:de="Luxemburg"
 	name:en="Luxembourg"
+	placetype="country"
 	/>
 	<place
-	x="301" y="621" dimx="0" dimy="0"
+	x="303" y="510" dimx="3" dimy="4"
 	name:de="Malta"
 	name:en="Malta"
+	placetype="country"
 	/>
 	<place
-	x="359" y="555" dimx="7" dimy="9"
+	x="360" y="444" dimx="20" dimy="18"
 	name:de="Mazedonien"
-	name:en="Macedonia"
+	name:en="Republic of Macedonia"
+	placetype="country"
 	/>
 	<place
-	x="400" y="485" dimx="14" dimy="9"
+	x="398" y="377" dimx="29" dimy="31"
 	name:de="Moldawien"
 	name:en="Moldova"
+	placetype="country"
 	/>
 	<place
-	x="246" y="538" dimx="0" dimy="0"
+	x="244" y="427" dimx="0" dimy="0"
 	name:de="Monaco"
 	name:en="Monaco"
+	placetype="country"
 	/>
 	<!--30-->
 	<place
-	x="338" y="544" dimx="7" dimy="7"
+	x="339" y="434" dimx="14" dimy="19"
 	name:de="Montenegro"
 	name:en="Montenegro"
+	placetype="country"
 	/>
 	<place
-	x="275" y="311" dimx="80" dimy="45"
+	x="280" y="200" dimx="87" dimy="148"
 	name:de="Norwegen"
 	name:en="Norway"
+	placetype="country"
 	/>
 	<place
-	x="326" y="446" dimx="26" dimy="30"
+	x="327" y="336" dimx="71" dimy="60"
+	name="Polska"
 	name:de="Polen"
 	name:en="Poland"
+	placetype="country"
 	/>
 	<place
-	x="115" y="564" dimx="24" dimy="10"
+	x="118" y="455" dimx="35" dimy="56"
 	name:de="Portugal"
 	name:en="Portugal"
+	placetype="country"
 	/>
 	<place
-	x="377" y="505" dimx="24" dimy="31"
+	x="378" y="393" dimx="72" dimy="54"
+	name="România"
 	name:de="Rumänien"
 	name:en="Romania"
+	placetype="country"
 	/>
 	<place
-	x="473" y="331" dimx="160" dimy="120"
+	x="468" y="225" dimx="262" dimy="318"
+	name="Россия"
 	name:de="Russland"
 	name:en="Russia"
+	placetype="country"
 	/>
 	<place
-	x="284" y="535" dimx="0" dimy="0"
+	x="284" y="426" dimx="0" dimy="0"
 	name:de="San Marino"
 	name:en="San Marino"
+	placetype="country"
 	/>
 	<place
-	x="296" y="336" dimx="75" dimy="15"
+	x="300" y="228" dimx="65" dimy="151"
 	name:de="Schweden"
 	name:en="Sweden"
+	placetype="country"
 	/>
 	<place
-	x="347" y="528" dimx="20" dimy="13"
+	x="350" y="418" dimx="68" dimy="41"
+	name="Србија"
 	name:de="Serbien"
 	name:en="Serbia"
+	placetype="country"
 	/>
 	<place
-	x="333" y="481" dimx="8" dimy="20"
+	x="334" y="371" dimx="42" dimy="23"
+	name="Slovensko"
 	name:de="Slowakei"
 	name:en="Slovakia"
+	placetype="country"
 	/>
 	<!--40-->
 	<place
-	x="301" y="513" dimx="5" dimy="11"
+	x="302" y="401" dimx="23" dimy="17"
+	name="Slovenija"
 	name:de="Slowenien"
 	name:en="Slovenia"
+	placetype="country"
 	/>
 	<place
-	x="155" y="570" dimx="35" dimy="35"
+	x="163" y="454" dimx="98" dimy="86"
 	name:de="Spanien"
 	name:en="Spain"
+	placetype="country"
 	/>
 	<place
-	x="471" y="554" dimx="40" dimy="75"
+	x="474" y="439" dimx="158" dimy="94"
 	name:de="Türkei"
 	name:en="Turkey"
+	placetype="country"
 	/>
 	<place
-	x="411" y="458" dimx="30" dimy="58"
+	x="412" y="352" dimx="126" dimy="86"
+	name="Україна"
 	name:de="Ukraine"
 	name:en="Ukraine"
+	placetype="country"
 	/>
 	<place
-	x="333" y="500" dimx="13" dimy="20"
+	x="334" y="387" dimx="47" dimy="34"
+	name="Magyarország"
 	name:de="Ungarn"
 	name:en="Hungary"
-	/>					<!-- genauer erfassen -->
+	placetype="country"
+	/>
 	<place
-	x="282" y="553" dimx="0" dimy="0"
+	x="285" y="447" dimx="0" dimy="0"
 	name:de="Vatikanstadt"
 	name:en="Vatican City"
+	placetype="country"
 	/>
 	<place
-	x="185" y="418" dimx="45" dimy="25"
+	x="183" y="303" dimx="60" dimy="96"
 	name="United Kingdom"
 	name:de="Vereinigtes Königreich"
-	name:en="Vereinigtes Königreich"
+	name:en="United Kingdom"
+	placetype="country"
 	/>
 	<place
-	x="377" y="420" dimx="25" dimy="28"
+	x="380" y="308" dimx="58" dimy="56"
+	name="Беларусь"
 	name:de="Weißrussland"
 	name:en="Belarus"
+	placetype="country"
 	/>
 	<!--48-->
-	<!-- -0 -52 -->
 </coordinates>

@@ -100,7 +100,13 @@ QString io::qsGetMapName(QDomDocument &doc) { // TODO read complete meta data
 		QDomElement e = n.toElement();
 		if(!e.isNull()) {
 			if(e.tagName()=="name") {
-				return e.attribute("default","NONAME"); // TODO lang through setting
+				QString n="NONAME";
+				for(int i=0; i<myDart->qlPreferedQcfLanguage.count() && n=="NONAME"; i++) {
+					if(e.attribute(myDart->qlPreferedQcfLanguage[i],"NONAME")!="NONAME") {
+						n=e.attribute(myDart->qlPreferedQcfLanguage[i],"NONAME");
+					}
+				}
+				return n;
 			}
 		} else {
 			qDebug() << "[W] file has broken <name>";
@@ -178,7 +184,7 @@ int io::iReadQcf(QString mapname) {
 				
 				myDart->dPxToKm=e.attribute("value","-1").toDouble();
 				if(myDart->dPxToKm==-1) {
-					qDebug() << "[W] pxtokm is unset, using fallback 1";
+					qDebug() << "[W] pxtokm is unset, using fallback 1"; // TODO support -1
 					myDart->dPxToKm=1;
 				}
 				
@@ -191,7 +197,15 @@ int io::iReadQcf(QString mapname) {
 				newPlace.y=e.attribute("y","-1").toInt();
 				newPlace.dimx=e.attribute("dimx","0").toInt();
 				newPlace.dimy=e.attribute("dimy","0").toInt();
-				newPlace.name=e.attribute("name","NONAME");
+				newPlace.name="NONAME";
+				for(int i=0; i<myDart->qlPreferedQcfLanguage.count() && newPlace.name=="NONAME"; i++) {
+					if(myDart->qlPreferedQcfLanguage[i]=="default") {
+						if(e.attribute("name","NONAME")!="NONAME")
+							newPlace.name=e.attribute("name","NONAME");
+					} else if(e.attribute("name:"+myDart->qlPreferedQcfLanguage[i],"NONAME")!="NONAME") {
+						newPlace.name=e.attribute("name:"+myDart->qlPreferedQcfLanguage[i],"NONAME");
+					}
+				}
 				newPlace.placeType=e.attribute("placetype","");
 				myDart->qlAllPlaces.append(newPlace);
 				
@@ -273,9 +287,11 @@ void io::vFillCurrentTypePlaces() {
 	}
 	
 	if(myDart->qlCurrentTypePlaces.count()==0) {
-		qDebug() << "[i] there is no place for placetype" << myDart->qsCurrentPlaceType; // TODO can this happan at all?
+		qDebug() << "[I] there is no place for placetype" << myDart->qsCurrentPlaceType; // TODO can this happan at all?
 		qDebug() << "    falling back to everything";
 		myDart->vSetPlaceType("");
+	} else {
+		qDebug() << "[i] found" << myDart->qlCurrentTypePlaces.count() << "places for current place type";
 	}
 }
 

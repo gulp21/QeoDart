@@ -64,8 +64,9 @@ Q_OBJECT
 		QList<QLabel*> qlPointLabels;
 		QList<QString> qlImageLayers;
 		QList<QLabel*> qlMapLayers;
+		QList<QString> qlPreferedQcfLanguage;
                 
-                bool bAgainstTime;
+                bool bAgainstTime, bResetCursor;
 
 		double dZoomFactor, dPxToKm;
 		

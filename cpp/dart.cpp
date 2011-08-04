@@ -42,7 +42,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iPlaceCount=0;
 	iCurrentPlayer=0;
 	iAskForMode=enPositions;
-	iNumberOfPlayers=1; // TODO we shouldn't change it in training mode (iNumberOfPlayersTrainingCache)
+	iNumberOfPlayers=2; // TODO we shouldn't change it in training mode (iNumberOfPlayersTrainingCache)
 	qsCurrentPlaceType="city;state";
 	bAcceptingClickEvent=TRUE;
 	dPxToKm=1;
@@ -52,6 +52,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
         bAgainstTime=FALSE;
         iMaxTime=20;
         iGameMode=enLocal;
+	qlPreferedQcfLanguage << "de" << "en" << "default";
+	bResetCursor=TRUE;
         
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
@@ -102,10 +104,10 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 //	actionName_of_Place->setIcon(QIcon::fromTheme("user-identity"));
 	connect(actionPosition_of_Place,SIGNAL (triggered()), this, SLOT(vSetAskForMode()));
 //	actionPosition_of_Place->setIcon(QIcon::fromTheme("user-identity"));
-	connect(actionStates,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
-	connect(actionCapitals_of_States,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionCountries,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionCapitals_of_Countries,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionStates,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionCapitals_of_States,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionCounties,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionCyties,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionTowns,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
@@ -124,7 +126,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	if(clIO->iReadQcf(qlQcfxFiles[iCurrentQcf].mapName)!=0) {
 		exit(-1);
 	}
-	for(int i=qlQcfxFiles.count()-1; i>-1; i--) {
+	for(int i=0; i<qlQcfxFiles.count(); i++) {
 		QAction *menuItem;
 		menuItem = new QAction(QIcon("TODO BACKGROUND"), qlQcfxFiles[i].mapName, this);
 		menuItem->setStatusTip(QString(tr("Load map %1")).arg(qlQcfxFiles[i].mapName));
@@ -209,10 +211,10 @@ void dart::vTimeout() {
 
 void dart::vSetPlaceType() {
 	qsCurrentPlaceType="";
-	if(actionStates->isChecked()) qsCurrentPlaceType+="state;";
-	if(actionCapitals_of_States->isChecked()) qsCurrentPlaceType+="capitalOfState;";
 	if(actionCountries->isChecked()) qsCurrentPlaceType+="country;";
 	if(actionCapitals_of_Countries->isChecked()) qsCurrentPlaceType+="capitalOfCountry;";
+	if(actionStates->isChecked()) qsCurrentPlaceType+="state;";
+	if(actionCapitals_of_States->isChecked()) qsCurrentPlaceType+="capitalOfState;";
 	if(actionCounties->isChecked()) qsCurrentPlaceType+="county;";
 	if(actionCyties->isChecked()) qsCurrentPlaceType+="city;";
 	if(actionTowns->isChecked()) qsCurrentPlaceType+="town;";
@@ -220,10 +222,10 @@ void dart::vSetPlaceType() {
 }
 void dart::vSetPlaceType(QString placetype) {
 	qsCurrentPlaceType=placetype;
-	if(placetype.contains("state")) actionStates->setChecked(TRUE);
-	if(placetype.contains("capitalOfState")) actionCapitals_of_States->setChecked(TRUE);
 	if(placetype.contains("country")) actionCountries->setChecked(TRUE);
 	if(placetype.contains("capitalOfCountry")) actionCapitals_of_Countries->setChecked(TRUE);
+	if(placetype.contains("state")) actionStates->setChecked(TRUE);
+	if(placetype.contains("capitalOfState")) actionCapitals_of_States->setChecked(TRUE);
 	if(placetype.contains("county")) actionCounties->setChecked(TRUE);
 	if(placetype.contains("city")) actionCyties->setChecked(TRUE);
 	if(placetype.contains("town")) actionTowns->setChecked(TRUE);
@@ -466,6 +468,9 @@ void dart::vMouseClickEvent(int x, int y) {
 	if(iCurrentPlayer<iNumberOfPlayers-1) { // next player
 		
 		mySleep(iDelayBeforeNextPlayer);
+		
+		if(bResetCursor) QCursor::setPos(QWidget::x()+5,QWidget::y()+iPaddingTop+iMarginTop);
+		
 		iCurrentPlayer++;
 		vRemoveAllCircles();
 		qDebug()<<"f";
