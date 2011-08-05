@@ -8,6 +8,7 @@ See main.cpp for details. */
 #include <qlist.h>
 #include <QLabel>
 #include <QMessageBox>
+#include <QToolButton>
 #include "ui_mainWindow.h"
 
 #ifndef DART_HPP
@@ -102,6 +103,12 @@ Q_OBJECT
 		QLabel *lblMouseClickOverlay;
                 
                 QTimer *timer;
+		
+		QActionGroup *agGameMode, *agAskForMode, *agMap;
+		
+		QToolButton *btMap, *btGameMode, *btAskForMode, *btPlaceType, *btView;
+		
+		QMenu *menuPlace_Number;
 		
 		void closeEvent(QCloseEvent *event);
 		void resizeEvent(QResizeEvent *event);
