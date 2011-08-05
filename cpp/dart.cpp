@@ -128,6 +128,9 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	connect(lineEdit,SIGNAL (returnPressed()), this, SLOT(vReturnPressedEvent()));
 	
+	
+	menubar->hide(); // TODO: allow: menubar+toolbar; menubar only; toolbar only
+	
 	QToolButton *btGame = new QToolButton(this);
 	btGame->setMenu(menuGame);
 	btGame->setPopupMode(QToolButton::InstantPopup);

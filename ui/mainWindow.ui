@@ -170,7 +170,7 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuGame">
@@ -180,10 +180,10 @@
     <addaction name="actionNew_Game"/>
     <addaction name="actionHigh_Score_List"/>
     <addaction name="actionFind_Place"/>
+    <addaction name="separator"/>
     <addaction name="actionSettings"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
-    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -191,7 +191,7 @@
     </property>
     <addaction name="actionAbout_Qt"/>
    </widget>
-   <widget class="QMenu" name="menuSettings_2">
+   <widget class="QMenu" name="menuSettings">
     <property name="title">
      <string>Settings</string>
     </property>
@@ -241,7 +241,7 @@
     <addaction name="menuPlaceType"/>
    </widget>
    <addaction name="menuGame"/>
-   <addaction name="menuSettings_2"/>
+   <addaction name="menuSettings"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
@@ -269,8 +269,6 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionNew_Game"/>
-   <addaction name="separator"/>
   </widget>
   <action name="actionNew_Game">
    <property name="text">
