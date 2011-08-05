@@ -150,6 +150,19 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="lblAd">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>190</y>
+      <width>49</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ad</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -160,54 +173,28 @@
      <height>20</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuSpiel">
+   <widget class="QMenu" name="menuGame">
     <property name="title">
      <string>Game</string>
     </property>
     <addaction name="actionNew_Game"/>
     <addaction name="actionHigh_Score_List"/>
     <addaction name="actionFind_Place"/>
+    <addaction name="actionSettings"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
+    <addaction name="separator"/>
    </widget>
-   <widget class="QMenu" name="menuEinstellungen">
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout_Qt"/>
+   </widget>
+   <widget class="QMenu" name="menuSettings_2">
     <property name="title">
      <string>Settings</string>
     </property>
-    <widget class="QMenu" name="menuSettings">
-     <property name="title">
-      <string>Settings…</string>
-     </property>
-    </widget>
-    <widget class="QMenu" name="menuGame_Mode">
-     <property name="title">
-      <string>Game Mode</string>
-     </property>
-     <addaction name="actionTraining"/>
-     <addaction name="actionLocal"/>
-    </widget>
-    <widget class="QMenu" name="menuAsk_for">
-     <property name="title">
-      <string>Ask for</string>
-     </property>
-     <widget class="QMenu" name="menuPlace_Number">
-      <property name="title">
-       <string>Place Number</string>
-      </property>
-      <addaction name="action1_20"/>
-     </widget>
-     <addaction name="actionPosition_of_Place"/>
-     <addaction name="actionName_of_Place"/>
-     <addaction name="separator"/>
-     <addaction name="actionCountries"/>
-     <addaction name="actionCapitals_of_Countries"/>
-     <addaction name="actionStates"/>
-     <addaction name="actionCapitals_of_States"/>
-     <addaction name="actionCounties"/>
-     <addaction name="actionCyties"/>
-     <addaction name="actionTowns"/>
-     <addaction name="menuPlace_Number"/>
-    </widget>
     <widget class="QMenu" name="menuView">
      <property name="title">
       <string>View</string>
@@ -215,27 +202,47 @@
      <addaction name="separator"/>
      <addaction name="action100"/>
     </widget>
+    <widget class="QMenu" name="menuGameMode">
+     <property name="title">
+      <string>Game Mode</string>
+     </property>
+     <addaction name="actionTraining"/>
+     <addaction name="actionLocal"/>
+    </widget>
     <widget class="QMenu" name="menuMap">
      <property name="title">
       <string>Map</string>
      </property>
      <addaction name="actionAdd_Map"/>
     </widget>
-    <addaction name="menuSettings"/>
-    <addaction name="menuGame_Mode"/>
-    <addaction name="menuAsk_for"/>
+    <widget class="QMenu" name="menuAskForMode">
+     <property name="title">
+      <string>Ask for mode</string>
+     </property>
+     <addaction name="actionPosition_of_Place"/>
+     <addaction name="actionName_of_Place"/>
+    </widget>
+    <widget class="QMenu" name="menuPlaceType">
+     <property name="title">
+      <string>Place Type</string>
+     </property>
+     <addaction name="actionCountries"/>
+     <addaction name="actionCapitals_of_Countries"/>
+     <addaction name="actionStates"/>
+     <addaction name="actionCapitals_of_States"/>
+     <addaction name="actionCounties"/>
+     <addaction name="actionCyties"/>
+     <addaction name="actionTowns"/>
+    </widget>
+    <addaction name="menuGameMode"/>
     <addaction name="menuView"/>
     <addaction name="menuMap"/>
+    <addaction name="menuAskForMode"/>
+    <addaction name="menuPlaceType"/>
    </widget>
-   <widget class="QMenu" name="menuHilfe">
-    <property name="title">
-     <string>Help</string>
-    </property>
-    <addaction name="actionAbout_Qt"/>
-   </widget>
-   <addaction name="menuSpiel"/>
-   <addaction name="menuEinstellungen"/>
-   <addaction name="menuHilfe"/>
+   <addaction name="menuGame"/>
+   <addaction name="menuSettings_2"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
@@ -264,16 +271,10 @@
    </attribute>
    <addaction name="actionNew_Game"/>
    <addaction name="separator"/>
-   <addaction name="action100"/>
-   <addaction name="actionTraining"/>
-   <addaction name="actionLocal"/>
-   <addaction name="actionName_of_Place"/>
-   <addaction name="actionPosition_of_Place"/>
-   <addaction name="actionAd"/>
   </widget>
   <action name="actionNew_Game">
    <property name="text">
-    <string>New &amp;Game?</string>
+    <string>New &amp;Game</string>
    </property>
   </action>
   <action name="actionQuit">
@@ -292,11 +293,17 @@
    </property>
   </action>
   <action name="actionPosition_of_Place">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Position of Place</string>
    </property>
   </action>
   <action name="actionName_of_Place">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Name of Place</string>
    </property>
@@ -314,33 +321,25 @@
     <string>About Qt</string>
    </property>
   </action>
-  <action name="actionAd">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Free Download: https://github.com/gulp21/qeodart</string>
-   </property>
-   <property name="font">
-    <font>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-  </action>
   <action name="action100">
    <property name="text">
     <string>100%</string>
    </property>
   </action>
   <action name="actionTraining">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Training</string>
    </property>
   </action>
   <action name="actionLocal">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
-    <string>Local RADIO</string>
+    <string>Local</string>
    </property>
    <property name="toolTip">
     <string>Local</string>
@@ -349,14 +348,6 @@
   <action name="actionAdd_Map">
    <property name="text">
     <string>Add Map…</string>
-   </property>
-  </action>
-  <action name="actionTowns">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Towns</string>
    </property>
   </action>
   <action name="actionCounties">
@@ -405,6 +396,24 @@
    </property>
    <property name="text">
     <string>Capitals of Countries</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings…</string>
+   </property>
+  </action>
+  <action name="actionAsd">
+   <property name="text">
+    <string>asd</string>
+   </property>
+  </action>
+  <action name="actionTowns">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Towns</string>
    </property>
   </action>
  </widget>

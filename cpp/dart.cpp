@@ -38,7 +38,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iPaddingTop=0;
 	iMarginTop=0;
 	dZoomFactor=1;
-	iMaxPlaceCount=10;
+	iMaxPlaceCount=2;
 	iPlaceCount=0;
 	iCurrentPlayer=0;
 	iAskForMode=enPositions;
@@ -88,6 +88,20 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	lblMouseClickOverlay->setGeometry(0, 0, iGetWindowSize(), iGetWindowSize());
 	//lblMouseClickOverlay->setCursor(QCursor(QPixmap("test.png"),1,1)); TODO
 	
+	agGameMode = new QActionGroup(this);
+	agGameMode->addAction(actionTraining);
+	agGameMode->addAction(actionLocal);
+//	agGameMode->addAction(actionNetwork);
+	actionLocal->setChecked(true);
+	
+	agAskForMode = new QActionGroup(this);
+	agAskForMode->addAction(actionPosition_of_Place);
+	agAskForMode->addAction(actionName_of_Place);
+	actionName_of_Place->setChecked(true);
+	
+	
+	actionHigh_Score_List->setIcon(QIcon::fromTheme("games-highscores"));
+	actionSettings->setIcon(QIcon::fromTheme("configure"));
 	connect(actionQuit,SIGNAL (triggered()), this, SLOT(vClose()));
 	actionQuit->setIcon(QIcon::fromTheme("application-exit"));
 	connect(actionNew_Game,SIGNAL (triggered()), this, SLOT(vNewGame()));
@@ -115,33 +129,86 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	connect(lineEdit,SIGNAL (returnPressed()), this, SLOT(vReturnPressedEvent()));
 	
+	QToolButton *btGame = new QToolButton(this);
+	btGame->setMenu(menuGame);
+	btGame->setPopupMode(QToolButton::InstantPopup);
+	btGame->setText(tr("Game"));
+	toolBar->addWidget(btGame);
+	
+	btGameMode = new QToolButton(toolBar);
+	btGameMode->setMenu(menuGameMode);
+	btGameMode->setPopupMode(QToolButton::InstantPopup);
+	btGameMode->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+	toolBar->addWidget(btGameMode);
+	
+	btAskForMode = new QToolButton(toolBar);
+	btAskForMode->setMenu(menuAskForMode);
+	btAskForMode->setPopupMode(QToolButton::InstantPopup);
+	btAskForMode->setToolButtonStyle(Qt::ToolButtonTextOnly);
+	toolBar->addWidget(btAskForMode);
+	
+	menuPlace_Number = new QMenu(this);
+	menuPlaceType->addMenu(menuPlace_Number);
+	btPlaceType = new QToolButton(toolBar);
+	btPlaceType->setMenu(menuPlaceType);
+	btPlaceType->setPopupMode(QToolButton::InstantPopup);
+	btPlaceType->setToolButtonStyle(Qt::ToolButtonTextOnly);
+	btPlaceType->setText(tr("Place Types"));
+	toolBar->addWidget(btPlaceType);
+	
+	btMap = new QToolButton(toolBar);
+	btMap->setMenu(menuMap);
+	btMap->setPopupMode(QToolButton::InstantPopup);
+	btMap->setToolButtonStyle(Qt::ToolButtonTextOnly);
+	toolBar->addWidget(btMap);
+	
+	btView = new QToolButton(toolBar);
+	btView->setMenu(menuView);
+	btView->setPopupMode(QToolButton::InstantPopup);
+	btView->setToolButtonStyle(Qt::ToolButtonTextOnly);
+	btView->setText(tr("View"));
+	toolBar->addWidget(btView);
+	
+	
 	if(clIO->iFindQcf()==0) {
 		qDebug() << "[E] No valid qcfx files found, exiting";
 		QMessageBox msgBox;
 		msgBox.setText(tr("Sorry, no valid qcfx files could be found."));
-		msgBox.setInformativeText(tr("You might want to add a file through Maps → Add map")); // TODO crash
+		msgBox.setInformativeText(tr("You might want to add a file through Maps → Add map")); // TODO
 		msgBox.setIcon(QMessageBox::Warning);
 		msgBox.exec();
 	}
-	if(clIO->iReadQcf(qlQcfxFiles[iCurrentQcf].mapName)!=0) {
-		exit(-1);
-	}
+	
+	agMap = new QActionGroup(this);
 	for(int i=0; i<qlQcfxFiles.count(); i++) {
 		QAction *menuItem;
-		menuItem = new QAction(QIcon("TODO BACKGROUND"), qlQcfxFiles[i].mapName, this);
-		menuItem->setStatusTip(QString(tr("Load map %1")).arg(qlQcfxFiles[i].mapName));
+		menuItem = new QAction(QIcon(qlQcfxFiles[i].path+"/background.png"), qlQcfxFiles[i].mapName, this);
+		menuItem->setToolTip(QString(tr("Load map of %1")).arg(qlQcfxFiles[i].mapName));
+		menuItem->setCheckable(TRUE);
 		connect(menuItem, SIGNAL(triggered()), this, SLOT(vReadQcf()));
 		menuMap->addAction(menuItem);
+		agMap->addAction(menuItem);
+		if(i==0) menuItem->trigger(); // TODO setting
 	}
-	
-	show();
+	menuMap->addSeparator();
+	menuMap->addAction(actionAdd_Map);
 	
 	gridLayout->setSpacing(1);
 	
 	vSetPlaceType(qsCurrentPlaceType);
 	vSetAgainstTime(bAgainstTime);
-	vSetGameMode(iGameMode);
-	vSetAskForMode(iAskForMode);
+	switch(iGameMode) {
+		case enTraining:
+			actionTraining->trigger(); break;
+		case enLocal:
+		        actionLocal->trigger(); break;
+	}
+	switch(iAskForMode) {
+		case enNames:
+			actionName_of_Place->trigger(); break;
+		case enPositions:
+		        actionPosition_of_Place->trigger(); break;
+	}
 	
 	vRepaintCommonLabels();
 	vRepaintPlayerLabels();
@@ -151,7 +218,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	vResize(1); // TODO saved value?
 	
-//	clIO->iReadOsm("osm/places.svg");exit(0);
+	show();
+	
 }
 
 dart::~dart(){
@@ -626,7 +694,7 @@ QColor dart::qcGetColorOfPlayer(int player) {
 }
 
 void dart::vSetGameMode() {
-	if(iPlaceCount!=1 && iGameMode!=enTraining) {
+	if( (iPlaceCount>1 || iCurrentPlayer!=0) && iGameMode!=enTraining) {
 		QMessageBox msgBox;
 		msgBox.setWindowTitle(tr("Chance Game Mode"));
 		msgBox.setText(tr("When you change the game mode, your current score will be lost.\nDo you want to continue?"));
@@ -634,6 +702,10 @@ void dart::vSetGameMode() {
 		msgBox.setDefaultButton(QMessageBox::Cancel);
 		if(msgBox.exec()==QMessageBox::Cancel) return;
 	}
+	
+	btGameMode->setText(QString("%1").arg(static_cast<QAction*>(QObject::sender())->text()));
+	btGameMode->setIcon(static_cast<QAction*>(QObject::sender())->icon());
+	
 	if(QObject::sender()==actionTraining) {
 		vSetGameMode(enTraining);
 	} else if(QObject::sender()==actionLocal) {
@@ -676,7 +748,7 @@ void dart::vSetGameMode(enGameModes mode) {
 }
 
 void dart::vSetAskForMode() {
-	if(iPlaceCount!=1 && iGameMode!=enTraining) {
+	if( (iPlaceCount>1 || iCurrentPlayer!=0) && iGameMode!=enTraining) {
 		QMessageBox msgBox;
 		msgBox.setWindowTitle(tr("Chance Mode"));
 		msgBox.setText(tr("When you change this setting, your current score will be lost.\nDo you want to continue?"));
@@ -684,6 +756,9 @@ void dart::vSetAskForMode() {
 		msgBox.setDefaultButton(QMessageBox::Cancel);
 		if(msgBox.exec()==QMessageBox::Cancel) return;
 	}
+	
+	btAskForMode->setText(QString(tr("Ask for: %1").arg(static_cast<QAction*>(QObject::sender())->text())));
+	
 	if(QObject::sender()==actionName_of_Place) {
 		vSetAskForMode(enNames);
 	} else if(QObject::sender()==actionPosition_of_Place) {
@@ -692,7 +767,6 @@ void dart::vSetAskForMode() {
 		qDebug() << "[E] vSetAskForMode: unknown sender";
 	}
 }
-
 void dart::vSetAskForMode(enAskForModes mode) {
 	iAskForMode=mode;
 	
@@ -736,6 +810,15 @@ void dart::vResetForNewGame() {
 }
 
 void dart::vNewGame() {
+	if( (iPlaceCount>1 || iCurrentPlayer!=0) && iGameMode!=enTraining) {
+		QMessageBox msgBox;
+		msgBox.setWindowTitle(tr("New Game"));
+		msgBox.setText(tr("When you start a new game, your current score will be lost.\nDo you want to continue?"));
+		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+		msgBox.setDefaultButton(QMessageBox::Cancel);
+		if(msgBox.exec()==QMessageBox::Cancel) return;
+	}
+	
 	vSetNumberOfPlayers(iNumberOfPlayers);
 	vSetGameMode(iGameMode);
 }
@@ -1084,7 +1167,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 }
 
 void dart::vReadQcf() {
-	if(iPlaceCount!=1) {
+	if(iPlaceCount>1 || iCurrentPlayer!=0) {
 		QMessageBox msgBox;
 		msgBox.setWindowTitle(tr("Chance Map"));
 		msgBox.setText(tr("When you change the map, your current score will be lost.\nDo you want to continue?"));
@@ -1092,7 +1175,10 @@ void dart::vReadQcf() {
 		msgBox.setDefaultButton(QMessageBox::Cancel);
 		if(msgBox.exec()==QMessageBox::Cancel) return;
 	}
+	
 	clIO->iReadQcf(static_cast<QAction*>(QObject::sender())->text());
+	
+	btMap->setText(QString(tr("Map: %1")).arg(static_cast<QAction*>(QObject::sender())->text()));
 	
 	vRepaintMap();
 	vResetForNewGame();
