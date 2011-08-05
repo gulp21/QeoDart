@@ -38,7 +38,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iPaddingTop=0;
 	iMarginTop=0;
 	dZoomFactor=1;
-	iMaxPlaceCount=10;
+	iMaxPlaceCount=2;
 	iPlaceCount=0;
 	iCurrentPlayer=0;
 	iAskForMode=enPositions;
@@ -49,7 +49,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iCurrentQcf=0;
 	iScoreAreaMode=1;
 	iTrainingPlaceNumber=-1;
-        bAgainstTime=FALSE;
+        bAgainstTime=TRUE;
         iMaxTime=20;
         iGameMode=enLocal;
 	qlPreferedQcfLanguage << "de" << "en" << "default";
@@ -70,7 +70,6 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 
 	setupUi(this);
 	toolBar->setMovable(FALSE);
-	iMarginTop=toolBar->height()+menubar->height(); //TODO put it in a suitable function
 	
 	for(int i=0; i<4; i++) {
 		QLabel *lblMap = new QLabel(this);
@@ -157,7 +156,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 dart::~dart(){
 	vRemoveAllCircles();
 	vRemoveAllCommonPoints();
-	vSetNumberOfPlayers(0);
+	//vSetNumberOfPlayers(0); // QGridLayout: Cannot add QLabel/lblTime to QGridLayout/gridLayout at row -1 column 4
         timer->stop();
         delete timer;
         delete clIO;
@@ -340,13 +339,14 @@ void dart::resizeEvent(QResizeEvent *event) {
 // 	QRect qr availableGeometry(screenNumber(this));
 // 	int availableHeight=qr.height();
 // 	int availableWidth=qr.width();
-
+	
+	iMarginTop=toolBar->height()+menubar->height();
+	
 	dZoomFactor=iGetWindowSize()/600.0; //TODO must be calculated in another way
 	
 	vRepaintPlayerLabels();
 	vRepaintCommonLabels();
-	int fontSize=iGetFontSize();
-	iPaddingTop= (qlPlayerLabels.count()+1*(iGameMode!=enTraining)) * (fontSize+6); // TODO function
+	iPaddingTop=iGetPaddingTop();
 	
 	dZoomFactor=iGetWindowSize()/600.0;
 	
@@ -357,15 +357,14 @@ void dart::resizeEvent(QResizeEvent *event) {
 	
 	gridLayoutWidget->setGeometry(QRect(0,0,600*dZoomFactor+1,iPaddingTop+50));
 
-	qDebug() << "[i] iPaddingTop" << iPaddingTop << "iMarginTop" << iMarginTop << "dZoomFactor" << dZoomFactor << "fontSize" << fontSize;
+	qDebug() << "[i] iPaddingTop" << iPaddingTop << "iMarginTop" << iMarginTop << "dZoomFactor" << dZoomFactor << "fontSize" << iGetFontSize();
 }
 
 void dart::vResize(double dNewZoomFactor) {
         showNormal();
 	
 	dZoomFactor=dNewZoomFactor;
-	int fontSize=iGetFontSize();
-	iPaddingTop= (qlPlayerLabels.count()+1*(iGameMode!=enTraining)) * (fontSize+6);
+	iPaddingTop=iGetPaddingTop();
 	resize(600*dZoomFactor,iMarginTop+iPaddingTop+600*dZoomFactor);
 }
 
@@ -406,6 +405,10 @@ void dart::vRepaintCommonLabels() {
 
 int dart::iGetFontSize() {
 	return 20*dZoomFactor<10 ? 10 : 20*dZoomFactor;
+}
+
+int dart::iGetPaddingTop() {
+	return (qlPlayerLabels.count()+1*(iGameMode!=enTraining)) * (iGetFontSize()+6);
 }
 
 // draws a point at P(x|y) with the label name, and adds it to the list list
@@ -469,7 +472,7 @@ void dart::vMouseClickEvent(int x, int y) {
 		
 		mySleep(iDelayBeforeNextPlayer);
 		
-		if(bResetCursor) QCursor::setPos(QWidget::x()+5,QWidget::y()+iPaddingTop+iMarginTop);
+		if(bResetCursor) QCursor::setPos(QWidget::x()+5,QWidget::y()+iPaddingTop+iMarginTop+10);
 		
 		iCurrentPlayer++;
 		vRemoveAllCircles();
@@ -517,8 +520,11 @@ void dart::vMouseClickEvent(int x, int y) {
 
 void dart::vShowComment() {
         if(iNumberOfPlayers==1 && iGameMode!=enTraining) {
-                int i = rand() % 3 + 3*(static_cast<int>(qlScoreHistory[0][iPlaceCount-1].mark)-1);
-                qDebug() << "[i]" << qlScoreHistory[0][iPlaceCount-1].mark << "comment #" << i;
+		// we shoudln't use the saved mark here as inappropriate comments could be shown
+		// (e.g "clicked wrongly", although clicked correctly, but bad time)
+		double mark=dGetMarkFromDistance(qlScoreHistory[0][iPlaceCount-1].diffKm);
+                int i = rand() % 3 + 3*(static_cast<int>(mark)-1);
+                qDebug() << "[i]" << mark << "comment #" << i;
                 lblComment->setText(qlComments[i]);
         }
 }
@@ -551,13 +557,14 @@ void dart::vShowCurrentPlace() {
 
 void dart::vShowScores() {
 	for(int i=0; i<iNumberOfPlayers; i++) { // show score for each player
-		QString km;
+		QString km, score;
 		if(qlScoreHistory[i][iPlaceCount-1].diffKm==-1) km=tr("∞");
 		else km=QString("%1").arg(qlScoreHistory[i][iPlaceCount-1].diffKm,0,'f',1);
-		qlPlayerLabels[i][1]->setText(QString(tr("Missed by %1 km (%2) +%3"))
+		if(iGameMode!=enTraining) score=QString(" +%1").arg(qlScoreHistory[i][iPlaceCount-1].score);
+		qlPlayerLabels[i][1]->setText(QString(tr("Missed by %1 km (%2)%3"))
 		                              .arg(km)
 		                              .arg(qlScoreHistory[i][iPlaceCount-1].mark,0,'f',1)
-		                              .arg(qlScoreHistory[i][iPlaceCount-1].score));
+		                              .arg(score));
 	}
 }
 
@@ -733,9 +740,11 @@ void dart::vResetForNewGame() {
 	iPlaceCount=0;
 	
 	vShowTotalScores();
+//	vRepaintCommonLabels();
 }
 
 void dart::vNewGame() {
+	iCurrentPlayer=0;
 	vSetNumberOfPlayers(iNumberOfPlayers);
 	vSetGameMode(iGameMode);
 }
@@ -1092,7 +1101,7 @@ void dart::vReadQcf() {
 		msgBox.setDefaultButton(QMessageBox::Cancel);
 		if(msgBox.exec()==QMessageBox::Cancel) return;
 	}
-	clIO->iReadQcf(static_cast<QAction*>(QObject::sender())->text());
+	if(clIO->iReadQcf(static_cast<QAction*>(QObject::sender())->text())!=0) exit(-1);
 	
 	vRepaintMap();
 	vResetForNewGame();

@@ -139,6 +139,7 @@ Q_OBJECT
 		int iGetWindowSize();
 		int iGetUnzoomed(double x);
 		int iGetFontSize();
+		int iGetPaddingTop();
 		int iFindInputInList(double &f);
 		
 		QColor qcGetColorOfPlayer(int n);

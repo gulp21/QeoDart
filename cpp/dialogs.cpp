@@ -23,7 +23,8 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 		                  .arg(myDart->qlTotalScores[0].score/myDart->iMaxPlaceCount,0,'f',1));
 	} else {
 		lblScore->setText(QString(tr("<span>Player %1 has a score of %2 points (&#8960; %3).</span>"))
-		                  .arg(player+1).arg(myDart->qlTotalScores[player].score)
+		                  .arg(player+1)
+		                  .arg(myDart->qlTotalScores[player].score)
 		                  .arg(myDart->qlTotalScores[player].score/myDart->iMaxPlaceCount,0,'f',1));
 	}
 	

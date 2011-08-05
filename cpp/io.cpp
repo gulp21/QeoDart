@@ -154,10 +154,9 @@ int io::iReadQcf(QString mapname) {
 	if(iCheckQcf(file, doc)!=0) {
 		qDebug() << "[E] File" << filename << "is not valid";
 		QMessageBox msgBox;
-		msgBox.setText(QString(tr("An unexpected error occured while reading %1. QeoDart will be quit.")).arg(filename));
+		msgBox.setText(QString(tr("An unexpected error occured while reading %1.\nQeoDart will be quit.")).arg(filename));
 		msgBox.setIcon(QMessageBox::Critical);
 		msgBox.exec();
-		myDart->close(); // TODO doesn't work
 		return -1;
 	}
 	
@@ -245,9 +244,9 @@ int io::iReadQcf(QString mapname) {
 	if(myDart->qlAllPlaces.count()==0) {
 		qDebug() << "[E] File" << filename << "contains no <place>";
 		QMessageBox msgBox;
-		msgBox.setText(QString(tr("The file %1 contains no <place>. QeoDart will be quit.")).arg(filename));
+		msgBox.setText(QString(tr("The file %1 contains no <place>.\nQeoDart will be quit.")).arg(filename));
 		msgBox.exec();
-		myDart->close(); // TODO through return?
+		return -1;
 	}
 	
 	qDebug() << "[i] current placetype is" << myDart->qsCurrentPlaceType;
