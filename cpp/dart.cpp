@@ -19,6 +19,7 @@ See main.cpp for details. */
 #include <time.h>
 #include <QDialog>
 #include <QTimer>
+#include <QInputDialog>
 
 using namespace std;
 
@@ -43,17 +44,18 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iCurrentPlayer=0;
 	iAskForMode=enPositions;
 	iNumberOfPlayers=2; // TODO we shouldn't change it in training mode (iNumberOfPlayersTrainingCache)
-	qsCurrentPlaceType="city;state";
+	qsCurrentPlaceType="city;state;town";
 	bAcceptingClickEvent=TRUE;
 	dPxToKm=1;
 	iCurrentQcf=0;
 	iScoreAreaMode=1;
 	iTrainingPlaceNumber=-1;
-        bAgainstTime=TRUE;
+        bAgainstTime=FALSE;
         iMaxTime=20;
         iGameMode=enLocal;
 	qlPreferedQcfLanguage << "de" << "en" << "default";
 	bResetCursor=TRUE;
+	iToolMenuBarState=enBoth;
         
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
@@ -85,7 +87,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	lblMouseClickOverlay->setAlignment(Qt::AlignTop);
 	lblMouseClickOverlay->show();
 	lblMouseClickOverlay->setGeometry(0, 0, iGetWindowSize(), iGetWindowSize());
-	//lblMouseClickOverlay->setCursor(QCursor(QPixmap("test.png"),1,1)); TODO
+//	lblMouseClickOverlay->setCursor(QCursor(QPixmap("test.png"),1,1)); //TODO
 	
 	agGameMode = new QActionGroup(this);
 	agGameMode->addAction(actionTraining);
@@ -110,6 +112,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(action100,SIGNAL (triggered()), this, SLOT(vResize()));
 	action100->setIcon(QIcon::fromTheme("zoom-original"));
 	connect(actionTraining,SIGNAL (triggered()), this, SLOT(vSetGameMode()));
+	connect(actionNumber_of_Players,SIGNAL (triggered()), this, SLOT(vSetNumberOfPlayers()));
+	connect(actionPlayers,SIGNAL (triggered()), this, SLOT(vSetNumberOfPlayers()));
 	actionTraining->setIcon(QIcon::fromTheme("user-identity"));
 	connect(actionLocal,SIGNAL (triggered()), this, SLOT(vSetGameMode()));
 	actionLocal->setIcon(QIcon::fromTheme("system-users"));
@@ -122,26 +126,33 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionStates,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionCapitals_of_States,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionCounties,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
-	connect(actionCyties,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionCities,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionTowns,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionAbout_Qt,SIGNAL (triggered()), qApp, SLOT(aboutQt()));
+	connect(actionMenu_Bar,SIGNAL (triggered()), this, SLOT(vSetToolMenuBarState()));
+	actionMenu_Bar->setIcon(QIcon::fromTheme("show-menu"));
+	connect(actionToolbar,SIGNAL (triggered()), this, SLOT(vSetToolMenuBarState()));
 	
 	connect(lineEdit,SIGNAL (returnPressed()), this, SLOT(vReturnPressedEvent()));
 	
 	
-	menubar->hide(); // TODO: allow: menubar+toolbar; menubar only; toolbar only
+	menubar->removeAction(menuApplication->menuAction());
 	
-	QToolButton *btGame = new QToolButton(this);
-	btGame->setMenu(menuGame);
-	btGame->setPopupMode(QToolButton::InstantPopup);
-	btGame->setText(tr("Game"));
-	toolBar->addWidget(btGame);
+	btApplication = new QToolButton(this);
+	btApplication->setMenu(menuApplication);
+	btApplication->setPopupMode(QToolButton::InstantPopup);
+	btApplication->setText(tr("Game"));
+	actionBtApplication=toolBar->addWidget(btApplication);
+	
+	toolBar->addAction(actionNew_Game);
 	
 	btGameMode = new QToolButton(toolBar);
 	btGameMode->setMenu(menuGameMode);
 	btGameMode->setPopupMode(QToolButton::InstantPopup);
 	btGameMode->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 	toolBar->addWidget(btGameMode);
+	
+	toolBar->addAction(actionPlayers);
 	
 	btAskForMode = new QToolButton(toolBar);
 	btAskForMode->setMenu(menuAskForMode);
@@ -211,6 +222,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 		case enPositions:
 		        actionPosition_of_Place->trigger(); break;
 	}
+	vSetToolMenuBarState(iToolMenuBarState);
 	
 	vRepaintCommonLabels();
 	vRepaintPlayerLabels();
@@ -286,7 +298,7 @@ void dart::vSetPlaceType() {
 	if(actionStates->isChecked()) qsCurrentPlaceType+="state;";
 	if(actionCapitals_of_States->isChecked()) qsCurrentPlaceType+="capitalOfState;";
 	if(actionCounties->isChecked()) qsCurrentPlaceType+="county;";
-	if(actionCyties->isChecked()) qsCurrentPlaceType+="city;";
+	if(actionCities->isChecked()) qsCurrentPlaceType+="city;";
 	if(actionTowns->isChecked()) qsCurrentPlaceType+="town;";
 	clIO->vFillCurrentTypePlaces();
 }
@@ -297,7 +309,7 @@ void dart::vSetPlaceType(QString placetype) {
 	if(placetype.contains("state")) actionStates->setChecked(TRUE);
 	if(placetype.contains("capitalOfState")) actionCapitals_of_States->setChecked(TRUE);
 	if(placetype.contains("county")) actionCounties->setChecked(TRUE);
-	if(placetype.contains("city")) actionCyties->setChecked(TRUE);
+	if(placetype.contains("city")) actionCities->setChecked(TRUE);
 	if(placetype.contains("town")) actionTowns->setChecked(TRUE);
 	clIO->vFillCurrentTypePlaces();
 }
@@ -315,10 +327,30 @@ void dart::vSetAgainstTime(bool enable) {
         }
 }
 
+void dart::vSetNumberOfPlayers() {
+	bool ok;
+	int min=iCurrentPlayer+1;
+	int max=iPlaceCount>1 ? iNumberOfPlayers : 99;
+	int n = QInputDialog::getInt(this, tr("Set Number Of Players"), tr("Number Of Players:"), iNumberOfPlayers, min, max, 1, &ok);
+	if(n>15) {
+		QMessageBox msgBox;
+		msgBox.setWindowTitle(tr("Warning"));
+		msgBox.setText(tr("You want to play with more than 15 players.\nAlthough QeoDart theoretically supports an infinite\nnumber of players, some display problems might occur.\n\nDo you want to continue anyway?"));
+		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+		msgBox.setDefaultButton(QMessageBox::Cancel);
+		msgBox.setIcon(QMessageBox::Warning);
+		if(msgBox.exec()==QMessageBox::Cancel) return;
+	}
+	if(ok) vSetNumberOfPlayers(n);
+}
 void dart::vSetNumberOfPlayers(int n) {
 	iNumberOfPlayers=n;
 	qDebug() << "[i] iNumberOfPlayers" << iNumberOfPlayers;
 	if(iNumberOfPlayers>15) qDebug() << "[w] very much players";
+	
+	actionPlayers->setText(QString(tr("Players: %1")).arg(iNumberOfPlayers));
+	
+	qDebug()<<qlPlayerLabels.count()<<"sssssssssss"<<n;
 	
 	if(qlPlayerLabels.count()>n) {
 		
@@ -338,6 +370,8 @@ void dart::vSetNumberOfPlayers(int n) {
 			
 			qlScoreHistory[i].clear(); //TODO must delete sub-lists?
 			qlScoreHistory.removeAt(i);
+			qlColorsOfPlayers.removeAt(i);
+			
 		}
 		
 	} else if(qlPlayerLabels.count()<n) {
@@ -349,7 +383,7 @@ void dart::vSetNumberOfPlayers(int n) {
 			QLabel *lblScore;
 			lblScore = new QLabel(this);
 			gridLayout->addWidget(lblScore,i,0);
-			lblScore->setText(QString(tr("<span>%1 Points &#8960; %2, %3</span>")).arg(0).arg(0).arg(0));
+			lblScore->setText(QString(tr("<span>%1 Points &#8960; %2, %3</span>")).arg(0).arg(0,0,'f',1).arg(0,0,'f',1));
 			
 			QLabel *lblRating;
 			lblRating = new QLabel(this);
@@ -364,6 +398,15 @@ void dart::vSetNumberOfPlayers(int n) {
 			
 			QList<scoreHistory> qlHistory;
 			qlScoreHistory.append(qlHistory);
+			
+			// usually we do this when starting a new game, but since we allow increasing the number of players
+			// during the first round, we must add totalScore here
+			while(qlTotalScores.count()<iNumberOfPlayers) {
+				totalScore ts;
+				ts.score=0;
+				ts.mark=0;
+				qlTotalScores.append(ts);
+			}
 			
 			qlColorsOfPlayers.append(qcGetColorOfPlayer(qlPlayerLabels.count()-1));
 		}
@@ -454,7 +497,7 @@ void dart::vRepaintPlayerLabels() {
 	int fontSize=iGetFontSize();
 	for(int i=0,max=qlPlayerLabels.count(); i<max; i++) {
 		for(int j=0,max=qlPlayerLabels[i].count(); j<max; j++) {
-			qlPlayerLabels[i][j]->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qcGetColorOfPlayer(i).name()));
+			qlPlayerLabels[i][j]->setStyleSheet(QString("color:%2;font-size:%1px;font-family:arial,sans-serif").arg(fontSize).arg(qlColorsOfPlayers[i].name()));
 		}
 	}
 }
@@ -464,7 +507,7 @@ void dart::vRepaintCommonLabels() {
 	int fontSize=iGetFontSize();
         QString stylesheet=QString("color:%2;font-size:%1px;font-family:arial,sans-serif")
                         .arg(fontSize)
-                        .arg(qcGetColorOfPlayer(iCurrentPlayer).name());
+                        .arg(qlColorsOfPlayers[iCurrentPlayer].name());
 	lblCurrentPlace->setStyleSheet(stylesheet);
 	lblComment->setStyleSheet(stylesheet);
 	lblCurrentRound->setStyleSheet(stylesheet);
@@ -698,7 +741,7 @@ QColor dart::qcGetColorOfPlayer(int player) {
 	if(m==1 || m==3 || m==4) c.setGreen(i);
 	if(m==2 || m==4 || m==5) c.setRed(i);
 	
-// 	qDebug()<<c;
+	qDebug()<<"cpl"<<player;
 	
 	return c;
 }
@@ -724,13 +767,14 @@ void dart::vSetGameMode() {
 		qDebug() << "[E] vSetGameMode: unknown sender";
 	}
 }
-
 void dart::vSetGameMode(enGameModes mode) {
 	switch(iGameMode) {
 		case enTraining:
 			lblCurrentRound->show();
 			lblCurrentPlayer->show();
 			qlPlayerLabels[0][0]->show();
+			actionNumber_of_Players->setEnabled(TRUE);
+			actionPlayers->setEnabled(TRUE);
 			vResetScoreLabels();
 			break;
 		case enLocal:
@@ -746,6 +790,8 @@ void dart::vSetGameMode(enGameModes mode) {
 			lblCurrentRound->hide();
 			lblCurrentPlayer->hide();
 			qlPlayerLabels[0][0]->hide();
+			actionNumber_of_Players->setEnabled(FALSE);
+			actionPlayers->setEnabled(FALSE);
 			
 			vSetNumberOfPlayers(1);
 			break;
@@ -1195,4 +1241,46 @@ void dart::vReadQcf() {
 	vRepaintMap();
 	vResetForNewGame();
 	vNextRound();
+}
+
+void dart::vSetToolMenuBarState() {
+	if (actionMenu_Bar->isChecked() && actionToolbar->isChecked()) iToolMenuBarState=enBoth;
+	else if (actionMenu_Bar->isChecked() && !actionToolbar->isChecked()) iToolMenuBarState=enMenuBarOnly;
+	else if (!actionMenu_Bar->isChecked() && actionToolbar->isChecked()) iToolMenuBarState=enToolBarOnly;
+	else { actionToolbar->trigger(); return; }
+	
+	switch(iToolMenuBarState) {
+		case enBoth:
+			toolBar->removeAction(actionBtApplication);
+			menuApplication->setVisible(FALSE);
+			menubar->setVisible(TRUE);
+			toolBar->setVisible(TRUE);
+			break;
+			
+		case enToolBarOnly:
+			toolBar->insertAction(actionNew_Game, actionBtApplication);
+			menubar->setVisible(FALSE);
+			toolBar->setVisible(TRUE);
+			break;
+			
+		case enMenuBarOnly:
+			menubar->setVisible(TRUE);
+			toolBar->setVisible(FALSE);
+			break;
+	}
+	
+	resizeEvent(0);
+}
+void dart::vSetToolMenuBarState(enToolMenuBarState state) {
+	iToolMenuBarState=state;
+	
+	switch(iToolMenuBarState) {
+		case enBoth:
+			actionMenu_Bar->trigger();
+			actionToolbar->trigger(); break;
+		case enToolBarOnly:
+			actionToolbar->trigger(); break;
+		case enMenuBarOnly:
+			actionMenu_Bar->trigger(); break;
+	}
 }

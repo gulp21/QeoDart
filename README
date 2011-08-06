@@ -1,3 +1,7 @@
-First project…
+QeoDart (Qt Geography Darts) is a geography education game.
 
+Requirements:
+Qt4 (tested with 4.7.2)
 
+Download:
+* git: git clone git://github.com/gulp21/QeoDart.git

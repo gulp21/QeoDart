@@ -48,6 +48,12 @@ enum enAskForModes {
 	enPositions=0,
 	enNames=1,
 };
+
+enum enToolMenuBarState {
+	enBoth=0,
+	enToolBarOnly=1,
+	enMenuBarOnly=2,
+};
  
 class dart : public QMainWindow, public Ui::MainWindow {
 Q_OBJECT
@@ -89,6 +95,7 @@ Q_OBJECT
 		
 		enGameModes iGameMode;
 		enAskForModes iAskForMode;
+		enToolMenuBarState iToolMenuBarState;
 		
 		int iCurrentPlayer, iPlaceCount, iTrainingPlaceNumber;
 		int iDelayNextCircle, iDelayBeforeShowingMark, iDelayBeforeNextPlayer, iDelayBeforeNextPlace, iDelayBeforeNextPlaceTraining;
@@ -106,7 +113,9 @@ Q_OBJECT
 		
 		QActionGroup *agGameMode, *agAskForMode, *agMap;
 		
-		QToolButton *btMap, *btGameMode, *btAskForMode, *btPlaceType, *btView;
+		QToolButton *btMap, *btGameMode, *btAskForMode, *btPlaceType, *btView, *btApplication;
+		
+		QAction *actionBtApplication;
 		
 		QMenu *menuPlace_Number;
 		
@@ -133,6 +142,7 @@ Q_OBJECT
                 void vShowComment();
 		void vResetScoreLabels();
 		void vShowResultWindows();
+		void vSetToolMenuBarState(enToolMenuBarState state);
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetDistanceInPx(int a, int b, int n);
@@ -163,6 +173,8 @@ Q_OBJECT
 		void vReturnPressedEvent();
                 void vTimeout();
 		void vSetPlaceType();
+		void vSetToolMenuBarState();
+		void vSetNumberOfPlayers();
 		
 	public slots:
 		void vReadQcf();

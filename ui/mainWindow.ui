@@ -170,7 +170,7 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuGame">
@@ -180,8 +180,6 @@
     <addaction name="actionNew_Game"/>
     <addaction name="actionHigh_Score_List"/>
     <addaction name="actionFind_Place"/>
-    <addaction name="separator"/>
-    <addaction name="actionSettings"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -195,13 +193,6 @@
     <property name="title">
      <string>Settings</string>
     </property>
-    <widget class="QMenu" name="menuView">
-     <property name="title">
-      <string>View</string>
-     </property>
-     <addaction name="separator"/>
-     <addaction name="action100"/>
-    </widget>
     <widget class="QMenu" name="menuGameMode">
      <property name="title">
       <string>Game Mode</string>
@@ -231,18 +222,64 @@
      <addaction name="actionStates"/>
      <addaction name="actionCapitals_of_States"/>
      <addaction name="actionCounties"/>
-     <addaction name="actionCyties"/>
+     <addaction name="actionCities"/>
      <addaction name="actionTowns"/>
     </widget>
+    <widget class="QMenu" name="menuAsk_for">
+     <property name="title">
+      <string>Ask for</string>
+     </property>
+     <addaction name="actionPosition_of_Place"/>
+     <addaction name="actionName_of_Place"/>
+     <addaction name="separator"/>
+     <addaction name="actionCountries"/>
+     <addaction name="actionCapitals_of_Countries"/>
+     <addaction name="actionStates"/>
+     <addaction name="actionCapitals_of_States"/>
+     <addaction name="actionCounties"/>
+     <addaction name="actionCities"/>
+     <addaction name="actionTowns"/>
+    </widget>
+    <widget class="QMenu" name="menuView">
+     <property name="title">
+      <string>View</string>
+     </property>
+     <addaction name="actionBorders"/>
+     <addaction name="actionRivers"/>
+     <addaction name="actionElevations"/>
+     <addaction name="separator"/>
+     <addaction name="action100"/>
+    </widget>
+    <addaction name="actionNumber_of_Players"/>
     <addaction name="menuGameMode"/>
     <addaction name="menuView"/>
     <addaction name="menuMap"/>
     <addaction name="menuAskForMode"/>
     <addaction name="menuPlaceType"/>
+    <addaction name="menuAsk_for"/>
+    <addaction name="separator"/>
+    <addaction name="actionMenu_Bar"/>
+    <addaction name="actionToolbar"/>
+    <addaction name="separator"/>
+    <addaction name="actionSettings"/>
+   </widget>
+   <widget class="QMenu" name="menuApplication">
+    <property name="title">
+     <string>Game</string>
+    </property>
+    <addaction name="actionNew_Game"/>
+    <addaction name="actionHigh_Score_List"/>
+    <addaction name="actionFind_Place"/>
+    <addaction name="separator"/>
+    <addaction name="actionMenu_Bar"/>
+    <addaction name="actionSettings"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
    </widget>
    <addaction name="menuGame"/>
    <addaction name="menuSettings"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuApplication"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
@@ -306,12 +343,12 @@
     <string>Name of Place</string>
    </property>
   </action>
-  <action name="actionCyties">
+  <action name="actionCities">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Cyties</string>
+    <string>Cityies</string>
    </property>
   </action>
   <action name="actionAbout_Qt">
@@ -396,11 +433,6 @@
     <string>Capitals of Countries</string>
    </property>
   </action>
-  <action name="actionSettings">
-   <property name="text">
-    <string>Settings…</string>
-   </property>
-  </action>
   <action name="actionAsd">
    <property name="text">
     <string>asd</string>
@@ -412,6 +444,61 @@
    </property>
    <property name="text">
     <string>Towns</string>
+   </property>
+  </action>
+  <action name="actionBorders">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Borders TODO map icons</string>
+   </property>
+  </action>
+  <action name="actionRivers">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Rivers</string>
+   </property>
+  </action>
+  <action name="actionElevations">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Elevations</string>
+   </property>
+  </action>
+  <action name="actionMenu_Bar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Menu Bar</string>
+   </property>
+  </action>
+  <action name="actionToolbar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Toolbar</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings…</string>
+   </property>
+  </action>
+  <action name="actionNumber_of_Players">
+   <property name="text">
+    <string>Number Of Players</string>
+   </property>
+  </action>
+  <action name="actionPlayers">
+   <property name="text">
+    <string>Players: </string>
    </property>
   </action>
  </widget>

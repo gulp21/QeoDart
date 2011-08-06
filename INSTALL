@@ -1,0 +1,17 @@
+=== Console ===
+
+Before you try to compile QeoDart, make sure that you have installed the
+Qt4 developer packages (libqt4-dev or the like), and the basic developer
+tools for your operating system (e.g. build-essential [Ubuntu]).
+
+cd QeoDart
+qmake
+make -j4
+./QeoDart
+
+=== Qt Creator ===
+
+You can install Qt Creator using the package manager of your operating
+system, or download it from http://qt.nokia.com/downloads.
+
+Open the project file QeoDart.pro in Qt Creator and press Ctrl+R.

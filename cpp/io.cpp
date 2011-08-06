@@ -167,7 +167,7 @@ int io::iReadQcf(QString mapname) {
 	myDart->actionCountries->setVisible(FALSE);
 	myDart->actionCapitals_of_Countries->setVisible(FALSE);
 	myDart->actionCounties->setVisible(FALSE);
-	myDart->actionCyties->setVisible(FALSE);
+	myDart->actionCities->setVisible(FALSE);
 	myDart->actionTowns->setVisible(FALSE);
 	
 	QDomElement docElem = doc.documentElement();
@@ -223,7 +223,7 @@ int io::iReadQcf(QString mapname) {
 				if(newPlace.placeType.contains("country")) myDart->actionCountries->setVisible(TRUE);
 				if(newPlace.placeType.contains("capitalOfCountry")) myDart->actionCapitals_of_Countries->setVisible(TRUE);
 				if(newPlace.placeType.contains("county")) myDart->actionCounties->setVisible(TRUE);
-				if(newPlace.placeType.contains("city")) myDart->actionCyties->setVisible(TRUE);
+				if(newPlace.placeType.contains("city")) myDart->actionCities->setVisible(TRUE);
 				if(newPlace.placeType.contains("town")) myDart->actionTowns->setVisible(TRUE);
 				
 			} else if(e.tagName()!="name") {
