@@ -135,8 +135,10 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	connect(lineEdit,SIGNAL (returnPressed()), this, SLOT(vReturnPressedEvent()));
 	
-	
+	//these menus are needed for QToolButtons only and shouldn't be display in the main menus
 	menubar->removeAction(menuApplication->menuAction());
+	menuSettings->removeAction(menuAskForMode->menuAction());
+	menuSettings->removeAction(menuPlaceType->menuAction());
 	
 	btApplication = new QToolButton(this);
 	btApplication->setMenu(menuApplication);
@@ -383,7 +385,7 @@ void dart::vSetNumberOfPlayers(int n) {
 			QLabel *lblScore;
 			lblScore = new QLabel(this);
 			gridLayout->addWidget(lblScore,i,0);
-			lblScore->setText(QString(tr("<span>%1 Points &#8960; %2, %3</span>")).arg(0).arg(0,0,'f',1).arg(0,0,'f',1));
+			lblScore->setText(QString(tr("<span>%1 Points &#8960; %2, %3</span>")).arg(0).arg(0.0,0,'f',1).arg(0.0,0,'f',1));
 			
 			QLabel *lblRating;
 			lblRating = new QLabel(this);
