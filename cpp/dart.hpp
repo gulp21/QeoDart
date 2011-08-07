@@ -159,6 +159,8 @@ Q_OBJECT
 		int iGetPaddingTop();
 		int iFindInputInList(double &f);
 		
+		bool bCanLoseScore();
+		
 		QColor qcGetColorOfPlayer(int n);
 		
 		QString qsSimplifyString(QString str, int l);
@@ -175,6 +177,7 @@ Q_OBJECT
 		void vSetPlaceType();
 		void vSetToolMenuBarState();
 		void vSetNumberOfPlayers();
+                void vSetAgainstTime();
 		
 	public slots:
 		void vReadQcf();

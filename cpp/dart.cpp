@@ -112,11 +112,13 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(action100,SIGNAL (triggered()), this, SLOT(vResize()));
 	action100->setIcon(QIcon::fromTheme("zoom-original"));
 	connect(actionTraining,SIGNAL (triggered()), this, SLOT(vSetGameMode()));
+	actionTraining->setIcon(QIcon::fromTheme("user-identity"));
 	connect(actionNumber_of_Players,SIGNAL (triggered()), this, SLOT(vSetNumberOfPlayers()));
 	connect(actionPlayers,SIGNAL (triggered()), this, SLOT(vSetNumberOfPlayers()));
-	actionTraining->setIcon(QIcon::fromTheme("user-identity"));
 	connect(actionLocal,SIGNAL (triggered()), this, SLOT(vSetGameMode()));
 	actionLocal->setIcon(QIcon::fromTheme("system-users"));
+	connect(actionAgainst_Time,SIGNAL (triggered()), this, SLOT(vSetAgainstTime()));
+	actionAgainst_Time->setIcon(QIcon::fromTheme("player-time"));
 	connect(actionName_of_Place,SIGNAL (triggered()), this, SLOT(vSetAskForMode()));
 //	actionName_of_Place->setIcon(QIcon::fromTheme("user-identity"));
 	connect(actionPosition_of_Place,SIGNAL (triggered()), this, SLOT(vSetAskForMode()));
@@ -155,6 +157,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	toolBar->addWidget(btGameMode);
 	
 	toolBar->addAction(actionPlayers);
+	
+	toolBar->addAction(actionAgainst_Time);
 	
 	btAskForMode = new QToolButton(toolBar);
 	btAskForMode->setMenu(menuAskForMode);
@@ -211,7 +215,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	gridLayout->setSpacing(1);
 	
 	vSetPlaceType(qsCurrentPlaceType);
-	vSetAgainstTime(bAgainstTime);
+	if(bAgainstTime) actionAgainst_Time->trigger();
+	else vSetAgainstTime();
 	switch(iGameMode) {
 		case enTraining:
 			actionTraining->trigger(); break;
@@ -316,7 +321,11 @@ void dart::vSetPlaceType(QString placetype) {
 	clIO->vFillCurrentTypePlaces();
 }
 
-// enables/disables "against time"; used for resetting timer, too
+void dart::vSetAgainstTime() {
+	if( bCanLoseScore() ) return;
+	vSetAgainstTime(actionAgainst_Time->isChecked());	
+}
+// resetting timer
 void dart::vSetAgainstTime(bool enable) {
         bAgainstTime=enable;
         iTimerElapsed=0;
@@ -743,13 +752,11 @@ QColor dart::qcGetColorOfPlayer(int player) {
 	if(m==1 || m==3 || m==4) c.setGreen(i);
 	if(m==2 || m==4 || m==5) c.setRed(i);
 	
-	qDebug()<<"cpl"<<player;
-	
 	return c;
 }
 
 void dart::vSetGameMode() {
-	if( (iPlaceCount>1 || iCurrentPlayer!=0) && iGameMode!=enTraining) {
+	if( bCanLoseScore() ) {
 		QMessageBox msgBox;
 		msgBox.setWindowTitle(tr("Chance Game Mode"));
 		msgBox.setText(tr("When you change the game mode, your current score will be lost.\nDo you want to continue?"));
@@ -806,7 +813,7 @@ void dart::vSetGameMode(enGameModes mode) {
 }
 
 void dart::vSetAskForMode() {
-	if( (iPlaceCount>1 || iCurrentPlayer!=0) && iGameMode!=enTraining) {
+	if( bCanLoseScore() ) {
 		QMessageBox msgBox;
 		msgBox.setWindowTitle(tr("Chance Mode"));
 		msgBox.setText(tr("When you change this setting, your current score will be lost.\nDo you want to continue?"));
@@ -869,7 +876,7 @@ void dart::vResetForNewGame() {
 }
 
 void dart::vNewGame() {
-	if( (iPlaceCount>1 || iCurrentPlayer!=0) && iGameMode!=enTraining) {
+	if( bCanLoseScore() ) {
 		QMessageBox msgBox;
 		msgBox.setWindowTitle(tr("New Game"));
 		msgBox.setText(tr("When you start a new game, your current score will be lost.\nDo you want to continue?"));
@@ -897,7 +904,7 @@ void dart::vNextRound() {
 		qDebug() << "Revise";
 		for(int i=0; i<qlScoreHistory[0].count() && pn==-1; i++) {
 			qDebug() << qlScoreHistory[0][i].mark << qlTotalScores[0].mark;
-			if(qlScoreHistory[0][i].mark>=4 or (qlScoreHistory[0][i].mark>2 && qlScoreHistory[0][i].mark>qlTotalScores[0].mark) ) {
+			if(qlScoreHistory[0][i].mark>=4 || (qlScoreHistory[0][i].mark>2 && qlScoreHistory[0][i].mark>qlTotalScores[0].mark) ) {
 				qDebug() << qlCurrentTypePlaces[qlPlacesHistory[i]]->name;
 				
 				if(iPlaceCount==5 && i==4) {
@@ -1285,4 +1292,8 @@ void dart::vSetToolMenuBarState(enToolMenuBarState state) {
 		case enMenuBarOnly:
 			actionMenu_Bar->trigger(); break;
 	}
+}
+
+bool dart::bCanLoseScore() {
+	return ( (iPlaceCount>1 || iCurrentPlayer!=0) && iGameMode!=enTraining );
 }

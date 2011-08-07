@@ -188,6 +188,7 @@
      <string>Help</string>
     </property>
     <addaction name="actionAbout_Qt"/>
+    <addaction name="actionAbout_QeoDart"/>
    </widget>
    <widget class="QMenu" name="menuSettings">
     <property name="title">
@@ -250,13 +251,14 @@
      <addaction name="separator"/>
      <addaction name="action100"/>
     </widget>
-    <addaction name="actionNumber_of_Players"/>
     <addaction name="menuGameMode"/>
-    <addaction name="menuView"/>
+    <addaction name="actionNumber_of_Players"/>
+    <addaction name="actionAgainst_Time"/>
     <addaction name="menuMap"/>
+    <addaction name="menuAsk_for"/>
+    <addaction name="menuView"/>
     <addaction name="menuAskForMode"/>
     <addaction name="menuPlaceType"/>
-    <addaction name="menuAsk_for"/>
     <addaction name="separator"/>
     <addaction name="actionMenu_Bar"/>
     <addaction name="actionToolbar"/>
@@ -316,6 +318,9 @@
    <property name="text">
     <string>Quit</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
+   </property>
   </action>
   <action name="actionHigh_Score_List">
    <property name="text">
@@ -354,6 +359,9 @@
   <action name="actionAbout_Qt">
    <property name="text">
     <string>About Qt</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutQtRole</enum>
    </property>
   </action>
   <action name="action100">
@@ -433,11 +441,6 @@
     <string>Capitals of Countries</string>
    </property>
   </action>
-  <action name="actionAsd">
-   <property name="text">
-    <string>asd</string>
-   </property>
-  </action>
   <action name="actionTowns">
    <property name="checkable">
     <bool>true</bool>
@@ -490,6 +493,9 @@
    <property name="text">
     <string>Settings…</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
+   </property>
   </action>
   <action name="actionNumber_of_Players">
    <property name="text">
@@ -499,6 +505,25 @@
   <action name="actionPlayers">
    <property name="text">
     <string>Players: </string>
+   </property>
+  </action>
+  <action name="actionAgainst_Time">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Against Time</string>
+   </property>
+   <property name="priority">
+    <enum>QAction::LowPriority</enum>
+   </property>
+  </action>
+  <action name="actionAbout_QeoDart">
+   <property name="text">
+    <string>About QeoDart</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
    </property>
   </action>
  </widget>
