@@ -170,7 +170,7 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuGame">
@@ -263,7 +263,7 @@
     <addaction name="actionMenu_Bar"/>
     <addaction name="actionToolbar"/>
     <addaction name="separator"/>
-    <addaction name="actionSettings"/>
+    <addaction name="actionConfigure"/>
    </widget>
    <widget class="QMenu" name="menuApplication">
     <property name="title">
@@ -274,7 +274,7 @@
     <addaction name="actionFind_Place"/>
     <addaction name="separator"/>
     <addaction name="actionMenu_Bar"/>
-    <addaction name="actionSettings"/>
+    <addaction name="actionConfigure"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -489,9 +489,9 @@
     <string>Toolbar</string>
    </property>
   </action>
-  <action name="actionSettings">
+  <action name="actionConfigure">
    <property name="text">
-    <string>Settings…</string>
+    <string>Configure QeoDart…</string>
    </property>
    <property name="menuRole">
     <enum>QAction::PreferencesRole</enum>

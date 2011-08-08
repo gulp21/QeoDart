@@ -6,8 +6,6 @@ See main.cpp for details. */
 
 #include "dart.hpp"
 #include "io.hpp"
-#include <QDebug>
-#include <QDir>
 
 using namespace std;
 

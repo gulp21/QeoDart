@@ -5,25 +5,8 @@ This is free software, and you are welcome to redistribute it under certain cond
 See main.cpp for details. */
 
 #include "dart.hpp"
-#include "io.hpp"
-#include "qtwin.h"
-#include "dialogs.hpp"
-#include <QLabel>
-#include <iostream>
-#include <QMouseEvent>
-#include <QResizeEvent>
-#include <QDebug>
-#include <QTime>
-#include <math.h>
-#include <QDesktopWidget>
-#include <time.h>
-#include <QDialog>
-#include <QTimer>
-#include <QInputDialog>
 
 using namespace std;
-
-io *clIO;
 
 dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
@@ -68,7 +51,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	srand(time(NULL));
 	
-	clIO = new io(this);
+	myIO = new io(this);
 
 	setupUi(this);
 	toolBar->setMovable(FALSE);
@@ -102,7 +85,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	
 	actionHigh_Score_List->setIcon(QIcon::fromTheme("games-highscores"));
-	actionSettings->setIcon(QIcon::fromTheme("configure"));
+	connect(actionConfigure,SIGNAL (triggered()), this, SLOT(vShowPreferences()));
+	actionConfigure->setIcon(QIcon::fromTheme("configure"));
 	connect(actionQuit,SIGNAL (triggered()), this, SLOT(vClose()));
 	actionQuit->setIcon(QIcon::fromTheme("application-exit"));
 	connect(actionNew_Game,SIGNAL (triggered()), this, SLOT(vNewGame()));
@@ -189,7 +173,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	toolBar->addWidget(btView);
 	
 	
-	if(clIO->iFindQcf()==0) {
+	if(myIO->iFindQcf()==0) {
 		qDebug() << "[E] No valid qcfx files found, exiting";
 		QMessageBox msgBox;
 		msgBox.setText(tr("Sorry, no valid qcfx files could be found."));
@@ -249,7 +233,7 @@ dart::~dart(){
 	//vSetNumberOfPlayers(0); // QGridLayout: Cannot add QLabel/lblTime to QGridLayout/gridLayout at row -1 column 4
         timer->stop();
         delete timer;
-        delete clIO;
+        delete myIO;
 }
 
 //draws distance circles using the saved click-coordinates of place n, iterating #count [recursion]
@@ -307,7 +291,7 @@ void dart::vSetPlaceType() {
 	if(actionCounties->isChecked()) qsCurrentPlaceType+="county;";
 	if(actionCities->isChecked()) qsCurrentPlaceType+="city;";
 	if(actionTowns->isChecked()) qsCurrentPlaceType+="town;";
-	clIO->vFillCurrentTypePlaces();
+	myIO->vFillCurrentTypePlaces();
 }
 void dart::vSetPlaceType(QString placetype) {
 	qsCurrentPlaceType=placetype;
@@ -318,7 +302,7 @@ void dart::vSetPlaceType(QString placetype) {
 	if(placetype.contains("county")) actionCounties->setChecked(TRUE);
 	if(placetype.contains("city")) actionCities->setChecked(TRUE);
 	if(placetype.contains("town")) actionTowns->setChecked(TRUE);
-	clIO->vFillCurrentTypePlaces();
+	myIO->vFillCurrentTypePlaces();
 }
 
 void dart::vSetAgainstTime() {
@@ -1243,7 +1227,7 @@ void dart::vReadQcf() {
 		if(msgBox.exec()==QMessageBox::Cancel) return;
 	}
 	
-	if(clIO->iReadQcf(static_cast<QAction*>(QObject::sender())->text())!=0) exit(-1);
+	if(myIO->iReadQcf(static_cast<QAction*>(QObject::sender())->text())!=0) exit(-1);
 	
 	btMap->setText(QString(tr("Map: %1")).arg(static_cast<QAction*>(QObject::sender())->text()));
 	
@@ -1296,4 +1280,9 @@ void dart::vSetToolMenuBarState(enToolMenuBarState state) {
 
 bool dart::bCanLoseScore() {
 	return ( (iPlaceCount>1 || iCurrentPlayer!=0) && iGameMode!=enTraining );
+}
+
+void dart::vShowPreferences() {
+	preferences dialog(this,myIO);
+	dialog.exec();
 }

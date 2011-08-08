@@ -4,15 +4,31 @@ This program comes with ABSOLUTELY NO WARRANTY.
 This is free software, and you are welcome to redistribute it under certain conditions.
 See main.cpp for details. */
 
-#include <qstring.h>
+#ifndef DART_HPP
+#define DART_HPP
+
+#include "ui_mainWindow.h"
+#include <iostream>
+#include <math.h>
+#include <QDebug>
+#include <QDesktopWidget>
+#include <QDialog>
+#include <QDir>
+#include <QInputDialog>
 #include <qlist.h>
 #include <QLabel>
 #include <QMessageBox>
+#include <QMouseEvent>
+#include <QResizeEvent>
+#include <QTime>
+#include <QTimer>
 #include <QToolButton>
-#include "ui_mainWindow.h"
+#include <qstring.h>
+#include <time.h>
 
-#ifndef DART_HPP
-#define DART_HPP
+#include "io.hpp"
+#include "dialogs.hpp"
+#include "preferences.hpp"
 
 struct place {
 	int x, y, dimx, dimy;
@@ -90,6 +106,8 @@ Q_OBJECT
 		void vSetPlaceType(QString placetype);
 
 	private:
+		
+		io *myIO;
 		
 		bool bAcceptingClickEvent;
 		
@@ -178,11 +196,11 @@ Q_OBJECT
 		void vSetToolMenuBarState();
 		void vSetNumberOfPlayers();
                 void vSetAgainstTime();
+		void vShowPreferences();
 		
 	public slots:
 		void vReadQcf();
 };
 
 #include "myLabels.hpp"
-
 #endif //DART_HPP 

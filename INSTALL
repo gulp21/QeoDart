@@ -15,3 +15,57 @@ You can install Qt Creator using the package manager of your operating
 system, or download it from http://qt.nokia.com/downloads.
 
 Open the project file QeoDart.pro in Qt Creator and press Ctrl+R.
+
+=== Visual Studio (cross-compile for Windows CE) ===
+
+1. Download the source code of Qt (http://qt.nokia.com/downloads, qt-everywhere-opensource-src-4.x.y.tar.gz)
+
+2. Compile Qt for WinCE + VS
+
+(see also: http://doc.qt.nokia.com/4.7/install-wince.html)
+
+2.1. add path\to\qt\bin to PATH
+
+2.2. in Visual Studio Command Prompt:
+
+>cd path\to\qt
+>configure -platform win32-msvc2008 -xplatform wince50standard-armv4i-msvc2008 -D QT_NO_CURSOR -D QT_NO_CLIPBOARD -D QT_NO_DRAGANDDROP -D QT_NO_ACCESSIBILITY -D QT_NO_SESSIONMANAGER -nomake examples -nomake demos -no-qt3support
+(or msvc2005, respectively)
+>setcepaths wincewm50pocket-msvc2008
+(or msvc2005, respectively)
+>nmake sub-src
+(this way we skip compiling all the example and demo stuff)
+
+3. Compile QeoDart
+
+3.1. in Visual Studio Command Prompt:
+
+(see also: http://doc.qt.nokia.com/4.7/wince-with-qt-introduction.html)
+
+>cd path\to\qeodart
+>qmake -tp vc
+(create VS project file)
+
+3.2. Open generated project file in Visual Studio
+
+3.2.1. Right-click on the "QeoDart"-Project and choose "Properties"
+3.2.2. Under "Configuration Properties > C/C++ > Command Line" add the following "Additional Options":
+
+/D "QT_NO_DRAGANDDROP" /D "QT_NO_DRAGANDDROP" /D "QT_NO_CLIPBOARD" /D "QT_NO_ACCESSIBILITY" /D "QT_NO_SESSIONMANAGER"
+
+(othwerise you'll get the following error:
+dart.obj : error LNK2001: unresolved external symbol "protected: virtual void __cdecl QWidget::dragEnterEvent(class QDragEnterEvent *)"(?dragEnterEvent@QWidget@@MAAXPAVQDragEnterEvent@@@Z)
+…
+thanks to http://ufna.ru/2010/03/23/pna-mod-qt-4-wince-build (+translator) for giving me this hint)
+
+3.2.3. btw, make sure that "Configuration:" is "Release"
+
+3.3. F7
+
+4. Copy the necessary files on the target device
+
+release/QeoDart.exe
+path/to/qt/lib/QtCore4.dll
+              /QtCoreGui4.dll
+              /QtXml4.dll
+path/to/VisualStudio/VC/ce/dll/armv4i/MSVCR90.dll

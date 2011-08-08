@@ -9,11 +9,14 @@ INCLUDEPATH += . cpp
 
 # Input
 HEADERS += cpp/dart.hpp cpp/io.hpp cpp/myLabels.hpp cpp/qtwin.h \
-    cpp/dialogs.hpp
+    cpp/dialogs.hpp \
+    cpp/preferences.hpp
 FORMS += ui/mainWindow.ui \
-    ui/resultWindow.ui
+    ui/resultWindow.ui \
+    ui/preferences.ui
 SOURCES += cpp/dart.cpp cpp/io.cpp cpp/main.cpp cpp/qtwin.cpp \
-    cpp/dialogs.cpp
+    cpp/dialogs.cpp \
+    cpp/preferences.cpp
 QT += xml
 
 #RESOURCES += \
