@@ -26,6 +26,10 @@ See main.cpp for details. */
 #include <qstring.h>
 #include <time.h>
 
+#ifdef Q_OS_WINCE 
+#include <winbase.h>
+#endif
+
 #include "io.hpp"
 #include "dialogs.hpp"
 #include "preferences.hpp"

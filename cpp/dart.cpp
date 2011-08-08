@@ -49,7 +49,12 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iDelayBeforeNextPlace=2000;
 	iDelayBeforeNextPlaceTraining=1000;
 	
+#ifdef Q_OS_WINCE
+	// "error: unresolved external symbol time" when compiling for WinCE
+	srand(GetTickCount());
+#elif
 	srand(time(NULL));
+#endif
 	
 	myIO = new io(this);
 
@@ -716,15 +721,15 @@ void dart::mySleep(int ms) {
 	timer.start();
 	do {
 		QCoreApplication::processEvents(QEventLoop::AllEvents, ms);
-		#ifdef Q_OS_UNIX
+#ifdef Q_OS_UNIX
 		struct timespec t;
 		t.tv_sec  = 0;
 		t.tv_nsec = 10000;
 		nanosleep(&t,NULL);
-		#endif
-		#ifdef Q_OS_WIN32
+#endif
+#ifdef Q_OS_WIN32
 		_sleep(10);
-		#endif
+#endif
 	} while (timer.elapsed() < ms);
 }
 

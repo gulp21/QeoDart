@@ -9,6 +9,7 @@ qmake
 make -j4
 ./QeoDart
 
+
 === Qt Creator ===
 
 You can install Qt Creator using the package manager of your operating
@@ -16,9 +17,12 @@ system, or download it from http://qt.nokia.com/downloads.
 
 Open the project file QeoDart.pro in Qt Creator and press Ctrl+R.
 
+
 === Visual Studio (cross-compile for Windows CE) ===
 
-1. Download the source code of Qt (http://qt.nokia.com/downloads, qt-everywhere-opensource-src-4.x.y.tar.gz)
+1. Download the source code of Qt
+
+(http://qt.nokia.com/downloads, qt-everywhere-opensource-src-4.x.y.tar.gz)
 
 2. Compile Qt for WinCE + VS
 
