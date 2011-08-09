@@ -92,6 +92,10 @@ Q_OBJECT
 		QList<QString> qlImageLayers;
 		QList<QLabel*> qlMapLayers;
 		QList<QString> qlPreferedQcfLanguage;
+		
+		enGameModes iGameMode;
+		enAskForModes iAskForMode;
+		enToolMenuBarState iToolMenuBarState;
                 
                 bool bAgainstTime, bResetCursor;
 
@@ -99,8 +103,8 @@ Q_OBJECT
 		
 		int iPaddingTop; // px between toolbar and map
 		int iMarginTop; // px between window decoration and toolbar
-		int iNumberOfPlayers, iMaxPlaceCount, iCurrentQcf;
-		int iScoreAreaMode, iMaxTime;
+		int iNumberOfPlayers, iMaxPlaceCount, iCurrentQcf, iMaxTime;
+		int iScoreAreaMode; // 0=point only; 1=25%; 2=100%
 		
 		QString qsCurrentPlaceType;
 		
@@ -113,11 +117,7 @@ Q_OBJECT
 		
 		io *myIO;
 		
-		bool bAcceptingClickEvent;
-		
-		enGameModes iGameMode;
-		enAskForModes iAskForMode;
-		enToolMenuBarState iToolMenuBarState;
+		bool bAcceptingClickEvent, bAcceptingResizeEvent;
 		
 		int iCurrentPlayer, iPlaceCount, iTrainingPlaceNumber;
 		int iDelayNextCircle, iDelayBeforeShowingMark, iDelayBeforeNextPlayer, iDelayBeforeNextPlace, iDelayBeforeNextPlaceTraining;

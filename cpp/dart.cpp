@@ -19,26 +19,19 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	           << tr("Completely Wrong!") << tr("That wasn't much of a hit…") << tr("Missed completely!")
 	           << tr("Read wrongly?") << tr("Clicked wrongly?") << tr("D'oh!");
 	
-	iPaddingTop=0;
-	iMarginTop=0;
-	dZoomFactor=1;
-	iMaxPlaceCount=2;
 	iPlaceCount=0;
 	iCurrentPlayer=0;
-	iAskForMode=enPositions;
-	iNumberOfPlayers=2; // TODO we shouldn't change it in training mode (iNumberOfPlayersTrainingCache)
-	qsCurrentPlaceType="city;state;town";
 	bAcceptingClickEvent=TRUE;
+	bAcceptingResizeEvent=FALSE;
 	dPxToKm=1;
-	iCurrentQcf=0;
+	iCurrentQcf=0; // TODO allow saving name;
 	iScoreAreaMode=1;
 	iTrainingPlaceNumber=-1;
-        bAgainstTime=FALSE;
-        iMaxTime=20;
-        iGameMode=enLocal;
-	qlPreferedQcfLanguage << "de" << "en" << "default";
-	bResetCursor=TRUE;
-	iToolMenuBarState=enBoth;
+	iPaddingTop=0;
+	iMarginTop=0;
+	
+	myIO = new io(this);
+	myIO->vLoadSettings();
         
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
@@ -52,11 +45,9 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 #ifdef Q_OS_WINCE
 	// "error: unresolved external symbol time" when compiling for WinCE
 	srand(GetTickCount());
-#elif
+#else
 	srand(time(NULL));
 #endif
-	
-	myIO = new io(this);
 
 	setupUi(this);
 	toolBar->setMovable(FALSE);
@@ -206,6 +197,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	vSetPlaceType(qsCurrentPlaceType);
 	if(bAgainstTime) actionAgainst_Time->trigger();
 	else vSetAgainstTime();
+	
+	vSetNumberOfPlayers(iNumberOfPlayers);
 	switch(iGameMode) {
 		case enTraining:
 			actionTraining->trigger(); break;
@@ -226,7 +219,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	gridLayout->removeWidget(lblCurrentRound); // we do not want to seg fault
 	gridLayout->addWidget(lblCurrentRound,0,4);
 	
-	vResize(1); // TODO saved value?
+	bAcceptingResizeEvent=TRUE;
+	vResize(dZoomFactor);
 	
 	show();
 	
@@ -245,7 +239,7 @@ dart::~dart(){
 void dart::vDrawDistanceCircles(int n, int count) {
 	bool drewCircle=FALSE;
 	
-	for(int i=0; i<iNumberOfPlayers; i++) {//draw circles for every player
+	for(int i=0; i<iNumberOfPlayers; i++) { // draw circles for each player
 		if(count*RADIUS+3*PENWIDTH < qlScoreHistory[i][n-1].diffPx) {
 			vDrawCircle(qlScoreHistory[i][n-1].x,qlScoreHistory[i][n-1].y,(count+1)*RADIUS,i);
 			drewCircle=TRUE;
@@ -312,7 +306,9 @@ void dart::vSetPlaceType(QString placetype) {
 
 void dart::vSetAgainstTime() {
 	if( bCanLoseScore() ) return;
-	vSetAgainstTime(actionAgainst_Time->isChecked());	
+	vSetAgainstTime(actionAgainst_Time->isChecked());
+
+	myIO->settings->setValue("bAgainstTime", bAgainstTime);	
 }
 // resetting timer
 void dart::vSetAgainstTime(bool enable) {
@@ -342,6 +338,8 @@ void dart::vSetNumberOfPlayers() {
 		if(msgBox.exec()==QMessageBox::Cancel) return;
 	}
 	if(ok) vSetNumberOfPlayers(n);
+	
+	myIO->settings->setValue("iNumberOfPlayers", iNumberOfPlayers);
 }
 void dart::vSetNumberOfPlayers(int n) {
 	iNumberOfPlayers=n;
@@ -445,6 +443,8 @@ void dart::vSetNumberOfPlayers(int n) {
 }
 
 void dart::resizeEvent(QResizeEvent *event) {
+	if(!bAcceptingResizeEvent) return;
+	
 	//maybe we want to preserve the shape of the window TODO use timer?
 // 	int w=this->width(), h=this->height()-toolBar->height()-menubar->height(), n=this->width()<this->height()-toolBar->height()-menubar->height()?this->width():this->height()-toolBar->height()-menubar->height();
 // 	cout << w << " " << h << endl;
@@ -472,6 +472,8 @@ void dart::resizeEvent(QResizeEvent *event) {
 	gridLayoutWidget->setGeometry(QRect(0,0,600*dZoomFactor+1,iPaddingTop+50));
 
 	qDebug() << "[i] iPaddingTop" << iPaddingTop << "iMarginTop" << iMarginTop << "dZoomFactor" << dZoomFactor << "fontSize" << iGetFontSize();
+	
+	myIO->settings->setValue("dZoomFactor", dZoomFactor);
 }
 
 void dart::vResize(double dNewZoomFactor) {
@@ -764,6 +766,8 @@ void dart::vSetGameMode() {
 	} else {
 		qDebug() << "[E] vSetGameMode: unknown sender";
 	}
+	
+	myIO->settings->setValue("iGameMode", iGameMode);
 }
 void dart::vSetGameMode(enGameModes mode) {
 	switch(iGameMode) {
@@ -820,6 +824,8 @@ void dart::vSetAskForMode() {
 	} else {
 		qDebug() << "[E] vSetAskForMode: unknown sender";
 	}
+	
+	myIO->settings->setValue("iAskForMode", iAskForMode);
 }
 void dart::vSetAskForMode(enAskForModes mode) {
 	iAskForMode=mode;
@@ -1268,6 +1274,8 @@ void dart::vSetToolMenuBarState() {
 	}
 	
 	resizeEvent(0);
+	
+	myIO->settings->setValue("iToolMenuBarState", iToolMenuBarState);
 }
 void dart::vSetToolMenuBarState(enToolMenuBarState state) {
 	iToolMenuBarState=state;

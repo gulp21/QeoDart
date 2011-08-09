@@ -9,10 +9,11 @@ See main.cpp for details. */
 
 using namespace std;
 
-io::io(dart *TDart) : myDart(TDart){
+io::io(dart *TDart) : myDart(TDart) {
 }
  
-io::~io(){
+io::~io() {
+	delete settings;
 }
 
 // looks for .qcfx files and adds valid files to qlQcfxFiles;
@@ -21,13 +22,14 @@ int io::iFindQcf() {
 	
 	QList<QDir> qlQcfDirs;
 	qlQcfDirs.append(QDir(QCoreApplication::applicationDirPath ()+"/qcf"));
-	qlQcfDirs.append(QDir(QDir::homePath()+"/.config/QeoDart/qcf"));
-	#ifdef Q_OS_UNIX
+#ifdef Q_OS_UNIX
 	qlQcfDirs.append(QDir("/usr/share/QeoDart/qcf"));
-	#endif
-	#ifdef Q_OS_WIN32
+	qlQcfDirs.append(QDir(QDir::homePath()+"/.config/QeoDart/qcf"));
+#endif
+#ifdef Q_OS_WIN32
 	qlQcfDirs.append(QDir(getenv("PROGRAMFILES")));
-	#endif
+	qlQcfDirs.append(QDir(getenv("APPDATA")+"/QeoDart/qcf"));
+#endif
 	
 	for(int i=0; i<qlQcfDirs.count(); i++) {
 		QStringList filters;
@@ -97,15 +99,13 @@ QString io::qsGetMapName(QDomDocument &doc) { // TODO read complete meta data
 	if(!n.isNull()) {
 		QDomElement e = n.toElement();
 		if(!e.isNull()) {
-			if(e.tagName()=="name") {
-				QString n="NONAME";
-				for(int i=0; i<myDart->qlPreferedQcfLanguage.count() && n=="NONAME"; i++) {
-					if(e.attribute(myDart->qlPreferedQcfLanguage[i],"NONAME")!="NONAME") {
-						n=e.attribute(myDart->qlPreferedQcfLanguage[i],"NONAME");
-					}
+			QString n="NONAME";
+			for(int i=0; i<myDart->qlPreferedQcfLanguage.count() && n=="NONAME"; i++) {
+				if(e.attribute(myDart->qlPreferedQcfLanguage[i],"NONAME")!="NONAME") {
+					n=e.attribute(myDart->qlPreferedQcfLanguage[i],"NONAME");
 				}
-				return n;
 			}
+			return n;
 		} else {
 			qDebug() << "[W] file has broken <name>";
 			return "NONAME";
@@ -274,6 +274,7 @@ void io::vFillCurrentTypePlaces() {
 	myDart->qlCurrentTypePlaces.clear();
 	
 	QString regexp=myDart->qsCurrentPlaceType.replace(";","|");
+	if(regexp.length()==0) regexp="|";
 	if(regexp[regexp.length()-1]=='|') regexp=regexp.left(regexp.length()-1);
 	
 	for(int i=0;i<max;i++) {
@@ -290,6 +291,8 @@ void io::vFillCurrentTypePlaces() {
 	} else {
 		qDebug() << "[i] found" << myDart->qlCurrentTypePlaces.count() << "places for current place type";
 	}
+	
+	settings->setValue("qsCurrentPlaceType", myDart->qsCurrentPlaceType);
 }
 
 int io::iReadOsm(QString filename) {
@@ -430,4 +433,43 @@ int io::iWriteQcf(QList<place> &places, qcfFile &f) {
 	file.close();
 	
 	return 0;
+}
+
+void io::vLoadSettings() {
+	QString configPath=QCoreApplication::applicationDirPath()+"/settings.conf";
+	
+	if( !QFile::exists(configPath) ) {
+		qDebug() << "[i] no" << configPath << "-> not portable";
+#ifdef Q_OS_UNIX
+		configPath=QDir::homePath()+"/.config/QeoDart/settings.conf";
+#endif
+#ifdef Q_OS_WIN32
+		configPath=getenv("APPDATA")+"/QeoDart/settings.conf";
+#endif
+	}
+	
+	qDebug() << "[i] using conf file" << configPath;
+	
+	settings = new QSettings(configPath, QSettings::IniFormat);
+	
+	qDebug()<<settings->fileName();
+	
+	myDart->dZoomFactor=settings->value("dZoomFactor",1).toDouble();
+		if(myDart->dZoomFactor==0) myDart->dZoomFactor=1;
+	myDart->iMaxPlaceCount=settings->value("iMaxPlaceCount",10).toInt(); //writeTODO
+		if(myDart->iMaxPlaceCount==0) myDart->iMaxPlaceCount=10;
+	myDart->iAskForMode=static_cast<enAskForModes>(settings->value("iAskForMode",enPositions).toInt());
+		if(myDart->iAskForMode!=enPositions && myDart->iAskForMode!=enNames) myDart->iAskForMode=enPositions;
+	myDart->iNumberOfPlayers=settings->value("iNumberOfPlayers",1).toInt();// TODO we shouldn't change it in training mode (iNumberOfPlayersTrainingCache)
+		if(myDart->iNumberOfPlayers==0) myDart->iNumberOfPlayers=1;
+	myDart->qsCurrentPlaceType=settings->value("qsCurrentPlaceType","").toString();
+	myDart->bAgainstTime=settings->value("bAgainstTime",FALSE).toBool();
+	myDart->iMaxTime=settings->value("iMaxTime",20).toInt(); //writeTODO
+		if(myDart->iMaxTime==0) myDart->iMaxTime=20;
+	myDart->iGameMode=static_cast<enGameModes>(settings->value("iGameMode",enLocal).toInt());
+		if(myDart->iGameMode!=enTraining && myDart->iGameMode!=enLocal && myDart->iGameMode!=enNetwork) myDart->iGameMode=enLocal;
+	myDart->qlPreferedQcfLanguage << "de" << "en" << "default"; // TODO//writeTODO
+	myDart->bResetCursor=settings->value("bResetCursor",TRUE).toBool();//writeTODO
+	myDart->iToolMenuBarState=static_cast<enToolMenuBarState>(settings->value("iToolMenuBarState",enBoth).toInt());
+		if(myDart->iToolMenuBarState!=enBoth && myDart->iToolMenuBarState!=enMenuBarOnly && myDart->iToolMenuBarState!=enToolBarOnly) myDart->iToolMenuBarState=enBoth;
 }

@@ -14,6 +14,7 @@ class preferences : public QDialog, public Ui::preferences {
 		preferences (dart*, io*, QDialog *parent = 0);
 		~preferences();
 	private slots:
+		void vSettingChanged();
 	private:
 		
 };

@@ -10,6 +10,7 @@ See main.cpp for details. */
 #include <QWidget>
 #include <QDomDocument>
 #include <QFile>
+#include <QSettings>
 
 struct place;
 struct qcfFile;
@@ -22,6 +23,8 @@ class io : public QWidget {
 	dart *myDart;
 	
 	public:
+		QSettings *settings;	
+		
 		io(dart*);
 		~io();
 		int iReadQcf(QString mapname);
@@ -30,6 +33,7 @@ class io : public QWidget {
 		int iFindQcf();
 		int iCheckQcf(QFile &file, QDomDocument &doc);
 		void vFillCurrentTypePlaces();
+		void vLoadSettings();
 		QString qsGetMapName(QDomDocument &doc);
 // 	private:
 };
