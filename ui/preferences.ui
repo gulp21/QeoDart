@@ -23,7 +23,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -46,7 +46,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="cbLanguage">
+             <widget class="QComboBox" name="cobLanguage">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -70,7 +70,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit">
+           <widget class="QLineEdit" name="lePreferedQcfLanguage">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -115,7 +115,7 @@ p, li { white-space: pre-wrap; }
              </widget>
             </item>
             <item>
-             <widget class="QSpinBox" name="spinBox_2">
+             <widget class="QSpinBox" name="spbNumberOfPlayers">
               <property name="minimum">
                <number>2</number>
               </property>
@@ -156,7 +156,7 @@ p, li { white-space: pre-wrap; }
              </widget>
             </item>
             <item>
-             <widget class="QSpinBox" name="spinBox">
+             <widget class="QSpinBox" name="spbMaxTime">
               <property name="suffix">
                <string>s</string>
               </property>
@@ -198,7 +198,7 @@ p, li { white-space: pre-wrap; }
            </layout>
           </item>
           <item>
-           <widget class="QCheckBox" name="checkBox">
+           <widget class="QCheckBox" name="cbAutoNewGame">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -226,7 +226,7 @@ p, li { white-space: pre-wrap; }
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QComboBox" name="comboBox">
+             <widget class="QComboBox" name="cobScoreAreaMode">
               <property name="whatsThis">
                <string>When calculating the scores, QeoDart respects the whole area of the place. This area is discribed by a rectangle put around it. As the area of this rectangle often includes areas of other places, the default is accepting only the inner 25% of the rectangle.</string>
               </property>
@@ -255,7 +255,10 @@ p, li { white-space: pre-wrap; }
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QComboBox" name="comboBox_2">
+             <widget class="QComboBox" name="cobGradeSystem">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <item>
                <property name="text">
                 <string>German (best: 1.0 - worst: 6.0)</string>
@@ -276,7 +279,10 @@ p, li { white-space: pre-wrap; }
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QSpinBox" name="spinBox_3">
+             <widget class="QSpinBox" name="spbLettersPerSecond">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="maximumSize">
                <size>
                 <width>44</width>
@@ -325,71 +331,6 @@ p, li { white-space: pre-wrap; }
           <string>Delays</string>
          </property>
          <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox">
-            <property name="suffix">
-             <string>s</string>
-            </property>
-            <property name="maximum">
-             <double>10.000000000000000</double>
-            </property>
-            <property name="singleStep">
-             <double>0.100000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
-            <property name="suffix">
-             <string>s</string>
-            </property>
-            <property name="maximum">
-             <double>10.000000000000000</double>
-            </property>
-            <property name="singleStep">
-             <double>0.100000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
-            <property name="suffix">
-             <string>s</string>
-            </property>
-            <property name="maximum">
-             <double>10.000000000000000</double>
-            </property>
-            <property name="singleStep">
-             <double>0.100000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_4">
-            <property name="suffix">
-             <string>s</string>
-            </property>
-            <property name="maximum">
-             <double>10.000000000000000</double>
-            </property>
-            <property name="singleStep">
-             <double>0.100000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_5">
-            <property name="suffix">
-             <string>s</string>
-            </property>
-            <property name="maximum">
-             <double>10.000000000000000</double>
-            </property>
-            <property name="singleStep">
-             <double>0.100000000000000</double>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_4">
             <property name="text">
@@ -422,6 +363,56 @@ p, li { white-space: pre-wrap; }
            <widget class="QLabel" name="label_8">
             <property name="text">
              <string>before next place (training)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="spbDelayMark">
+            <property name="suffix">
+             <string>ms</string>
+            </property>
+            <property name="maximum">
+             <number>5000</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="spbDelayNextCircle">
+            <property name="suffix">
+             <string>ms</string>
+            </property>
+            <property name="maximum">
+             <number>5000</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="spbDelayNextPlayer">
+            <property name="suffix">
+             <string>ms</string>
+            </property>
+            <property name="maximum">
+             <number>5000</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QSpinBox" name="spbDelayNextPlace">
+            <property name="suffix">
+             <string>ms</string>
+            </property>
+            <property name="maximum">
+             <number>5000</number>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QSpinBox" name="spbDelayNextPlaceTraining">
+            <property name="suffix">
+             <string>ms</string>
+            </property>
+            <property name="maximum">
+             <number>5000</number>
             </property>
            </widget>
           </item>

@@ -105,6 +105,7 @@ Q_OBJECT
 		int iMarginTop; // px between window decoration and toolbar
 		int iNumberOfPlayers, iMaxPlaceCount, iCurrentQcf, iMaxTime;
 		int iScoreAreaMode; // 0=point only; 1=25%; 2=100%
+		int iDelayNextCircle, iDelayMark, iDelayNextPlayer, iDelayNextPlace, iDelayNextPlaceTraining;
 		
 		QString qsCurrentPlaceType;
 		
@@ -120,7 +121,6 @@ Q_OBJECT
 		bool bAcceptingClickEvent, bAcceptingResizeEvent;
 		
 		int iCurrentPlayer, iPlaceCount, iTrainingPlaceNumber;
-		int iDelayNextCircle, iDelayBeforeShowingMark, iDelayBeforeNextPlayer, iDelayBeforeNextPlace, iDelayBeforeNextPlaceTraining;
                 int iTimerElapsed;
                 
 		QList<QList<QLabel*> > qlCircleLabels; //contains all circles (incl. points) for each user

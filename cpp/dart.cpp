@@ -8,6 +8,8 @@ See main.cpp for details. */
 
 using namespace std;
 
+QAction *qa;
+
 dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	qlImageLayers << "background" << "borders" << "rivers" << "elevations";
@@ -37,13 +39,13 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
         connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
 	
 	iDelayNextCircle=200;
-	iDelayBeforeShowingMark=500;
-	iDelayBeforeNextPlayer=1000;
-	iDelayBeforeNextPlace=2000;
-	iDelayBeforeNextPlaceTraining=1000;
+	iDelayMark=500;
+	iDelayNextPlayer=1000;
+	iDelayNextPlace=2000;
+	iDelayNextPlaceTraining=1000;
 	
+// "error: unresolved external symbol time" when compiling for WinCE
 #ifdef Q_OS_WINCE
-	// "error: unresolved external symbol time" when compiling for WinCE
 	srand(GetTickCount());
 #else
 	srand(time(NULL));
@@ -166,7 +168,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	btView->setPopupMode(QToolButton::InstantPopup);
 	btView->setToolButtonStyle(Qt::ToolButtonTextOnly);
 	btView->setText(tr("View"));
-	toolBar->addWidget(btView);
+	qa=toolBar->addWidget(btView);
 	
 	
 	if(myIO->iFindQcf()==0) {
@@ -181,7 +183,10 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	agMap = new QActionGroup(this);
 	for(int i=0; i<qlQcfxFiles.count(); i++) {
 		QAction *menuItem;
+//produces crash in WinCE
+#ifndef Q_OS_WINCE
 		menuItem = new QAction(QIcon(qlQcfxFiles[i].path+"/background.png"), qlQcfxFiles[i].mapName, this);
+#endif
 		menuItem->setToolTip(QString(tr("Load map of %1")).arg(qlQcfxFiles[i].mapName));
 		menuItem->setCheckable(TRUE);
 		connect(menuItem, SIGNAL(triggered()), this, SLOT(vReadQcf()));
@@ -474,6 +479,17 @@ void dart::resizeEvent(QResizeEvent *event) {
 	qDebug() << "[i] iPaddingTop" << iPaddingTop << "iMarginTop" << iMarginTop << "dZoomFactor" << dZoomFactor << "fontSize" << iGetFontSize();
 	
 	myIO->settings->setValue("dZoomFactor", dZoomFactor);
+	
+	
+	
+	//TODO hide labels when toolbar becomes to small
+	//fix recursion!
+	if(!toolBar->layout()->itemAt(toolBar->layout()->count()-1)->widget()->isVisible()) actionNew_Game->setText("");
+	else actionNew_Game->setText("New Game");
+	
+	qDebug()<< reinterpret_cast< long >(&qa)
+	        << reinterpret_cast< long >(toolBar->layout()->itemAt(7))
+	        << reinterpret_cast< long >(toolBar->layout()->itemAt(7)->widget());
 }
 
 void dart::vResize(double dNewZoomFactor) {
@@ -586,7 +602,7 @@ void dart::vMouseClickEvent(int x, int y) {
 	
 	if(iCurrentPlayer<iNumberOfPlayers-1) { // next player
 		
-		mySleep(iDelayBeforeNextPlayer);
+		mySleep(iDelayNextPlayer);
 		
 		if(bResetCursor) QCursor::setPos(QWidget::x()+5,QWidget::y()+iPaddingTop+iMarginTop+10);
 		
@@ -615,8 +631,8 @@ void dart::vMouseClickEvent(int x, int y) {
                 
                 vShowComment();
 		
-		if(iGameMode==enTraining) mySleep(iDelayBeforeNextPlaceTraining);
-		else mySleep(iDelayBeforeNextPlace);
+		if(iGameMode==enTraining) mySleep(iDelayNextPlaceTraining);
+		else mySleep(iDelayNextPlace);
                 
                 lblComment->setText("");
 		
@@ -1178,7 +1194,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 	
 	if(iCurrentPlayer<iNumberOfPlayers-1) { // next player
 		
-		mySleep(iDelayBeforeNextPlayer);
+		mySleep(iDelayNextPlayer);
 		iCurrentPlayer++;
 		vRemoveAllCircles();
 		qDebug()<<"f";
@@ -1208,8 +1224,8 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
                 
                 vShowComment();
 		
-		if(iGameMode==enTraining) mySleep(iDelayBeforeNextPlaceTraining);
-		else mySleep(iDelayBeforeNextPlace);
+		if(iGameMode==enTraining) mySleep(iDelayNextPlaceTraining);
+		else mySleep(iDelayNextPlace);
                 
                 lblComment->setText("");
 		

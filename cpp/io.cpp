@@ -101,9 +101,7 @@ QString io::qsGetMapName(QDomDocument &doc) { // TODO read complete meta data
 		if(!e.isNull()) {
 			QString n="NONAME";
 			for(int i=0; i<myDart->qlPreferedQcfLanguage.count() && n=="NONAME"; i++) {
-				if(e.attribute(myDart->qlPreferedQcfLanguage[i],"NONAME")!="NONAME") {
-					n=e.attribute(myDart->qlPreferedQcfLanguage[i],"NONAME");
-				}
+				n=e.attribute(myDart->qlPreferedQcfLanguage[i],"NONAME");
 			}
 			return n;
 		} else {
@@ -197,9 +195,8 @@ int io::iReadQcf(QString mapname) {
 				newPlace.name="NONAME";
 				for(int i=0; i<myDart->qlPreferedQcfLanguage.count() && newPlace.name=="NONAME"; i++) {
 					if(myDart->qlPreferedQcfLanguage[i]=="default") {
-						if(e.attribute("name","NONAME")!="NONAME")
-							newPlace.name=e.attribute("name","NONAME");
-					} else if(e.attribute("name:"+myDart->qlPreferedQcfLanguage[i],"NONAME")!="NONAME") {
+						newPlace.name=e.attribute("name","NONAME");
+					} else {
 						newPlace.name=e.attribute("name:"+myDart->qlPreferedQcfLanguage[i],"NONAME");
 					}
 				}
@@ -472,4 +469,5 @@ void io::vLoadSettings() {
 	myDart->bResetCursor=settings->value("bResetCursor",TRUE).toBool();//writeTODO
 	myDart->iToolMenuBarState=static_cast<enToolMenuBarState>(settings->value("iToolMenuBarState",enBoth).toInt());
 		if(myDart->iToolMenuBarState!=enBoth && myDart->iToolMenuBarState!=enMenuBarOnly && myDart->iToolMenuBarState!=enToolBarOnly) myDart->iToolMenuBarState=enBoth;
+	//TODO myDart->iDelayNextCircle…
 }
