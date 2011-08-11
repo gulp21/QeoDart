@@ -19,6 +19,8 @@ You should have received a copy of the GNU General Public License along with thi
 int main(int argc, char* argv[]) {
 	QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8")); 
 	
+	//QLocale::system().name().left(2)
+	
         QApplication a(argc, argv);
         dart w;
         w.show();

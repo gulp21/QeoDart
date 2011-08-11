@@ -91,7 +91,6 @@ Q_OBJECT
 		QList<QLabel*> qlPointLabels;
 		QList<QString> qlImageLayers;
 		QList<QLabel*> qlMapLayers;
-		QList<QString> qlPreferedQcfLanguage;
 		
 		enGameModes iGameMode;
 		enAskForModes iAskForMode;
@@ -103,16 +102,19 @@ Q_OBJECT
 		
 		int iPaddingTop; // px between toolbar and map
 		int iMarginTop; // px between window decoration and toolbar
-		int iNumberOfPlayers, iMaxPlaceCount, iCurrentQcf, iMaxTime;
+		int iNumberOfPlayers, iMaxPlaceCount, iPlaceCount, iCurrentQcf, iMaxTime;
 		int iScoreAreaMode; // 0=point only; 1=25%; 2=100%
-		int iDelayNextCircle, iDelayMark, iDelayNextPlayer, iDelayNextPlace, iDelayNextPlaceTraining;
+		int iDelayNextCircle, iDelayNextPlayer, iDelayNextPlace, iDelayNextPlaceTraining;
 		
-		QString qsCurrentPlaceType;
+		QString qsCurrentPlaceType, qsPreferedQcfLanguage;
 		
 		void vMouseClickEvent(int x, int y);
 		void mySleep(int ms);
 		void vShowCurrentPlace();
 		void vSetPlaceType(QString placetype);
+		void vRepaintCommonLabels();
+		
+		bool bCanLoseScore();
 
 	private:
 		
@@ -120,8 +122,7 @@ Q_OBJECT
 		
 		bool bAcceptingClickEvent, bAcceptingResizeEvent;
 		
-		int iCurrentPlayer, iPlaceCount, iTrainingPlaceNumber;
-                int iTimerElapsed;
+		int iCurrentPlayer, iTrainingPlaceNumber, iTimerElapsed;
                 
 		QList<QList<QLabel*> > qlCircleLabels; //contains all circles (incl. points) for each user
 // 		QList<QLabel*> qlPlayerLabel;
@@ -143,7 +144,6 @@ Q_OBJECT
 		
 		void closeEvent(QCloseEvent *event);
 		void resizeEvent(QResizeEvent *event);
-		void vRepaintCommonLabels();
 		void vRepaintPlayerLabels();
 		void vRepaintMap();
 		void vDrawCircle(int x, int y,  int r, int player);
@@ -181,8 +181,6 @@ Q_OBJECT
 		int iGetPaddingTop();
 		int iFindInputInList(double &f);
 		
-		bool bCanLoseScore();
-		
 		QColor qcGetColorOfPlayer(int n);
 		
 		QString qsSimplifyString(QString str, int l);
@@ -190,7 +188,6 @@ Q_OBJECT
 	private slots:
 		void vClose();
 		void vShowAllPlaces();
-		void vNewGame();
 		void vResize(double dNewZoomFactor=1);
 		void vSetGameMode();
 		void vSetAskForMode();
@@ -204,6 +201,7 @@ Q_OBJECT
 		
 	public slots:
 		void vReadQcf();
+		void vNewGame();
 };
 
 #include "myLabels.hpp"

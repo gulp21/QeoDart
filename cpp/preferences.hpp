@@ -15,6 +15,9 @@ class preferences : public QDialog, public Ui::preferences {
 		~preferences();
 	private slots:
 		void vSettingChanged();
+		void vReset();
+		void vRestoreDefaults();
+		void vAccepted();
 	private:
 		
 };

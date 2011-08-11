@@ -38,12 +38,6 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
 	
-	iDelayNextCircle=200;
-	iDelayMark=500;
-	iDelayNextPlayer=1000;
-	iDelayNextPlace=2000;
-	iDelayNextPlaceTraining=1000;
-	
 // "error: unresolved external symbol time" when compiling for WinCE
 #ifdef Q_OS_WINCE
 	srand(GetTickCount());
@@ -734,6 +728,8 @@ int dart::iGetUnzoomed(double x) {
 }
 
 void dart::mySleep(int ms) {
+	if(ms<0 || ms>5000) ms=0;
+	
 	Q_ASSERT(QCoreApplication::instance());
 	QTime timer;
 	timer.start();

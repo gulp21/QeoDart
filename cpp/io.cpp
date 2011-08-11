@@ -92,7 +92,14 @@ int io::iCheckQcf(QFile &file, QDomDocument &doc) {
 	return 0;
 }
 
+QStringList io::qslGetPreferedQcfLanguage() {
+	QString l=myDart->qsPreferedQcfLanguage;
+	return l.replace("ui","de").split(",");// TODO ui=pref
+}
+
 QString io::qsGetMapName(QDomDocument &doc) { // TODO read complete meta data
+	QStringList qslPreferedQcfLanguage=qslGetPreferedQcfLanguage();
+	
 	QDomElement docElem = doc.documentElement();
 	
 	QDomNode n = docElem.firstChildElement("name");
@@ -100,8 +107,8 @@ QString io::qsGetMapName(QDomDocument &doc) { // TODO read complete meta data
 		QDomElement e = n.toElement();
 		if(!e.isNull()) {
 			QString n="NONAME";
-			for(int i=0; i<myDart->qlPreferedQcfLanguage.count() && n=="NONAME"; i++) {
-				n=e.attribute(myDart->qlPreferedQcfLanguage[i],"NONAME");
+			for(int i=0; i<qslPreferedQcfLanguage.count() && n=="NONAME"; i++) {
+				n=e.attribute(qslPreferedQcfLanguage[i],"NONAME");
 			}
 			return n;
 		} else {
@@ -166,6 +173,8 @@ int io::iReadQcf(QString mapname) {
 	myDart->actionCities->setVisible(FALSE);
 	myDart->actionTowns->setVisible(FALSE);
 	
+	QStringList qslPreferedQcfLanguage=qslGetPreferedQcfLanguage();
+	
 	QDomElement docElem = doc.documentElement();
 	
 	QDomNode n = docElem.firstChild();
@@ -193,11 +202,11 @@ int io::iReadQcf(QString mapname) {
 				newPlace.dimx=e.attribute("dimx","0").toInt();
 				newPlace.dimy=e.attribute("dimy","0").toInt();
 				newPlace.name="NONAME";
-				for(int i=0; i<myDart->qlPreferedQcfLanguage.count() && newPlace.name=="NONAME"; i++) {
-					if(myDart->qlPreferedQcfLanguage[i]=="default") {
+				for(int i=0; i<qslPreferedQcfLanguage.count() && newPlace.name=="NONAME"; i++) {
+					if(qslPreferedQcfLanguage[i]=="default") {
 						newPlace.name=e.attribute("name","NONAME");
 					} else {
-						newPlace.name=e.attribute("name:"+myDart->qlPreferedQcfLanguage[i],"NONAME");
+						newPlace.name=e.attribute("name:"+qslPreferedQcfLanguage[i],"NONAME");
 					}
 				}
 				newPlace.placeType=e.attribute("placetype","");
@@ -433,15 +442,15 @@ int io::iWriteQcf(QList<place> &places, qcfFile &f) {
 }
 
 void io::vLoadSettings() {
-	QString configPath=QCoreApplication::applicationDirPath()+"/settings.conf";
+	QString configPath=QCoreApplication::applicationDirPath()+"/QeoDart.conf";
 	
 	if( !QFile::exists(configPath) ) {
 		qDebug() << "[i] no" << configPath << "-> not portable";
 #ifdef Q_OS_UNIX
-		configPath=QDir::homePath()+"/.config/QeoDart/settings.conf";
+		configPath=QDir::homePath()+"/.config/QeoDart/QeoDart.conf";
 #endif
 #ifdef Q_OS_WIN32
-		configPath=getenv("APPDATA")+"/QeoDart/settings.conf";
+		configPath=getenv("APPDATA")+"/QeoDart/QeoDart.conf";
 #endif
 	}
 	
@@ -451,23 +460,49 @@ void io::vLoadSettings() {
 	
 	qDebug()<<settings->fileName();
 	
+	
+	// UI
+	
 	myDart->dZoomFactor=settings->value("dZoomFactor",1).toDouble();
-		if(myDart->dZoomFactor==0) myDart->dZoomFactor=1;
-	myDart->iMaxPlaceCount=settings->value("iMaxPlaceCount",10).toInt(); //writeTODO
-		if(myDart->iMaxPlaceCount==0) myDart->iMaxPlaceCount=10;
+	if(myDart->dZoomFactor<=0) myDart->dZoomFactor=1;
+	
 	myDart->iAskForMode=static_cast<enAskForModes>(settings->value("iAskForMode",enPositions).toInt());
-		if(myDart->iAskForMode!=enPositions && myDart->iAskForMode!=enNames) myDart->iAskForMode=enPositions;
+	if(myDart->iAskForMode!=enPositions && myDart->iAskForMode!=enNames) myDart->iAskForMode=enPositions;
+	
 	myDart->iNumberOfPlayers=settings->value("iNumberOfPlayers",1).toInt();// TODO we shouldn't change it in training mode (iNumberOfPlayersTrainingCache)
-		if(myDart->iNumberOfPlayers==0) myDart->iNumberOfPlayers=1;
+	if(myDart->iNumberOfPlayers<=0) myDart->iNumberOfPlayers=1;
+	
 	myDart->qsCurrentPlaceType=settings->value("qsCurrentPlaceType","").toString();
+	
 	myDart->bAgainstTime=settings->value("bAgainstTime",FALSE).toBool();
-	myDart->iMaxTime=settings->value("iMaxTime",20).toInt(); //writeTODO
-		if(myDart->iMaxTime==0) myDart->iMaxTime=20;
+	
 	myDart->iGameMode=static_cast<enGameModes>(settings->value("iGameMode",enLocal).toInt());
-		if(myDart->iGameMode!=enTraining && myDart->iGameMode!=enLocal && myDart->iGameMode!=enNetwork) myDart->iGameMode=enLocal;
-	myDart->qlPreferedQcfLanguage << "de" << "en" << "default"; // TODO//writeTODO
-	myDart->bResetCursor=settings->value("bResetCursor",TRUE).toBool();//writeTODO
+	if(myDart->iGameMode!=enTraining && myDart->iGameMode!=enLocal && myDart->iGameMode!=enNetwork) myDart->iGameMode=enLocal;
+	
 	myDart->iToolMenuBarState=static_cast<enToolMenuBarState>(settings->value("iToolMenuBarState",enBoth).toInt());
-		if(myDart->iToolMenuBarState!=enBoth && myDart->iToolMenuBarState!=enMenuBarOnly && myDart->iToolMenuBarState!=enToolBarOnly) myDart->iToolMenuBarState=enBoth;
-	//TODO myDart->iDelayNextCircle…
+	if(myDart->iToolMenuBarState!=enBoth && myDart->iToolMenuBarState!=enMenuBarOnly && myDart->iToolMenuBarState!=enToolBarOnly) myDart->iToolMenuBarState=enBoth;
+	
+	
+	// General
+	
+	myDart->qsPreferedQcfLanguage=settings->value("qsPreferedQcfLanguage","ui,default,en").toString();
+	
+	myDart->iMaxPlaceCount=settings->value("iMaxPlaceCount",10).toInt();
+	if(myDart->iMaxPlaceCount<=0) myDart->iMaxPlaceCount=10;
+	
+	myDart->iMaxTime=settings->value("iMaxTime",20).toInt();
+	if(myDart->iMaxTime<=0) myDart->iMaxTime=20;
+	
+	myDart->bResetCursor=settings->value("bResetCursor",TRUE).toBool();
+	
+	myDart->iScoreAreaMode=settings->value("iScoreAreaMode",1).toInt();
+	if(myDart->iScoreAreaMode<0 || myDart->iScoreAreaMode>2) myDart->iScoreAreaMode=1;
+	
+	
+	// Advanced
+	
+	myDart->iDelayNextCircle=settings->value("iDelayNextCircle",200).toInt();
+	myDart->iDelayNextPlayer=settings->value("iDelayNextPlayer",1000).toInt();
+	myDart->iDelayNextPlace=settings->value("iDelayNextPlace",2000).toInt();
+	myDart->iDelayNextPlaceTraining=settings->value("iDelayNextPlaceTraining",1000).toInt();
 }
