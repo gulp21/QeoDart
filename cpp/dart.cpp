@@ -8,8 +8,6 @@ See main.cpp for details. */
 
 using namespace std;
 
-QAction *qa;
-
 dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	qlImageLayers << "background" << "borders" << "rivers" << "elevations";
@@ -168,7 +166,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	btView->setPopupMode(QToolButton::InstantPopup);
 	btView->setToolButtonStyle(Qt::ToolButtonTextOnly);
 	btView->setText(tr("View"));
-	qa=toolBar->addWidget(btView);
+	toolBar->addWidget(btView);
 	
 	
 	if(myIO->iFindQcf()==0) {
@@ -486,10 +484,6 @@ void dart::resizeEvent(QResizeEvent *event) {
 	//fix recursion!
 	if(!toolBar->layout()->itemAt(toolBar->layout()->count()-1)->widget()->isVisible()) actionNew_Game->setText("");
 	else actionNew_Game->setText("New Game");
-	
-	qDebug()<< reinterpret_cast< long >(&qa)
-	        << reinterpret_cast< long >(toolBar->layout()->itemAt(7))
-	        << reinterpret_cast< long >(toolBar->layout()->itemAt(7)->widget());
 }
 
 void dart::vResize(double dNewZoomFactor) {
