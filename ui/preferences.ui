@@ -16,9 +16,6 @@
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
-  <property name="sizeGripEnabled">
-   <bool>true</bool>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">

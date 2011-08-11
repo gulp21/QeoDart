@@ -15,6 +15,7 @@ preferences::preferences(dart *TDart, io *TIO, QDialog *parent) : myDart(TDart),
 	connect(cbResetCursor, SIGNAL (clicked()), this, SLOT(vSettingChanged()));
 	//buttons
 	connect(buttonBox, SIGNAL (accepted()), this, SLOT(vAccepted()));
+	connect(buttonBox->button(QDialogButtonBox::Reset), SIGNAL (clicked()), this, SLOT(vReset()));
 	connect(buttonBox->button(QDialogButtonBox::RestoreDefaults), SIGNAL (clicked()), this, SLOT(vRestoreDefaults()));
 	
 	vReset();

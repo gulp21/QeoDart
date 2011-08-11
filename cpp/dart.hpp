@@ -129,6 +129,7 @@ Q_OBJECT
 		QList<QList<QLabel*> > qlPlayerLabels;
 		QList<QColor> qlColorsOfPlayers;
 		QList<QString> qlComments;
+		QList<int>qlToolbarOverflow;
 		
 		QLabel *lblMouseClickOverlay;
                 
@@ -174,6 +175,7 @@ Q_OBJECT
 		double dGetDistanceInKm(double px);
 		double dGetAverageMarkOfPlayer(int player);
 		double dGetAverageScoreOfPlayer(int player);
+		double dGetZoomed(int x);
 		
 		int iGetWindowSize();
 		int iGetUnzoomed(double x);
@@ -198,6 +200,7 @@ Q_OBJECT
 		void vSetNumberOfPlayers();
                 void vSetAgainstTime();
 		void vShowPreferences();
+		void vToolbarOverflow();
 		
 	public slots:
 		void vReadQcf();

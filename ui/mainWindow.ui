@@ -170,7 +170,7 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuGame">
@@ -182,6 +182,7 @@
     <addaction name="actionFind_Place"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
+    <addaction name="actionBla"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -275,6 +276,7 @@
     <addaction name="separator"/>
     <addaction name="actionMenu_Bar"/>
     <addaction name="actionConfigure"/>
+    <addaction name="actionBla"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -524,6 +526,14 @@
    </property>
    <property name="menuRole">
     <enum>QAction::AboutRole</enum>
+   </property>
+  </action>
+  <action name="actionBla">
+   <property name="text">
+    <string>bla</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
    </property>
   </action>
  </widget>
