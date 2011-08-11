@@ -129,11 +129,10 @@ Q_OBJECT
 		QList<QList<QLabel*> > qlPlayerLabels;
 		QList<QColor> qlColorsOfPlayers;
 		QList<QString> qlComments;
-		QList<int>qlToolbarOverflow;
 		
 		QLabel *lblMouseClickOverlay;
                 
-                QTimer *timer;
+                QTimer *timer, *resizeTimer;
 		
 		QActionGroup *agGameMode, *agAskForMode, *agMap;
 		

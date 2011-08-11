@@ -29,13 +29,16 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iTrainingPlaceNumber=-1;
 	iPaddingTop=0;
 	iMarginTop=0;
-	qlToolbarOverflow << 0 << 0 << 0;
 	
 	myIO = new io(this);
 	myIO->vLoadSettings();
         
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
+	
+        resizeTimer = new QTimer(this);
+	resizeTimer->setSingleShot(TRUE);
+        connect(resizeTimer, SIGNAL(timeout()), this, SLOT(vToolbarOverflow()));
 	
 // "error: unresolved external symbol time" when compiling for WinCE
 #ifdef Q_OS_WINCE
@@ -231,6 +234,8 @@ dart::~dart(){
 	//vSetNumberOfPlayers(0); // QGridLayout: Cannot add QLabel/lblTime to QGridLayout/gridLayout at row -1 column 4
         timer->stop();
         delete timer;
+	resizeTimer->stop();
+	delete resizeTimer;
         delete myIO;
 }
 
@@ -474,54 +479,93 @@ void dart::resizeEvent(QResizeEvent *event) {
 	
 	myIO->settings->setValue("dZoomFactor", dZoomFactor);
 	
+	resizeTimer->start(200);
 }
 
+// this function shorten the labels when the window becomes to narrow // TODO handle rename (e.g. mapname)
 void dart::vToolbarOverflow() {
-	//TODO hide labels when toolbar becomes to small
-	//fix recursion!
+	qDebug() << "[i] vToolbarOverflow";
+	
 	if(iToolMenuBarState==enMenuBarOnly) return;
 	
 	int d=0;
-	if(iToolMenuBarState==enToolBarOnly) d=1; // TODO FIXME
+	if(iToolMenuBarState==enToolBarOnly) d=1;
 	
 	QWidget *w;
 	w=toolBar->layout()->itemAt(toolBar->layout()->count()-1)->widget();
-	for(int i=0; i<2; i++) {
+	QToolButton *a;
+	QString shortText, longText;
+	
+	// while the last toolbar button is visible, extend the text of other items
+	for(int i=4; w->isVisible() && i>-1; i--) {
 		
-		QToolButton *a;
-		QString shortText, longText;
-		if(iToolMenuBarState==enBoth)
-		if(i==0) {
-			a=static_cast<QToolButton*>(toolBar->layout()->itemAt(0+d)->widget());
-			longText=tr("New Game");
-			shortText="";
-		} else if(i==1) {
-			a=static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget());
-			longText=QString(tr("Ask for: %1")).arg(iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place"));
-			shortText=iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place");
+		switch(i) {
+			case 0:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(0+d)->widget());
+				longText=tr("New Game");
+				shortText="";
+				break;
+			case 1:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget());
+				longText=QString(tr("Ask for: %1")).arg(iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place"));
+				shortText=iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place");
+				break;
+			case 2:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(6+d)->widget());
+				longText=QString(tr("Map: %1")).arg(qlQcfxFiles[iCurrentQcf].mapName);
+				shortText=QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName);
+				break;
+			case 3:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget());
+				longText=iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place");
+				shortText=iAskForMode==enNames ? tr("Name") : tr("Position");
+				break;
+			case 4:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(2+d)->widget());
+				longText=QString(tr("Players: %1")).arg(iNumberOfPlayers);
+				shortText=QString(tr("%1")).arg(iNumberOfPlayers);
+				break;
 		}
 		
-//		if(qlToolbarOverflow[0]==0 && !w->isVisible()) {
-//			if(w->pos().y()<5 && w->pos().y()!=0 /*&& w->pos().x()+w->width()<width()*/)
-//				qlToolbarOverflow[0]=width();
-//		}
-//		if (width()<=qlToolbarOverflow[0] || w->pos().y()==0) {
-////			a->setWindowIconText("");
-//			a->setText("");
-//		} else {
-//			a->setText(tr("New Game"));
-//		}
+		a->setText(longText);
 		
-		if(!w->isVisible()) {
-			a->setText(shortText);
-		} else {
-			a->setText(longText);
+		mySleep(1); // repaint
+		
+		if(!w->isVisible()) { // in case we showed to much text
+			a->setText(shortText); // undo it
+			break; // and stop showing any further text
 		}
-		repaint();
+	}
+	
+	// while the last toolbar button is not visible, shorten the text of other items
+	for(int i=0; !w->isVisible() && i<5; i++) {
+		
+		switch(i) {
+			case 0:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(0+d)->widget());
+				shortText="";
+				break;
+			case 1:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget());
+				shortText=iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place");
+				break;
+			case 2:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(6+d)->widget());
+				shortText=QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName);
+				break;
+			case 3:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget());
+				shortText=iAskForMode==enNames ? tr("Name") : tr("Position");
+				break;
+			case 4:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(2+d)->widget());
+				shortText=QString(tr("%1")).arg(iNumberOfPlayers);
+				break;
+		}
+		
+		a->setText(shortText);
+		
 		mySleep(1);
-		if(!w->isVisible()) a->setText(shortText);
-		
-		qDebug()<<"dddddd"<<qlToolbarOverflow[0]<<w->pos()<<width();
 	}
 }
 
