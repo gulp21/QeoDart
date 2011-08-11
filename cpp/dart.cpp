@@ -29,18 +29,13 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iTrainingPlaceNumber=-1;
 	iPaddingTop=0;
 	iMarginTop=0;
+	qlToolbarOverflow << 0 << 0 << 0;
 	
 	myIO = new io(this);
 	myIO->vLoadSettings();
         
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
-	
-	iDelayNextCircle=200;
-	iDelayMark=500;
-	iDelayNextPlayer=1000;
-	iDelayNextPlace=2000;
-	iDelayNextPlaceTraining=1000;
 	
 // "error: unresolved external symbol time" when compiling for WinCE
 #ifdef Q_OS_WINCE
@@ -114,6 +109,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionMenu_Bar,SIGNAL (triggered()), this, SLOT(vSetToolMenuBarState()));
 	actionMenu_Bar->setIcon(QIcon::fromTheme("show-menu"));
 	connect(actionToolbar,SIGNAL (triggered()), this, SLOT(vSetToolMenuBarState()));
+	connect(actionBla,SIGNAL (triggered()), this, SLOT(vToolbarOverflow()));
 	
 	connect(lineEdit,SIGNAL (returnPressed()), this, SLOT(vReturnPressedEvent()));
 	
@@ -478,12 +474,55 @@ void dart::resizeEvent(QResizeEvent *event) {
 	
 	myIO->settings->setValue("dZoomFactor", dZoomFactor);
 	
-	
-	
+}
+
+void dart::vToolbarOverflow() {
 	//TODO hide labels when toolbar becomes to small
 	//fix recursion!
-	if(!toolBar->layout()->itemAt(toolBar->layout()->count()-1)->widget()->isVisible()) actionNew_Game->setText("");
-	else actionNew_Game->setText("New Game");
+	if(iToolMenuBarState==enMenuBarOnly) return;
+	
+	int d=0;
+	if(iToolMenuBarState==enToolBarOnly) d=1; // TODO FIXME
+	
+	QWidget *w;
+	w=toolBar->layout()->itemAt(toolBar->layout()->count()-1)->widget();
+	for(int i=0; i<2; i++) {
+		
+		QToolButton *a;
+		QString shortText, longText;
+		if(iToolMenuBarState==enBoth)
+		if(i==0) {
+			a=static_cast<QToolButton*>(toolBar->layout()->itemAt(0+d)->widget());
+			longText=tr("New Game");
+			shortText="";
+		} else if(i==1) {
+			a=static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget());
+			longText=QString(tr("Ask for: %1")).arg(iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place"));
+			shortText=iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place");
+		}
+		
+//		if(qlToolbarOverflow[0]==0 && !w->isVisible()) {
+//			if(w->pos().y()<5 && w->pos().y()!=0 /*&& w->pos().x()+w->width()<width()*/)
+//				qlToolbarOverflow[0]=width();
+//		}
+//		if (width()<=qlToolbarOverflow[0] || w->pos().y()==0) {
+////			a->setWindowIconText("");
+//			a->setText("");
+//		} else {
+//			a->setText(tr("New Game"));
+//		}
+		
+		if(!w->isVisible()) {
+			a->setText(shortText);
+		} else {
+			a->setText(longText);
+		}
+		repaint();
+		mySleep(1);
+		if(!w->isVisible()) a->setText(shortText);
+		
+		qDebug()<<"dddddd"<<qlToolbarOverflow[0]<<w->pos()<<width();
+	}
 }
 
 void dart::vResize(double dNewZoomFactor) {
@@ -530,7 +569,7 @@ void dart::vRepaintCommonLabels() {
 }
 
 int dart::iGetFontSize() {
-	return 20*dZoomFactor<10 ? 10 : 20*dZoomFactor;
+	return (20-iNumberOfPlayers/2)*dZoomFactor<10 ? 10 : (20-iNumberOfPlayers/2)*dZoomFactor;
 }
 
 int dart::iGetPaddingTop() {
@@ -727,7 +766,13 @@ int dart::iGetUnzoomed(double x) {
 	return x/dZoomFactor;
 }
 
+double dart::dGetZoomed(int x) {
+	return x*dZoomFactor;
+}
+
 void dart::mySleep(int ms) {
+	if(ms<0 || ms>5000) ms=0;
+	
 	Q_ASSERT(QCoreApplication::instance());
 	QTime timer;
 	timer.start();
@@ -1008,7 +1053,7 @@ double dart::dGetDistanceInKm(double px) {
 double dart::dGetMarkFromDistance(double distance) {
 	if(distance==-1) return 6;
 	
-	if(distance>1) distance--; // a difference of 1px is OK 
+	if(distance>dGetZoomed(1)) distance-=dGetZoomed(1); // a difference of 1px is OK 
 	else distance=0;
 
 	double mark=distance/RADIUS+1;

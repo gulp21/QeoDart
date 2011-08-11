@@ -10,6 +10,7 @@ See main.cpp for details. */
 #include <QWidget>
 #include <QDomDocument>
 #include <QFile>
+#include <QLocale>
 #include <QSettings>
 
 struct place;
@@ -35,6 +36,7 @@ class io : public QWidget {
 		void vFillCurrentTypePlaces();
 		void vLoadSettings();
 		QString qsGetMapName(QDomDocument &doc);
-// 	private:
+ 	private:
+		QStringList qslGetPreferedQcfLanguage();
 };
 #endif //IO_HPP 
