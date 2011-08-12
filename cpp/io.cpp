@@ -28,7 +28,7 @@ int io::iFindQcf() {
 #endif
 #ifdef Q_OS_WIN32
 	qlQcfDirs.append(QDir(getenv("PROGRAMFILES")));
-	qlQcfDirs.append(QDir(getenv("APPDATA")+"/QeoDart/qcf"));
+	qlQcfDirs.append(QDir(QString(getenv("APPDATA"))+"/QeoDart/qcf"));
 #endif
 	
 	for(int i=0; i<qlQcfDirs.count(); i++) {
@@ -450,7 +450,7 @@ void io::vLoadSettings() {
 		configPath=QDir::homePath()+"/.config/QeoDart/QeoDart.conf";
 #endif
 #ifdef Q_OS_WIN32
-		configPath=getenv("APPDATA")+"/QeoDart/QeoDart.conf";
+		configPath=QString(getenv("APPDATA"))+"/QeoDart/QeoDart.conf";
 #endif
 	}
 	

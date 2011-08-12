@@ -165,6 +165,7 @@ Q_OBJECT
 		void vResetScoreLabels();
 		void vShowResultWindows();
 		void vSetToolMenuBarState(enToolMenuBarState state);
+		void vUpdateActionsIsCheckedStates();
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetDistanceInPx(int a, int b, int n);
@@ -181,6 +182,8 @@ Q_OBJECT
 		int iGetFontSize();
 		int iGetPaddingTop();
 		int iFindInputInList(double &f);
+		
+		bool bNewGameIsSafe();
 		
 		QColor qcGetColorOfPlayer(int n);
 		

@@ -20,7 +20,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -253,7 +253,7 @@ p, li { white-space: pre-wrap; }
                   </property>
                   <item>
                    <property name="text">
-                    <string>100% of the area</string>
+                    <string>the point only</string>
                    </property>
                   </item>
                   <item>
@@ -263,7 +263,7 @@ p, li { white-space: pre-wrap; }
                   </item>
                   <item>
                    <property name="text">
-                    <string>the point only</string>
+                    <string>100% of the area</string>
                    </property>
                   </item>
                  </widget>

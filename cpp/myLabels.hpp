@@ -12,7 +12,7 @@ using namespace std;
 
 const int RADIUS=10, PENWIDTH=5;
 
-class QCircleLabel : public QLabel{
+class QCircleLabel : public QLabel {
 
 	private:
 		dart *myDart;
@@ -60,7 +60,7 @@ class QCircleLabel : public QLabel{
 		}
 };
 
-class QPointLabel : public QLabel{
+class QPointLabel : public QLabel {
 
 	dart *myDart;
 
@@ -121,7 +121,7 @@ class QPointLabel : public QLabel{
 		}
 };
 
-class QMouseReleaseLabel : public QLabel{
+class QMouseReleaseLabel : public QLabel {
 	dart *myDart;
 
 	public:
