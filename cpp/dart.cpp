@@ -30,6 +30,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iPaddingTop=0;
 	iMarginTop=0;
 	
+	setupUi(this);
+	
 	myIO = new io(this);
 	myIO->vLoadSettings();
         
@@ -47,7 +49,6 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	srand(time(NULL));
 #endif
 
-	setupUi(this);
 	toolBar->setMovable(FALSE);
 	
 	for(int i=0; i<4; i++) {
@@ -76,6 +77,12 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	agAskForMode->addAction(actionPosition_of_Place);
 	agAskForMode->addAction(actionName_of_Place);
 	actionName_of_Place->setChecked(true);
+	
+	agLayers = new QActionGroup(this);
+	agLayers->setExclusive(false);
+	agLayers->addAction(actionBorders);
+	agLayers->addAction(actionRivers);
+	agLayers->addAction(actionElevations);
 	
 	
 	actionHigh_Score_List->setIcon(QIcon::fromTheme("games-highscores"));
@@ -112,6 +119,9 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionMenu_Bar,SIGNAL (triggered()), this, SLOT(vSetToolMenuBarState()));
 	actionMenu_Bar->setIcon(QIcon::fromTheme("show-menu"));
 	connect(actionToolbar,SIGNAL (triggered()), this, SLOT(vSetToolMenuBarState()));
+	connect(actionBorders,SIGNAL (triggered()), this, SLOT(vToggleMapLayer()));
+	connect(actionRivers,SIGNAL (triggered()), this, SLOT(vToggleMapLayer()));
+	connect(actionElevations,SIGNAL (triggered()), this, SLOT(vToggleMapLayer()));
 	
 	connect(lineEdit,SIGNAL (returnPressed()), this, SLOT(vReturnPressedEvent()));
 	
@@ -196,10 +206,12 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	gridLayout->setSpacing(1);
 	
 	vSetPlaceType(qsCurrentPlaceType);
+	
+	vSetNumberOfPlayers(iNumberOfPlayers);
+	
 	if(bAgainstTime) actionAgainst_Time->trigger();
 	else vSetAgainstTime();
 	
-	vSetNumberOfPlayers(iNumberOfPlayers);
 	switch(iGameMode) {
 		case enTraining:
 			actionTraining->trigger(); break;
@@ -363,6 +375,8 @@ void dart::vSetNumberOfPlayers() {
 	}
 	if(ok) vSetNumberOfPlayers(n);
 	
+	vToolbarOverflow();
+	
 	myIO->settings->setValue("iNumberOfPlayers", iNumberOfPlayers);
 }
 void dart::vSetNumberOfPlayers(int n) {
@@ -495,6 +509,8 @@ void dart::resizeEvent(QResizeEvent *event) {
 
 // this function shorten the labels when the window becomes to narrow // TODO handle rename (e.g. mapname)
 void dart::vToolbarOverflow() {
+	if(!bAcceptingResizeEvent) return;
+	mySleep(1);
 	qDebug() << "[i] vToolbarOverflow";
 	
 	if(iToolMenuBarState==enMenuBarOnly) return;
@@ -879,6 +895,7 @@ void dart::vSetGameMode() {
 	
 	btGameMode->setText(QString("%1").arg(static_cast<QAction*>(QObject::sender())->text()));
 	btGameMode->setIcon(static_cast<QAction*>(QObject::sender())->icon());
+	vToolbarOverflow();
 	
 	if(QObject::sender()==actionTraining) {
 		vSetGameMode(enTraining);
@@ -939,6 +956,7 @@ void dart::vSetAskForMode() {
 	}
 	
 	btAskForMode->setText(QString(tr("Ask for: %1").arg(static_cast<QAction*>(QObject::sender())->text())));
+	vToolbarOverflow();
 	
 	if(QObject::sender()==actionName_of_Place) {
 		vSetAskForMode(enNames);
@@ -1368,8 +1386,11 @@ void dart::vReadQcf() {
 	if(myIO->iReadQcf(static_cast<QAction*>(QObject::sender())->text())!=0) exit(-1);
 	
 	btMap->setText(QString(tr("Map: %1")).arg(static_cast<QAction*>(QObject::sender())->text()));
+	vToolbarOverflow();
 	
 	vRepaintMap();
+	mySleep(1);
+	vToggleMapLayer();
 	vResetForNewGame();
 	vNextRound();
 }
@@ -1427,11 +1448,11 @@ bool dart::bCanLoseScore() {
 bool dart::bNewGameIsSafe() {
 	bool val=false;
 	
-	switch(iGameMode) {
-		case enNames:
-			val=bAcceptingClickEvent; break;
+	switch(iAskForMode) {
 		case enPositions:
-			val=!lineEdit->isEnabled(); break;
+			val=bAcceptingClickEvent; break;
+		case enNames:
+			val=lineEdit->isEnabled(); break;
 		default:
 			qDebug() << "[E] bNewGameIsSafe" << iGameMode;
 	}
@@ -1461,6 +1482,8 @@ void dart::vUpdateActionsIsCheckedStates() {
 			actionLocal->setChecked(true); break;
 	}
 	
+	agGameMode->actions()[iGameMode]->setChecked(true);
+	
 	switch(iAskForMode) {
 		case enNames:
 			actionName_of_Place->setChecked(true); break;
@@ -1470,4 +1493,14 @@ void dart::vUpdateActionsIsCheckedStates() {
 	
 	actionAgainst_Time->setChecked(bAgainstTime);
 	
+}
+
+// shows a layer when the ckeckbox is checked and the layer is available
+void dart::vToggleMapLayer() {
+	qlMapLayers[1]->setVisible(actionBorders->isChecked() && actionBorders->isVisible());
+	myIO->settings->setValue("bBorders",actionBorders->isChecked());
+	qlMapLayers[2]->setVisible(actionRivers->isChecked() && actionRivers->isVisible());
+	myIO->settings->setValue("bRivers",actionRivers->isChecked());
+	qlMapLayers[3]->setVisible(actionElevations->isChecked() && actionElevations->isVisible());
+	myIO->settings->setValue("bElevations",actionElevations->isChecked());
 }

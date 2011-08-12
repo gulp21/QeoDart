@@ -92,6 +92,8 @@ Q_OBJECT
 		QList<QString> qlImageLayers;
 		QList<QLabel*> qlMapLayers;
 		
+		QActionGroup *agLayers;
+		
 		enGameModes iGameMode;
 		enAskForModes iAskForMode;
 		enToolMenuBarState iToolMenuBarState;
@@ -203,6 +205,7 @@ Q_OBJECT
                 void vSetAgainstTime();
 		void vShowPreferences();
 		void vToolbarOverflow();
+		void vToggleMapLayer();
 		
 	public slots:
 		void vReadQcf();
