@@ -182,7 +182,6 @@
     <addaction name="actionFind_Place"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
-    <addaction name="actionBla"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -215,10 +214,13 @@
      <addaction name="actionPosition_of_Place"/>
      <addaction name="actionName_of_Place"/>
     </widget>
-    <widget class="QMenu" name="menuPlaceType">
+    <widget class="QMenu" name="menuAsk_for">
      <property name="title">
-      <string>Place Type</string>
+      <string>Ask for</string>
      </property>
+     <addaction name="actionPosition_of_Place"/>
+     <addaction name="actionName_of_Place"/>
+     <addaction name="separator"/>
      <addaction name="actionCountries"/>
      <addaction name="actionCapitals_of_Countries"/>
      <addaction name="actionStates"/>
@@ -227,13 +229,10 @@
      <addaction name="actionCities"/>
      <addaction name="actionTowns"/>
     </widget>
-    <widget class="QMenu" name="menuAsk_for">
+    <widget class="QMenu" name="menuPlaceType">
      <property name="title">
-      <string>Ask for</string>
+      <string>Place Type</string>
      </property>
-     <addaction name="actionPosition_of_Place"/>
-     <addaction name="actionName_of_Place"/>
-     <addaction name="separator"/>
      <addaction name="actionCountries"/>
      <addaction name="actionCapitals_of_Countries"/>
      <addaction name="actionStates"/>
@@ -276,7 +275,6 @@
     <addaction name="separator"/>
     <addaction name="actionMenu_Bar"/>
     <addaction name="actionConfigure"/>
-    <addaction name="actionBla"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -456,7 +454,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Borders TODO map icons</string>
+    <string>Borders</string>
    </property>
   </action>
   <action name="actionRivers">
@@ -516,9 +514,6 @@
    <property name="text">
     <string>Against Time</string>
    </property>
-   <property name="priority">
-    <enum>QAction::LowPriority</enum>
-   </property>
   </action>
   <action name="actionAbout_QeoDart">
    <property name="text">
@@ -526,14 +521,6 @@
    </property>
    <property name="menuRole">
     <enum>QAction::AboutRole</enum>
-   </property>
-  </action>
-  <action name="actionBla">
-   <property name="text">
-    <string>bla</string>
-   </property>
-   <property name="shortcut">
-    <string>F5</string>
    </property>
   </action>
  </widget>

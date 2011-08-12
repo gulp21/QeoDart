@@ -28,7 +28,7 @@ int io::iFindQcf() {
 #endif
 #ifdef Q_OS_WIN32
 	qlQcfDirs.append(QDir(getenv("PROGRAMFILES")));
-	qlQcfDirs.append(QDir(getenv("APPDATA")+"/QeoDart/qcf"));
+	qlQcfDirs.append(QDir(QString(getenv("APPDATA"))+"/QeoDart/qcf"));
 #endif
 	
 	for(int i=0; i<qlQcfDirs.count(); i++) {
@@ -264,10 +264,12 @@ int io::iReadQcf(QString mapname) {
 		
 		if(!file.open(QIODevice::ReadOnly)) {
 			qDebug() << "[I] No" << myDart->qlImageLayers[i] << "found";
-			myDart->qlMapLayers[i]->hide(); // TODO disable the show-button in ui
+			if(i>0) myDart->agLayers->actions()[i-1]->setVisible(false);
+			myDart->qlMapLayers[i]->hide();
 		} else {
 			qDebug() << "[i] found" << myDart->qlImageLayers[i];
-			myDart->qlMapLayers[i]->show();
+			if(i>0) myDart->agLayers->actions()[i-1]->setVisible(true);
+			if(i==0) myDart->qlMapLayers[i]->show();
 		}
 		file.close();
 	}
@@ -450,7 +452,7 @@ void io::vLoadSettings() {
 		configPath=QDir::homePath()+"/.config/QeoDart/QeoDart.conf";
 #endif
 #ifdef Q_OS_WIN32
-		configPath=getenv("APPDATA")+"/QeoDart/QeoDart.conf";
+		configPath=QString(getenv("APPDATA"))+"/QeoDart/QeoDart.conf";
 #endif
 	}
 	
@@ -481,6 +483,11 @@ void io::vLoadSettings() {
 	
 	myDart->iToolMenuBarState=static_cast<enToolMenuBarState>(settings->value("iToolMenuBarState",enBoth).toInt());
 	if(myDart->iToolMenuBarState!=enBoth && myDart->iToolMenuBarState!=enMenuBarOnly && myDart->iToolMenuBarState!=enToolBarOnly) myDart->iToolMenuBarState=enBoth;
+	
+	qDebug()<<(settings->value("bBorders",true).toBool());
+	myDart->actionBorders->setChecked(settings->value("bBorders",true).toBool());
+	myDart->actionRivers->setChecked(settings->value("bRivers",true).toBool());
+	myDart->actionElevations->setChecked(settings->value("bElevations",true).toBool());
 	
 	
 	// General

@@ -30,6 +30,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iPaddingTop=0;
 	iMarginTop=0;
 	
+	setupUi(this);
+	
 	myIO = new io(this);
 	myIO->vLoadSettings();
         
@@ -47,7 +49,6 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	srand(time(NULL));
 #endif
 
-	setupUi(this);
 	toolBar->setMovable(FALSE);
 	
 	for(int i=0; i<4; i++) {
@@ -76,6 +77,12 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	agAskForMode->addAction(actionPosition_of_Place);
 	agAskForMode->addAction(actionName_of_Place);
 	actionName_of_Place->setChecked(true);
+	
+	agLayers = new QActionGroup(this);
+	agLayers->setExclusive(false);
+	agLayers->addAction(actionBorders);
+	agLayers->addAction(actionRivers);
+	agLayers->addAction(actionElevations);
 	
 	
 	actionHigh_Score_List->setIcon(QIcon::fromTheme("games-highscores"));
@@ -112,7 +119,9 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionMenu_Bar,SIGNAL (triggered()), this, SLOT(vSetToolMenuBarState()));
 	actionMenu_Bar->setIcon(QIcon::fromTheme("show-menu"));
 	connect(actionToolbar,SIGNAL (triggered()), this, SLOT(vSetToolMenuBarState()));
-	connect(actionBla,SIGNAL (triggered()), this, SLOT(vToolbarOverflow()));
+	connect(actionBorders,SIGNAL (triggered()), this, SLOT(vToggleMapLayer()));
+	connect(actionRivers,SIGNAL (triggered()), this, SLOT(vToggleMapLayer()));
+	connect(actionElevations,SIGNAL (triggered()), this, SLOT(vToggleMapLayer()));
 	
 	connect(lineEdit,SIGNAL (returnPressed()), this, SLOT(vReturnPressedEvent()));
 	
@@ -197,10 +206,12 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	gridLayout->setSpacing(1);
 	
 	vSetPlaceType(qsCurrentPlaceType);
+	
+	vSetNumberOfPlayers(iNumberOfPlayers);
+	
 	if(bAgainstTime) actionAgainst_Time->trigger();
 	else vSetAgainstTime();
 	
-	vSetNumberOfPlayers(iNumberOfPlayers);
 	switch(iGameMode) {
 		case enTraining:
 			actionTraining->trigger(); break;
@@ -286,6 +297,17 @@ void dart::vTimeout() {
 }
 
 void dart::vSetPlaceType() {
+	if(!bNewGameIsSafe()) { vUpdateActionsIsCheckedStates(); return; }
+	
+	if( bCanLoseScore() ) {
+		QMessageBox msgBox;
+		msgBox.setWindowTitle(tr("Change Place Types"));
+		msgBox.setText(tr("When you change this setting, your current score will be lost.\nDo you want to continue?"));
+		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+		msgBox.setDefaultButton(QMessageBox::Cancel);
+		if(msgBox.exec()==QMessageBox::Cancel) { vUpdateActionsIsCheckedStates(); return; }
+	}
+	
 	qsCurrentPlaceType="";
 	if(actionCountries->isChecked()) qsCurrentPlaceType+="country;";
 	if(actionCapitals_of_Countries->isChecked()) qsCurrentPlaceType+="capitalOfCountry;";
@@ -295,24 +317,32 @@ void dart::vSetPlaceType() {
 	if(actionCities->isChecked()) qsCurrentPlaceType+="city;";
 	if(actionTowns->isChecked()) qsCurrentPlaceType+="town;";
 	myIO->vFillCurrentTypePlaces();
+	
+	vSetGameMode(iGameMode);
 }
 void dart::vSetPlaceType(QString placetype) {
 	qsCurrentPlaceType=placetype;
-	if(placetype.contains("country")) actionCountries->setChecked(TRUE);
-	if(placetype.contains("capitalOfCountry")) actionCapitals_of_Countries->setChecked(TRUE);
-	if(placetype.contains("state")) actionStates->setChecked(TRUE);
-	if(placetype.contains("capitalOfState")) actionCapitals_of_States->setChecked(TRUE);
-	if(placetype.contains("county")) actionCounties->setChecked(TRUE);
-	if(placetype.contains("city")) actionCities->setChecked(TRUE);
-	if(placetype.contains("town")) actionTowns->setChecked(TRUE);
+	vUpdateActionsIsCheckedStates();
 	myIO->vFillCurrentTypePlaces();
 }
 
 void dart::vSetAgainstTime() {
-	if( bCanLoseScore() ) return;
+	if(!bNewGameIsSafe()) { vUpdateActionsIsCheckedStates(); return; }
+	
+	if( bCanLoseScore() ) {
+		QMessageBox msgBox;
+		msgBox.setWindowTitle(tr("Enable Against Time"));
+		msgBox.setText(tr("When you change this setting, your current score will be lost.\nDo you want to continue?"));
+		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+		msgBox.setDefaultButton(QMessageBox::Cancel);
+		if(msgBox.exec()==QMessageBox::Cancel) { vUpdateActionsIsCheckedStates(); return; }
+	}
+	
 	vSetAgainstTime(actionAgainst_Time->isChecked());
 
-	myIO->settings->setValue("bAgainstTime", bAgainstTime);	
+	myIO->settings->setValue("bAgainstTime", bAgainstTime);
+	
+	vSetGameMode(iGameMode);
 }
 // resetting timer
 void dart::vSetAgainstTime(bool enable) {
@@ -328,6 +358,8 @@ void dart::vSetAgainstTime(bool enable) {
 }
 
 void dart::vSetNumberOfPlayers() {
+	if(!bNewGameIsSafe()) return;
+	
 	bool ok;
 	int min=iCurrentPlayer+1;
 	int max=iPlaceCount>1 ? iNumberOfPlayers : 99;
@@ -335,13 +367,15 @@ void dart::vSetNumberOfPlayers() {
 	if(n>15) {
 		QMessageBox msgBox;
 		msgBox.setWindowTitle(tr("Warning"));
-		msgBox.setText(tr("You want to play with more than 15 players.\nAlthough QeoDart theoretically supports an infinite\nnumber of players, some display problems might occur.\n\nDo you want to continue anyway?"));
+		msgBox.setText(tr("You want to play with more than 15 players.\nAlthough QeoDart theoretically supports an infinite number of players, some display problems might occur.\n\nDo you want to continue anyway?"));
 		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
 		msgBox.setDefaultButton(QMessageBox::Cancel);
 		msgBox.setIcon(QMessageBox::Warning);
 		if(msgBox.exec()==QMessageBox::Cancel) return;
 	}
 	if(ok) vSetNumberOfPlayers(n);
+	
+	vToolbarOverflow();
 	
 	myIO->settings->setValue("iNumberOfPlayers", iNumberOfPlayers);
 }
@@ -449,15 +483,6 @@ void dart::vSetNumberOfPlayers(int n) {
 void dart::resizeEvent(QResizeEvent *event) {
 	if(!bAcceptingResizeEvent) return;
 	
-	//maybe we want to preserve the shape of the window TODO use timer?
-// 	int w=this->width(), h=this->height()-toolBar->height()-menubar->height(), n=this->width()<this->height()-toolBar->height()-menubar->height()?this->width():this->height()-toolBar->height()-menubar->height();
-// 	cout << w << " " << h << endl;
-// 	if(w!=h) resize(n,n+toolBar->height()+menubar->height());
-
-// 	QRect qr availableGeometry(screenNumber(this));
-// 	int availableHeight=qr.height();
-// 	int availableWidth=qr.width();
-	
 	iMarginTop=toolBar->height()+menubar->height();
 	
 	dZoomFactor=iGetWindowSize()/600.0; //TODO must be calculated in another way
@@ -484,6 +509,8 @@ void dart::resizeEvent(QResizeEvent *event) {
 
 // this function shorten the labels when the window becomes too narrow // TODO handle rename (e.g. mapname)
 void dart::vToolbarOverflow() {
+	if(!bAcceptingResizeEvent) return;
+	mySleep(1);
 	qDebug() << "[i] vToolbarOverflow";
 	
 	if(iToolMenuBarState==enMenuBarOnly) return;
@@ -491,36 +518,41 @@ void dart::vToolbarOverflow() {
 	int d=0;
 	if(iToolMenuBarState==enToolBarOnly) d=1;
 	
-	QWidget *w;
+	QWidget *w; // last widget in toolbar
 	w=toolBar->layout()->itemAt(toolBar->layout()->count()-1)->widget();
-	QToolButton *a;
+	QToolButton *a=NULL; // widget whose text will be changed
 	QString shortText, longText;
 	
 	// while the last toolbar button is visible, extend the text of other items
-	for(int i=4; w->isVisible() && i>-1; i--) {
+	for(int i=5; w->isVisible() && i>-1; i--) {
 		
 		switch(i) {
 			case 0:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(3+d)->widget());
+				longText=tr("Against Time");
+				shortText="";
+				break;
+			case 1:
 				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(0+d)->widget());
 				longText=tr("New Game");
 				shortText="";
 				break;
-			case 1:
+			case 2:
 				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget());
 				longText=QString(tr("Ask for: %1")).arg(iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place"));
 				shortText=iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place");
 				break;
-			case 2:
+			case 3:
 				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(6+d)->widget());
 				longText=QString(tr("Map: %1")).arg(qlQcfxFiles[iCurrentQcf].mapName);
 				shortText=QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName);
 				break;
-			case 3:
+			case 4:
 				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget());
 				longText=iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place");
 				shortText=iAskForMode==enNames ? tr("Name") : tr("Position");
 				break;
-			case 4:
+			case 5:
 				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(2+d)->widget());
 				longText=QString(tr("Players: %1")).arg(iNumberOfPlayers);
 				shortText=QString(tr("%1")).arg(iNumberOfPlayers);
@@ -538,26 +570,30 @@ void dart::vToolbarOverflow() {
 	}
 	
 	// while the last toolbar button is not visible, shorten the text of other items
-	for(int i=0; !w->isVisible() && i<5; i++) {
+	for(int i=0; !w->isVisible() && i<6; i++) {
 		
 		switch(i) {
 			case 0:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(0+d)->widget());
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(3+d)->widget());
 				shortText="";
 				break;
 			case 1:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(0+d)->widget());
+				shortText="";
+				break;
+			case 2:
 				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget());
 				shortText=iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place");
 				break;
-			case 2:
+			case 3:
 				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(6+d)->widget());
 				shortText=QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName);
 				break;
-			case 3:
+			case 4:
 				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget());
 				shortText=iAskForMode==enNames ? tr("Name") : tr("Position");
 				break;
-			case 4:
+			case 5:
 				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(2+d)->widget());
 				shortText=QString(tr("%1")).arg(iNumberOfPlayers);
 				break;
@@ -764,7 +800,7 @@ void dart::vShowCurrentPlace() {
 	else vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels, qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->name);
 }
 
-void dart::vShowScores() {
+void dart::vShowScores() { // TODO "small display"-support
 	for(int i=0; i<iNumberOfPlayers; i++) { // show score for each player
 		QString km, score;
 		if(qlScoreHistory[i][iPlaceCount-1].diffKm==-1) km=tr("∞");
@@ -846,17 +882,20 @@ QColor dart::qcGetColorOfPlayer(int player) {
 }
 
 void dart::vSetGameMode() {
+	if(!bNewGameIsSafe()) { vUpdateActionsIsCheckedStates(); return; }
+	
 	if( bCanLoseScore() ) {
 		QMessageBox msgBox;
 		msgBox.setWindowTitle(tr("Chance Game Mode"));
 		msgBox.setText(tr("When you change the game mode, your current score will be lost.\nDo you want to continue?"));
 		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
 		msgBox.setDefaultButton(QMessageBox::Cancel);
-		if(msgBox.exec()==QMessageBox::Cancel) return;
+		if(msgBox.exec()==QMessageBox::Cancel) { vUpdateActionsIsCheckedStates(); return; }
 	}
 	
 	btGameMode->setText(QString("%1").arg(static_cast<QAction*>(QObject::sender())->text()));
 	btGameMode->setIcon(static_cast<QAction*>(QObject::sender())->icon());
+	vToolbarOverflow();
 	
 	if(QObject::sender()==actionTraining) {
 		vSetGameMode(enTraining);
@@ -905,16 +944,19 @@ void dart::vSetGameMode(enGameModes mode) {
 }
 
 void dart::vSetAskForMode() {
+	if(!bNewGameIsSafe()) { vUpdateActionsIsCheckedStates(); return; }
+	
 	if( bCanLoseScore() ) {
 		QMessageBox msgBox;
 		msgBox.setWindowTitle(tr("Chance Mode"));
 		msgBox.setText(tr("When you change this setting, your current score will be lost.\nDo you want to continue?"));
 		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
 		msgBox.setDefaultButton(QMessageBox::Cancel);
-		if(msgBox.exec()==QMessageBox::Cancel) return;
+		if(msgBox.exec()==QMessageBox::Cancel) { vUpdateActionsIsCheckedStates(); return; }
 	}
 	
 	btAskForMode->setText(QString(tr("Ask for: %1").arg(static_cast<QAction*>(QObject::sender())->text())));
+	vToolbarOverflow();
 	
 	if(QObject::sender()==actionName_of_Place) {
 		vSetAskForMode(enNames);
@@ -970,6 +1012,8 @@ void dart::vResetForNewGame() {
 }
 
 void dart::vNewGame() {
+	if(!bNewGameIsSafe()) return;
+	
 	if( bCanLoseScore() ) {
 		QMessageBox msgBox;
 		msgBox.setWindowTitle(tr("New Game"));
@@ -1230,7 +1274,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 	
 	lineEdit->setStyleSheet("color:black");
 	if(f<1) {
-		lineEdit->setStyleSheet("text-decoration:underline;color:black");
+		lineEdit->setStyleSheet("text-decoration:underline;color:black"); // TODO underline is not always visible
 		if(f<0.75) {
 			lineEdit->setStyleSheet("text-decoration:underline;color:red");
 			if(iIndexOfPlace==-1) {
@@ -1328,7 +1372,9 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 }
 
 void dart::vReadQcf() {
-	if(iPlaceCount>1 || iCurrentPlayer!=0) {
+	if(!bNewGameIsSafe()) { vUpdateActionsIsCheckedStates(); return; }
+	
+	if(bCanLoseScore()) {
 		QMessageBox msgBox;
 		msgBox.setWindowTitle(tr("Chance Map"));
 		msgBox.setText(tr("When you change the map, your current score will be lost.\nDo you want to continue?"));
@@ -1340,8 +1386,11 @@ void dart::vReadQcf() {
 	if(myIO->iReadQcf(static_cast<QAction*>(QObject::sender())->text())!=0) exit(-1);
 	
 	btMap->setText(QString(tr("Map: %1")).arg(static_cast<QAction*>(QObject::sender())->text()));
+	vToolbarOverflow();
 	
 	vRepaintMap();
+	mySleep(1);
+	vToggleMapLayer();
 	vResetForNewGame();
 	vNextRound();
 }
@@ -1394,7 +1443,55 @@ bool dart::bCanLoseScore() {
 	return ( (iPlaceCount>1 || iCurrentPlayer!=0) && iGameMode!=enTraining );
 }
 
+// this function checks if we can start a new game safely
+// (i.e. "sum up scores" and stuff has finished [otherwise we could get a segfault])
+bool dart::bNewGameIsSafe() {
+	bool val=false;
+	
+	switch(iAskForMode) {
+		case enPositions:
+			val=bAcceptingClickEvent; break;
+		case enNames:
+			val=lineEdit->isEnabled(); break;
+		default:
+			qDebug() << "[E] bNewGameIsSafe" << iGameMode;
+	}
+	
+	if(!val) qDebug() << "[i] new game is unsafe!";
+	
+	return val;
+}
+
 void dart::vShowPreferences() {
 	preferences dialog(this,myIO);
 	dialog.exec();
+}
+void dart::vUpdateActionsIsCheckedStates() {
+	actionCountries->setChecked(qsCurrentPlaceType.contains("country"));
+	actionCapitals_of_Countries->setChecked(qsCurrentPlaceType.contains("capitalOfCountry"));
+	actionStates->setChecked(qsCurrentPlaceType.contains("state"));
+	actionCapitals_of_States->setChecked(qsCurrentPlaceType.contains("capitalOfState"));
+	actionCounties->setChecked(qsCurrentPlaceType.contains("county"));
+	actionCities->setChecked(qsCurrentPlaceType.contains("city"));
+	actionTowns->setChecked(qsCurrentPlaceType.contains("town"));
+		
+	agGameMode->actions()[iGameMode]->setChecked(true);
+	
+	agAskForMode->actions()[iAskForMode]->setChecked(true);
+	
+	agMap->actions()[iCurrentQcf]->setChecked(true);
+	
+	actionAgainst_Time->setChecked(bAgainstTime);
+	
+	vToolbarOverflow(); // the "Against Time" label appears for some reason
+}
+
+// shows a layer when the ckeckbox is checked and the layer is available
+void dart::vToggleMapLayer() {
+	qlMapLayers[1]->setVisible(actionBorders->isChecked() && actionBorders->isVisible());
+	myIO->settings->setValue("bBorders",actionBorders->isChecked());
+	qlMapLayers[2]->setVisible(actionRivers->isChecked() && actionRivers->isVisible());
+	myIO->settings->setValue("bRivers",actionRivers->isChecked());
+	qlMapLayers[3]->setVisible(actionElevations->isChecked() && actionElevations->isVisible());
+	myIO->settings->setValue("bElevations",actionElevations->isChecked());
 }

@@ -21,3 +21,5 @@ QT += xml
 
 #RESOURCES += \
 #    icons.qrc
+
+QMAKE_CXXFLAGS_WARN_OFF += -Wno-reorder

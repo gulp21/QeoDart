@@ -56,12 +56,11 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 	
 	lblPlaces->setText(places.left(places.length()-2)); // remove the last ", "
 	
-
-	#ifdef Q_OS_LINUX
-	//WORKAROUND for https://bugreports.qt.nokia.com/browse/QTBUG-691
-	//we resize the window so that the text fits (better)
+//WORKAROUND for https://bugreports.qt.nokia.com/browse/QTBUG-691
+//we resize the window so that the text fits (better)
+#ifdef Q_OS_LINUX
 	if(places.size()*7/width()*7>65) resize(width(),height()-65+places.size()*7/width()*7);
-	#endif
+#endif
 	
 }
 
