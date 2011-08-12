@@ -53,7 +53,10 @@ Open the project file QeoDart.pro in Qt Creator and press Ctrl+R.
 3.2. Open generated project file in Visual Studio
 
 3.2.1. Right-click on the "QeoDart"-Project and choose "Properties"
-3.2.2. Under "Configuration Properties > C/C++ > Command Line" add the following "Additional Options":
+
+3.2.2. Under "Configuration Manager…" > "Active solution configuration:" choose "Release"
+
+3.2.3. Under "Configuration Properties > C/C++ > Command Line" add the following "Additional Options":
 
 /D "QT_NO_DRAGANDDROP" /D "QT_NO_DRAGANDDROP" /D "QT_NO_CLIPBOARD" /D "QT_NO_ACCESSIBILITY" /D "QT_NO_SESSIONMANAGER"
 
@@ -61,8 +64,6 @@ Open the project file QeoDart.pro in Qt Creator and press Ctrl+R.
 dart.obj : error LNK2001: unresolved external symbol "protected: virtual void __cdecl QWidget::dragEnterEvent(class QDragEnterEvent *)"(?dragEnterEvent@QWidget@@MAAXPAVQDragEnterEvent@@@Z)
 …
 thanks to http://ufna.ru/2010/03/23/pna-mod-qt-4-wince-build (+translator) for giving me this hint)
-
-3.2.3. btw, make sure that "Configuration:" is "Release"
 
 3.3. F7
 

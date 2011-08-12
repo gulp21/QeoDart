@@ -482,7 +482,7 @@ void dart::resizeEvent(QResizeEvent *event) {
 	resizeTimer->start(200);
 }
 
-// this function shorten the labels when the window becomes to narrow // TODO handle rename (e.g. mapname)
+// this function shorten the labels when the window becomes too narrow // TODO handle rename (e.g. mapname)
 void dart::vToolbarOverflow() {
 	qDebug() << "[i] vToolbarOverflow";
 	
