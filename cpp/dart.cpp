@@ -1274,7 +1274,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 	
 	lineEdit->setStyleSheet("color:black");
 	if(f<1) {
-		lineEdit->setStyleSheet("text-decoration:underline;color:black");
+		lineEdit->setStyleSheet("text-decoration:underline;color:black"); // TODO underline is not always visible
 		if(f<0.75) {
 			lineEdit->setStyleSheet("text-decoration:underline;color:red");
 			if(iIndexOfPlace==-1) {
@@ -1474,25 +1474,16 @@ void dart::vUpdateActionsIsCheckedStates() {
 	actionCounties->setChecked(qsCurrentPlaceType.contains("county"));
 	actionCities->setChecked(qsCurrentPlaceType.contains("city"));
 	actionTowns->setChecked(qsCurrentPlaceType.contains("town"));
-	
-	switch(iGameMode) {
-		case enTraining:
-			actionTraining->setChecked(true); break;
-		case enLocal:
-			actionLocal->setChecked(true); break;
-	}
-	
+		
 	agGameMode->actions()[iGameMode]->setChecked(true);
 	
-	switch(iAskForMode) {
-		case enNames:
-			actionName_of_Place->setChecked(true); break;
-		case enPositions:
-		        actionPosition_of_Place->setChecked(true); break;
-	}
+	agAskForMode->actions()[iAskForMode]->setChecked(true);
+	
+	agMap->actions()[iCurrentQcf]->setChecked(true);
 	
 	actionAgainst_Time->setChecked(bAgainstTime);
 	
+	vToolbarOverflow(); // the "Against Time" label appears for some reason
 }
 
 // shows a layer when the ckeckbox is checked and the layer is available
