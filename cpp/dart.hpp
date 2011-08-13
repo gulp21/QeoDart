@@ -58,7 +58,9 @@ struct qcfFile {
 	qcfCopyright copyright;
 };
 
+#warning TODO----------------read/validate settings
 enum enGameModes {
+	enFind=3,
 	enTraining=0,
 	enLocal=1,
 	enNetwork=2,
@@ -168,6 +170,7 @@ Q_OBJECT
 		void vShowResultWindows();
 		void vSetToolMenuBarState(enToolMenuBarState state);
 		void vUpdateActionsIsCheckedStates();
+		void vFindPlaceAround(int x, int y);
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetDistanceInPx(int a, int b, int n);

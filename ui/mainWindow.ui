@@ -179,7 +179,6 @@
     </property>
     <addaction name="actionNew_Game"/>
     <addaction name="actionHigh_Score_List"/>
-    <addaction name="actionFind_Place"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -198,6 +197,7 @@
      <property name="title">
       <string>Game Mode</string>
      </property>
+     <addaction name="actionFind_Place"/>
      <addaction name="actionTraining"/>
      <addaction name="actionLocal"/>
     </widget>
@@ -328,6 +328,9 @@
    </property>
   </action>
   <action name="actionFind_Place">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Find Place</string>
    </property>

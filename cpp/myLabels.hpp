@@ -101,12 +101,9 @@ class QPointLabel : public QLabel {
 			setText(QString("<span>%3%2</span>").arg(name).arg(spaces));
 			int fontSize=myDart->dZoomFactor*PENWIDTH+3<5 ? 5 : myDart->dZoomFactor*PENWIDTH+3; // fontSize<5 is illegiable
 			setFont(QFont("Arial", fontSize));
-// 			qDebug()<<x<<y<<a<<spaces<<fontSize<<"ll";
 			
-// 			setGeometry(x*myDart->dZoomFactor,y*myDart->dZoomFactor+myDart->iPaddingTop,100*myDart->dZoomFactor,a*3);
-			
-// 			resize(100*myDart->dZoomFactor,a*3);
-// 			move(x*myDart->dZoomFactor-a,y*myDart->dZoomFactor+myDart->iPaddingTop-a-a);
+			setStyleSheet(QString("color:rgba(0,0,0,%1)").arg(color.alpha()));
+			//QPainter::setRenderHint(QPainter::renderHints() | QPainter::TextAntialiasing);
 			
 			resize(
 				(20+name.length()*7)*myDart->dZoomFactor, // text must be visible

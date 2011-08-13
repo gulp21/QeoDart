@@ -68,6 +68,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 //	lblMouseClickOverlay->setCursor(QCursor(QPixmap("test.png"),1,1)); //TODO
 	
 	agGameMode = new QActionGroup(this);
+	agGameMode->addAction(actionFind_Place);
 	agGameMode->addAction(actionTraining);
 	agGameMode->addAction(actionLocal);
 //	agGameMode->addAction(actionNetwork);
@@ -96,7 +97,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	actionQuit->setIcon(QIcon::fromTheme("application-exit", QIcon(":/icons/oxygen/application-exit.png")));
 	connect(actionNew_Game,SIGNAL (triggered()), this, SLOT(vNewGame()));
 	actionNew_Game->setIcon(QIcon::fromTheme("document-new"));
-	connect(actionFind_Place,SIGNAL (triggered()), this, SLOT(vShowAllPlaces()));
+	connect(actionFind_Place,SIGNAL (triggered()), this, SLOT(vSetGameMode()));
 	actionFind_Place->setIcon(QIcon::fromTheme("edit-find"));
 	connect(action100,SIGNAL (triggered()), this, SLOT(vResize()));
 	action100->setIcon(QIcon::fromTheme("zoom-original"));
@@ -217,6 +218,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	else vSetAgainstTime();
 	
 	switch(iGameMode) {
+		case enFind:
+			actionFind_Place->trigger(); break;
 		case enTraining:
 			actionTraining->trigger(); break;
 		case enLocal:
@@ -687,6 +690,7 @@ void dart::vShowAllPlaces() {
 }
 
 void dart::vMouseClickEvent(int x, int y) {
+	if(iGameMode==enFind) { vFindPlaceAround(iGetUnzoomed(x),iGetUnzoomed(y)); return; }
 	if(!bAcceptingClickEvent) return;
 	bAcceptingClickEvent=FALSE;
 	if(iAskForMode!=enPositions) return;
@@ -901,7 +905,9 @@ void dart::vSetGameMode() {
 	btGameMode->setIcon(static_cast<QAction*>(QObject::sender())->icon());
 	vToolbarOverflow();
 	
-	if(QObject::sender()==actionTraining) {
+	if(QObject::sender()==actionFind_Place) {
+		vSetGameMode(enFind);
+	} else if(QObject::sender()==actionTraining) {
 		vSetGameMode(enTraining);
 	} else if(QObject::sender()==actionLocal) {
 		vSetGameMode(enLocal);
@@ -930,6 +936,18 @@ void dart::vSetGameMode(enGameModes mode) {
 	vResetForNewGame();
 	
 	switch(iGameMode) {
+		case enFind:
+			lblCurrentRound->hide();
+			lblCurrentPlayer->hide();
+			qlPlayerLabels[0][0]->hide();
+			actionNumber_of_Players->setEnabled(false);
+			actionPlayers->setEnabled(false);
+			btAskForMode->setEnabled(false);
+			actionName_of_Place->setEnabled(false);
+			actionPosition_of_Place->setEnabled(false);
+			vSetNumberOfPlayers(1);
+			vShowAllPlaces(); return;
+			break;
 		case enTraining:
 			lblCurrentRound->hide();
 			lblCurrentPlayer->hide();
@@ -1444,7 +1462,7 @@ void dart::vSetToolMenuBarState(enToolMenuBarState state) {
 }
 
 bool dart::bCanLoseScore() {
-	return ( (iPlaceCount>1 || iCurrentPlayer!=0) && iGameMode!=enTraining );
+	return ( (iPlaceCount>1 || iCurrentPlayer!=0) && iGameMode!=enTraining && iGameMode!=enFind);
 }
 
 // this function checks if we can start a new game safely
@@ -1500,4 +1518,21 @@ void dart::vToggleMapLayer() {
 	myIO->settings->setValue("bRivers",actionRivers->isChecked());
 	qlMapLayers[3]->setVisible(actionElevations->isChecked() && actionElevations->isVisible());
 	myIO->settings->setValue("bElevations",actionElevations->isChecked());
+}
+
+void dart::vFindPlaceAround(int x, int y) {
+	vRemoveAllCommonPoints();
+	
+	for(int i=0; i<qlCurrentTypePlaces.count(); i++) {
+		if(qlCurrentTypePlaces[i]->x-x<10 && qlCurrentTypePlaces[i]->x-x>-10 &&
+		   qlCurrentTypePlaces[i]->y-y<10 && qlCurrentTypePlaces[i]->y-y>-10) {
+			vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65,255));
+		} else if(qlCurrentTypePlaces[i]->x-x<20 && qlCurrentTypePlaces[i]->x-x>-20 &&
+		          qlCurrentTypePlaces[i]->y-y<20 && qlCurrentTypePlaces[i]->y-y>-20) {
+			vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65,170));
+		} else if(qlCurrentTypePlaces[i]->x-x<30 && qlCurrentTypePlaces[i]->x-x>-30 &&
+			qlCurrentTypePlaces[i]->y-y<30 && qlCurrentTypePlaces[i]->y-y>-30) {
+			vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65,85));
+		}
+	}
 }
