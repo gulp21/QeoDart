@@ -69,7 +69,7 @@ int io::iCheckQcf(QFile &file, QDomDocument &doc) {
 		qDebug() << "[W]" << file.fileName() << "is not readable";
 		return -1;
 	}
-	bool namespaceProcessing; QString errorMsg; int errorLine, errorColumn;
+	bool namespaceProcessing=false; QString errorMsg; int errorLine, errorColumn;
 	if(!doc.setContent(&file, namespaceProcessing, &errorMsg, &errorLine,  &errorColumn )){
 		file.close();
 		qDebug() << "[W] Problem reading file" << file.fileName();

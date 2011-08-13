@@ -84,12 +84,16 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	agLayers->addAction(actionRivers);
 	agLayers->addAction(actionElevations);
 	
+	// if there is no default icon theme (win+osx), use fallback
+	//if (!QIcon::hasThemeIcon("document-open")) { // TODO test
+		//QIcon::setThemeName(" ");
+	//}
 	
 	actionHigh_Score_List->setIcon(QIcon::fromTheme("games-highscores"));
 	connect(actionConfigure,SIGNAL (triggered()), this, SLOT(vShowPreferences()));
 	actionConfigure->setIcon(QIcon::fromTheme("configure"));
 	connect(actionQuit,SIGNAL (triggered()), this, SLOT(vClose()));
-	actionQuit->setIcon(QIcon::fromTheme("application-exit"));
+	actionQuit->setIcon(QIcon::fromTheme("application-exit", QIcon(":/icons/oxygen/application-exit.png")));
 	connect(actionNew_Game,SIGNAL (triggered()), this, SLOT(vNewGame()));
 	actionNew_Game->setIcon(QIcon::fromTheme("document-new"));
 	connect(actionFind_Place,SIGNAL (triggered()), this, SLOT(vShowAllPlaces()));
@@ -767,8 +771,8 @@ void dart::vShowComment() {
         if(iNumberOfPlayers==1 && iGameMode!=enTraining) {
 		// we shoudln't use the saved mark here as inappropriate comments could be shown
 		// (e.g "clicked wrongly", although clicked correctly, but bad time)
-		double mark=dGetMarkFromDistance(qlScoreHistory[0][iPlaceCount-1].diffKm);
-                int i = rand() % 3 + 3*(static_cast<int>(mark)-1);
+		double mark=dGetMarkFromDistance(qlScoreHistory[0][iPlaceCount-1].diffPxArea);
+                int i = rand() % 3 + 3*(static_cast<int>(mark-1));
                 qDebug() << "[i]" << mark << "comment #" << i;
                 lblComment->setText(qlComments[i]);
         }
@@ -1447,6 +1451,8 @@ bool dart::bCanLoseScore() {
 // (i.e. "sum up scores" and stuff has finished [otherwise we could get a segfault])
 bool dart::bNewGameIsSafe() {
 	bool val=false;
+	
+	if(iPlaceCount==0) return true;
 	
 	switch(iAskForMode) {
 		case enPositions:
