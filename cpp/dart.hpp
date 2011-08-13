@@ -171,6 +171,7 @@ Q_OBJECT
 		void vSetToolMenuBarState(enToolMenuBarState state);
 		void vUpdateActionsIsCheckedStates();
 		void vFindPlaceAround(int x, int y);
+		void vShowAllPlaces();
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetDistanceInPx(int a, int b, int n);
@@ -196,11 +197,11 @@ Q_OBJECT
 		
 	private slots:
 		void vClose();
-		void vShowAllPlaces();
 		void vResize(double dNewZoomFactor=1);
 		void vSetGameMode();
 		void vSetAskForMode();
 		void vReturnPressedEvent();
+		void vTextEditedEvent();
                 void vTimeout();
 		void vSetPlaceType();
 		void vSetToolMenuBarState();

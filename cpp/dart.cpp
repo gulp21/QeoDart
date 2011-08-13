@@ -129,6 +129,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionElevations,SIGNAL (triggered()), this, SLOT(vToggleMapLayer()));
 	
 	connect(lineEdit,SIGNAL (returnPressed()), this, SLOT(vReturnPressedEvent()));
+	connect(lineEdit,SIGNAL (textEdited(QString)), this, SLOT(vTextEditedEvent()));
 	
 	//these menus are needed for QToolButtons only and shouldn't be display in the main menus
 	menubar->removeAction(menuApplication->menuAction());
@@ -1535,4 +1536,63 @@ void dart::vFindPlaceAround(int x, int y) {
 			vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65,85));
 		}
 	}
+}
+
+void dart::vTextEditedEvent() {
+	if(iGameMode!=enFind) return;
+	
+	vRemoveAllCommonPoints();
+	
+	bool found=false;
+	QString text=lineEdit->text().toLower();
+	
+	if(text=="") { vShowAllPlaces(); return; }
+	
+#warning TODObr combobox
+	const int m=1;
+	
+	for(int i=0; i<qlCurrentTypePlaces.count(); i++) {
+		if(m==0) { // match beginning
+		
+			if(qlCurrentTypePlaces[i]->name.indexOf(text,0,Qt::CaseInsensitive)==0) {
+				vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65));
+				found=true;
+			}
+			
+		} else { // match beginning of word / contains
+			
+			if(qlCurrentTypePlaces[i]->name.contains(text,Qt::CaseInsensitive)) { // contains
+				
+				if(m==2 || (qlCurrentTypePlaces[i]->name.indexOf(text,0,Qt::CaseInsensitive)==0)) { // contains or very beginning
+					vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65));
+					found=true;
+					
+				// if the character before the matching phrase matches [ -_/()]
+				} else {
+					if(QString(qlCurrentTypePlaces[i]->name[qlCurrentTypePlaces[i]->name.indexOf(text,0,Qt::CaseInsensitive)-1]).replace(QRegExp("([ -_/()])"), "}")=="}") {
+					vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65));
+					found=true;
+					}
+				}
+				
+			}
+			
+		}
+	}
+	
+	qDebug()<<found<<"fdf";
+	
+	// if there's no match
+	for(int l=0; !found && l<4; l++) {
+		QString textl=qsSimplifyString(text,l);
+		
+		for(int i=0; i<qlCurrentTypePlaces.count(); i++) {
+			if(qsSimplifyString(qlCurrentTypePlaces[i]->name,l).contains(textl)) {
+				vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65,255-51*(l+1)));
+				found=true;
+			}
+		}
+	}
+#warning use system colors TODObr
+	lineEdit->setStyleSheet(found ? "color:black" : "color:red");
 }
