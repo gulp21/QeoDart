@@ -67,7 +67,7 @@ thanks to http://ufna.ru/2010/03/23/pna-mod-qt-4-wince-build (+translator) for g
 
 3.3. F7
 
-4. Copy the necessary files on the target device
+4. Copy the necessary files to the target device
 
 release/QeoDart.exe
 path/to/qt/lib/QtCore4.dll
