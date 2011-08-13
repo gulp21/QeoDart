@@ -31,7 +31,7 @@ See main.cpp for details. */
 #endif
 
 #include "io.hpp"
-#include "dialogs.hpp"
+#include "results.hpp"
 #include "preferences.hpp"
 
 struct place {

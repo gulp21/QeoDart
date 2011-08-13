@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/icons/oxygen">
+        <file alias="application-exit.png">icons/oxygen/application-exit.png</file>
+        <file alias="index.theme">icons/oxygen/index.theme</file>
+    </qresource>
+</RCC>

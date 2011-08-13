@@ -1,4 +1,4 @@
-#include "dialogs.hpp"
+#include "results.hpp"
 #include "qtwin.h"
 
 using namespace std;
@@ -7,14 +7,20 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 	const int R1=15, G1=135, B1=28, R2=255, G2=25, B2=25;
 
 	setParent(myDart);
+
+// allow maximizing on WinCE in order to make the whole window readable
+#ifdef Q_OS_WINCE
+	setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowMaximizeButtonHint);
+#else
 	setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint);
+#endif
 
 	setupUi(this);
 	
 	connect(btOk, SIGNAL(clicked()), this, SLOT(close())); // TODO we should save the name
 	
 	if(QtWin::extendFrameIntoClientArea(this)) { // use aero glass if possible
-		setWindowOpacity(1.0); // otherwise there would be artifact
+		setWindowOpacity(1.0); // otherwise there are artifacts
 	}
 	
 	if(myDart->iNumberOfPlayers==1) {

@@ -9,17 +9,20 @@ INCLUDEPATH += . cpp
 
 # Input
 HEADERS += cpp/dart.hpp cpp/io.hpp cpp/myLabels.hpp cpp/qtwin.h \
-    cpp/dialogs.hpp \
-    cpp/preferences.hpp
+    cpp/preferences.hpp \
+    cpp/results.hpp
 FORMS += ui/mainWindow.ui \
     ui/resultWindow.ui \
     ui/preferences.ui
 SOURCES += cpp/dart.cpp cpp/io.cpp cpp/main.cpp cpp/qtwin.cpp \
-    cpp/dialogs.cpp \
-    cpp/preferences.cpp
+    cpp/preferences.cpp \
+    cpp/results.cpp
 QT += xml
 
 #RESOURCES += \
 #    icons.qrc
 
 QMAKE_CXXFLAGS_WARN_OFF += -Wno-reorder
+
+RESOURCES += \
+    icons.qrc
