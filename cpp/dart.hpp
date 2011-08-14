@@ -142,7 +142,7 @@ Q_OBJECT
 		
 		QToolButton *btMap, *btGameMode, *btAskForMode, *btPlaceType, *btView, *btApplication;
 		
-		QAction *actionBtApplication;
+		QAction *actionBtApplication, *actionBtAskForMode;
 		
 		QMenu *menuPlace_Number;
 		
