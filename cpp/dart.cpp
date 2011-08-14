@@ -193,8 +193,10 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	agMap = new QActionGroup(this);
 	for(int i=0; i<qlQcfxFiles.count(); i++) {
 		QAction *menuItem;
-//produces crash in WinCE
-#ifndef Q_OS_WINCE
+//QIcon produces crash in WinCE
+#ifdef Q_OS_WINCE
+		menuItem = new QAction(qlQcfxFiles[i].mapName, this);
+#else
 		menuItem = new QAction(QIcon(qlQcfxFiles[i].path+"/background.png"), qlQcfxFiles[i].mapName, this);
 #endif
 		menuItem->setToolTip(QString(tr("Load map of %1")).arg(qlQcfxFiles[i].mapName));
@@ -511,7 +513,7 @@ void dart::resizeEvent(QResizeEvent *event) {
 	resizeTimer->start(200);
 }
 
-// this function shorten the labels when the window becomes to narrow // TODO handle rename (e.g. mapname)
+// this function shorten the labels when the window becomes too narrow // TODO handle rename (e.g. mapname)
 void dart::vToolbarOverflow() {
 	if(!bAcceptingResizeEvent) return;
 	mySleep(1);
@@ -527,8 +529,8 @@ void dart::vToolbarOverflow() {
 	QToolButton *a=NULL; // widget whose text will be changed
 	QString shortText, longText;
 	
-	// while the last toolbar button is visible, extend the text of other items
-	for(int i=5; w->isVisible() && i>-1; i--) {
+	// while the last toolbar button is visible and not in overflow view, extend the text of other items
+	for(int i=5; w->isVisible() && w->y()<5 && i>-1; i--) {
 		
 		switch(i) {
 			case 0:
@@ -567,14 +569,14 @@ void dart::vToolbarOverflow() {
 		
 		mySleep(1); // repaint
 		
-		if(!w->isVisible()) { // in case we showed to much text
+		if(!w->isVisible() && w->y()<5) { // in case we showed to much text
 			a->setText(shortText); // undo it
 			break; // and stop showing any further text
 		}
 	}
 	
 	// while the last toolbar button is not visible, shorten the text of other items
-	for(int i=0; !w->isVisible() && i<6; i++) {
+	for(int i=0; !w->isVisible() && w->y()<5 && i<6; i++) {
 		
 		switch(i) {
 			case 0:
@@ -1471,6 +1473,7 @@ bool dart::bNewGameIsSafe() {
 }
 
 void dart::vShowPreferences() {
+	if(!bNewGameIsSafe()) return;
 	preferences dialog(this,myIO);
 	dialog.exec();
 }

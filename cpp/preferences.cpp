@@ -3,7 +3,7 @@
 using namespace std;
 
 preferences::preferences(dart *TDart, io *TIO, QDialog *parent) : myDart(TDart), myIO(TIO), QDialog(parent) {
-	setWindowFlags(windowFlags() | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint);
+	setWindowFlags(windowFlags() | Qt::CustomizeWindowHint | Qt::WindowContextHelpButtonHint | Qt::WindowMaximizeButtonHint);
 	
 	setupUi(this);
 	
@@ -75,7 +75,7 @@ void preferences::vSettingChanged() {
 			lblStatusText->setVisible(true);
 			lblStatusText->setStyleSheet("font-weight:bold; color:red;");
 			lblStatusText->setText(tr("Setting the number of places smaller than the current place number will start a new game automatically."));
-		} else if( (QObject::sender()==spbMaxTime && spbMaxTime->value()!=myDart->iMaxTime) ||
+		} else if( (QObject::sender()==spbMaxTime && spbMaxTime->value()!=myDart->iMaxTime && myDart->bAgainstTime) ||
 			   (QObject::sender()==cobScoreAreaMode && cobScoreAreaMode->currentIndex()!=myDart->iScoreAreaMode) ||
 		           (QObject::sender()==spbLettersPerSecond /*&& spbMaxTime->value()!=myDart->iMaxTime TODO*/)
 			 ) {
@@ -110,7 +110,7 @@ void preferences::vAccepted() {
 	else if(myDart->iMaxPlaceCount!=spbMaxPlaceCount->value()) repaintRequired=true;
 	myIO->settings->setValue("iMaxPlaceCount",spbMaxPlaceCount->value());
 	
-	if(myDart->iMaxTime!=spbMaxTime->value()) newGameRequired=true;
+	if(myDart->iMaxTime!=spbMaxTime->value() && myDart->bAgainstTime) newGameRequired=true;
 	myIO->settings->setValue("iMaxTime",spbMaxTime->value());
 	
 	myIO->settings->setValue("bResetCursor",cbResetCursor->isChecked());
