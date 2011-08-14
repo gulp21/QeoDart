@@ -10,6 +10,8 @@ using namespace std;
 
 dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
+	setWindowFlags(windowFlags() | Qt::WindowContextHelpButtonHint);
+	
 	qlImageLayers << "background" << "borders" << "rivers" << "elevations";
 	
 	qlComments << tr("Very Good!") << tr("Super!") << tr("Very Fine!")
@@ -17,7 +19,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	           << tr("Well.") << tr("That was OK.") << tr("That was reasonable.")
 	           << tr("Oh boy!") << tr("Not really…") << tr("Not quite…")
 	           << tr("Completely Wrong!") << tr("That wasn't much of a hit…") << tr("Missed completely!")
-	           << tr("Read wrongly?") << tr("Clicked wrongly?") << tr("D'oh!");
+	           << tr("Read wrongly?") << tr("Clicked wrongly?") << tr("D'oh!"); // TODO typed wrongly?
 	
 	iPlaceCount=0;
 	iCurrentPlayer=0;
@@ -34,13 +36,13 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	myIO = new io(this);
 	myIO->vLoadSettings();
-        
-        timer = new QTimer(this);
-        connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
 	
-        resizeTimer = new QTimer(this);
+	timer = new QTimer(this);
+	connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
+	
+	resizeTimer = new QTimer(this);
 	resizeTimer->setSingleShot(TRUE);
-        connect(resizeTimer, SIGNAL(timeout()), this, SLOT(vToolbarOverflow()));
+	connect(resizeTimer, SIGNAL(timeout()), this, SLOT(vToolbarOverflow()));
 	
 // "error: unresolved external symbol time" when compiling for WinCE
 #ifdef Q_OS_WINCE
@@ -91,45 +93,46 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	//}
 	
 	actionHigh_Score_List->setIcon(QIcon::fromTheme("games-highscores"));
-	connect(actionConfigure,SIGNAL (triggered()), this, SLOT(vShowPreferences()));
+	connect(actionConfigure, SIGNAL(triggered()), this, SLOT(vShowPreferences()));
 	actionConfigure->setIcon(QIcon::fromTheme("configure"));
-	connect(actionQuit,SIGNAL (triggered()), this, SLOT(vClose()));
+	connect(actionQuit, SIGNAL(triggered()), this, SLOT(vClose()));
 	actionQuit->setIcon(QIcon::fromTheme("application-exit", QIcon(":/icons/oxygen/application-exit.png")));
-	connect(actionNew_Game,SIGNAL (triggered()), this, SLOT(vNewGame()));
+	connect(actionNew_Game, SIGNAL(triggered()), this, SLOT(vNewGame()));
 	actionNew_Game->setIcon(QIcon::fromTheme("document-new"));
-	connect(actionFind_Place,SIGNAL (triggered()), this, SLOT(vSetGameMode()));
+	connect(actionFind_Place, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
 	actionFind_Place->setIcon(QIcon::fromTheme("edit-find"));
-	connect(action100,SIGNAL (triggered()), this, SLOT(vResize()));
+	connect(action100, SIGNAL(triggered()), this, SLOT(vResize()));
 	action100->setIcon(QIcon::fromTheme("zoom-original"));
-	connect(actionTraining,SIGNAL (triggered()), this, SLOT(vSetGameMode()));
+	connect(actionTraining, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
 	actionTraining->setIcon(QIcon::fromTheme("user-identity"));
-	connect(actionNumber_of_Players,SIGNAL (triggered()), this, SLOT(vSetNumberOfPlayers()));
-	connect(actionPlayers,SIGNAL (triggered()), this, SLOT(vSetNumberOfPlayers()));
-	connect(actionLocal,SIGNAL (triggered()), this, SLOT(vSetGameMode()));
+	connect(actionNumber_of_Players, SIGNAL(triggered()), this, SLOT(vSetNumberOfPlayers()));
+	connect(actionPlayers, SIGNAL(triggered()), this, SLOT(vSetNumberOfPlayers()));
+	connect(actionLocal, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
 	actionLocal->setIcon(QIcon::fromTheme("system-users"));
-	connect(actionAgainst_Time,SIGNAL (triggered()), this, SLOT(vSetAgainstTime()));
+	connect(actionAgainst_Time, SIGNAL(triggered()), this, SLOT(vSetAgainstTime()));
 	actionAgainst_Time->setIcon(QIcon::fromTheme("player-time"));
-	connect(actionName_of_Place,SIGNAL (triggered()), this, SLOT(vSetAskForMode()));
+	connect(actionName_of_Place, SIGNAL(triggered()), this, SLOT(vSetAskForMode()));
 //	actionName_of_Place->setIcon(QIcon::fromTheme("user-identity"));
-	connect(actionPosition_of_Place,SIGNAL (triggered()), this, SLOT(vSetAskForMode()));
+	connect(actionPosition_of_Place, SIGNAL(triggered()), this, SLOT(vSetAskForMode()));
 //	actionPosition_of_Place->setIcon(QIcon::fromTheme("user-identity"));
-	connect(actionCountries,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
-	connect(actionCapitals_of_Countries,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
-	connect(actionStates,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
-	connect(actionCapitals_of_States,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
-	connect(actionCounties,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
-	connect(actionCities,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
-	connect(actionTowns,SIGNAL (triggered()), this, SLOT(vSetPlaceType()));
-	connect(actionAbout_Qt,SIGNAL (triggered()), qApp, SLOT(aboutQt()));
-	connect(actionMenu_Bar,SIGNAL (triggered()), this, SLOT(vSetToolMenuBarState()));
+	connect(actionCountries, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionCapitals_of_Countries, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionStates, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionCapitals_of_States, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionCounties, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionCities, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionTowns, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+	connect(actionMenu_Bar, SIGNAL(triggered()), this, SLOT(vSetToolMenuBarState()));
 	actionMenu_Bar->setIcon(QIcon::fromTheme("show-menu"));
-	connect(actionToolbar,SIGNAL (triggered()), this, SLOT(vSetToolMenuBarState()));
-	connect(actionBorders,SIGNAL (triggered()), this, SLOT(vToggleMapLayer()));
-	connect(actionRivers,SIGNAL (triggered()), this, SLOT(vToggleMapLayer()));
-	connect(actionElevations,SIGNAL (triggered()), this, SLOT(vToggleMapLayer()));
+	connect(actionToolbar, SIGNAL(triggered()), this, SLOT(vSetToolMenuBarState()));
+	connect(actionBorders, SIGNAL(triggered()), this, SLOT(vToggleMapLayer()));
+	connect(actionRivers, SIGNAL(triggered()), this, SLOT(vToggleMapLayer()));
+	connect(actionElevations, SIGNAL(triggered()), this, SLOT(vToggleMapLayer()));
 	
-	connect(lineEdit,SIGNAL (returnPressed()), this, SLOT(vReturnPressedEvent()));
-	connect(lineEdit,SIGNAL (textEdited(QString)), this, SLOT(vTextEditedEvent()));
+	connect(lineEdit, SIGNAL(returnPressed()), this, SLOT(vReturnPressedEvent()));
+	connect(lineEdit, SIGNAL(textEdited(QString)), this, SLOT(vTextEditedEvent()));
+	connect(cbMatchBehaviour, SIGNAL(currentIndexChanged(int)), this, SLOT(vTextEditedEvent()));
 	
 	//these menus are needed for QToolButtons only and shouldn't be display in the main menus
 	menubar->removeAction(menuApplication->menuAction());
@@ -301,7 +304,7 @@ void dart::vRemoveAllCommonPoints() {
 void dart::vTimeout() {
         if(iTimerElapsed==iMaxTime) return;
         qDebug() << ++iTimerElapsed;
-        lblTime->setText(QString("%1").arg(iMaxTime-iTimerElapsed));
+	lblTime->setText(QString("%1").arg(iMaxTime-iTimerElapsed));
 }
 
 void dart::vSetPlaceType() {
@@ -462,11 +465,11 @@ void dart::vSetNumberOfPlayers(int n) {
 	gridLayout->removeWidget(lblTime);
 	if(iNumberOfPlayers==1) {
 		gridLayout->removeWidget(lblComment);
-		gridLayout->addWidget(lblCurrentPlace,1*(iGameMode!=enTraining),0);
+		gridLayout->addWidget(lblCurrentPlace,1*(iGameMode!=enTraining && iGameMode!=enFind),0);
 		gridLayout->addWidget(lblCurrentPlayer,1,4);
 		gridLayout->addWidget(lblComment,1,2);
-		gridLayout->addWidget(lineEdit,1*(iGameMode!=enTraining),0);
-                gridLayout->addWidget(lblTime,1*(iGameMode!=enTraining),4);
+		gridLayout->addWidget(lineEdit,1*(iGameMode!=enTraining && iGameMode!=enFind),0);
+                gridLayout->addWidget(lblTime,1*(iGameMode!=enTraining && iGameMode!=enFind),4);
 		lblComment->setText("");
 		lblComment->show();
                 lblCurrentPlayer->hide();
@@ -479,9 +482,6 @@ void dart::vSetNumberOfPlayers(int n) {
                 lblCurrentPlayer->show();
 	}
 	
-// 	gridLayout->setGeometry(QRect(0, 0, 10, 10));
-// 	gridLayout->setSpacing(1);
-// 	gridLayout->setContentsMargins(0,0,0,0);
 	gridLayout->removeItem(spGridLayoutVertical);
 	gridLayout->addItem(spGridLayoutVertical,iNumberOfPlayers+1,0);
 	
@@ -661,7 +661,7 @@ int dart::iGetFontSize() {
 }
 
 int dart::iGetPaddingTop() {
-	return (qlPlayerLabels.count()+1*(iGameMode!=enTraining)) * (iGetFontSize()+6);
+	return (qlPlayerLabels.count()+1*(iGameMode!=enTraining && iGameMode!=enFind)) * (iGetFontSize()+6);
 }
 
 // draws a point at P(x|y) with the label name, and adds it to the list list
@@ -919,7 +919,29 @@ void dart::vSetGameMode() {
 	myIO->settings->setValue("iGameMode", iGameMode);
 }
 void dart::vSetGameMode(enGameModes mode) {
+	// undo hiding lbls etc.
 	switch(iGameMode) {
+		case enFind:
+			lblCurrentPlace->show();
+			lblCurrentRound->show();
+			lblCurrentPlayer->show();
+			lblTime->show();
+			qlPlayerLabels[0][0]->show();
+			actionNumber_of_Players->setEnabled(true);
+			actionPlayers->setEnabled(true);
+			btAskForMode->setEnabled(true);
+			actionName_of_Place->setEnabled(true);
+			actionPosition_of_Place->setEnabled(true);
+			actionAgainst_Time->setEnabled(true);
+			
+			gridLayout->removeItem(horizontalSpacer);
+			gridLayout->addItem(horizontalSpacer,0,1);
+			gridLayout->removeItem(horizontalSpacer_2);
+			gridLayout->addItem(horizontalSpacer_2,0,3);
+			
+			lineEdit->hide();
+			
+			break;
 		case enTraining:
 			lblCurrentRound->show();
 			lblCurrentPlayer->show();
@@ -936,18 +958,39 @@ void dart::vSetGameMode(enGameModes mode) {
 	
 	vResetForNewGame();
 	
+	// TODO can we do it like this for everything here?
+	cbSearchDistance->setVisible(iGameMode==enFind);
+	cbMatchBehaviour->setVisible(iGameMode==enFind);
+	
 	switch(iGameMode) {
 		case enFind:
+			lblCurrentPlace->hide();
 			lblCurrentRound->hide();
 			lblCurrentPlayer->hide();
+			lblTime->hide();
 			qlPlayerLabels[0][0]->hide();
 			actionNumber_of_Players->setEnabled(false);
 			actionPlayers->setEnabled(false);
 			btAskForMode->setEnabled(false);
 			actionName_of_Place->setEnabled(false);
 			actionPosition_of_Place->setEnabled(false);
-			vSetNumberOfPlayers(1);
-			vShowAllPlaces(); return;
+			actionAgainst_Time->setEnabled(false);
+			
+			gridLayout->removeItem(horizontalSpacer);
+			gridLayout->addItem(horizontalSpacer,0,4);
+			gridLayout->removeItem(horizontalSpacer_2);
+			
+			gridLayout->removeWidget(cbMatchBehaviour);
+			gridLayout->addWidget(cbMatchBehaviour,0,1);
+			gridLayout->removeWidget(cbSearchDistance);
+			gridLayout->addWidget(cbSearchDistance,0,3);
+			
+			lineEdit->show();
+			gridLayout->removeWidget(lineEdit);
+			gridLayout->addWidget(lineEdit,0,0);
+			
+			vSetNumberOfPlayers(1); // TODO save it
+			vTextEditedEvent(); return;
 			break;
 		case enTraining:
 			lblCurrentRound->hide();
@@ -955,7 +998,6 @@ void dart::vSetGameMode(enGameModes mode) {
 			qlPlayerLabels[0][0]->hide();
 			actionNumber_of_Players->setEnabled(FALSE);
 			actionPlayers->setEnabled(FALSE);
-			
 			vSetNumberOfPlayers(1);
 			break;
 		case enLocal:
@@ -1286,8 +1328,8 @@ QString dart::qsSimplifyString(QString str, int l) {
 }
 
 void dart::vReturnPressedEvent() { // TODO split (net!)
-	if(iAskForMode!=enNames) {
-		qDebug() << "[E] vReturnPressedEvent";
+	if(iAskForMode!=enNames || iGameMode==enFind) {
+		qDebug() << "[i] vReturnPressedEvent rejected";
 		return;
 	}
 	lineEdit->setEnabled(FALSE);
@@ -1295,9 +1337,9 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 	double f;
 	int iIndexOfPlace=iFindInputInList(f);
 	
-	lineEdit->setStyleSheet("color:black");
+	lineEdit->setStyleSheet("color:WindowText");
 	if(f<1) {
-		lineEdit->setStyleSheet("text-decoration:underline;color:black"); // TODO underline is not always visible
+		lineEdit->setStyleSheet("text-decoration:underline;color:WindowText"); // TODO underline is not always visible
 		if(f<0.75) {
 			lineEdit->setStyleSheet("text-decoration:underline;color:red");
 			if(iIndexOfPlace==-1) {
@@ -1410,6 +1452,10 @@ void dart::vReadQcf() {
 	
 	btMap->setText(QString(tr("Map: %1")).arg(static_cast<QAction*>(QObject::sender())->text()));
 	vToolbarOverflow();
+	
+	cbSearchDistance->setItemText(0,QString(tr("%1 km")).arg(dGetDistanceInKm(10),0,'f',1));
+	cbSearchDistance->setItemText(1,QString(tr("%1 km")).arg(dGetDistanceInKm(20),0,'f',1));
+	cbSearchDistance->setItemText(2,QString(tr("%1 km")).arg(dGetDistanceInKm(30),0,'f',1));
 	
 	vRepaintMap();
 	mySleep(1);
@@ -1524,15 +1570,15 @@ void dart::vToggleMapLayer() {
 void dart::vFindPlaceAround(int x, int y) {
 	vRemoveAllCommonPoints();
 	
+	//vircle!
 	for(int i=0; i<qlCurrentTypePlaces.count(); i++) {
-		if(qlCurrentTypePlaces[i]->x-x<10 && qlCurrentTypePlaces[i]->x-x>-10 &&
-		   qlCurrentTypePlaces[i]->y-y<10 && qlCurrentTypePlaces[i]->y-y>-10) {
+		double distance=dGetDistanceInPxBetween(qlCurrentTypePlaces[i]->x,qlCurrentTypePlaces[i]->y,x,y);
+		
+		if(distance<=10) {
 			vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65,255));
-		} else if(qlCurrentTypePlaces[i]->x-x<20 && qlCurrentTypePlaces[i]->x-x>-20 &&
-		          qlCurrentTypePlaces[i]->y-y<20 && qlCurrentTypePlaces[i]->y-y>-20) {
+		} else if(distance<=20 && cbSearchDistance->currentIndex()>=1) {
 			vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65,170));
-		} else if(qlCurrentTypePlaces[i]->x-x<30 && qlCurrentTypePlaces[i]->x-x>-30 &&
-			qlCurrentTypePlaces[i]->y-y<30 && qlCurrentTypePlaces[i]->y-y>-30) {
+		} else if(distance<=30 && cbSearchDistance->currentIndex()>=2) {
 			vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65,85));
 		}
 	}
@@ -1548,8 +1594,7 @@ void dart::vTextEditedEvent() {
 	
 	if(text=="") { vShowAllPlaces(); return; }
 	
-#warning TODObr combobox
-	const int m=1;
+	const int m=cbMatchBehaviour->currentIndex();
 	
 	for(int i=0; i<qlCurrentTypePlaces.count(); i++) {
 		if(m==0) { // match beginning
@@ -1593,6 +1638,6 @@ void dart::vTextEditedEvent() {
 			}
 		}
 	}
-#warning use system colors TODObr
-	lineEdit->setStyleSheet(found ? "color:black" : "color:red");
+
+	lineEdit->setStyleSheet(found ? "color:WindowText" : "color:red");
 }

@@ -133,6 +133,12 @@
      </item>
      <item row="3" column="0">
       <widget class="QLineEdit" name="lineEdit">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="frame">
         <bool>true</bool>
        </property>
@@ -146,6 +152,65 @@
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QComboBox" name="cbMatchBehaviour">
+       <property name="whatsThis">
+        <string>Chance the search behavior of the searchbox:
+
+Match beginning of names:
+&quot;K&quot; finds &quot;Kosovo&quot; but not &quot;United Kingdom&quot;
+
+Match beginning of words:
+&quot;Ki&quot; finds &quot;United Kingdom&quot; but not &quot;Slovakia&quot;
+
+Search within names:
+&quot;Ki&quot; finds &quot;United Kingdom&quot; and &quot;Slovakia&quot;</string>
+       </property>
+       <property name="currentIndex">
+        <number>1</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Match beginning of names</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Match beginning of words</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Search within names</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QComboBox" name="cbSearchDistance">
+       <property name="whatsThis">
+        <string>When you click on the map, places which are at most x km around that point are displayed.</string>
+       </property>
+       <property name="currentIndex">
+        <number>2</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>%1 km</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>%1 km</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>%1 km</string>
+        </property>
+       </item>
       </widget>
      </item>
     </layout>
