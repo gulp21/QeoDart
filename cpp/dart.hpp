@@ -168,7 +168,6 @@ Q_OBJECT
 		void vShowResultWindows();
 		void vSetToolMenuBarState(enToolMenuBarState state);
 		void vUpdateActionsIsCheckedStates();
-		void vHideDisabledActions();
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetDistanceInPx(int a, int b, int n);

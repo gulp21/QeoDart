@@ -919,8 +919,10 @@ void dart::vSetGameMode(enGameModes mode) {
 			lblCurrentRound->show();
 			lblCurrentPlayer->show();
 			qlPlayerLabels[0][0]->show();
-			actionNumber_of_Players->setEnabled(TRUE);
-			actionPlayers->setEnabled(TRUE);
+			actionNumber_of_Players->setEnabled(true);
+			actionPlayers->setVisible(true);
+			actionPlayers->setEnabled(true);
+			qDebug()<<"shoudl be true"<<actionPlayers->isEnabled();
 			vResetScoreLabels();
 			break;
 		case enLocal:
@@ -936,8 +938,9 @@ void dart::vSetGameMode(enGameModes mode) {
 			lblCurrentRound->hide();
 			lblCurrentPlayer->hide();
 			qlPlayerLabels[0][0]->hide();
-			actionNumber_of_Players->setEnabled(FALSE);
-			actionPlayers->setEnabled(FALSE);
+			actionNumber_of_Players->setEnabled(false);
+			actionPlayers->setVisible(false);
+			actionPlayers->setEnabled(false);
 			
 			vSetNumberOfPlayers(1);
 			break;
@@ -945,8 +948,6 @@ void dart::vSetGameMode(enGameModes mode) {
 			vSetNumberOfPlayers(iNumberOfPlayers);
 			break;
 	}
-	
-	vHideDisabledActions();
 	
 	vNextRound();
 }
@@ -1505,11 +1506,4 @@ void dart::vToggleMapLayer() {
 	myIO->settings->setValue("bRivers",actionRivers->isChecked());
 	qlMapLayers[3]->setVisible(actionElevations->isChecked() && actionElevations->isVisible());
 	myIO->settings->setValue("bElevations",actionElevations->isChecked());
-}
-
-void dart::vHideDisabledActions() { // TODO not working
-	actionPlayers->setVisible(actionPlayers->isEnabled());
-	btAskForMode->setEnabled(false);
-	actionBtAskForMode->setVisible(btAskForMode->isEnabled()) << actionPlayers->isEnabled();
-	//actionAgainst_Time->setVisible(actionAgainst_Time->isEnabled()); // TODO on toolbar only
 }
