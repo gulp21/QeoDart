@@ -156,7 +156,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	btAskForMode->setMenu(menuAskForMode);
 	btAskForMode->setPopupMode(QToolButton::InstantPopup);
 	btAskForMode->setToolButtonStyle(Qt::ToolButtonTextOnly);
-	toolBar->addWidget(btAskForMode);
+	actionBtAskForMode=toolBar->addWidget(btAskForMode);
 	
 	menuPlace_Number = new QMenu(this);
 	menuPlaceType->addMenu(menuPlace_Number);
@@ -944,6 +944,8 @@ void dart::vSetGameMode(enGameModes mode) {
 			break;
 	}
 	
+	vHideDisabledActions();
+	
 	vNextRound();
 }
 
@@ -1500,4 +1502,11 @@ void dart::vToggleMapLayer() {
 	myIO->settings->setValue("bRivers",actionRivers->isChecked());
 	qlMapLayers[3]->setVisible(actionElevations->isChecked() && actionElevations->isVisible());
 	myIO->settings->setValue("bElevations",actionElevations->isChecked());
+}
+
+void dart::vHideDisabledActions() { // TODO not working
+	actionPlayers->setVisible(actionPlayers->isEnabled());
+	btAskForMode->setEnabled(false);
+	actionBtAskForMode->setVisible(btAskForMode->isEnabled()) << actionPlayers->isEnabled();
+	//actionAgainst_Time->setVisible(actionAgainst_Time->isEnabled()); // TODO on toolbar only
 }

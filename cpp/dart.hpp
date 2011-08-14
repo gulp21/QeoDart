@@ -140,7 +140,7 @@ Q_OBJECT
 		
 		QToolButton *btMap, *btGameMode, *btAskForMode, *btPlaceType, *btView, *btApplication;
 		
-		QAction *actionBtApplication;
+		QAction *actionBtApplication, *actionBtAskForMode;
 		
 		QMenu *menuPlace_Number;
 		
@@ -168,6 +168,7 @@ Q_OBJECT
 		void vShowResultWindows();
 		void vSetToolMenuBarState(enToolMenuBarState state);
 		void vUpdateActionsIsCheckedStates();
+		void vHideDisabledActions();
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetDistanceInPx(int a, int b, int n);
