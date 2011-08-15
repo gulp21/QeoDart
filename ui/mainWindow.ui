@@ -235,7 +235,7 @@ Search within names:
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuGame">
@@ -319,8 +319,8 @@ Search within names:
     <addaction name="menuGameMode"/>
     <addaction name="actionNumber_of_Players"/>
     <addaction name="actionAgainst_Time"/>
-    <addaction name="menuMap"/>
     <addaction name="menuAsk_for"/>
+    <addaction name="menuMap"/>
     <addaction name="menuView"/>
     <addaction name="menuAskForMode"/>
     <addaction name="menuPlaceType"/>

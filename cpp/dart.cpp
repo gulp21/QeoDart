@@ -87,30 +87,25 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	agLayers->addAction(actionRivers);
 	agLayers->addAction(actionElevations);
 	
-	// if there is no default icon theme (win+osx), use fallback
-	//if (!QIcon::hasThemeIcon("document-open")) { // TODO test
-		//QIcon::setThemeName(" ");
-	//}
-	
 	actionHigh_Score_List->setIcon(QIcon::fromTheme("games-highscores"));
 	connect(actionConfigure, SIGNAL(triggered()), this, SLOT(vShowPreferences()));
 	actionConfigure->setIcon(QIcon::fromTheme("configure"));
 	connect(actionQuit, SIGNAL(triggered()), this, SLOT(vClose()));
 	actionQuit->setIcon(QIcon::fromTheme("application-exit", QIcon(":/icons/oxygen/application-exit.png")));
 	connect(actionNew_Game, SIGNAL(triggered()), this, SLOT(vNewGame()));
-	actionNew_Game->setIcon(QIcon::fromTheme("document-new"));
+	actionNew_Game->setIcon(QIcon::fromTheme("document-new", QIcon(":/icons/oxygen/document-new.png")));
 	connect(actionFind_Place, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
 	actionFind_Place->setIcon(QIcon::fromTheme("edit-find"));
 	connect(action100, SIGNAL(triggered()), this, SLOT(vResize()));
 	action100->setIcon(QIcon::fromTheme("zoom-original"));
 	connect(actionTraining, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
-	actionTraining->setIcon(QIcon::fromTheme("user-identity"));
+	actionTraining->setIcon(QIcon::fromTheme("user-identity", QIcon(":/icons/oxygen/user-identity.png")));
 	connect(actionNumber_of_Players, SIGNAL(triggered()), this, SLOT(vSetNumberOfPlayers()));
 	connect(actionPlayers, SIGNAL(triggered()), this, SLOT(vSetNumberOfPlayers()));
 	connect(actionLocal, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
 	actionLocal->setIcon(QIcon::fromTheme("system-users"));
 	connect(actionAgainst_Time, SIGNAL(triggered()), this, SLOT(vSetAgainstTime()));
-	actionAgainst_Time->setIcon(QIcon::fromTheme("player-time"));
+	actionAgainst_Time->setIcon(QIcon::fromTheme("player-time", QIcon(":/icons/oxygen/player-time.png")));
 	connect(actionName_of_Place, SIGNAL(triggered()), this, SLOT(vSetAskForMode()));
 //	actionName_of_Place->setIcon(QIcon::fromTheme("user-identity"));
 	connect(actionPosition_of_Place, SIGNAL(triggered()), this, SLOT(vSetAskForMode()));
@@ -161,7 +156,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	btAskForMode->setMenu(menuAskForMode);
 	btAskForMode->setPopupMode(QToolButton::InstantPopup);
 	btAskForMode->setToolButtonStyle(Qt::ToolButtonTextOnly);
-	toolBar->addWidget(btAskForMode);
+	actionBtAskForMode=toolBar->addWidget(btAskForMode);
 	
 	menuPlace_Number = new QMenu(this);
 	menuPlaceType->addMenu(menuPlace_Number);
@@ -198,8 +193,10 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	agMap = new QActionGroup(this);
 	for(int i=0; i<qlQcfxFiles.count(); i++) {
 		QAction *menuItem;
-//produces crash in WinCE
-#ifndef Q_OS_WINCE
+//QIcon produces crash in WinCE
+#ifdef Q_OS_WINCE
+		menuItem = new QAction(qlQcfxFiles[i].mapName, this);
+#else
 		menuItem = new QAction(QIcon(qlQcfxFiles[i].path+"/background.png"), qlQcfxFiles[i].mapName, this);
 #endif
 		menuItem->setToolTip(QString(tr("Load map of %1")).arg(qlQcfxFiles[i].mapName));
@@ -515,7 +512,7 @@ void dart::resizeEvent(QResizeEvent *event) {
 	resizeTimer->start(200);
 }
 
-// this function shorten the labels when the window becomes to narrow // TODO handle rename (e.g. mapname)
+// this function shorten the labels when the window becomes too narrow // TODO handle rename (e.g. mapname)
 void dart::vToolbarOverflow() {
 	if(!bAcceptingResizeEvent) return;
 	mySleep(1);
@@ -531,8 +528,8 @@ void dart::vToolbarOverflow() {
 	QToolButton *a=NULL; // widget whose text will be changed
 	QString shortText, longText;
 	
-	// while the last toolbar button is visible, extend the text of other items
-	for(int i=5; w->isVisible() && i>-1; i--) {
+	// while the last toolbar button is visible and not in overflow view, extend the text of other items
+	for(int i=7; w->isVisible() && w->y()<5 && i>-1; i--) {
 		
 		switch(i) {
 			case 0:
@@ -565,20 +562,30 @@ void dart::vToolbarOverflow() {
 				longText=QString(tr("Players: %1")).arg(iNumberOfPlayers);
 				shortText=QString(tr("%1")).arg(iNumberOfPlayers);
 				break;
+			case 6:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(5+d)->widget());
+				longText=tr("Place Types");
+				shortText=tr("Places");
+				break;
+			case 7:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(6+d)->widget());
+				longText=QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName);
+				shortText=QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName.left(2));
+				break;
 		}
 		
 		a->setText(longText);
 		
 		mySleep(1); // repaint
 		
-		if(!w->isVisible()) { // in case we showed to much text
+		if(!w->isVisible() || w->y()>5) { // in case we showed to much text
 			a->setText(shortText); // undo it
 			break; // and stop showing any further text
 		}
 	}
 	
-	// while the last toolbar button is not visible, shorten the text of other items
-	for(int i=0; !w->isVisible() && i<6; i++) {
+	// while the last toolbar button is visible or in overflow view, shorten the text of other items
+	for(int i=0; (!w->isVisible() || w->y()>5) && i<8; i++) {
 		
 		switch(i) {
 			case 0:
@@ -604,6 +611,14 @@ void dart::vToolbarOverflow() {
 			case 5:
 				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(2+d)->widget());
 				shortText=QString(tr("%1")).arg(iNumberOfPlayers);
+				break;
+			case 6:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(5+d)->widget());
+				shortText=tr("Places");
+				break;
+			case 7:
+				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(6+d)->widget());
+				shortText=QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName.left(2));
 				break;
 		}
 		
@@ -699,7 +714,7 @@ void dart::vMouseClickEvent(int x, int y) {
 	x=iGetUnzoomed(x);
 	y=iGetUnzoomed(y);
 	vDrawPoint(x,y,qlCircleLabels[iCurrentPlayer],qlColorsOfPlayers[iCurrentPlayer]);
-
+	
 	scoreHistory score;
 	score.x=x;
 	score.y=y;
@@ -711,6 +726,7 @@ void dart::vMouseClickEvent(int x, int y) {
         if(bAgainstTime) {
                 score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
                 score.mark=dGetMarkFromScore(score.score);
+		timer->stop();
         }
 	qlScoreHistory[iCurrentPlayer].append(score);
 	
@@ -946,8 +962,10 @@ void dart::vSetGameMode(enGameModes mode) {
 			lblCurrentRound->show();
 			lblCurrentPlayer->show();
 			qlPlayerLabels[0][0]->show();
-			actionNumber_of_Players->setEnabled(TRUE);
-			actionPlayers->setEnabled(TRUE);
+			actionNumber_of_Players->setEnabled(true);
+			actionPlayers->setVisible(true);
+			actionPlayers->setEnabled(true);
+			qDebug()<<"shoudl be true"<<actionPlayers->isEnabled();
 			vResetScoreLabels();
 			break;
 		case enLocal:
@@ -996,8 +1014,10 @@ void dart::vSetGameMode(enGameModes mode) {
 			lblCurrentRound->hide();
 			lblCurrentPlayer->hide();
 			qlPlayerLabels[0][0]->hide();
-			actionNumber_of_Players->setEnabled(FALSE);
-			actionPlayers->setEnabled(FALSE);
+			actionNumber_of_Players->setEnabled(false);
+			actionPlayers->setVisible(false);
+			actionPlayers->setEnabled(false);
+			
 			vSetNumberOfPlayers(1);
 			break;
 		case enLocal:
@@ -1165,7 +1185,7 @@ void dart::vNextRound() {
 			break;
 	};
         
-        if(bAgainstTime) vSetAgainstTime(TRUE);
+        vSetAgainstTime(bAgainstTime);
 }
 
 //returns the distance between P(a|b) and Q(x|y); a,b,x,y should be unzoomed
@@ -1371,6 +1391,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
                 iTimerElapsed-=bonusSeconds;
                 if(iTimerElapsed<0) iTimerElapsed=0;
                 score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
+		timer->stop();
         }
 	score.mark=dGetMarkFromScore(score.score);
         
@@ -1534,6 +1555,7 @@ bool dart::bNewGameIsSafe() {
 }
 
 void dart::vShowPreferences() {
+	if(!bNewGameIsSafe()) return;
 	preferences dialog(this,myIO);
 	dialog.exec();
 }
