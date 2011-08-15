@@ -218,6 +218,12 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	if(bAgainstTime) actionAgainst_Time->trigger();
 	else vSetAgainstTime();
 	
+	switch(iAskForMode) {
+		case enNames:
+			actionName_of_Place->trigger(); break;
+		case enPositions:
+		        actionPosition_of_Place->trigger(); break;
+	}
 	switch(iGameMode) {
 		case enFind:
 			actionFind_Place->trigger(); break;
@@ -225,12 +231,6 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 			actionTraining->trigger(); break;
 		case enLocal:
 		        actionLocal->trigger(); break;
-	}
-	switch(iAskForMode) {
-		case enNames:
-			actionName_of_Place->trigger(); break;
-		case enPositions:
-		        actionPosition_of_Place->trigger(); break;
 	}
 	vSetToolMenuBarState(iToolMenuBarState);
 	
@@ -247,7 +247,10 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 }
 
-dart::~dart(){
+dart::~dart() {
+	myIO->settings->setValue("iMatchBehaviour",cbMatchBehaviour->currentIndex());
+	myIO->settings->setValue("iSearchDistance",cbSearchDistance->currentIndex());
+	
 	vRemoveAllCircles();
 	vRemoveAllCommonPoints();
 	//vSetNumberOfPlayers(0); // QGridLayout: Cannot add QLabel/lblTime to QGridLayout/gridLayout at row -1 column 4
@@ -945,6 +948,7 @@ void dart::vSetGameMode(enGameModes mode) {
 			qlPlayerLabels[0][0]->show();
 			actionNumber_of_Players->setEnabled(true);
 			actionPlayers->setEnabled(true);
+			actionPlayers->setVisible(true);
 			btAskForMode->setEnabled(true);
 			actionName_of_Place->setEnabled(true);
 			actionPosition_of_Place->setEnabled(true);
@@ -989,6 +993,7 @@ void dart::vSetGameMode(enGameModes mode) {
 			qlPlayerLabels[0][0]->hide();
 			actionNumber_of_Players->setEnabled(false);
 			actionPlayers->setEnabled(false);
+			actionPlayers->setVisible(false);
 			btAskForMode->setEnabled(false);
 			actionName_of_Place->setEnabled(false);
 			actionPosition_of_Place->setEnabled(false);
@@ -1008,6 +1013,7 @@ void dart::vSetGameMode(enGameModes mode) {
 			gridLayout->addWidget(lineEdit,0,0);
 			
 			vSetNumberOfPlayers(1); // TODO save it
+			lineEdit->clear();
 			vTextEditedEvent(); return;
 			break;
 		case enTraining:
@@ -1483,6 +1489,8 @@ void dart::vReadQcf() {
 	vToggleMapLayer();
 	vResetForNewGame();
 	vNextRound();
+	
+	if(iGameMode==enFind) vTextEditedEvent();
 }
 
 void dart::vSetToolMenuBarState() {
@@ -1567,10 +1575,17 @@ void dart::vUpdateActionsIsCheckedStates() {
 	actionCounties->setChecked(qsCurrentPlaceType.contains("county"));
 	actionCities->setChecked(qsCurrentPlaceType.contains("city"));
 	actionTowns->setChecked(qsCurrentPlaceType.contains("town"));
-		
-	agGameMode->actions()[iGameMode]->setChecked(true);
 	
 	agAskForMode->actions()[iAskForMode]->setChecked(true);
+	
+	switch(iGameMode) {
+		case enFind:
+			actionFind_Place->setChecked(true); break;
+		case enTraining:
+			actionTraining->setChecked(true); break;
+		case enLocal:
+			actionLocal->setChecked(true); break;
+	}
 	
 	agMap->actions()[iCurrentQcf]->setChecked(true);
 	
@@ -1609,12 +1624,14 @@ void dart::vFindPlaceAround(int x, int y) {
 void dart::vTextEditedEvent() {
 	if(iGameMode!=enFind) return;
 	
+	qDebug() << "vTextEditedEvent";
+	
 	vRemoveAllCommonPoints();
 	
 	bool found=false;
 	QString text=lineEdit->text().toLower();
 	
-	if(text=="") { vShowAllPlaces(); return; }
+	if(text=="") { vShowAllPlaces(); lineEdit->setStyleSheet("color:WindowText"); return; }
 	
 	const int m=cbMatchBehaviour->currentIndex();
 	
@@ -1636,10 +1653,18 @@ void dart::vTextEditedEvent() {
 					
 				// if the character before the matching phrase matches [ -_/()]
 				} else {
-					if(QString(qlCurrentTypePlaces[i]->name[qlCurrentTypePlaces[i]->name.indexOf(text,0,Qt::CaseInsensitive)-1]).replace(QRegExp("([ -_/()])"), "}")=="}") {
-					vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65));
-					found=true;
+					
+					qDebug() << QString(qlCurrentTypePlaces[i]->name[qlCurrentTypePlaces[i]->name.indexOf(text,0,Qt::CaseInsensitive)-1]) << QString(qlCurrentTypePlaces[i]->name[qlCurrentTypePlaces[i]->name.indexOf(text,0,Qt::CaseInsensitive)-1]).replace(QRegExp("[ _/()]"), "}").replace("-","}") << qlCurrentTypePlaces[i]->name;
+					
+					if(qlCurrentTypePlaces[i]->name.contains(QRegExp(QString("[ _/()]%1").arg(text),Qt::CaseInsensitive)) ||
+					   qlCurrentTypePlaces[i]->name.contains(QString("-%1").arg(text),Qt::CaseInsensitive) ) {
+//					if(QString(qlCurrentTypePlaces[i]->name[qlCurrentTypePlaces[i]->name.indexOf(text,0,Qt::CaseInsensitive)-1]).replace(QRegExp("[ _/()]"), "}").replace("-","}")=="}") {
+						
+						vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65));
+						found=true;
+						
 					}
+					
 				}
 				
 			}

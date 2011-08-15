@@ -58,7 +58,6 @@ struct qcfFile {
 	qcfCopyright copyright;
 };
 
-#warning TODO----------------read/validate settings
 enum enGameModes {
 	enFind=3,
 	enTraining=0,

@@ -479,7 +479,7 @@ void io::vLoadSettings() {
 	myDart->bAgainstTime=settings->value("bAgainstTime",FALSE).toBool();
 	
 	myDart->iGameMode=static_cast<enGameModes>(settings->value("iGameMode",enLocal).toInt());
-	if(myDart->iGameMode!=enTraining && myDart->iGameMode!=enLocal && myDart->iGameMode!=enNetwork) myDart->iGameMode=enLocal;
+	if(myDart->iGameMode!=enFind && myDart->iGameMode!=enTraining && myDart->iGameMode!=enLocal && myDart->iGameMode!=enNetwork) myDart->iGameMode=enLocal;
 	
 	myDart->iToolMenuBarState=static_cast<enToolMenuBarState>(settings->value("iToolMenuBarState",enBoth).toInt());
 	if(myDart->iToolMenuBarState!=enBoth && myDart->iToolMenuBarState!=enMenuBarOnly && myDart->iToolMenuBarState!=enToolBarOnly) myDart->iToolMenuBarState=enBoth;
@@ -488,6 +488,9 @@ void io::vLoadSettings() {
 	myDart->actionBorders->setChecked(settings->value("bBorders",true).toBool());
 	myDart->actionRivers->setChecked(settings->value("bRivers",true).toBool());
 	myDart->actionElevations->setChecked(settings->value("bElevations",true).toBool());
+	
+	myDart->cbMatchBehaviour->setCurrentIndex(settings->value("iMatchBehaviour",1).toInt());
+	myDart->cbSearchDistance->setCurrentIndex(settings->value("iSearchDistance",2).toInt());
 	
 	
 	// General
