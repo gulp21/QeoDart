@@ -1363,9 +1363,9 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 	double f;
 	int iIndexOfPlace=iFindInputInList(f);
 	
-	lineEdit->setStyleSheet("color:WindowText");
+	lineEdit->setStyleSheet("");
 	if(f<1) {
-		lineEdit->setStyleSheet("text-decoration:underline;color:WindowText"); // TODO underline is not always visible
+		lineEdit->setStyleSheet("text-decoration:underline;"); // TODO underline is not always visible
 		if(f<0.75) {
 			lineEdit->setStyleSheet("text-decoration:underline;color:red");
 			if(iIndexOfPlace==-1) {
@@ -1631,7 +1631,7 @@ void dart::vTextEditedEvent() {
 	bool found=false;
 	QString text=lineEdit->text().toLower();
 	
-	if(text=="") { vShowAllPlaces(); lineEdit->setStyleSheet("color:WindowText"); return; }
+	if(text=="") { vShowAllPlaces(); lineEdit->setStyleSheet(""); return; }
 	
 	const int m=cbMatchBehaviour->currentIndex();
 	
@@ -1686,5 +1686,5 @@ void dart::vTextEditedEvent() {
 		}
 	}
 
-	lineEdit->setStyleSheet(found ? "color:WindowText" : "color:red");
+	lineEdit->setStyleSheet(found ? "" : "color:red");
 }
