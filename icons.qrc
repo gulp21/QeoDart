@@ -1,9 +1,15 @@
 <RCC>
     <qresource prefix="/icons/oxygen">
         <file alias="application-exit.png">icons/oxygen/application-exit.png</file>
+        <file alias="configure.png">icons/oxygen/configure.png</file>
         <file alias="document-new.png">icons/oxygen/document-new.png</file>
-        <file alias="user-identity.png">icons/oxygen/user-identity.png</file>
+        <file alias="edit-find.png">icons/oxygen/edit-find.png</file>
+        <file alias="games-highscores.png">icons/oxygen/games-highscores.png</file>
         <file alias="player-time.png">icons/oxygen/player-time.png</file>
+        <file alias="show-menu.png">icons/oxygen/show-menu.png</file>
+        <file alias="system-users.png">icons/oxygen/system-users.png</file>
+        <file alias="user-identity.png">icons/oxygen/user-identity.png</file>
+        <file alias="zoom-original.png">icons/oxygen/zoom-original.png</file>
         <file alias="index.theme">icons/oxygen/index.theme</file>
     </qresource>
 </RCC>

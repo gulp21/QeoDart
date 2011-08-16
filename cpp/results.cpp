@@ -8,15 +8,18 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 
 	setParent(myDart);
 
+	setupUi(this);
+
 // allow maximizing on WinCE in order to make the whole window readable
 #ifdef Q_OS_WINCE
-	setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowMaximizeButtonHint);
+	setWindowFlags(Qt::Window | Qt::WindowMaximizeButtonHint);
+	setSizeGripEnabled(true);
+	lblScore->setStyleSheet("font-size:12pt");
+	lblMark->setStyleSheet("font-size:12pt");
 #else
 	setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint);
 #endif
 
-	setupUi(this);
-	
 	connect(btOk, SIGNAL(clicked()), this, SLOT(close())); // TODO we should save the name
 	
 	if(QtWin::extendFrameIntoClientArea(this)) { // use aero glass if possible

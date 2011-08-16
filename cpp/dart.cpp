@@ -512,7 +512,7 @@ void dart::resizeEvent(QResizeEvent *event) {
 	resizeTimer->start(200);
 }
 
-// this function shorten the labels when the window becomes too narrow // TODO handle rename (e.g. mapname)
+// this function shortens the labels when the window becomes too narrow
 void dart::vToolbarOverflow() {
 	if(!bAcceptingResizeEvent) return;
 	mySleep(1);
@@ -1285,7 +1285,7 @@ QString dart::qsSimplifyString(QString str, int l) {
 			str=str.replace("_", "");
 			str=str.replace(".", "");
 			str=str.replace(QRegExp("([aou])e"), "\\1");
-			str=str.replace(QRegExp(QString::fromUtf8("[äáàã]")), "a");
+			str=str.replace(QRegExp(QString::fromUtf8("[äá� ã]")), "a");
 			str=str.replace(QRegExp(QString::fromUtf8("[éèẽ]")), "e");
 			str=str.replace(QRegExp(QString::fromUtf8("[íìĩ]")), "i");
 			str=str.replace(QRegExp(QString::fromUtf8("[öṏø]")), "o");
