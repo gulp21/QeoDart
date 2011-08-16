@@ -25,6 +25,11 @@ preferences::preferences(dart *TDart, io *TIO, QDialog *parent) : myDart(TDart),
 	spbLettersPerSecond->setToolTip(spbLettersPerSecond->whatsThis());
 //	cbCursor TODO->setToolTip(cbCursor->whatsThis());
 	
+#ifdef QT_NO_CURSOR
+	cbResetCursor->hide();
+	//TODO cursor image
+#endif
+	
 	lblStatusText->setVisible(false);
 	
 }

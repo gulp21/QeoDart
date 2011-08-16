@@ -87,29 +87,27 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	agLayers->addAction(actionRivers);
 	agLayers->addAction(actionElevations);
 	
-	actionHigh_Score_List->setIcon(QIcon::fromTheme("games-highscores"));
+	actionHigh_Score_List->setIcon(QIcon::fromTheme("games-highscores", QIcon(":/icons/oxygen/games-highscores.png")));
 	connect(actionConfigure, SIGNAL(triggered()), this, SLOT(vShowPreferences()));
-	actionConfigure->setIcon(QIcon::fromTheme("configure"));
+	actionConfigure->setIcon(QIcon::fromTheme("configure", QIcon(":/icons/oxygen/configure.png")));
 	connect(actionQuit, SIGNAL(triggered()), this, SLOT(vClose()));
 	actionQuit->setIcon(QIcon::fromTheme("application-exit", QIcon(":/icons/oxygen/application-exit.png")));
 	connect(actionNew_Game, SIGNAL(triggered()), this, SLOT(vNewGame()));
 	actionNew_Game->setIcon(QIcon::fromTheme("document-new", QIcon(":/icons/oxygen/document-new.png")));
-	connect(actionFind_Place, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
-	actionFind_Place->setIcon(QIcon::fromTheme("edit-find"));
 	connect(action100, SIGNAL(triggered()), this, SLOT(vResize()));
-	action100->setIcon(QIcon::fromTheme("zoom-original"));
+	action100->setIcon(QIcon::fromTheme("zoom-original", QIcon(":/icons/oxygen/zoom-original.png")));
+	connect(actionFind_Place, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
+	actionFind_Place->setIcon(QIcon::fromTheme("edit-find", QIcon(":/icons/oxygen/edit-find.png")));
 	connect(actionTraining, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
 	actionTraining->setIcon(QIcon::fromTheme("user-identity", QIcon(":/icons/oxygen/user-identity.png")));
+	connect(actionLocal, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
+	actionLocal->setIcon(QIcon::fromTheme("system-users", QIcon(":/icons/oxygen/system-users.png")));
 	connect(actionNumber_of_Players, SIGNAL(triggered()), this, SLOT(vSetNumberOfPlayers()));
 	connect(actionPlayers, SIGNAL(triggered()), this, SLOT(vSetNumberOfPlayers()));
-	connect(actionLocal, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
-	actionLocal->setIcon(QIcon::fromTheme("system-users"));
 	connect(actionAgainst_Time, SIGNAL(triggered()), this, SLOT(vSetAgainstTime()));
 	actionAgainst_Time->setIcon(QIcon::fromTheme("player-time", QIcon(":/icons/oxygen/player-time.png")));
 	connect(actionName_of_Place, SIGNAL(triggered()), this, SLOT(vSetAskForMode()));
-//	actionName_of_Place->setIcon(QIcon::fromTheme("user-identity"));
 	connect(actionPosition_of_Place, SIGNAL(triggered()), this, SLOT(vSetAskForMode()));
-//	actionPosition_of_Place->setIcon(QIcon::fromTheme("user-identity"));
 	connect(actionCountries, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionCapitals_of_Countries, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionStates, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
@@ -119,7 +117,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionTowns, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 	connect(actionMenu_Bar, SIGNAL(triggered()), this, SLOT(vSetToolMenuBarState()));
-	actionMenu_Bar->setIcon(QIcon::fromTheme("show-menu"));
+	actionMenu_Bar->setIcon(QIcon::fromTheme("show-menu", QIcon(":/icons/oxygen/show-menu.png")));
 	connect(actionToolbar, SIGNAL(triggered()), this, SLOT(vSetToolMenuBarState()));
 	connect(actionBorders, SIGNAL(triggered()), this, SLOT(vToggleMapLayer()));
 	connect(actionRivers, SIGNAL(triggered()), this, SLOT(vToggleMapLayer()));
@@ -244,7 +242,6 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	vResize(dZoomFactor);
 	
 	show();
-	
 }
 
 dart::~dart() {
@@ -528,104 +525,70 @@ void dart::vToolbarOverflow() {
 	
 	QWidget *w; // last widget in toolbar
 	w=toolBar->layout()->itemAt(toolBar->layout()->count()-1)->widget();
-	QToolButton *a=NULL; // widget whose text will be changed
-	QString shortText, longText;
+
+	QString longText;
 	
-	// while the last toolbar button is visible and not in overflow view, extend the text of other items
-	for(int i=7; w->isVisible() && w->y()<5 && i>-1; i--) {
-		
-		switch(i) {
-			case 0:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(3+d)->widget());
-				longText=tr("Against Time");
-				shortText="";
-				break;
-			case 1:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(0+d)->widget());
-				longText=tr("New Game");
-				shortText="";
-				break;
-			case 2:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget());
-				longText=QString(tr("Ask for: %1")).arg(iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place"));
-				shortText=iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place");
-				break;
-			case 3:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(6+d)->widget());
-				longText=QString(tr("Map: %1")).arg(qlQcfxFiles[iCurrentQcf].mapName);
-				shortText=QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName);
-				break;
-			case 4:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget());
-				longText=iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place");
-				shortText=iAskForMode==enNames ? tr("Name") : tr("Position");
-				break;
-			case 5:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(2+d)->widget());
-				longText=QString(tr("Players: %1")).arg(iNumberOfPlayers);
-				shortText=QString(tr("%1")).arg(iNumberOfPlayers);
-				break;
-			case 6:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(5+d)->widget());
-				longText=tr("Place Types");
-				shortText=tr("Places");
-				break;
-			case 7:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(6+d)->widget());
-				longText=QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName);
-				shortText=QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName.left(2));
-				break;
-		}
-		
-		a->setText(longText);
-		
-		mySleep(1); // repaint
-		
-		if(!w->isVisible() || w->y()>5) { // in case we showed to much text
-			a->setText(shortText); // undo it
-			break; // and stop showing any further text
-		}
+	static_cast<QToolButton*>(toolBar->layout()->itemAt(3+d)->widget())->setText(tr("Against Time"));
+	static_cast<QToolButton*>(toolBar->layout()->itemAt(0+d)->widget())->setText(tr("New Game"));
+	static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget())
+		->setText(QString(tr("Ask for: %1")).arg(iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place")));
+	static_cast<QToolButton*>(toolBar->layout()->itemAt(6+d)->widget())
+		->setText(QString(tr("Map: %1")).arg(qlQcfxFiles[iCurrentQcf].mapName));
+	static_cast<QToolButton*>(toolBar->layout()->itemAt(2+d)->widget())
+		->setText(QString(tr("Players: %1")).arg(iNumberOfPlayers));
+	static_cast<QToolButton*>(toolBar->layout()->itemAt(5+d)->widget())->setText(tr("Place Types"));
+	
+	switch(iGameMode) {
+		case enFind: longText=tr("Find Place"); break;
+		case enTraining: longText=tr("Training"); break;
+		case enLocal: longText=tr("Local"); break;
 	}
+	static_cast<QToolButton*>(toolBar->layout()->itemAt(1+d)->widget())->setText(longText);
+	
+	
+	mySleep(1); // repaint
 	
 	// while the last toolbar button is visible or in overflow view, shorten the text of other items
-	for(int i=0; (!w->isVisible() || w->y()>5) && i<8; i++) {
+	for(int i=0; (!w->isVisible() || w->y()>5) && i<9; i++) {
 		
 		switch(i) {
 			case 0:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(3+d)->widget());
-				shortText="";
+				static_cast<QToolButton*>(toolBar->layout()->itemAt(3+d)->widget())
+					->setText("");
 				break;
 			case 1:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(0+d)->widget());
-				shortText="";
+				static_cast<QToolButton*>(toolBar->layout()->itemAt(0+d)->widget())
+					->setText("");
 				break;
 			case 2:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget());
-				shortText=iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place");
+				static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget())
+					->setText(iAskForMode==enNames ? tr("Name of Place") : tr("Position of Place"));
 				break;
 			case 3:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(6+d)->widget());
-				shortText=QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName);
+				static_cast<QToolButton*>(toolBar->layout()->itemAt(6+d)->widget())
+					->setText(QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName));
 				break;
 			case 4:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget());
-				shortText=iAskForMode==enNames ? tr("Name") : tr("Position");
+				static_cast<QToolButton*>(toolBar->layout()->itemAt(4+d)->widget())
+					->setText(iAskForMode==enNames ? tr("Name") : tr("Position"));
 				break;
 			case 5:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(2+d)->widget());
-				shortText=QString(tr("%1")).arg(iNumberOfPlayers);
+				static_cast<QToolButton*>(toolBar->layout()->itemAt(2+d)->widget())
+					->setText(QString(tr("%1")).arg(iNumberOfPlayers));
 				break;
 			case 6:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(5+d)->widget());
-				shortText=tr("Places");
+				static_cast<QToolButton*>(toolBar->layout()->itemAt(5+d)->widget())
+					->setText(tr("Places"));
 				break;
 			case 7:
-				a=static_cast<QToolButton*>(toolBar->layout()->itemAt(6+d)->widget());
-				shortText=QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName.left(2));
+				static_cast<QToolButton*>(toolBar->layout()->itemAt(6+d)->widget())
+					->setText(QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName.left(2)));
+				break;
+			case 8:
+				static_cast<QToolButton*>(toolBar->layout()->itemAt(1+d)->widget())
+					->setText("");
 				break;
 		}
-		
-		a->setText(shortText);
 		
 		mySleep(1);
 	}
@@ -828,13 +791,21 @@ void dart::vShowCurrentPlace() {
 	else vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels, qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->name);
 }
 
-void dart::vShowScores() { // TODO "small display"-support
+void dart::vShowScores() {
 	for(int i=0; i<iNumberOfPlayers; i++) { // show score for each player
 		QString km, score;
 		if(qlScoreHistory[i][iPlaceCount-1].diffKm==-1) km=tr("∞");
 		else km=QString("%1").arg(qlScoreHistory[i][iPlaceCount-1].diffKm,0,'f',1);
 		if(iGameMode!=enTraining) score=QString(" +%1").arg(qlScoreHistory[i][iPlaceCount-1].score);
-		qlPlayerLabels[i][1]->setText(QString(tr("Missed by %1 km (%2)%3"))
+		
+		// the important score is not readable on small displays
+		if(dZoomFactor>0.5)
+			qlPlayerLabels[i][1]->setText(QString(tr("Missed by %1 km (%2)%3"))
+		                              .arg(km)
+		                              .arg(qlScoreHistory[i][iPlaceCount-1].mark,0,'f',1)
+		                              .arg(score));
+		else 
+			qlPlayerLabels[i][1]->setText(QString(tr("%1 km (%2)%3"))
 		                              .arg(km)
 		                              .arg(qlScoreHistory[i][iPlaceCount-1].mark,0,'f',1)
 		                              .arg(score));

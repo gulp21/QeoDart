@@ -11,3 +11,5 @@ ui*.h
 test.png
 osm/
 qcf/*test*
+qrc*cpp
+*.user

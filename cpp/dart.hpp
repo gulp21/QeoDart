@@ -85,7 +85,7 @@ Q_OBJECT
 		
 		QList<qcfFile> qlQcfxFiles;
 		QList<place> qlAllPlaces; //contains all places of the current map
-		QList<place*> qlCurrentTypePlaces; //contains pointers pointing on the places in qlAllPlaces which fit the current placetype
+		QList<place*> qlCurrentTypePlaces; //contains pointers pointing to the places in qlAllPlaces which fit the current placetype
 		QList<int> qlPlacesHistory;
 		QList<QList<scoreHistory> > qlScoreHistory; // [player][round].scores
 		QList<totalScore> qlTotalScores;

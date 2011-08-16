@@ -39,7 +39,7 @@ int io::iFindQcf() {
 		qDebug() << "[i] Found" << qlQcfDirs[i].entryList() << "in" << qlQcfDirs[i].absolutePath();
 		
 		for(int j=0; j<qlQcfDirs[i].entryList().count(); j++) {
-			QDomDocument doc("coordinates");
+			QDomDocument doc("qcfx");
 			QFile file(qlQcfDirs[i].absolutePath()+"/"+qlQcfDirs[i].entryList()[j]);
 			
 			if(iCheckQcf(file, doc)==0) {
@@ -79,12 +79,12 @@ int io::iCheckQcf(QFile &file, QDomDocument &doc) {
 	file.close();
 	
 	QDomElement root = doc.documentElement();
-	if(root.tagName()!="coordinates") {
-		qDebug() << "[W] " << file.fileName() << "is no .svg-file";
+	if(root.tagName()!="qcfx") {
+		qDebug() << "[W] " << file.fileName() << "is no qcfx-file";
 		qDebug() << "     root.tagName is" << root.tagName();
 		return -3;
 	}
-	if(root.attribute("version", "NULL")!="0.2") {
+	if(root.attribute("version", "NULL").left(3)!="0.2") {
 		qDebug() << "[W] " << file.fileName() << "is not qcfx-version 0.2";
 		qDebug() << "     version is" << root.attribute("version", "NULL");
 		return -4;
@@ -151,7 +151,7 @@ int io::iReadQcf(QString mapname) {
 	
 	qDebug() << "[i] Reading file" << filename << "with mapName" << mapname;
 	
-	QDomDocument doc("coordinates");
+	QDomDocument doc("qcfx");
 	QFile file(filename);
 	
 	if(iCheckQcf(file, doc)!=0) {
@@ -206,7 +206,7 @@ int io::iReadQcf(QString mapname) {
 					if(qslPreferedQcfLanguage[i]=="default") {
 						newPlace.name=e.attribute("name","NONAME");
 					} else {
-						newPlace.name=e.attribute("name:"+qslPreferedQcfLanguage[i],"NONAME");
+						newPlace.name=e.attribute("name_"+qslPreferedQcfLanguage[i],"NONAME");
 					}
 				}
 				newPlace.placeType=e.attribute("placetype","");
@@ -397,8 +397,8 @@ int io::iWriteQcf(QList<place> &places, qcfFile &f) {
 	
 	qDebug() << "[i] going to write file" << f.path;
 	
-	QDomDocument doc("QeoDartCoordinates");
-	QDomElement root=doc.createElement("coordinates");
+	QDomDocument doc("qcfx");
+	QDomElement root=doc.createElement("qcfx");
 	root.setAttribute("version","0.2");
 	doc.appendChild(root);
 	

@@ -235,7 +235,7 @@ Search within names:
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuGame">
@@ -336,7 +336,6 @@ Search within names:
     </property>
     <addaction name="actionNew_Game"/>
     <addaction name="actionHigh_Score_List"/>
-    <addaction name="actionFind_Place"/>
     <addaction name="separator"/>
     <addaction name="actionMenu_Bar"/>
     <addaction name="actionConfigure"/>
@@ -388,6 +387,9 @@ Search within names:
    </property>
   </action>
   <action name="actionHigh_Score_List">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>High Score List</string>
    </property>

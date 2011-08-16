@@ -58,7 +58,7 @@ Open the project file QeoDart.pro in Qt Creator and press Ctrl+R.
 
 3.2.3. Under "Configuration Properties > C/C++ > Command Line" add the following "Additional Options":
 
-/D "QT_NO_DRAGANDDROP" /D "QT_NO_DRAGANDDROP" /D "QT_NO_CLIPBOARD" /D "QT_NO_ACCESSIBILITY" /D "QT_NO_SESSIONMANAGER"
+/D "QT_NO_CURSOR" /D "QT_NO_CLIPBOARD" /D "QT_NO_DRAGANDDROP" /D "QT_NO_ACCESSIBILITY" /D "QT_NO_SESSIONMANAGER"
 
 (othwerise you'll get the following error:
 dart.obj : error LNK2001: unresolved external symbol "protected: virtual void __cdecl QWidget::dragEnterEvent(class QDragEnterEvent *)"(?dragEnterEvent@QWidget@@MAAXPAVQDragEnterEvent@@@Z)

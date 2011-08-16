@@ -73,6 +73,11 @@ class QPointLabel : public QLabel {
 		QPointLabel( dart *TDart, QString Name, int X, int Y, QColor COlor, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), name(Name), x(X), y(Y), color(COlor), QLabel(parent, f) {
 			resize(1,1);
 			setParent(myDart->centralwidget);
+			
+			QFont ff=this->font();
+			ff.setStyleStrategy(QFont::PreferAntialias);
+			this->setFont(ff);
+			
 			setVisible(TRUE);
 		}
 		QPointLabel(const QString &text, QWidget *parent = 0,Qt::WindowFlags f = 0) : QLabel(text, parent, f) {}
