@@ -44,10 +44,10 @@
          <widget class="QWidget" name="scrollAreaWidgetContents">
           <property name="geometry">
            <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>438</width>
-            <height>464</height>
+            <x>-22</x>
+            <y>-51</y>
+            <width>443</width>
+            <height>496</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -137,6 +137,12 @@ p, li { white-space: pre-wrap; }
                 </item>
                 <item>
                  <widget class="QSpinBox" name="spbMaxPlaceCount">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="minimum">
                    <number>2</number>
                   </property>
@@ -178,6 +184,12 @@ p, li { white-space: pre-wrap; }
                 </item>
                 <item>
                  <widget class="QSpinBox" name="spbMaxTime">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="suffix">
                    <string>s</string>
                   </property>
@@ -304,11 +316,11 @@ p, li { white-space: pre-wrap; }
                   <property name="enabled">
                    <bool>true</bool>
                   </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>44</width>
-                    <height>16777215</height>
-                   </size>
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
                   <property name="whatsThis">
                    <string>In the mode &quot;Ask for: Name of Place&quot; in combination with &quot;Against Time&quot;, you get some &quot;free seconds&quot; depending on the length of the name and the number of letters you can type per second.</string>
@@ -414,8 +426,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>438</width>
-            <height>223</height>
+            <width>253</width>
+            <height>230</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_9">
