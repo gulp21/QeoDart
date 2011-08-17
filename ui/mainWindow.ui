@@ -427,6 +427,9 @@ Search within names:
    </property>
   </action>
   <action name="actionAbout_Qt">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>About Qt</string>
    </property>
@@ -586,6 +589,9 @@ Search within names:
    </property>
   </action>
   <action name="actionAbout_QeoDart">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>About QeoDart</string>
    </property>

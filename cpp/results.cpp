@@ -9,7 +9,7 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 	setParent(myDart);
 
 	setupUi(this);
-
+	
 // allow maximizing on WinCE in order to make the whole window readable
 #ifdef Q_OS_WINCE
 	setWindowFlags(Qt::Window | Qt::WindowMaximizeButtonHint);
@@ -19,11 +19,13 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 #else
 	setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint);
 #endif
-
+	
 	connect(btOk, SIGNAL(clicked()), this, SLOT(close())); // TODO we should save the name
 	
 	if(QtWin::extendFrameIntoClientArea(this)) { // use aero glass if possible
 		setWindowOpacity(1.0); // otherwise there are artifacts
+	} else {
+		setWindowOpacity(0.8);
 	}
 	
 	if(myDart->iNumberOfPlayers==1) {

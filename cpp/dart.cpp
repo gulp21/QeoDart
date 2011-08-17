@@ -12,7 +12,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	setWindowFlags(windowFlags() | Qt::WindowContextHelpButtonHint);
 	
-	qlImageLayers << "background" << "borders" << "rivers" << "elevations";
+	qlLayersNames << "background" << "elevations"<< "borders" << "rivers" ;
 	
 	qlComments << tr("Very Good!") << tr("Super!") << tr("Very Fine!")
 	           << tr("Well Done!") << tr("Good!") << tr("That was good!")
@@ -33,9 +33,6 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iMarginTop=0;
 	
 	setupUi(this);
-	
-	myIO = new io(this);
-	myIO->vLoadSettings();
 	
 	timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
@@ -83,9 +80,9 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	agLayers = new QActionGroup(this);
 	agLayers->setExclusive(false);
+	agLayers->addAction(actionElevations);
 	agLayers->addAction(actionBorders);
 	agLayers->addAction(actionRivers);
-	agLayers->addAction(actionElevations);
 	
 	actionHigh_Score_List->setIcon(QIcon::fromTheme("games-highscores", QIcon(":/icons/oxygen/games-highscores.png")));
 	connect(actionConfigure, SIGNAL(triggered()), this, SLOT(vShowPreferences()));
@@ -179,6 +176,10 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	toolBar->addWidget(btView);
 	
 	
+	myIO = new io(this);
+	myIO->vLoadSettings();
+	
+	
 	if(myIO->iFindQcf()==0) {
 		qDebug() << "[E] No valid qcfx files found, exiting";
 		QMessageBox msgBox;
@@ -189,6 +190,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	}
 	
 	agMap = new QActionGroup(this);
+	bool foundMapName=false;
 	for(int i=0; i<qlQcfxFiles.count(); i++) {
 		QAction *menuItem;
 //QIcon produces crash in WinCE
@@ -202,8 +204,14 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 		connect(menuItem, SIGNAL(triggered()), this, SLOT(vReadQcf()));
 		menuMap->addAction(menuItem);
 		agMap->addAction(menuItem);
-		if(i==0) menuItem->trigger(); // TODO setting
+		// load the saved map…
+		if(qlQcfxFiles[i].mapName==myIO->settings->value("qsCurrentMapName","DUMMYFILE").toString()) {
+			menuItem->trigger();
+			foundMapName=true;
+		}
 	}
+	//…or the first map as fall-back
+	if(!foundMapName) agMap->actions()[0]->trigger();
 	menuMap->addSeparator();
 	menuMap->addAction(actionAdd_Map);
 	
@@ -431,6 +439,7 @@ void dart::vSetNumberOfPlayers(int n) {
 			
 			QLabel *lblRating;
 			lblRating = new QLabel(this);
+			lblRating->setAlignment(Qt::AlignHCenter);
 			gridLayout->addWidget(lblRating,i,2);
 			
 			QList<QLabel*> qlPlayerLabel;
@@ -607,7 +616,7 @@ void dart::vRepaintMap() {
 	
 	for(int i=0; i<4; i++) {
 		qlMapLayers[i]->resize(600*dZoomFactor,600*dZoomFactor);
-		qlMapLayers[i]->setText(QString("<img src=\"%2/%3.png\" height=\"%1\" width=\"%1\"/>").arg(600*dZoomFactor).arg(path).arg(qlImageLayers[i]));
+		qlMapLayers[i]->setText(QString("<img src=\"%2/%3.png\" height=\"%1\" width=\"%1\"/>").arg(600*dZoomFactor).arg(path).arg(qlLayersNames[i]));
 		qlMapLayers[i]->move(0,iPaddingTop);
 	}
 }
@@ -793,22 +802,21 @@ void dart::vShowCurrentPlace() {
 
 void dart::vShowScores() {
 	for(int i=0; i<iNumberOfPlayers; i++) { // show score for each player
-		QString km, score;
+		QString km, score, missedBy;
 		if(qlScoreHistory[i][iPlaceCount-1].diffKm==-1) km=tr("∞");
 		else km=QString("%1").arg(qlScoreHistory[i][iPlaceCount-1].diffKm,0,'f',1);
 		if(iGameMode!=enTraining) score=QString(" +%1").arg(qlScoreHistory[i][iPlaceCount-1].score);
 		
 		// the important score is not readable on small displays
-		if(dZoomFactor>0.5)
-			qlPlayerLabels[i][1]->setText(QString(tr("Missed by %1 km (%2)%3"))
-		                              .arg(km)
-		                              .arg(qlScoreHistory[i][iPlaceCount-1].mark,0,'f',1)
-		                              .arg(score));
-		else 
-			qlPlayerLabels[i][1]->setText(QString(tr("%1 km (%2)%3"))
-		                              .arg(km)
-		                              .arg(qlScoreHistory[i][iPlaceCount-1].mark,0,'f',1)
-		                              .arg(score));
+		if(dZoomFactor>0.5) missedBy=QString(tr("Missed by %1 km ")).arg(km);
+		else missedBy=QString(tr("%1 km ")).arg(km);
+		
+		if(dPxToKm==-1) missedBy="";
+		
+		qlPlayerLabels[i][1]->setText(QString(tr("%1(%2)%3"))
+				      .arg(missedBy)
+				      .arg(qlScoreHistory[i][iPlaceCount-1].mark,0,'f',1)
+				      .arg(score));
 	}
 }
 
@@ -1285,7 +1293,7 @@ QString dart::qsSimplifyString(QString str, int l) {
 			str=str.replace("_", "");
 			str=str.replace(".", "");
 			str=str.replace(QRegExp("([aou])e"), "\\1");
-			str=str.replace(QRegExp(QString::fromUtf8("[äá� ã]")), "a");
+			str=str.replace(QRegExp(QString::fromUtf8("[äáàã]")), "a");
 			str=str.replace(QRegExp(QString::fromUtf8("[éèẽ]")), "e");
 			str=str.replace(QRegExp(QString::fromUtf8("[íìĩ]")), "i");
 			str=str.replace(QRegExp(QString::fromUtf8("[öṏø]")), "o");
@@ -1364,7 +1372,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
         score.score=dGetScore(score.mark)*f;
         if(bAgainstTime) {
                 //typing against time can be hard, so there are some bonusSeconds
-                double bonusSeconds=lineEdit->text().length()/8.0;
+                double bonusSeconds=lineEdit->text().length()/static_cast<double>(iLettersPerSecond);
                 iTimerElapsed-=bonusSeconds;
                 if(iTimerElapsed<0) iTimerElapsed=0;
                 score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
@@ -1462,6 +1470,8 @@ void dart::vReadQcf() {
 	vNextRound();
 	
 	if(iGameMode==enFind) vTextEditedEvent();
+	
+	myIO->settings->setValue("qsCurrentMapName",static_cast<QAction*>(QObject::sender())->text());
 }
 
 void dart::vSetToolMenuBarState() {
@@ -1567,12 +1577,11 @@ void dart::vUpdateActionsIsCheckedStates() {
 
 // shows a layer when the ckeckbox is checked and the layer is available
 void dart::vToggleMapLayer() {
-	qlMapLayers[1]->setVisible(actionBorders->isChecked() && actionBorders->isVisible());
-	myIO->settings->setValue("bBorders",actionBorders->isChecked());
-	qlMapLayers[2]->setVisible(actionRivers->isChecked() && actionRivers->isVisible());
-	myIO->settings->setValue("bRivers",actionRivers->isChecked());
-	qlMapLayers[3]->setVisible(actionElevations->isChecked() && actionElevations->isVisible());
-	myIO->settings->setValue("bElevations",actionElevations->isChecked());
+	for(int i=0; i<3; i++) {
+		bool visible=agLayers->actions()[i]->isChecked() && agLayers->actions()[i]->isVisible();
+		qlMapLayers[i+1]->setVisible(visible);
+		myIO->settings->setValue(qlLayersNames[i+1],visible);
+	}
 }
 
 void dart::vFindPlaceAround(int x, int y) {

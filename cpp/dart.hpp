@@ -90,7 +90,7 @@ Q_OBJECT
 		QList<QList<scoreHistory> > qlScoreHistory; // [player][round].scores
 		QList<totalScore> qlTotalScores;
 		QList<QLabel*> qlPointLabels;
-		QList<QString> qlImageLayers;
+		QList<QString> qlLayersNames;
 		QList<QLabel*> qlMapLayers;
 		
 		QActionGroup *agLayers;
@@ -105,7 +105,7 @@ Q_OBJECT
 		
 		int iPaddingTop; // px between toolbar and map
 		int iMarginTop; // px between window decoration and toolbar
-		int iNumberOfPlayers, iMaxPlaceCount, iPlaceCount, iCurrentQcf, iMaxTime;
+		int iNumberOfPlayers, iMaxPlaceCount, iPlaceCount, iCurrentQcf, iMaxTime, iLettersPerSecond;
 		int iScoreAreaMode; // 0=point only; 1=25%; 2=100%
 		int iDelayNextCircle, iDelayNextPlayer, iDelayNextPlace, iDelayNextPlaceTraining;
 		

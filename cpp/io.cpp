@@ -47,7 +47,7 @@ int io::iFindQcf() {
 				f.path=file.fileName().left(file.fileName().length()-5);
 				f.mapName=qsGetMapName(doc);
 				qDebug() << f.path;
-				myDart->qlQcfxFiles << f;
+				myDart->qlQcfxFiles << f; // TODO check if some name already exists
 			}
 		}
 	}
@@ -173,6 +173,8 @@ int io::iReadQcf(QString mapname) {
 	myDart->actionCities->setVisible(FALSE);
 	myDart->actionTowns->setVisible(FALSE);
 	
+	myDart->dPxToKm=-1;
+	
 	QStringList qslPreferedQcfLanguage=qslGetPreferedQcfLanguage();
 	
 	QDomElement docElem = doc.documentElement();
@@ -184,13 +186,9 @@ int io::iReadQcf(QString mapname) {
 		
 		if(!e.isNull()) {
 			
-			if(e.tagName()=="pxtokm") {
+			if(e.tagName()=="pxtokm") { // TODO -> meta data / struct
 				
 				myDart->dPxToKm=e.attribute("value","-1").toDouble();
-				if(myDart->dPxToKm==-1) {
-					qDebug() << "[W] pxtokm is unset, using fallback 1"; // TODO support -1
-					myDart->dPxToKm=1;
-				}
 				
 			} else if(e.tagName()=="author") { // TODO -> meta data function
 				
@@ -242,6 +240,9 @@ int io::iReadQcf(QString mapname) {
 		
 	} // while(!n.isNull())
 	
+	if(myDart->dPxToKm==-1) {
+		qDebug() << "[W] pxtokm is unset";
+	}
 	
 	qDebug() << "[i] Read" << myDart->qlAllPlaces.count() << "places";
 	
@@ -260,14 +261,14 @@ int io::iReadQcf(QString mapname) {
 	QString path=myDart->qlQcfxFiles[myDart->iCurrentQcf].path;
 	
 	for(int i=0; i<4; i++) {
-		QFile file(QString("%1/%2.png").arg(path).arg(myDart->qlImageLayers[i]));
+		QFile file(QString("%1/%2.png").arg(path).arg(myDart->qlLayersNames[i]));
 		
 		if(!file.open(QIODevice::ReadOnly)) {
-			qDebug() << "[I] No" << myDart->qlImageLayers[i] << "found";
+			qDebug() << "[I] No" << myDart->qlLayersNames[i] << "found";
 			if(i>0) myDart->agLayers->actions()[i-1]->setVisible(false);
 			myDart->qlMapLayers[i]->hide();
 		} else {
-			qDebug() << "[i] found" << myDart->qlImageLayers[i];
+			qDebug() << "[i] found" << myDart->qlLayersNames[i];
 			if(i>0) myDart->agLayers->actions()[i-1]->setVisible(true);
 			if(i==0) myDart->qlMapLayers[i]->show();
 		}
@@ -492,6 +493,9 @@ void io::vLoadSettings() {
 	myDart->cbMatchBehaviour->setCurrentIndex(settings->value("iMatchBehaviour",1).toInt());
 	myDart->cbSearchDistance->setCurrentIndex(settings->value("iSearchDistance",2).toInt());
 	
+	for(int i=0; i<3; i++) {
+		myDart->agLayers->actions()[i]->setChecked(settings->value(myDart->qlLayersNames[i+1],true).toBool());
+	}
 	
 	// General
 	
@@ -507,6 +511,9 @@ void io::vLoadSettings() {
 	
 	myDart->iScoreAreaMode=settings->value("iScoreAreaMode",1).toInt();
 	if(myDart->iScoreAreaMode<0 || myDart->iScoreAreaMode>2) myDart->iScoreAreaMode=1;
+	
+	myDart->iLettersPerSecond=settings->value("iLettersPerSecond",8).toInt();
+	if(myDart->iLettersPerSecond<1) myDart->iLettersPerSecond=8;
 	
 	
 	// Advanced

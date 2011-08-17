@@ -13,6 +13,7 @@ preferences::preferences(dart *TDart, io *TIO, QDialog *parent) : myDart(TDart),
 	connect(spbMaxTime, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
 	connect(cobScoreAreaMode, SIGNAL (currentIndexChanged(int)), this, SLOT(vSettingChanged()));
 	connect(cbResetCursor, SIGNAL (clicked()), this, SLOT(vSettingChanged()));
+	connect(spbLettersPerSecond, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
 	//buttons
 	connect(buttonBox, SIGNAL (accepted()), this, SLOT(vAccepted()));
 	connect(buttonBox->button(QDialogButtonBox::Reset), SIGNAL (clicked()), this, SLOT(vReset()));
@@ -44,6 +45,7 @@ void preferences::vReset() {
 	spbMaxTime->setValue(myDart->iMaxTime);
 	cbResetCursor->setChecked(myDart->bResetCursor);
 	cobScoreAreaMode->setCurrentIndex(myDart->iScoreAreaMode);
+	spbLettersPerSecond->setValue(myDart->iLettersPerSecond);
 	//Advanced
 	spbDelayNextCircle->setValue(myDart->iDelayNextCircle);
 	spbDelayNextPlayer->setValue(myDart->iDelayNextPlayer);
@@ -60,7 +62,7 @@ void preferences::vRestoreDefaults() {
 	
 	cobScoreAreaMode->setCurrentIndex(1);
 	
-	//spbLettersPerSecond->setValue(2);
+	spbLettersPerSecond->setValue(8);
 	//Advanced
 	spbDelayNextCircle->setValue(200);
 	spbDelayNextPlayer->setValue(500);
@@ -75,14 +77,13 @@ void preferences::vSettingChanged() {
 		lblStatusText->setStyleSheet("font-weight:bold; color:gray;");
 		lblStatusText->setText(tr("Changing this language setting will require reloading the map."));
 	} else if(myDart->bCanLoseScore()) {
-		qDebug()<<"fff";
 		if(QObject::sender()==spbMaxPlaceCount && spbMaxPlaceCount->value()<myDart->iPlaceCount) {
 			lblStatusText->setVisible(true);
 			lblStatusText->setStyleSheet("font-weight:bold; color:red;");
 			lblStatusText->setText(tr("Setting the number of places smaller than the current place number will start a new game automatically."));
 		} else if( (QObject::sender()==spbMaxTime && spbMaxTime->value()!=myDart->iMaxTime && myDart->bAgainstTime) ||
 			   (QObject::sender()==cobScoreAreaMode && cobScoreAreaMode->currentIndex()!=myDart->iScoreAreaMode) ||
-		           (QObject::sender()==spbLettersPerSecond /*&& spbMaxTime->value()!=myDart->iMaxTime TODO*/)
+		           (QObject::sender()==spbLettersPerSecond && spbLettersPerSecond->value()!=myDart->iLettersPerSecond)
 			 ) {
 			lblStatusText->setVisible(true);
 			qDebug()<<"ffsf";
@@ -123,6 +124,8 @@ void preferences::vAccepted() {
 	if(myDart->iScoreAreaMode!=cobScoreAreaMode->currentIndex()) newGameRequired=true;
 	myIO->settings->setValue("iScoreAreaMode",cobScoreAreaMode->currentIndex());
 	
+	if(myDart->iLettersPerSecond!=spbLettersPerSecond->value()) newGameRequired=true;
+	myIO->settings->setValue("iLettersPerSecond",spbLettersPerSecond->value());
 	
 	// Advanced
 	

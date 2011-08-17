@@ -22,6 +22,7 @@ int main(int argc, char* argv[]) {
 	//QLocale::system().name().left(2)
 	
         QApplication a(argc, argv);
+	a.setAutoSipEnabled(true);
         dart w;
         w.show();
         return a.exec();
