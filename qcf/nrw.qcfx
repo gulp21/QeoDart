@@ -9,7 +9,7 @@
 	copyright_rivers="TUBS: CC BY-SA 3.0 (derived from http://commons.wikimedia.org/wiki/File:North_rhine_w_Landschaftsverb%C3%A4nde.svg)"
 	copyright_elevations="TUBS: CC BY-SA 3.0 (derived from http://commons.wikimedia.org/wiki/File:North_Rhine-Westphalia_Topography_01.svg)"
 	/>
-	<!--.....counties.....Landkreis.....-->
+	<!--.....counties.....Landkreise.....-->
 	<place x="56" y="492" name="Städteregion Aachen" dimx="73" dimy="119" placetype="county"/> <!--Kommunalverband besonderer Art-->
 	<place x="162" y="155" name="Kreis Borken" dimx="143" dimy="136" placetype="county"/>
 	<place x="252" y="186" name="Kreis Coesfeld" dimx="113" dimy="103" placetype="county"/>
@@ -41,36 +41,65 @@
 	<place x="81" y="339" name="Kreis Viersen" dimx="91" dimy="86" placetype="county"/>
 	<place x="348" y="179" name="Kreis Warendorf" dimx="116" dimy="115" placetype="county"/>
 	<place x="125" y="258" name="Kreis Wesel" dimx="105" dimy="111" placetype="county"/>
-	<!--.....counties/cities.....Kreisfreie Stadt.....--><!--TODO town=city?; other sitze-->
-	<place x="436" y="141" name="Bielefeld" name_de="Bielefeld" dimx="45" dimy="52" placetype="county;town"/>
-	<place x="228" y="291" name="Bochum" name_de="Bochum" dimx="39" dimy="31" placetype="county;town"/>
-	<place x="212" y="495" name="Bonn" name_de="Bonn" name_la="Bonna" dimx="30" dimy="37" placetype="county;town"/>
-	<place x="175" y="264" name="Bottrop" name_de="Bottrop" dimx="26" dimy="38" placetype="county;town"/>
-	<place x="267" y="280" name="Dortmund" name_de="Dortmund" dimx="45" dimy="47" placetype="county;town"/>
-	<place x="144" y="298" name="Duisburg" name_de="Duisburg" dimx="31" dimy="59" placetype="county;town"/>
-	<place x="159" y="353" name="Düsseldorf" name_de="Düsseldorf" name_la="Dusseldorpium" dimx="40" dimy="59" placetype="county;town"/>
-	<place x="192" y="299" name="Essen" name_de="Essen" dimx="39" dimy="49" placetype="county;town"/>
-	<place x="201" y="269" name="Gelsenkirchen" name_de="Gelsenkirchen" dimx="24" dimy="38" placetype="county;town"/>
-	<place x="271" y="324" name="Hagen" name_de="Hagen" dimx="36" dimy="38" placetype="county;town"/>
-	<place x="326" y="239" name="Hamm" name_de="Hamm" dimx="51" dimy="42" placetype="county;town"/>
-	<place x="224" y="274" name="Herne" name_de="Herne" dimx="27" dimy="17" placetype="county;town"/>
-	<place x="188" y="428" name="Köln" name_de="Köln" name_en="Cologne" name_la="Colonia Agrippina" dimx="59" dimy="66" placetype="county;town"/>
-	<place x="121" y="326" name="Krefeld" name_de="Krefeld" dimx="35" dimy="30" placetype="county;town"/>
-	<place x="193" y="402" name="Leverkusen" name_de="Leverkusen" dimx="35" dimy="22" placetype="county;town"/>
-	<place x="93" y="373" name="Mönchengladbach" name_de="Mönchengladbach" dimx="40" dimy="41" placetype="county;town"/>
-	<place x="170" y="308" name="Mülheim an der Ruhr" name_de="Mülheim an der Ruhr" dimx="23" dimy="29" placetype="county;town"/>
-	<place x="290" y="162" name="Münster" name_de="Münster" dimx="47" dimy="57" placetype="county;town"/>
-	<place x="165" y="280" name="Oberhausen" name_de="Oberhausen" dimx="23" dimy="33" placetype="county;town"/>
-	<place x="227" y="367" name="Remscheid" name_de="Remscheid" dimx="27" dimy="21" placetype="county;town"/>
-	<place x="201" y="372" name="Solingen" name_de="Solingen" dimx="36" dimy="26" placetype="county;town"/>
-	<place x="217" y="352" name="Wuppertal" name_de="Wuppertal" dimx="47" dimy="39" placetype="county;town"/>
-	<!--.....cities.....-->
-	<place x="217" y="424" name="Bergisch Gladbach" name_de="Bergisch Gladbach" dimx="31" dimy="29" placetype="town"/>
-	<!--<place x="122" y="350" name="Moers" name_de="Moers" dimx="5" dimy="5" />
-	<place x="135" y="426" name="Neuss" name_de="Neuss" name_la="Novaesium" dimx="5" dimy="5" />
-	<place x="474" y="269" name="Paderborn" name_de="Paderborn" dimx="10" dimy="10" />????
-	<place x="220" y="309" name="Recklinghausen" name_de="Recklinghausen" dimx="5" dimy="10" />???
-	<place x="360" y="496" name="Siegen" name_de="Siegen" dimx="10" dimy="10" />??-->
+	<!--.....counties/cities.....Kreisfreie Städte.....-->
+	<place x="436" y="141" name="Bielefeld" name_de="Bielefeld" dimx="45" dimy="52" placetype="county;city"/>
+	<place x="228" y="291" name="Bochum" name_de="Bochum" dimx="39" dimy="31" placetype="county;city"/>
+	<place x="212" y="495" name="Bonn" name_de="Bonn" name_la="Bonna" dimx="30" dimy="37" placetype="county;city"/>
+	<place x="175" y="264" name="Bottrop" name_de="Bottrop" dimx="26" dimy="38" placetype="county;city"/>
+	<place x="267" y="280" name="Dortmund" name_de="Dortmund" dimx="45" dimy="47" placetype="county;city"/>
+	<place x="144" y="298" name="Duisburg" name_de="Duisburg" dimx="31" dimy="59" placetype="county;city"/>
+	<place x="159" y="353" name="Düsseldorf" name_de="Düsseldorf" name_la="Dusseldorpium" dimx="40" dimy="59" placetype="county;city"/>
+	<place x="192" y="299" name="Essen" name_de="Essen" dimx="39" dimy="49" placetype="county;city"/>
+	<place x="201" y="269" name="Gelsenkirchen" name_de="Gelsenkirchen" dimx="24" dimy="38" placetype="county;city"/>
+	<place x="271" y="324" name="Hagen" name_de="Hagen" dimx="36" dimy="38" placetype="county;city"/>
+	<place x="326" y="239" name="Hamm" name_de="Hamm" dimx="51" dimy="42" placetype="county;city"/>
+	<place x="224" y="274" name="Herne" name_de="Herne" dimx="27" dimy="17" placetype="county;city"/>
+	<place x="188" y="428" name="Köln" name_de="Köln" name_en="Cologne" name_la="Colonia Agrippina" dimx="59" dimy="66" placetype="county;city"/>
+	<place x="121" y="326" name="Krefeld" name_de="Krefeld" dimx="35" dimy="30" placetype="county;city"/>
+	<place x="193" y="402" name="Leverkusen" name_de="Leverkusen" dimx="35" dimy="22" placetype="county;city"/>
+	<place x="93" y="373" name="Mönchengladbach" name_de="Mönchengladbach" dimx="40" dimy="41" placetype="county;city"/>
+	<place x="170" y="308" name="Mülheim an der Ruhr" name_de="Mülheim an der Ruhr" dimx="23" dimy="29" placetype="county;city"/>
+	<place x="290" y="162" name="Münster" name_de="Münster" dimx="47" dimy="57" placetype="county;city"/>
+	<place x="165" y="280" name="Oberhausen" name_de="Oberhausen" dimx="23" dimy="33" placetype="county;city"/>
+	<place x="227" y="367" name="Remscheid" name_de="Remscheid" dimx="27" dimy="21" placetype="county;city"/>
+	<place x="201" y="372" name="Solingen" name_de="Solingen" dimx="36" dimy="26" placetype="county;city"/>
+	<place x="217" y="352" name="Wuppertal" name_de="Wuppertal" dimx="47" dimy="39" placetype="county;city"/>
+	<!--.....Sitze.....-->
+	<!--...cities...-->
+	<place x="40" y="482" name="Aachen" name_de="Aachen" name_la="Aquisgranum" dimx="39" dimy="48" placetype="city"/>
+	<place x="217" y="424" name="Bergisch Gladbach" name_de="Bergisch Gladbach" dimx="31" dimy="29" placetype="city"/>
+	<place x="128" y="297" name="Moers" name_de="Moers" dimx="16" dimy="34" placetype="city"/>
+	<place x="147" y="370" name="Neuss" name_de="Neuss" name_la="Novaesium" dimx="40" dimy="29" placetype="city"/>
+	<place x="474" y="269" name="Paderborn" name_de="Paderborn" name_la="Paderbronna" dimx="10" dimy="10" placetype="city"/>
+	<place x="223" y="254" name="Recklinghausen" name_de="Recklinghausen" name_la="Recklinghusium" dimx="23" dimy="20" placetype="city"/>
+	<place x="363" y="447" name="Siegen" name_de="Siegen" dimx="33" dimy="32" placetype="city"/>
+	<!--...towns...-->
+	<place x="158" y="193" name="Borken" name_de="Borken" dimx="32" dimy="38" placetype="town"/>
+	<place x="213" y="171" name="Coesfeld" name_de="Coesfeld" name_la="Cosfeldia" dimx="31" dimy="32" placetype="town"/>
+	<place x="101" y="471" name="Düren" name_de="Düren" dimx="28" dimy="30" placetype="town"/>
+	<place x="238" y="340" name="Schwelm" name_de="Schwelm" dimx="10" dimy="17" placetype="town"/>
+	<place x="161" y="515" name="Euskirchen" name_de="Euskirchen" dimx="35" dimy="37" placetype="town"/>
+	<place x="417" y="167" name="Gütersloh" name_de="Gütersloh" dimx="33" dimy="30" placetype="town"/>
+	<place x="46" y="403" name="Heinsberg" name_de="Heinsberg" dimx="31" dimy="31" placetype="town"/>
+	<place x="457" y="113" name="Herford" name_de="Herford" dimx="31" dimy="30" placetype="town"/>
+	<place x="394" y="322" name="Meschede" name_de="Meschede" dimx="40" dimy="38" placetype="town"/>
+	<place x="577" y="201" name="Höxter" name_de="Höxter" dimx="29" dimy="50" placetype="town"/>
+	<place x="45" y="206" name="Kleve" name_de="Kleve" dimx="34" dimy="34" placetype="town"/>
+	<place x="495" y="160" name="Detmold" name_de="Detmold" name_la="Detmolda" dimx="37" dimy="41" placetype="town"/>
+	<place x="295" y="358" name="Lüdenscheid" name_de="Lüdenscheid" dimx="27" dimy="27" placetype="town"/>
+	<place x="188" y="348" name="Mettmann" name_de="Mettmann" dimx="18" dimy="19" placetype="town"/>
+	<place x="494" y="60" name="Minden" name_de="Minden" dimx="33" dimy="27" placetype="town"/>
+	<place x="286" y="407" name="Gummersbach" name_de="Gummersbach" dimx="46" dimy="28" placetype="town"/>
+	<place x="340" y="406" name="Olpe" name_de="Olpe" dimx="24" dimy="23" placetype="town"/>
+	<place x="134" y="424" name="Bergheim" name_de="Bergheim" dimx="31" dimy="26" placetype="town"/>
+	<place x="229" y="468" name="Siegburg" name_de="Siegburg" dimx="27" dimy="11" placetype="town"/>
+	<place x="370" y="259" name="Soest" name_de="Soest" dimx="32" dimy="31" placetype="town"/>
+	<place x="244" y="114" name="Steinfurt" name_de="Steinfurt" dimx="28" dimy="29" placetype="town"/>
+	<place x="311" y="271" name="Unna" name_de="Unna" dimx="34" dimy="23" placetype="town"/>
+	<place x="84" y="346" name="Viersen" name_de="Viersen" dimx="31" dimy="28" placetype="town"/>
+	<place x="350" y="163" name="Warendorf" name_de="Warendorf" dimx="36" dimy="55" placetype="town"/>
+	<place x="121" y="240" name="Wesel" name_de="Wesel" dimx="44" dimy="29" placetype="town"/>
+	
 	<!--.....towns.....
 	<place x="121" y="413" name="Kaarst" name_de="TODO" dimx="5" dimy="2" />
 	<place x="153" y="443" name="Dormagen" name_de="TODO" dimx="5" dimy="5" />

@@ -10,12 +10,27 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 
 	setupUi(this);
 	
-// allow maximizing on WinCE in order to make the whole window readable
+// allow maximizing on WinCE in order to make the whole window readable + add scrollarea
 #ifdef Q_OS_WINCE
 	setWindowFlags(Qt::Window | Qt::WindowMaximizeButtonHint);
 	setSizeGripEnabled(true);
 	lblScore->setStyleSheet("font-size:12pt");
 	lblMark->setStyleSheet("font-size:12pt");
+	
+	QScrollArea *scrollArea;
+	QWidget *scrollAreaWidgetContents;
+	QVBoxLayout *verticalLayout;
+	scrollArea = new QScrollArea(this);
+	scrollArea->setFrameShape(QFrame::NoFrame);
+	scrollArea->setFrameShadow(QFrame::Plain);
+	scrollArea->setWidgetResizable(true);
+	scrollAreaWidgetContents = new QWidget();
+	scrollAreaWidgetContents->setGeometry(QRect(0, 0, 427, 60));
+	verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
+	verticalLayout_2->removeWidget(lblPlaces);
+	verticalLayout->addWidget(lblPlaces);
+	scrollArea->setWidget(scrollAreaWidgetContents);
+	verticalLayout_2->insertWidget(3,scrollArea);
 #else
 	setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint);
 #endif

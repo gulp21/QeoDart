@@ -70,7 +70,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	agGameMode->addAction(actionFind_Place);
 	agGameMode->addAction(actionTraining);
 	agGameMode->addAction(actionLocal);
-//	agGameMode->addAction(actionNetwork);
+	agGameMode->addAction(actionNetwork);
 	actionLocal->setChecked(true);
 	
 	agAskForMode = new QActionGroup(this);
@@ -99,6 +99,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	actionTraining->setIcon(QIcon::fromTheme("user-identity", QIcon(":/icons/oxygen/user-identity.png")));
 	connect(actionLocal, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
 	actionLocal->setIcon(QIcon::fromTheme("system-users", QIcon(":/icons/oxygen/system-users.png")));
+//	connect(actionNetwork, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
+	actionNetwork->setIcon(QIcon::fromTheme("network-workgroup", QIcon(":/icons/oxygen/network-workgroup.png")));
 	connect(actionNumber_of_Players, SIGNAL(triggered()), this, SLOT(vSetNumberOfPlayers()));
 	connect(actionPlayers, SIGNAL(triggered()), this, SLOT(vSetNumberOfPlayers()));
 	connect(actionAgainst_Time, SIGNAL(triggered()), this, SLOT(vSetAgainstTime()));
@@ -119,6 +121,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionBorders, SIGNAL(triggered()), this, SLOT(vToggleMapLayer()));
 	connect(actionRivers, SIGNAL(triggered()), this, SLOT(vToggleMapLayer()));
 	connect(actionElevations, SIGNAL(triggered()), this, SLOT(vToggleMapLayer()));
+	actionAdd_Map->setIcon(QIcon::fromTheme("list-add", QIcon(":/icons/oxygen/list-add.png")));
+	actionHint->setIcon(QIcon::fromTheme("games-hint", QIcon(":/icons/oxygen/games-hint.png")));
 	
 	connect(lineEdit, SIGNAL(returnPressed()), this, SLOT(vReturnPressedEvent()));
 	connect(lineEdit, SIGNAL(textEdited(QString)), this, SLOT(vTextEditedEvent()));
@@ -439,7 +443,7 @@ void dart::vSetNumberOfPlayers(int n) {
 			
 			QLabel *lblRating;
 			lblRating = new QLabel(this);
-			lblRating->setAlignment(Qt::AlignHCenter);
+			lblRating->setAlignment(Qt::AlignCenter);
 			gridLayout->addWidget(lblRating,i,2);
 			
 			QList<QLabel*> qlPlayerLabel;

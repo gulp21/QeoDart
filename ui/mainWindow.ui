@@ -240,7 +240,7 @@ Search within names:
    </property>
    <widget class="QMenu" name="menuGame">
     <property name="title">
-     <string>Game</string>
+     <string>&amp;Game</string>
     </property>
     <addaction name="actionNew_Game"/>
     <addaction name="actionHigh_Score_List"/>
@@ -249,26 +249,20 @@ Search within names:
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Help</string>
+     <string>&amp;Help</string>
     </property>
+    <addaction name="actionHint"/>
+    <addaction name="separator"/>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_QeoDart"/>
    </widget>
    <widget class="QMenu" name="menuSettings">
     <property name="title">
-     <string>Settings</string>
+     <string>&amp;Settings</string>
     </property>
-    <widget class="QMenu" name="menuGameMode">
-     <property name="title">
-      <string>Game Mode</string>
-     </property>
-     <addaction name="actionFind_Place"/>
-     <addaction name="actionTraining"/>
-     <addaction name="actionLocal"/>
-    </widget>
     <widget class="QMenu" name="menuMap">
      <property name="title">
-      <string>Map</string>
+      <string>&amp;Map</string>
      </property>
      <addaction name="actionAdd_Map"/>
     </widget>
@@ -281,7 +275,7 @@ Search within names:
     </widget>
     <widget class="QMenu" name="menuAsk_for">
      <property name="title">
-      <string>Ask for</string>
+      <string>Ask &amp;for</string>
      </property>
      <addaction name="actionPosition_of_Place"/>
      <addaction name="actionName_of_Place"/>
@@ -308,13 +302,22 @@ Search within names:
     </widget>
     <widget class="QMenu" name="menuView">
      <property name="title">
-      <string>View</string>
+      <string>&amp;View</string>
      </property>
      <addaction name="actionBorders"/>
      <addaction name="actionRivers"/>
      <addaction name="actionElevations"/>
      <addaction name="separator"/>
      <addaction name="action100"/>
+    </widget>
+    <widget class="QMenu" name="menuGameMode">
+     <property name="title">
+      <string>G&amp;ame Mode</string>
+     </property>
+     <addaction name="actionFind_Place"/>
+     <addaction name="actionTraining"/>
+     <addaction name="actionLocal"/>
+     <addaction name="actionNetwork"/>
     </widget>
     <addaction name="menuGameMode"/>
     <addaction name="actionNumber_of_Players"/>
@@ -332,7 +335,7 @@ Search within names:
    </widget>
    <widget class="QMenu" name="menuApplication">
     <property name="title">
-     <string>Game</string>
+     <string>&amp;Game</string>
     </property>
     <addaction name="actionNew_Game"/>
     <addaction name="actionHigh_Score_List"/>
@@ -375,12 +378,18 @@ Search within names:
   </widget>
   <action name="actionNew_Game">
    <property name="text">
-    <string>New &amp;Game</string>
+    <string>&amp;New Game</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
   <action name="actionQuit">
    <property name="text">
-    <string>Quit</string>
+    <string>&amp;Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
    <property name="menuRole">
     <enum>QAction::QuitRole</enum>
@@ -391,7 +400,10 @@ Search within names:
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>High Score List</string>
+    <string>&amp;High Score List</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
    </property>
   </action>
   <action name="actionFind_Place">
@@ -399,7 +411,10 @@ Search within names:
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Find Place</string>
+    <string>&amp;Find Place</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
    </property>
   </action>
   <action name="actionPosition_of_Place">
@@ -407,7 +422,10 @@ Search within names:
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Position of Place</string>
+    <string>&amp;Position of Place</string>
+   </property>
+   <property name="shortcut">
+    <string>F9</string>
    </property>
   </action>
   <action name="actionName_of_Place">
@@ -415,7 +433,10 @@ Search within names:
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Name of Place</string>
+    <string>&amp;Name of Place</string>
+   </property>
+   <property name="shortcut">
+    <string>F10</string>
    </property>
   </action>
   <action name="actionCities">
@@ -423,7 +444,7 @@ Search within names:
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Cityies</string>
+    <string>Cities</string>
    </property>
   </action>
   <action name="actionAbout_Qt">
@@ -431,7 +452,7 @@ Search within names:
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>About Qt</string>
+    <string>About &amp;Qt</string>
    </property>
    <property name="menuRole">
     <enum>QAction::AboutQtRole</enum>
@@ -439,7 +460,10 @@ Search within names:
   </action>
   <action name="action100">
    <property name="text">
-    <string>100%</string>
+    <string>&amp;100%</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+0</string>
    </property>
   </action>
   <action name="actionTraining">
@@ -447,7 +471,10 @@ Search within names:
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Training</string>
+    <string>&amp;Training</string>
+   </property>
+   <property name="shortcut">
+    <string>F6</string>
    </property>
   </action>
   <action name="actionLocal">
@@ -455,15 +482,27 @@ Search within names:
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Local</string>
+    <string>&amp;Local</string>
    </property>
    <property name="toolTip">
     <string>Local</string>
    </property>
+   <property name="shortcut">
+    <string>F7</string>
+   </property>
   </action>
   <action name="actionAdd_Map">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Add Map…</string>
+   </property>
+   <property name="toolTip">
+    <string>&amp;Add Map…</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
    </property>
   </action>
   <action name="actionCounties">
@@ -488,14 +527,6 @@ Search within names:
    </property>
    <property name="text">
     <string>States</string>
-   </property>
-  </action>
-  <action name="action1_20">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>1-20</string>
    </property>
   </action>
   <action name="actionCapitals_of_States">
@@ -527,7 +558,10 @@ Search within names:
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Borders</string>
+    <string>&amp;Borders</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
    </property>
   </action>
   <action name="actionRivers">
@@ -535,7 +569,10 @@ Search within names:
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Rivers</string>
+    <string>&amp;Rivers</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
    </property>
   </action>
   <action name="actionElevations">
@@ -543,7 +580,10 @@ Search within names:
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Elevations</string>
+    <string>&amp;Elevations</string>
+   </property>
+   <property name="shortcut">
+    <string>F4</string>
    </property>
   </action>
   <action name="actionMenu_Bar">
@@ -551,7 +591,10 @@ Search within names:
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Menu Bar</string>
+    <string>&amp;Menu Bar</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+M</string>
    </property>
   </action>
   <action name="actionToolbar">
@@ -559,12 +602,18 @@ Search within names:
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Toolbar</string>
+    <string>Tool&amp;bar</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
    </property>
   </action>
   <action name="actionConfigure">
    <property name="text">
-    <string>Configure QeoDart…</string>
+    <string>&amp;Configure QeoDart…</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
    <property name="menuRole">
     <enum>QAction::PreferencesRole</enum>
@@ -572,12 +621,15 @@ Search within names:
   </action>
   <action name="actionNumber_of_Players">
    <property name="text">
-    <string>Number Of Players</string>
+    <string>Number Of &amp;Players</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
    </property>
   </action>
   <action name="actionPlayers">
    <property name="text">
-    <string>Players: </string>
+    <string>&amp;Players: </string>
    </property>
   </action>
   <action name="actionAgainst_Time">
@@ -585,7 +637,10 @@ Search within names:
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Against Time</string>
+    <string>Against &amp;Time</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
    </property>
   </action>
   <action name="actionAbout_QeoDart">
@@ -593,10 +648,35 @@ Search within names:
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>About QeoDart</string>
+    <string>&amp;About QeoDart</string>
    </property>
    <property name="menuRole">
     <enum>QAction::AboutRole</enum>
+   </property>
+  </action>
+  <action name="actionNetwork">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Network</string>
+   </property>
+   <property name="shortcut">
+    <string>F8</string>
+   </property>
+  </action>
+  <action name="actionHint">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Hint</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+H</string>
    </property>
   </action>
  </widget>

@@ -64,6 +64,7 @@
 	/>
 	<place
 	x="303" y="363" dimx="47" dimy="27"
+	name="Česko"
 	name_de="Tschechien"
 	name_en="Czech Republic"
 	placetype="country"
@@ -77,6 +78,7 @@
 	/>
 	<place
 	x="198" y="438" dimx="3" dimy="3"
+	name="Andorra"
 	name_de="Andorra"
 	name_en="Andorra"
 	placetype="country"
@@ -90,6 +92,7 @@
 	/>
 	<place
 	x="348" y="451" dimx="17" dimy="32"
+	name="Shqipëri"
 	name_de="Albanien"
 	name_en="Albania"
 	placetype="country"
@@ -179,24 +182,28 @@
 	/>
 	<place
 	x="303" y="510" dimx="3" dimy="4"
+	name="Malta"
 	name_de="Malta"
 	name_en="Malta"
 	placetype="country"
 	/>
 	<place
 	x="360" y="444" dimx="20" dimy="18"
+	name="Македонија"
 	name_de="Mazedonien"
-	name_en="Republic of Macedonia"
+	name_en="Macedonia"
 	placetype="country"
 	/>
 	<place
 	x="398" y="377" dimx="29" dimy="31"
+	name="Moldova"
 	name_de="Moldawien"
 	name_en="Moldova"
 	placetype="country"
 	/>
 	<place
 	x="244" y="427" dimx="0" dimy="0"
+	name="Monaco"
 	name_de="Monaco"
 	name_en="Monaco"
 	placetype="country"
@@ -204,12 +211,14 @@
 	<!--30-->
 	<place
 	x="339" y="434" dimx="14" dimy="19"
+	name="Црна Гора"
 	name_de="Montenegro"
 	name_en="Montenegro"
 	placetype="country"
 	/>
 	<place
 	x="280" y="200" dimx="87" dimy="148"
+	name="Norge"
 	name_de="Norwegen"
 	name_en="Norway"
 	placetype="country"
@@ -223,6 +232,7 @@
 	/>
 	<place
 	x="118" y="455" dimx="35" dimy="56"
+	name="Portugal"
 	name_de="Portugal"
 	name_en="Portugal"
 	placetype="country"
@@ -243,12 +253,14 @@
 	/>
 	<place
 	x="284" y="426" dimx="0" dimy="0"
+	name="San Marino"
 	name_de="San Marino"
 	name_en="San Marino"
 	placetype="country"
 	/>
 	<place
 	x="300" y="228" dimx="65" dimy="151"
+	name="Sverige"
 	name_de="Schweden"
 	name_en="Sweden"
 	placetype="country"
@@ -277,12 +289,14 @@
 	/>
 	<place
 	x="163" y="454" dimx="98" dimy="86"
+	name="España"
 	name_de="Spanien"
 	name_en="Spain"
 	placetype="country"
 	/>
 	<place
 	x="474" y="439" dimx="158" dimy="94"
+	name="Türkiye"
 	name_de="Türkei"
 	name_en="Turkey"
 	placetype="country"
@@ -305,6 +319,7 @@
 	x="285" y="447" dimx="0" dimy="0"
 	name_de="Vatikanstadt"
 	name_en="Vatican City"
+	name_la="Santa Sede"
 	placetype="country"
 	/>
 	<place
@@ -322,4 +337,169 @@
 	placetype="country"
 	/>
 	<!--48-->
+	<place
+	x="349" y="449"
+	name="Tiranë"
+	name_de="Tirana"
+	name_en="Tirana"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="198" y="438"
+	name="Andora la Vella"
+	name_de="Andorra la Vella"
+	name_en="Andorra la Vella"
+	placetype="capitalOfCountry;town"
+	/>
+	<place
+	x="312" y="379"
+	name="Wien"
+	name_de="Wien"
+	name_en="Vienna"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="377" y="306"
+	name="Мінск"
+	name_de="Minsk"
+	name_en="Minsk"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="227" y="351"
+	name_de="Brüssel"
+	name_en="Brussels"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="330" y="424"
+	name_de="Sarajevo"
+	name_en="Sarajevo"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="370" y="730"
+	name="София"
+	name_de="Sofia"
+	name_en="Sofia"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="311" y="404"
+	name="Zagreb"
+	name_de="Zagreb"
+	name_en="Zagreb"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="295" y="360"
+	name="Praha"
+	name_de="Prag"
+	name_en="Prague"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="279" y="299"
+	name="København"
+	name_de="Kopenhagen"
+	name_en="Copenhagen"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="346" y="251"
+	name="Tallinn"
+	name_de="Tallinn"
+	name_en="Tallinn"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="345" y="242"
+	name_de="Helsinki"
+	name_en="Helsinki"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="211" y="377"
+	name="Paris"
+	name_de="Paris"
+	name_en="Paris"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="287" y="333"
+	name="Berlin"
+	name_de="Berlin"
+	name_en="Berlin"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="380" y="478"
+	name="Αθήνα"
+	name_de="Athen"
+	name_en="Athens"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="331" y="383"
+	name="Budapest"
+	name_de="Budapest"
+	name_en="Budapest"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="122" y="174"
+	name="Reykjavík"
+	name_de="Reykjavík"
+	name_en="Reykjavík"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="161" y="313"
+	name="Dublin"
+	name_de="Dublin"
+	name_en="Dublin"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="285" y="447"
+	name="Roma"
+	name_de="Rom"
+	name_en="Rome"
+	placetype="capitalOfCountry;city"
+	/>
+	<!--<place
+	x="287" y="333"
+	name_de="Astana"
+	name_en="Astana"
+	placetype="capitalOfCountry;city"
+	/> DOES NOT FIT-->
+	<place
+	x="346" y="278"
+	name="Rīga"
+	name_de="Riga"
+	name_en="Riga"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="262" y="392"
+	name="Vaduz"
+	name_de="Vaduz"
+	name_en="Vaduz"
+	placetype="capitalOfCountry;town"
+	/>
+	<place
+	x="358" y="301"
+	name="Vilnius"
+	name_de="Vilnius"
+	name_en="Vilnius"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="238" y="364"
+	name_de="Luxemburg"
+	name_en="Luxembourg"
+	placetype="capitalOfCountry;town"
+	/>
+		<!--Скопје http://en.wikipedia.org/wiki/List_of_sovereign_states_and_dependent_territories_in_Europe-->
+	
 </qcfx>

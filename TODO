@@ -1,30 +1,16 @@
-http://www.wdr.de/tv/daheimundunterwegs/extras/lustigsteortsnamen/index.jsp
-Alpen
-Deppendorf
-Dreckloch
-Faulebutter
-Fettehenne
-Habenichts
-Halbhusten
-Kaffekanne
-Kalberschnacke
-Köterberg
-Oberholzklau
-Oberwichterich
-Pixel
-Puffendorf
-Schlangen                                                                      
-Stammeln
-Stockdum
-Wetter
-Witzhelden
-Wüste
+shortcuts
+some icons
+nrw town added
+results: scrollarea for wince only
+capitals europe
 
-nrw
+
+http://la.wikipedia.org/wiki/Index_civitatum_Europaearum
+http://de.wikipedia.org/wiki/Liste_der_Gro%C3%9Fst%C3%A4dte_in_Deutschland
+http://de.wikipedia.org/wiki/Liste_der_Millionenst%C3%A4dte
 capitals europa
 indien
 history pointer
-scroll area for CE only (+Linux?)
 git update-index --assume-unchanged
 Ad
 
@@ -54,3 +40,27 @@ http://checkstyle.sourceforge.net/
 /home/markus/Dokumente/GitHub/QeoDart/cpp/qtwin.cpp:134: 6 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/qtwin.cpp, beginnend bei Zeile 172
 /home/markus/Dokumente/GitHub/QeoDart/cpp/template.cpp:1: 11 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/io.cpp, beginnend bei Zeile 1
 /home/markus/Dokumente/GitHub/QeoDart/cpp/template.cpp:1: 7 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 1
+
+
+
+http://www.wdr.de/tv/daheimundunterwegs/extras/lustigsteortsnamen/index.jsp
+Alpen
+Deppendorf
+Dreckloch
+Faulebutter
+Fettehenne
+Habenichts
+Halbhusten
+Kaffekanne
+Kalberschnacke
+Köterberg
+Oberholzklau
+Oberwichterich
+Pixel
+Puffendorf
+Schlangen                                                                      
+Stammeln
+Stockdum
+Wetter
+Witzhelden
+Wüste
