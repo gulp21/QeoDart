@@ -58,6 +58,11 @@ struct qcfFile {
 	qcfCopyright copyright;
 };
 
+struct highScoreEntry {
+	QString name;
+	double score; // TODO important settings
+};
+
 enum enGameModes {
 	enFind=3,
 	enTraining=0,
@@ -92,6 +97,7 @@ Q_OBJECT
 		QList<QLabel*> qlPointLabels;
 		QList<QString> qlLayersNames;
 		QList<QLabel*> qlMapLayers;
+		QList<highScoreEntry> qlHighScores;
 		
 		QActionGroup *agLayers;
 		

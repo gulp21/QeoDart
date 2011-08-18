@@ -786,7 +786,7 @@ void dart::vShowResultWindows() {
 	}
 	
 	for(int i=0; i<iNumberOfPlayers; i++) {
-		resultWindow dialog(this,i);
+		resultWindow dialog(this,i,myIO);
 		dialog.exec();
 	}
 	

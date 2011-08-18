@@ -523,3 +523,17 @@ void io::vLoadSettings() {
 	myDart->iDelayNextPlace=settings->value("iDelayNextPlace",2000).toInt();
 	myDart->iDelayNextPlaceTraining=settings->value("iDelayNextPlaceTraining",1000).toInt();
 }
+
+void io::vLoadHighScores(QString mapName) {
+	for(int i=0; i<10; i++) {
+		QStringList list=settings->value(QString("Highscores/%1.%2").arg(mapName).arg(i),"---–0").toString().split("–");// TODO mapid
+		if(list.count()<2) list=QString("---–0").split("–");
+		
+		highScoreEntry entry;
+		entry.name=list[0];
+		entry.score=list[0].toDouble();
+		myDart->qlHighScores.append(entry);
+		
+		qDebug() << entry.name << "highsc" << entry.score;
+	}
+}

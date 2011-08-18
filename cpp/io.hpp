@@ -35,6 +35,7 @@ class io : public QWidget {
 		int iCheckQcf(QFile &file, QDomDocument &doc);
 		void vFillCurrentTypePlaces();
 		void vLoadSettings();
+		void vLoadHighScores(QString mapName);
 		QString qsGetMapName(QDomDocument &doc);
  	private:
 		QStringList qslGetPreferedQcfLanguage();

@@ -3,9 +3,11 @@
 
 using namespace std;
 
-resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TDart), player(PLayer), QDialog(parent) {
+resultWindow::resultWindow(dart *TDart, int PLayer, io *TIO, QDialog *parent) : myDart(TDart), player(PLayer), myIO(TIO), QDialog(parent) {
 	const int R1=15, G1=135, B1=28, R2=255, G2=25, B2=25;
-
+	
+	myIO->vLoadHighScores(myDart->qlQcfxFiles[myDart->iCurrentQcf].mapName);
+	
 	setParent(myDart);
 
 	setupUi(this);
@@ -34,8 +36,6 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 #else
 	setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint);
 #endif
-	
-	connect(btOk, SIGNAL(clicked()), this, SLOT(close())); // TODO we should save the name
 	
 	if(QtWin::extendFrameIntoClientArea(this)) { // use aero glass if possible
 		setWindowOpacity(1.0); // otherwise there are artifacts
@@ -82,6 +82,14 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 	
 	lblPlaces->setText(places.left(places.length()-2)); // remove the last ", "
 	
+	if(myDart->qlHighScores[9].score>=myDart->qlTotalScores[player].score) {
+		lblName->hide();
+		leName->hide();
+		connect(btOk, SIGNAL(clicked()), this, SLOT(close()));
+	} else {
+		connect(btOk, SIGNAL(clicked()), this, SLOT(vClose()));
+	}
+	
 //WORKAROUND for https://bugreports.qt.nokia.com/browse/QTBUG-691
 //we resize the window so that the text fits (better)
 #ifdef Q_OS_LINUX
@@ -90,5 +98,22 @@ resultWindow::resultWindow(dart *TDart, int PLayer, QDialog *parent) : myDart(TD
 	
 }
 
-resultWindow::~resultWindow(){
+resultWindow::~resultWindow() {
+}
+
+void resultWindow::vClose() {
+	if(leName->text()=="") {
+		close();
+		return;
+	}
+	int i=9; // TODO fix
+	while(myDart->qlHighScores[i].score>=myDart->qlTotalScores[player].score) {
+		if(i<9) {
+			myDart->qlHighScores[i+1]=myDart->qlHighScores[i];
+		}
+		i--;
+	}
+	myIO->settings->setValue(QString("Highscores/%1.%2").arg(myDart->qlQcfxFiles[myDart->iCurrentQcf].mapName).arg(i),
+	                         QString("%1–%2").arg(leName->text().replace("–","-")).arg(myDart->qlTotalScores[player].score/myDart->iMaxPlaceCount)); // double format
+	close();
 }

@@ -9,11 +9,13 @@ class resultWindow : public QDialog, public Ui::resultWindow {
 	
 	dart *myDart;
 	int player;
+	io *myIO;
 	
 	public:
-		resultWindow (dart*, int PLayer, QDialog *parent = 0);
+		resultWindow (dart*, int PLayer, io*, QDialog *parent = 0);
 		~resultWindow();
 	private slots:
+		void vClose();
 	private:
 		
 };
