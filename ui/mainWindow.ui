@@ -397,7 +397,7 @@ Search within names:
   </action>
   <action name="actionHigh_Score_List">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>&amp;High Score List</string>

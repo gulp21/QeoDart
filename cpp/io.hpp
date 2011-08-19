@@ -36,6 +36,7 @@ class io : public QWidget {
 		void vFillCurrentTypePlaces();
 		void vLoadSettings();
 		void vLoadHighScores(QString mapName);
+		void vSaveHighScores(QString mapName);
 		QString qsGetMapName(QDomDocument &doc);
  	private:
 		QStringList qslGetPreferedQcfLanguage();

@@ -84,6 +84,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	agLayers->addAction(actionBorders);
 	agLayers->addAction(actionRivers);
 	
+	connect(actionHigh_Score_List, SIGNAL(triggered()), this, SLOT(vShowHighScores()));
 	actionHigh_Score_List->setIcon(QIcon::fromTheme("games-highscores", QIcon(":/icons/oxygen/games-highscores.png")));
 	connect(actionConfigure, SIGNAL(triggered()), this, SLOT(vShowPreferences()));
 	actionConfigure->setIcon(QIcon::fromTheme("configure", QIcon(":/icons/oxygen/configure.png")));
@@ -1552,6 +1553,12 @@ void dart::vShowPreferences() {
 	preferences dialog(this,myIO);
 	dialog.exec();
 }
+
+void dart::vShowHighScores() {
+	highScoreWindow dialog(this,myIO,this);
+	dialog.exec();
+}
+
 void dart::vUpdateActionsIsCheckedStates() {
 	actionCountries->setChecked(qsCurrentPlaceType.contains("country"));
 	actionCapitals_of_Countries->setChecked(qsCurrentPlaceType.contains("capitalOfCountry"));
