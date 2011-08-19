@@ -1298,12 +1298,12 @@ QString dart::qsSimplifyString(QString str, int l) {
 			str=str.replace("_", "");
 			str=str.replace(".", "");
 			str=str.replace(QRegExp("([aou])e"), "\\1");
-			str=str.replace(QRegExp(QString::fromUtf8("[äáàã]")), "a");
+			str=str.replace(QRegExp(QString::fromUtf8("[äáàãă]")), "a");
 			str=str.replace(QRegExp(QString::fromUtf8("[éèẽ]")), "e");
 			str=str.replace(QRegExp(QString::fromUtf8("[íìĩ]")), "i");
 			str=str.replace(QRegExp(QString::fromUtf8("[öṏø]")), "o");
 			str=str.replace(QRegExp(QString::fromUtf8("[üǘǜ]")), "u");
-			str=str.replace(QRegExp(QString::fromUtf8("[ßś]")), "s");
+			str=str.replace(QRegExp(QString::fromUtf8("[ßśş]")), "s");
 			str=str.replace("ss", "s");
 			
 			if(l>=2) {

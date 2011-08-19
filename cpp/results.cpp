@@ -110,14 +110,14 @@ void resultWindow::vClose() {
 	}
 	
 	name=name.trimmed();
-	while(name.contains("||")) name.replace("||", "| |");
+	while(name.contains("||")) name.replace("||", "| |");
 	if(name.endsWith('|')) name.append(' ');
 	
 	int i=8;
 	for(; i>-1 && score>myDart->qlHighScores[i].score; i--) {
 		myDart->qlHighScores[i+1]=myDart->qlHighScores[i];
 	}
-	i++; // for i=0: better than current best? CHECK TODO
+	i++;
 	
 	highScoreEntry newEntry;
 	newEntry.name=name;

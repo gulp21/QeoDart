@@ -13,6 +13,7 @@
 	name="Deutschland"
 	name_de="Deutschland"
 	name_en="Germany"
+	name_la="Germania"
 	placetype="country"
 	/>
 	<place
@@ -20,12 +21,14 @@
 	name="Nederland"
 	name_de="Niederlande"
 	name_en="Netherlands"
+	name_la="Nederlandia"
 	placetype="country"
 	/>
 	<place
 	x="229" y="355" dimx="26" dimy="25"
 	name_de="Belgien"
 	name_en="Belgium"
+	name_la="Belgica"
 	placetype="country"
 	/>
 	<place
@@ -33,6 +36,7 @@
 	name="France"
 	name_de="Frankreich"
 	name_en="France"
+	name_la="Francia"
 	placetype="country"
 	/>
 	<place
@@ -40,12 +44,14 @@
 	name="Liechtenstein"
 	name_de="Liechtenstein"
 	name_en="Liechtenstein"
+	name_la="Lichtenstenum"
 	placetype="country"
 	/>
 	<place
 	x="252" y="396" dimx="34" dimy="22"
 	name_de="Schweiz"
 	name_en="Switzerland"
+	name_la="Suitia"
 	placetype="country"
 	/>
 	<place
@@ -53,6 +59,7 @@
 	name="Danmark"
 	name_de="Dänemark"
 	name_en="Denmark"
+	name_la="Dania"
 	placetype="country"
 	/>
 	<place
@@ -60,6 +67,7 @@
 	name="Österreich"
 	name_de="Österreich"
 	name_en="Austria"
+	name_la="Austria"
 	placetype="country"
 	/>
 	<place
@@ -67,6 +75,7 @@
 	name="Česko"
 	name_de="Tschechien"
 	name_en="Czech Republic"
+	name_la="Cechia"
 	placetype="country"
 	/>
 	<!--10-->
@@ -74,6 +83,7 @@
 	x="324" y="423" dimx="31" dimy="27"
 	name_de="Bosnien und Herzegowina"
 	name_en="Bosnia-Herzegovina"
+	name_la="Bosnia et Herzegovina"
 	placetype="country"
 	/>
 	<place
@@ -81,6 +91,7 @@
 	name="Andorra"
 	name_de="Andorra"
 	name_en="Andorra"
+	name_la="Andorra"
 	placetype="country"
 	/>
 	<place
@@ -88,6 +99,7 @@
 	name="България"
 	name_de="Bulgarien"
 	name_en="Bulgaria"
+	name_la="Bulgaria"
 	placetype="country"
 	/>
 	<place
@@ -95,6 +107,7 @@
 	name="Shqipëri"
 	name_de="Albanien"
 	name_en="Albania"
+	name_la="Albania"
 	placetype="country"
 	/>
 	<place
@@ -102,6 +115,7 @@
 	name="Eesti"
 	name_de="Estland"
 	name_en="Estonia"
+	name_la="Estonia"
 	placetype="country"
 	/>
 	<place
@@ -109,6 +123,7 @@
 	name="Suomi"
 	name_de="Finnland"
 	name_en="Finland"
+	name_la="Finnia"
 	placetype="country"
 	/>
 	<place
@@ -116,6 +131,7 @@
 	name="Ελλάδα"
 	name_de="Griechenland"
 	name_en="Greece"
+	name_la="Graecia"
 	placetype="country"
 	/>
 	<place
@@ -123,6 +139,7 @@
 	name="Éire"
 	name_de="Irland"
 	name_en="Ireland"
+	name_la="Hibernia"
 	placetype="country"
 	/>
 	<place
@@ -130,6 +147,7 @@
 	name="Ísland"
 	name_de="Island"
 	name_en="Iceland"
+	name_la="Islandia"
 	placetype="country"
 	/>
 	<place
@@ -137,6 +155,7 @@
 	name="Italia"
 	name_de="Italien"
 	name_en="Italy"
+	name_la="Italia"
 	placetype="country"
 	/>
 	<!--20-->
@@ -145,12 +164,14 @@
 	name="Қазақстан"
 	name_de="Kasachstan"
 	name_en="Kazakhstan"
+	name_la="Kazachstania"
 	placetype="country"
 	/>
 	<place
 	x="352" y="434" dimx="15" dimy="13"
 	name_de="Kosovo"
 	name_en="Kosovo"
+	name_la="Ager Merulensis"
 	placetype="country"
 	/>
 	<place
@@ -158,6 +179,7 @@
 	name="Hrvatska"
 	name_de="Kroatien"
 	name_en="Croatia"
+	name_la="Croatia"
 	placetype="country"
 	/>
 	<place
@@ -165,6 +187,7 @@
 	name="Latvija"
 	name_de="Lettland"
 	name_en="Latvia"
+	name_la="Lettonia"
 	placetype="country"
 	/>
 	<place
@@ -172,12 +195,14 @@
 	name="Lietuva"
 	name_de="Litauen"
 	name_en="Lithuania"
+	name_la="Lituania"
 	placetype="country"
 	/>
 	<place
 	x="238" y="362" dimx="7" dimy="8"
 	name_de="Luxemburg"
 	name_en="Luxembourg"
+	name_la="Luxemburgum"
 	placetype="country"
 	/>
 	<place
@@ -185,6 +210,7 @@
 	name="Malta"
 	name_de="Malta"
 	name_en="Malta"
+	name_la="Melita"
 	placetype="country"
 	/>
 	<place
@@ -192,6 +218,7 @@
 	name="Македонија"
 	name_de="Mazedonien"
 	name_en="Macedonia"
+	name_la="Macedonica"
 	placetype="country"
 	/>
 	<place
@@ -199,6 +226,7 @@
 	name="Moldova"
 	name_de="Moldawien"
 	name_en="Moldova"
+	name_la="Moldavia"
 	placetype="country"
 	/>
 	<place
@@ -206,7 +234,8 @@
 	name="Monaco"
 	name_de="Monaco"
 	name_en="Monaco"
-	placetype="country"
+	name_la="Monoecus"
+	placetype="country;capitalOfCountry;town"
 	/>
 	<!--30-->
 	<place
@@ -214,6 +243,7 @@
 	name="Црна Гора"
 	name_de="Montenegro"
 	name_en="Montenegro"
+	name_la="Mons Niger"
 	placetype="country"
 	/>
 	<place
@@ -221,6 +251,7 @@
 	name="Norge"
 	name_de="Norwegen"
 	name_en="Norway"
+	name_la="Norvegia"
 	placetype="country"
 	/>
 	<place
@@ -228,6 +259,7 @@
 	name="Polska"
 	name_de="Polen"
 	name_en="Poland"
+	name_la="Polonia"
 	placetype="country"
 	/>
 	<place
@@ -235,6 +267,7 @@
 	name="Portugal"
 	name_de="Portugal"
 	name_en="Portugal"
+	name_la="Portugallia"
 	placetype="country"
 	/>
 	<place
@@ -242,6 +275,7 @@
 	name="România"
 	name_de="Rumänien"
 	name_en="Romania"
+	name_la="Romania"
 	placetype="country"
 	/>
 	<place
@@ -249,6 +283,7 @@
 	name="Россия"
 	name_de="Russland"
 	name_en="Russia"
+	name_la="Russia"
 	placetype="country"
 	/>
 	<place
@@ -256,13 +291,15 @@
 	name="San Marino"
 	name_de="San Marino"
 	name_en="San Marino"
-	placetype="country"
+	name_la="Sanctus Marinus"
+	placetype="country;capitalOfCountry;town"
 	/>
 	<place
 	x="300" y="228" dimx="65" dimy="151"
 	name="Sverige"
 	name_de="Schweden"
 	name_en="Sweden"
+	name="Suecia"
 	placetype="country"
 	/>
 	<place
@@ -270,6 +307,7 @@
 	name="Србија"
 	name_de="Serbien"
 	name_en="Serbia"
+	name_la="Serbia"
 	placetype="country"
 	/>
 	<place
@@ -277,6 +315,7 @@
 	name="Slovensko"
 	name_de="Slowakei"
 	name_en="Slovakia"
+	name_la="Slovacia"
 	placetype="country"
 	/>
 	<!--40-->
@@ -285,6 +324,7 @@
 	name="Slovenija"
 	name_de="Slowenien"
 	name_en="Slovenia"
+	name_la="Slovenia"
 	placetype="country"
 	/>
 	<place
@@ -292,6 +332,7 @@
 	name="España"
 	name_de="Spanien"
 	name_en="Spain"
+	name_la="Hispania"
 	placetype="country"
 	/>
 	<place
@@ -299,6 +340,7 @@
 	name="Türkiye"
 	name_de="Türkei"
 	name_en="Turkey"
+	name_la="Turcia"
 	placetype="country"
 	/>
 	<place
@@ -306,6 +348,7 @@
 	name="Україна"
 	name_de="Ukraine"
 	name_en="Ukraine"
+	name_la="Ucraina"
 	placetype="country"
 	/>
 	<place
@@ -313,6 +356,7 @@
 	name="Magyarország"
 	name_de="Ungarn"
 	name_en="Hungary"
+	name_la="Hungaria"
 	placetype="country"
 	/>
 	<place
@@ -320,13 +364,14 @@
 	name_de="Vatikanstadt"
 	name_en="Vatican City"
 	name_la="Santa Sede"
-	placetype="country"
+	placetype="country;capitalOfCountry;town"
 	/>
 	<place
 	x="183" y="303" dimx="60" dimy="96"
 	name="United Kingdom"
 	name_de="Vereinigtes Königreich"
 	name_en="United Kingdom"
+	name_la="Britanniarum Regnum"
 	placetype="country"
 	/>
 	<place
@@ -334,14 +379,16 @@
 	name="Беларусь"
 	name_de="Weißrussland"
 	name_en="Belarus"
+	name_la="Ruthenia Alba"
 	placetype="country"
 	/>
-	<!--48-->
+	<!--.....capitals.....48-->
 	<place
 	x="349" y="449"
 	name="Tiranë"
 	name_de="Tirana"
 	name_en="Tirana"
+	name="Theranda"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -349,6 +396,7 @@
 	name="Andora la Vella"
 	name_de="Andorra la Vella"
 	name_en="Andorra la Vella"
+	name="Andorra Vetus"
 	placetype="capitalOfCountry;town"
 	/>
 	<place
@@ -356,6 +404,7 @@
 	name="Wien"
 	name_de="Wien"
 	name_en="Vienna"
+	name_la="Vindobona"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -363,18 +412,21 @@
 	name="Мінск"
 	name_de="Minsk"
 	name_en="Minsk"
+	name_la="Minscum"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
 	x="227" y="351"
 	name_de="Brüssel"
 	name_en="Brussels"
+	name_la="Bruxellae"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
 	x="330" y="424"
 	name_de="Sarajevo"
 	name_en="Sarajevo"
+	name_la="Seraium"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -382,6 +434,7 @@
 	name="София"
 	name_de="Sofia"
 	name_en="Sofia"
+	name_la="Serdica"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -389,6 +442,7 @@
 	name="Zagreb"
 	name_de="Zagreb"
 	name_en="Zagreb"
+	name_la="Zagrabia"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -396,6 +450,7 @@
 	name="Praha"
 	name_de="Prag"
 	name_en="Prague"
+	name_la="Praga"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -403,6 +458,7 @@
 	name="København"
 	name_de="Kopenhagen"
 	name_en="Copenhagen"
+	name_la="Hafnia"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -410,12 +466,14 @@
 	name="Tallinn"
 	name_de="Tallinn"
 	name_en="Tallinn"
+	name_la="Castrum Danorum"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
 	x="345" y="242"
 	name_de="Helsinki"
 	name_en="Helsinki"
+	name_la="Helsingia"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -423,6 +481,7 @@
 	name="Paris"
 	name_de="Paris"
 	name_en="Paris"
+	name_la="Lutetia"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -430,6 +489,7 @@
 	name="Berlin"
 	name_de="Berlin"
 	name_en="Berlin"
+	name_la="Berolinum"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -437,6 +497,7 @@
 	name="Αθήνα"
 	name_de="Athen"
 	name_en="Athens"
+	name_la="Athenae"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -444,6 +505,7 @@
 	name="Budapest"
 	name_de="Budapest"
 	name_en="Budapest"
+	name="Aquincum"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -451,6 +513,7 @@
 	name="Reykjavík"
 	name_de="Reykjavík"
 	name_en="Reykjavík"
+	name_la="Reykiavica"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -458,6 +521,7 @@
 	name="Dublin"
 	name_de="Dublin"
 	name_en="Dublin"
+	name_la="Eblana"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -465,6 +529,7 @@
 	name="Roma"
 	name_de="Rom"
 	name_en="Rome"
+	name_la="Roma"
 	placetype="capitalOfCountry;city"
 	/>
 	<!--<place
@@ -478,6 +543,7 @@
 	name="Rīga"
 	name_de="Riga"
 	name_en="Riga"
+	name_la="Riga"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
@@ -485,6 +551,7 @@
 	name="Vaduz"
 	name_de="Vaduz"
 	name_en="Vaduz"
+	name_la="Dulcis Vallis"
 	placetype="capitalOfCountry;town"
 	/>
 	<place
@@ -492,14 +559,170 @@
 	name="Vilnius"
 	name_de="Vilnius"
 	name_en="Vilnius"
+	name_la="Vilna"
 	placetype="capitalOfCountry;city"
 	/>
 	<place
 	x="238" y="364"
 	name_de="Luxemburg"
 	name_en="Luxembourg"
-	placetype="capitalOfCountry;town"
+	name_la="Luxemburgum"
+	placetype="capitalOfCountry;city"
 	/>
-		<!--Скопје http://en.wikipedia.org/wiki/List_of_sovereign_states_and_dependent_territories_in_Europe-->
-	
+	<place
+	x="357" y="440"
+	name="Скопје"
+	name_de="Skopje"
+	name_en="Skopje"
+	name_la="Scupi"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="304" y="512"
+	name_de="Valletta"
+	name_en="Valletta"
+	name_la="Valletta"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="403" y="376"
+	name="Chişinău"
+	name_de="Chişinău"
+	name_en="Chişinău"
+	name_la="Chisla Nova"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="338" y="437"
+	name="Подгорица"
+	name_de="Podgorica"
+	name_en="Podgorica"
+	name_la="Birziminium"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="232" y="334"
+	name="Amsterdam"
+	name_de="Amsterdam"
+	name_en="Amsterdam"
+	name_la="Amstelodamum"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="268" y="254"
+	name="Oslo"
+	name_de="Oslo"
+	name_en="Oslo"
+	name_la="Asloa"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="342" y="328"
+	name="Warszawa"
+	name_de="Warschau"
+	name_en="Warsaw"
+	name_la="Varsovia"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="106" y="463"
+	name="Lisboa"
+	name_de="Lissabon"
+	name_en="Lisbon"
+	name_la="Olisipo"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="386" y="407"
+	name="Bucureşti"
+	name_de="Bukarest"
+	name_en="Bucharest"
+	name_la="Bucaresta"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="400" y="265"
+	name="Москва"
+	name_de="Moskau"
+	name_en="Moscow"
+	name_la="Moscua"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="343" y="410"
+	name="Београд"
+	name_de="Belgrad"
+	name_en="Belgrade"
+	name_la="Belgradum"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="317" y="378"
+	name="Bratislava"
+	name_de="Bratislava"
+	name_en="Bratislava"
+	name_la="Posonium"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="298" y="402"
+	name="Ljubljana"
+	name_de="Ljubljana"
+	name_en="Ljubljana"
+	name_la="Aemona"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="157" y="454"
+	name="Madrid"
+	name_de="Madrid"
+	name_en="Madrid"
+	name_la="Matritum"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="309" y="258"
+	name="Stockholm"
+	name_de="Stockholm"
+	name_en="Stockholm"
+	name_la="Holmia"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="246" y="394"
+	name_de="Bern"
+	name_en="Bern"
+	name_la="Berna"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="450" y="437"
+	name="Ankara"
+	name_de="Ankara"
+	name_en="Ankara"
+	name_la="Ancyra"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="402" y="335"
+	name="Київ"
+	name_de="Kiew"
+	name_en="Kiev"
+	name_la="Kiovia"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="199" y="340"
+	name="London"
+	name_de="London"
+	name_en="London"
+	name_la="Londinium"
+	placetype="capitalOfCountry;city"
+	/>
+	<place
+	x="355" y="434"
+	name_de="Priština"
+	name_en="Pristina"
+	placetype="capitalOfCountry;city"
+	/>
 </qcfx>
