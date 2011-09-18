@@ -102,18 +102,32 @@ resultWindow::~resultWindow() {
 }
 
 void resultWindow::vClose() {
-	if(leName->text()=="") {
+	double score=myDart->qlTotalScores[player].score/static_cast<double>(myDart->iMaxPlaceCount);
+	QString name=leName->text();
+	if(name=="") {
 		close();
 		return;
 	}
-	int i=9; // TODO fix
-	while(myDart->qlHighScores[i].score>=myDart->qlTotalScores[player].score) {
-		if(i<9) {
-			myDart->qlHighScores[i+1]=myDart->qlHighScores[i];
-		}
-		i--;
+	
+	name=name.trimmed();
+	while(name.contains("||")) name.replace("||", "| |");
+	if(name.endsWith('|')) name.append(' ');
+	
+	int i=8;
+	for(; i>-1 && score>myDart->qlHighScores[i].score; i--) {
+		myDart->qlHighScores[i+1]=myDart->qlHighScores[i];
 	}
-	myIO->settings->setValue(QString("Highscores/%1.%2").arg(myDart->qlQcfxFiles[myDart->iCurrentQcf].mapName).arg(i),
-	                         QString("%1–%2").arg(leName->text().replace("–","-")).arg(myDart->qlTotalScores[player].score/myDart->iMaxPlaceCount)); // double format
+	i++;
+	
+	highScoreEntry newEntry;
+	newEntry.name=name;
+	newEntry.score=score;
+	
+	myDart->qlHighScores[i]=newEntry;
+	
+	qDebug() << "[i] saved" << name<< score;
+	
+	myIO->vSaveHighScores(myDart->qlQcfxFiles[myDart->iCurrentQcf].mapName);
+	
 	close();
 }

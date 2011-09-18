@@ -528,15 +528,27 @@ void io::vLoadSettings() {
 }
 
 void io::vLoadHighScores(QString mapName) {
+	myDart->qlHighScores.clear();
+	
 	for(int i=0; i<10; i++) {
-		QStringList list=settings->value(QString("Highscores/%1.%2").arg(mapName).arg(i),"---–0").toString().split("–");// TODO mapid
-		if(list.count()<2) list=QString("---–0").split("–");
+		QStringList list=settings->value(QString("Highscores/%1.%2").arg(mapName).arg(i),"---||0").toString().split("||"); // TODO mapid
+		qDebug() << list;
+		if(list.count()<2) list=QString("---||0").split("||");
 		
 		highScoreEntry entry;
 		entry.name=list[0];
-		entry.score=list[0].toDouble();
+		entry.score=list[1].toDouble();
 		myDart->qlHighScores.append(entry);
 		
-		qDebug() << entry.name << "highsc" << entry.score;
+		qDebug() << entry.name << "R highsc" << entry.score;
+	}
+}
+
+void io::vSaveHighScores(QString mapName) {
+	for(int i=0; i<10; i++) {
+		settings->setValue(QString("Highscores/%1.%2").arg(mapName).arg(i),
+		                   QString("%1||%2").arg(myDart->qlHighScores[i].name).arg(myDart->qlHighScores[i].score));
+		
+		qDebug() << myDart->qlHighScores[i].name << "W highsc" << myDart->qlHighScores[i].score;
 	}
 }

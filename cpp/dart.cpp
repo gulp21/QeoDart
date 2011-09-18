@@ -84,6 +84,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	agLayers->addAction(actionBorders);
 	agLayers->addAction(actionRivers);
 	
+	connect(actionHigh_Score_List, SIGNAL(triggered()), this, SLOT(vShowHighScores()));
 	actionHigh_Score_List->setIcon(QIcon::fromTheme("games-highscores", QIcon(":/icons/oxygen/games-highscores.png")));
 	connect(actionConfigure, SIGNAL(triggered()), this, SLOT(vShowPreferences()));
 	actionConfigure->setIcon(QIcon::fromTheme("configure", QIcon(":/icons/oxygen/configure.png")));
@@ -1302,12 +1303,12 @@ QString dart::qsSimplifyString(QString str, int l) {
 			str=str.replace("_", "");
 			str=str.replace(".", "");
 			str=str.replace(QRegExp("([aou])e"), "\\1");
-			str=str.replace(QRegExp(QString::fromUtf8("[äáàã]")), "a");
+			str=str.replace(QRegExp(QString::fromUtf8("[äáàãă]")), "a");
 			str=str.replace(QRegExp(QString::fromUtf8("[éèẽ]")), "e");
 			str=str.replace(QRegExp(QString::fromUtf8("[íìĩ]")), "i");
 			str=str.replace(QRegExp(QString::fromUtf8("[öṏø]")), "o");
 			str=str.replace(QRegExp(QString::fromUtf8("[üǘǜ]")), "u");
-			str=str.replace(QRegExp(QString::fromUtf8("[ßś]")), "s");
+			str=str.replace(QRegExp(QString::fromUtf8("[ßśş]")), "s");
 			str=str.replace("ss", "s");
 			
 			if(l>=2) {
@@ -1557,6 +1558,12 @@ void dart::vShowPreferences() {
 	preferences dialog(this,myIO);
 	dialog.exec();
 }
+
+void dart::vShowHighScores() {
+	highScoreWindow dialog(this,myIO,this);
+	dialog.exec();
+}
+
 void dart::vUpdateActionsIsCheckedStates() {
 	actionCountries->setChecked(qsCurrentPlaceType.contains("country"));
 	actionCapitals_of_Countries->setChecked(qsCurrentPlaceType.contains("capitalOfCountry"));

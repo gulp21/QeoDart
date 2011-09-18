@@ -31,6 +31,7 @@ See main.cpp for details. */
 #endif
 
 #include "io.hpp"
+#include "highscores.hpp"
 #include "results.hpp"
 #include "preferences.hpp"
 
@@ -215,6 +216,7 @@ Q_OBJECT
 		void vSetNumberOfPlayers();
                 void vSetAgainstTime();
 		void vShowPreferences();
+		void vShowHighScores();
 		void vToolbarOverflow();
 		void vToggleMapLayer();
 		

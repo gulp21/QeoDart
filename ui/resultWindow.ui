@@ -112,9 +112,6 @@
      <property name="enabled">
       <bool>true</bool>
      </property>
-     <property name="maxLength">
-      <number>20</number>
-     </property>
     </widget>
    </item>
    <item>

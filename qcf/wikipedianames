@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for name in `cat nrw.qcfx | grep place | grep -v name_la | sed -e "s/.*name=\"//g" | sed -e "s/\".*//g" | sed -e "s/ /_/g" | grep -v TODO`
+do
+	echo http://la.wp.openstreetmap.pl/de:$name
+	firefox http://la.wp.openstreetmap.pl/de:$name &
+	read -p "$*"
+done
