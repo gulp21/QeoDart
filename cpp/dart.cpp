@@ -28,7 +28,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	dPxToKm=1;
 	iCurrentQcf=0; // TODO allow saving name;
 	iScoreAreaMode=1;
-	iTrainingPlaceNumber=-1;
+	pTrainingPlaceNumber=NULL;
 	iPaddingTop=0;
 	iMarginTop=0;
 	
@@ -517,6 +517,8 @@ void dart::resizeEvent(QResizeEvent *event) {
 	vRepaintMap();
 	
 	gridLayoutWidget->setGeometry(QRect(0,0,600*dZoomFactor+1,iPaddingTop+50));
+	
+	lblAd->setGeometry(0,iPaddingTop+600*dZoomFactor,600*dZoomFactor,100);
 
 	qDebug() << "[i] iPaddingTop" << iPaddingTop << "iMarginTop" << iMarginTop << "dZoomFactor" << dZoomFactor << "fontSize" << iGetFontSize();
 	
@@ -698,7 +700,7 @@ void dart::vMouseClickEvent(int x, int y) {
 	score.x=x;
 	score.y=y;
 	score.diffPxArea=dGetDistanceInPx(x,y,iPlaceCount-1); // respects area // TODO what about shown distance?
-	score.diffPx=dGetDistanceInPxBetween(x,y,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y);
+	score.diffPx=dGetDistanceInPxBetween(x,y,qlPlacesHistory[iPlaceCount-1]->x,qlPlacesHistory[iPlaceCount-1]->y);
 	score.diffKm=dGetDistanceInKm(score.diffPxArea);
 	score.mark=dGetMarkFromDistance(score.diffPxArea);
 	score.score=dGetScore(score.mark);
@@ -782,7 +784,7 @@ void dart::vShowResultWindows() {
 	bAcceptingClickEvent=FALSE;
 	
 	for(int i=0,max=qlPlacesHistory.count(); i<max; i++) {
-		vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[i]]->x, qlCurrentTypePlaces[qlPlacesHistory[i]]->y, qlPointLabels, qlCurrentTypePlaces[qlPlacesHistory[i]]->name);
+		vDrawPoint(qlPlacesHistory[i]->x, qlPlacesHistory[i]->y, qlPointLabels, qlPlacesHistory[i]->name);
 	}
 	
 	for(int i=0; i<iNumberOfPlayers; i++) {
@@ -800,8 +802,8 @@ void dart::vResetScoreLabels() {
 }
 
 void dart::vShowCurrentPlace() {
-	if(iAskForMode==enPositions) vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels);
-	else vDrawPoint(qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y,qlPointLabels, qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->name);
+	if(iAskForMode==enPositions) vDrawPoint(qlPlacesHistory[iPlaceCount-1]->x,qlPlacesHistory[iPlaceCount-1]->y,qlPointLabels);
+	else vDrawPoint(qlPlacesHistory[iPlaceCount-1]->x,qlPlacesHistory[iPlaceCount-1]->y,qlPointLabels, qlPlacesHistory[iPlaceCount-1]->name);
 }
 
 void dart::vShowScores() {
@@ -1111,21 +1113,22 @@ void dart::vNextRound() {
 	}
 	
 	int pn=-1;
+	place *ppn=NULL;
 	
 	if(iGameMode==enTraining && iPlaceCount>=5) {
 		qDebug() << "Revise";
 		for(int i=0; i<qlScoreHistory[0].count() && pn==-1; i++) {
 			qDebug() << qlScoreHistory[0][i].mark << qlTotalScores[0].mark;
 			if(qlScoreHistory[0][i].mark>=4 || (qlScoreHistory[0][i].mark>2 && qlScoreHistory[0][i].mark>qlTotalScores[0].mark) ) {
-				qDebug() << qlCurrentTypePlaces[qlPlacesHistory[i]]->name;
+				qDebug() << qlPlacesHistory[i]->name;
 				
 				if(iPlaceCount==5 && i==4) {
 					//we shouldn't ask for the last place immediatly
 					//so we keep it in mind
-					iTrainingPlaceNumber=qlPlacesHistory[i];
+					pTrainingPlaceNumber=qlPlacesHistory[i];
 				} else {
 					qlScoreHistory[0][i].mark=0;
-					pn=qlPlacesHistory[i];
+					ppn=qlPlacesHistory[i];
 				}
 			} //if (badscore)
 		} // for (scorehistory)
@@ -1134,31 +1137,33 @@ void dart::vNextRound() {
 		}
 	}
 	
-	if(pn<=-1) {
+	if(pn<=-1 && ppn==NULL) {
 		int i=0;
 		do {
 			qDebug() << qlCurrentTypePlaces.count();
 			pn = rand() % qlCurrentTypePlaces.count();
-		} while(qlPlacesHistory.contains(pn) && i++<10);
+		} while(qlPlacesHistory.contains(qlCurrentTypePlaces[pn]) && i++<10);
 		
-		if(iGameMode==enTraining && iTrainingPlaceNumber!=-1 && iPlaceCount==2) {
-			pn=iTrainingPlaceNumber;
-			iTrainingPlaceNumber=-1;
+		if(iGameMode==enTraining && pTrainingPlaceNumber!=NULL && iPlaceCount==2) {
+			ppn=pTrainingPlaceNumber;
+			pTrainingPlaceNumber=NULL;
+		} else {
+			ppn=qlCurrentTypePlaces[pn];
 		}
 	}
 	
 	iPlaceCount++;
-	qlPlacesHistory.append(pn);
+	qlPlacesHistory.append(ppn);
 	
-	qDebug() << "[i] next place:" << pn << qlCurrentTypePlaces[pn]->name << iPlaceCount << "/" << iMaxPlaceCount;
+	qDebug() << "[i] next place:" << pn << qlPlacesHistory[iPlaceCount-1]->name << iPlaceCount << "/" << iMaxPlaceCount;
 	
 	switch(iAskForMode) {
 		case enPositions:
 			bAcceptingClickEvent=TRUE;
-			lblCurrentPlace->setText(qlCurrentTypePlaces[pn]->name);
+			lblCurrentPlace->setText(qlPlacesHistory[iPlaceCount-1]->name);
 			break;
 		case enNames:
-			vDrawPoint(qlCurrentTypePlaces[pn]->x, qlCurrentTypePlaces[pn]->y, qlPointLabels);
+			vDrawPoint(qlPlacesHistory[iPlaceCount-1]->x, qlPlacesHistory[iPlaceCount-1]->y, qlPointLabels);
 			lineEdit->clear();
 			lineEdit->setStyleSheet("");
 			lineEdit->setEnabled(TRUE);
@@ -1187,13 +1192,13 @@ double dart::dGetDistanceInPxBetween(int a, int b, int x, int y) {
 double dart::dGetDistanceInPx(int a, int b, int n) {
 	if(a==-1 && b==-1) return -1;
 	
-	int x=qlCurrentTypePlaces[qlPlacesHistory[n]]->x;
-	int y=qlCurrentTypePlaces[qlPlacesHistory[n]]->y;
+	int x=qlPlacesHistory[n]->x;
+	int y=qlPlacesHistory[n]->y;
 	
 	if(iAskForMode==enNames) return dGetDistanceInPxBetween(a,b,x,y);
 	
-	int dim2x=qlCurrentTypePlaces[qlPlacesHistory[n]]->dimx*(iScoreAreaMode/2.0)/2;
-	int dim2y=qlCurrentTypePlaces[qlPlacesHistory[n]]->dimx*(iScoreAreaMode/2.0)/2;
+	int dim2x=qlPlacesHistory[n]->dimx*(iScoreAreaMode/2.0)/2;
+	int dim2y=qlPlacesHistory[n]->dimx*(iScoreAreaMode/2.0)/2;
 	
 	if(a>x+dim2x) a-=dim2x;
 	else if(a<x-dim2x) a+=dim2x;
@@ -1370,7 +1375,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 	score.x=x;
 	score.y=y;
 	score.diffPxArea=dGetDistanceInPx(x,y,iPlaceCount-1); // respects area // TODO what about shown distance?
-	score.diffPx=dGetDistanceInPxBetween(x,y,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->x,qlCurrentTypePlaces[qlPlacesHistory[iPlaceCount-1]]->y);
+	score.diffPx=dGetDistanceInPxBetween(x,y,qlPlacesHistory[iPlaceCount-1]->x,qlPlacesHistory[iPlaceCount-1]->y);
 	score.diffKm=dGetDistanceInKm(score.diffPxArea);
 	score.mark=dGetMarkFromDistance(score.diffPxArea);
         score.score=dGetScore(score.mark)*f;

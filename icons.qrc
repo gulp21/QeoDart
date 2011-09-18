@@ -9,4 +9,7 @@
         <file alias="player-time.png">icons/oxygen/player-time.png</file>
         <file alias="index.theme">icons/oxygen/index.theme</file>
     </qresource>
+    <qresource prefix="/icons">
+        <file alias="banner.png">icons/banner.png</file>
+    </qresource>
 </RCC>

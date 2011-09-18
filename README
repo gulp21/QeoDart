@@ -6,6 +6,12 @@ Requirements:
 Download:
 * git: git clone git://github.com/gulp21/QeoDart.git
 
+Supported Operating Systems:
+* Linux (tested Kubuntu 11.04 32/64 bit)
+* Windows (tested Windows 7 32 bit)
+* Windows CE (tested Windows CE Core 5.0)
+* MacOSX is also supported by Qt, but is untested
+
 Support:
 * https://github.com/gulp21/QeoDart/wiki
 * support.gulp21 (ä) googlemail.com

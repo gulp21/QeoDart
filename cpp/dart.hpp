@@ -91,7 +91,7 @@ Q_OBJECT
 		QList<qcfFile> qlQcfxFiles;
 		QList<place> qlAllPlaces; //contains all places of the current map
 		QList<place*> qlCurrentTypePlaces; //contains pointers pointing to the places in qlAllPlaces which fit the current placetype
-		QList<int> qlPlacesHistory;
+		QList<place*> qlPlacesHistory;
 		QList<QList<scoreHistory> > qlScoreHistory; // [player][round].scores
 		QList<totalScore> qlTotalScores;
 		QList<QLabel*> qlPointLabels;
@@ -131,7 +131,9 @@ Q_OBJECT
 		
 		bool bAcceptingClickEvent, bAcceptingResizeEvent;
 		
-		int iCurrentPlayer, iTrainingPlaceNumber, iTimerElapsed;
+		int iCurrentPlayer, iTimerElapsed;
+		
+		place *pTrainingPlaceNumber;
                 
 		QList<QList<QLabel*> > qlCircleLabels; //contains all circles (incl. points) for each user
 // 		QList<QLabel*> qlPlayerLabel;

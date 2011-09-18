@@ -378,7 +378,7 @@
 	placetype="capitalOfCountry;city"
 	/>
 	<place
-	x="370" y="730"
+	x="370" y="430"
 	name="София"
 	name_de="Sofia"
 	name_en="Sofia"

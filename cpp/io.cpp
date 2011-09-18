@@ -219,8 +219,11 @@ int io::iReadQcf(QString mapname) {
 				if(newPlace.x==-1 || newPlace.y==-1) {
 					qDebug() << "[W] place" << myDart->qlAllPlaces.count() << "has incomplete coordinates";
 				}
+				if(newPlace.x>600 || newPlace.y>600 || newPlace.x<-1 || newPlace.y<-1) {
+					qDebug() << "[W] place" << myDart->qlAllPlaces.count() << "has at least one coordinate out of range";
+				}
 				
-				if(newPlace.placeType.contains("state")) myDart->actionStates->setVisible(TRUE); // TODO count + show count
+				if(newPlace.placeType.contains("state")) myDart->actionStates->setVisible(TRUE); // TODO count + show count; actiongroup caption with total count? [x of y]
 				if(newPlace.placeType.contains("capitalOfState")) myDart->actionCapitals_of_States->setVisible(TRUE);
 				if(newPlace.placeType.contains("country")) myDart->actionCountries->setVisible(TRUE);
 				if(newPlace.placeType.contains("capitalOfCountry")) myDart->actionCapitals_of_Countries->setVisible(TRUE);

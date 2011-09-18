@@ -72,7 +72,7 @@ resultWindow::resultWindow(dart *TDart, int PLayer, io *TIO, QDialog *parent) : 
 		else km=QString("%1").arg(myDart->qlScoreHistory[player][i].diffKm,0,'f',1);
 		
 		places+=QString(tr("<span style=\"color:rgb(%5,%6,%7)\">%1&nbsp;(%2&nbsp;km,&nbsp;%3&nbsp;P.,&nbsp;%4)</span>, "))
-		                .arg(myDart->qlCurrentTypePlaces[myDart->qlPlacesHistory[i]]->name)
+		                .arg(myDart->qlPlacesHistory[i]->name)
 		                .arg(km)
 		                .arg(myDart->qlScoreHistory[player][i].score)
 		                .arg(myDart->qlScoreHistory[player][i].mark,0,'f',1)
