@@ -34,6 +34,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	setupUi(this);
 	
+	if(!(QCoreApplication::arguments().contains("--banner"))) lblAd->setVisible(false);
+	
 	timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
 	
@@ -519,7 +521,7 @@ void dart::resizeEvent(QResizeEvent *event) {
 	
 	gridLayoutWidget->setGeometry(QRect(0,0,600*dZoomFactor+1,iPaddingTop+50));
 	
-	lblAd->setGeometry(0,iPaddingTop+600*dZoomFactor,600*dZoomFactor,100);
+	lblAd->setGeometry(0,iPaddingTop+600*dZoomFactor,600*dZoomFactor,111);
 
 	qDebug() << "[i] iPaddingTop" << iPaddingTop << "iMarginTop" << iMarginTop << "dZoomFactor" << dZoomFactor << "fontSize" << iGetFontSize();
 	

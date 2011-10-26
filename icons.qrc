@@ -16,6 +16,8 @@
         <file alias="index.theme">icons/oxygen/index.theme</file>
     </qresource>
     <qresource prefix="/icons">
-        <file alias="banner.png">icons/banner.png</file>
+        <file>icons/icon16.png</file>
+        <file>icons/icon48.png</file>
+        <file>icons/icon256.png</file>
     </qresource>
 </RCC>
