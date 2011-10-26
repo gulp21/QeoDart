@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>High Score List</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../icons.qrc">
+    <normaloff>:/icons/oxygen/games-highscores.png</normaloff>:/icons/oxygen/games-highscores.png</iconset>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0">
    <item>
@@ -387,6 +391,8 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

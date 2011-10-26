@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Configure – QeoDart</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../icons.qrc">
+    <normaloff>:/icons/oxygen/configure.png</normaloff>:/icons/oxygen/configure.png</iconset>
+  </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
@@ -46,8 +50,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>421</width>
-            <height>467</height>
+            <width>443</width>
+            <height>484</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -391,6 +395,12 @@ p, li { white-space: pre-wrap; }
                     <property name="sizeType">
                      <enum>QSizePolicy::Minimum</enum>
                     </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
                    </spacer>
                   </item>
                   <item>
@@ -450,8 +460,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>228</width>
-            <height>223</height>
+            <width>438</width>
+            <height>230</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -619,7 +629,9 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../icons.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
