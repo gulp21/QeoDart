@@ -13,16 +13,20 @@ You should have received a copy of the GNU General Public License along with thi
 #include <stdlib.h>
 #include <QApplication>
 #include <QTextCodec>
+#include <QTranslator>
 
 #include "dart.hpp"
 
 int main(int argc, char* argv[]) {
 	QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8")); 
 	
-	//QLocale::system().name().left(2)
-	
         QApplication a(argc, argv);
 	a.setAutoSipEnabled(true);
+	
+	QTranslator translator;
+	translator.load(QString(("lang/%1")).arg(QLocale::system().name().left(2)));
+	a.installTranslator(&translator);
+	
         dart w;
         w.show();
         return a.exec();

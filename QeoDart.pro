@@ -22,8 +22,8 @@ SOURCES += cpp/dart.cpp cpp/io.cpp cpp/main.cpp cpp/qtwin.cpp \
     cpp/highscores.cpp
 QT += xml
 
-#RESOURCES += \
-#    icons.qrc
+TRANSLATIONS = lang/de.ts \
+	lang/la.ts
 
 QMAKE_CXXFLAGS_WARN_OFF += -Wno-reorder
 
