@@ -32,6 +32,7 @@ See main.cpp for details. */
 
 #include "io.hpp"
 #include "highscores.hpp"
+#include "about.hpp"
 #include "results.hpp"
 #include "preferences.hpp"
 
@@ -217,6 +218,7 @@ Q_OBJECT
                 void vSetAgainstTime();
 		void vShowPreferences();
 		void vShowHighScores();
+		void vShowAboutWindow();
 		void vToolbarOverflow();
 		void vToggleMapLayer();
 		

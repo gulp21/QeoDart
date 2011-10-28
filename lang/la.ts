@@ -9,11 +9,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="154"/>
-        <source>&lt;time&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui/mainWindow.ui" line="164"/>
         <source>Chance the search behavior of the searchbox:
 
@@ -92,7 +87,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="302"/>
-        <location filename="../ui/mainWindow.ui" line="397"/>
+        <location filename="../ui/mainWindow.ui" line="399"/>
         <source>&amp;Game</source>
         <translation type="unfinished"></translation>
     </message>
@@ -102,303 +97,308 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="320"/>
+        <location filename="../ui/mainWindow.ui" line="322"/>
         <source>&amp;Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="324"/>
+        <location filename="../ui/mainWindow.ui" line="326"/>
         <source>&amp;Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="330"/>
+        <location filename="../ui/mainWindow.ui" line="332"/>
         <source>Ask for mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="337"/>
+        <location filename="../ui/mainWindow.ui" line="339"/>
         <source>Ask &amp;for</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="352"/>
+        <location filename="../ui/mainWindow.ui" line="354"/>
         <source>Place Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="364"/>
+        <location filename="../ui/mainWindow.ui" line="366"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="374"/>
+        <location filename="../ui/mainWindow.ui" line="376"/>
         <source>G&amp;ame Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="414"/>
+        <location filename="../ui/mainWindow.ui" line="416"/>
         <source>toolBar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="440"/>
+        <location filename="../ui/mainWindow.ui" line="442"/>
         <source>&amp;New Game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="443"/>
+        <location filename="../ui/mainWindow.ui" line="445"/>
         <source>Ctrl+N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="448"/>
+        <location filename="../ui/mainWindow.ui" line="450"/>
         <source>&amp;Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="451"/>
+        <location filename="../ui/mainWindow.ui" line="453"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="462"/>
+        <location filename="../ui/mainWindow.ui" line="464"/>
         <source>&amp;High Score List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="465"/>
+        <location filename="../ui/mainWindow.ui" line="467"/>
         <source>Ctrl+H</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="473"/>
+        <location filename="../ui/mainWindow.ui" line="475"/>
         <source>&amp;Find Place</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="476"/>
+        <location filename="../ui/mainWindow.ui" line="478"/>
         <source>F5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="484"/>
+        <location filename="../ui/mainWindow.ui" line="486"/>
         <source>&amp;Position of Place</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="487"/>
+        <location filename="../ui/mainWindow.ui" line="489"/>
         <source>F9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="495"/>
+        <location filename="../ui/mainWindow.ui" line="497"/>
         <source>&amp;Name of Place</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="498"/>
+        <location filename="../ui/mainWindow.ui" line="500"/>
         <source>F10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="506"/>
+        <location filename="../ui/mainWindow.ui" line="508"/>
         <source>Cities</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="514"/>
+        <location filename="../ui/mainWindow.ui" line="516"/>
         <source>About &amp;Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="522"/>
+        <location filename="../ui/mainWindow.ui" line="524"/>
         <source>&amp;100%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="525"/>
+        <location filename="../ui/mainWindow.ui" line="527"/>
         <source>Ctrl+0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="533"/>
+        <location filename="../ui/mainWindow.ui" line="535"/>
         <source>&amp;Training</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="536"/>
+        <location filename="../ui/mainWindow.ui" line="538"/>
         <source>F6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="544"/>
+        <location filename="../ui/mainWindow.ui" line="546"/>
         <source>&amp;Local</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="547"/>
+        <location filename="../ui/mainWindow.ui" line="549"/>
         <source>Local</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="550"/>
+        <location filename="../ui/mainWindow.ui" line="552"/>
         <source>F7</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/mainWindow.ui" line="558"/>
+        <location filename="../ui/mainWindow.ui" line="560"/>
         <source>Add Map…</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/mainWindow.ui" line="561"/>
+        <location filename="../ui/mainWindow.ui" line="563"/>
         <source>&amp;Add Map…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="564"/>
+        <location filename="../ui/mainWindow.ui" line="566"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="572"/>
+        <location filename="../ui/mainWindow.ui" line="574"/>
         <source>Counties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="580"/>
+        <location filename="../ui/mainWindow.ui" line="582"/>
         <source>Countries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="588"/>
+        <location filename="../ui/mainWindow.ui" line="590"/>
         <source>States</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="596"/>
+        <location filename="../ui/mainWindow.ui" line="598"/>
         <source>Capitals of States</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="604"/>
+        <location filename="../ui/mainWindow.ui" line="606"/>
         <source>Capitals of Countries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="612"/>
+        <location filename="../ui/mainWindow.ui" line="614"/>
         <source>Towns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="620"/>
+        <location filename="../ui/mainWindow.ui" line="622"/>
         <source>&amp;Borders</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="623"/>
+        <location filename="../ui/mainWindow.ui" line="625"/>
         <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="631"/>
+        <location filename="../ui/mainWindow.ui" line="633"/>
         <source>&amp;Rivers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="634"/>
+        <location filename="../ui/mainWindow.ui" line="636"/>
         <source>F3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="642"/>
+        <location filename="../ui/mainWindow.ui" line="644"/>
         <source>&amp;Elevations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="645"/>
+        <location filename="../ui/mainWindow.ui" line="647"/>
         <source>F4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="653"/>
+        <location filename="../ui/mainWindow.ui" line="655"/>
         <source>&amp;Menu Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="656"/>
+        <location filename="../ui/mainWindow.ui" line="658"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="664"/>
+        <location filename="../ui/mainWindow.ui" line="666"/>
         <source>Tool&amp;bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="667"/>
+        <location filename="../ui/mainWindow.ui" line="669"/>
         <source>Ctrl+B</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/mainWindow.ui" line="672"/>
+        <location filename="../ui/mainWindow.ui" line="674"/>
         <source>&amp;Configure QeoDart…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="675"/>
+        <location filename="../ui/mainWindow.ui" line="677"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="683"/>
+        <location filename="../ui/mainWindow.ui" line="685"/>
         <source>Number Of &amp;Players</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="686"/>
+        <location filename="../ui/mainWindow.ui" line="688"/>
         <source>Ctrl+P</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="691"/>
+        <location filename="../ui/mainWindow.ui" line="693"/>
         <source>&amp;Players: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="699"/>
+        <location filename="../ui/mainWindow.ui" line="701"/>
         <source>Against &amp;Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="702"/>
+        <location filename="../ui/mainWindow.ui" line="704"/>
         <source>Ctrl+T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="710"/>
+        <location filename="../ui/mainWindow.ui" line="712"/>
         <source>&amp;About QeoDart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="724"/>
+        <location filename="../ui/mainWindow.ui" line="726"/>
         <source>&amp;Network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="727"/>
+        <location filename="../ui/mainWindow.ui" line="729"/>
         <source>F8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="735"/>
+        <location filename="../ui/mainWindow.ui" line="737"/>
         <source>Hint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="738"/>
+        <location filename="../ui/mainWindow.ui" line="740"/>
         <source>Ctrl+Alt+H</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/mainWindow.ui" line="748"/>
+        <source>Report Bug</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -516,11 +516,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="194"/>
-        <source>You might want to add a file through Maps â Add map</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../cpp/dart.cpp" line="209"/>
         <source>Load map of %1</source>
         <translation type="unfinished"></translation>
@@ -573,15 +568,22 @@ Do you want to continue anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="445"/>
-        <location filename="../cpp/dart.cpp" line="834"/>
-        <source>&lt;span&gt;%1 Points &amp;#8960; %2, %3&lt;/span&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../cpp/dart.cpp" line="549"/>
         <source>Against Time</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="194"/>
+        <source>You might want to add a file through Map â Add map.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../cpp/dart.cpp" line="445"/>
+        <location filename="../cpp/dart.cpp" line="834"/>
+        <source>&lt;span&gt;%n Point(s) &amp;#8960; %1, %2&lt;/span&gt;</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="550"/>
@@ -936,7 +938,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../ui/preferences.ui" line="268"/>
-        <source>When calculating the scores, QeoDart respects the whole area of the place. This area is discribed by a rectangle put around it. As the area of this rectangle often includes areas of other places, the default is accepting only the inner 25% of the rectangle.</source>
+        <source>When calculating the scores, QeoDart respects the whole area of the place. This area is discribed by a rectangle put around the place. As the area of this rectangle often includes areas of other places, the default is accepting only the inner 25% of the rectangle.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1105,7 +1107,7 @@ p, li { white-space: pre-wrap; }
     <name>resultWindow</name>
     <message>
         <location filename="../ui/resultWindow.ui" line="14"/>
-        <source>Spiel beendet</source>
+        <source>Game Over</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1118,15 +1120,19 @@ p, li { white-space: pre-wrap; }
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../cpp/results.cpp" line="47"/>
-        <source>&lt;span&gt;You have a score of %1 points (&amp;#8960; %2).&lt;/span&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;span&gt;You have a score of %n point(s) (&amp;#8960; %1).&lt;/span&gt;</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../cpp/results.cpp" line="51"/>
-        <source>&lt;span&gt;Player %1 has a score of %2 points (&amp;#8960; %3).&lt;/span&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;span&gt;Player %1 has a score of %n point(s) (&amp;#8960; %2).&lt;/span&gt;</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../cpp/results.cpp" line="57"/>

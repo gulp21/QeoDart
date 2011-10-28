@@ -11,15 +11,18 @@ INCLUDEPATH += . cpp
 HEADERS += cpp/dart.hpp cpp/io.hpp cpp/myLabels.hpp cpp/qtwin.h \
     cpp/preferences.hpp \
     cpp/results.hpp \
-    cpp/highscores.hpp
+    cpp/highscores.hpp \
+    cpp/about.hpp
 FORMS += ui/mainWindow.ui \
     ui/resultWindow.ui \
     ui/preferences.ui \
-    ui/highscore.ui
+    ui/highscore.ui \
+    ui/about.ui
 SOURCES += cpp/dart.cpp cpp/io.cpp cpp/main.cpp cpp/qtwin.cpp \
     cpp/preferences.cpp \
     cpp/results.cpp \
-    cpp/highscores.cpp
+    cpp/highscores.cpp \
+    cpp/about.cpp
 QT += xml
 
 TRANSLATIONS = lang/de.ts \

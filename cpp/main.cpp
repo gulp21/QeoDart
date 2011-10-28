@@ -14,6 +14,7 @@ You should have received a copy of the GNU General Public License along with thi
 #include <QApplication>
 #include <QTextCodec>
 #include <QTranslator>
+#include <QLibraryInfo>
 
 #include "dart.hpp"
 
@@ -23,8 +24,15 @@ int main(int argc, char* argv[]) {
         QApplication a(argc, argv);
 	a.setAutoSipEnabled(true);
 	
+	QString lang=QLocale::system().name();
+	
+	// Qt translations for default dialogs
+	QTranslator qtTranslator;
+	qtTranslator.load(QString("%1/qt_%2").arg(QLibraryInfo::location(QLibraryInfo::TranslationsPath)).arg(lang));
+	a.installTranslator(&qtTranslator);
+	
 	QTranslator translator;
-	translator.load(QString(("lang/%1")).arg(QLocale::system().name().left(2)));
+	translator.load(QString(("lang/%1")).arg(lang));
 	a.installTranslator(&translator);
 	
         dart w;

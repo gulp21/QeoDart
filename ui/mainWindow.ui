@@ -151,7 +151,7 @@
      <item row="3" column="4">
       <widget class="QLabel" name="lblTime">
        <property name="text">
-        <string>&lt;time&gt;</string>
+        <string notr="true">&lt;time&gt;</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -311,6 +311,8 @@ p, li { white-space: pre-wrap; }
      <string>&amp;Help</string>
     </property>
     <addaction name="actionHint"/>
+    <addaction name="separator"/>
+    <addaction name="actionReport_Bug"/>
     <addaction name="separator"/>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_QeoDart"/>
@@ -703,9 +705,6 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
   <action name="actionAbout_QeoDart">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
    <property name="text">
     <string>&amp;About QeoDart</string>
    </property>
@@ -736,6 +735,14 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="shortcut">
     <string>Ctrl+Alt+H</string>
+   </property>
+  </action>
+  <action name="actionReport_Bug">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Report Bug</string>
    </property>
   </action>
  </widget>

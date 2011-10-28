@@ -118,6 +118,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionCities, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionTowns, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+	connect(actionAbout_QeoDart, SIGNAL(triggered()), this, SLOT(vShowAboutWindow()));
 	connect(actionMenu_Bar, SIGNAL(triggered()), this, SLOT(vSetToolMenuBarState()));
 	actionMenu_Bar->setIcon(QIcon::fromTheme("show-menu", QIcon(":/icons/oxygen/show-menu.png")));
 	connect(actionToolbar, SIGNAL(triggered()), this, SLOT(vSetToolMenuBarState()));
@@ -191,7 +192,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 		qDebug() << "[E] No valid qcfx files found, exiting";
 		QMessageBox msgBox;
 		msgBox.setText(tr("Sorry, no valid qcfx files could be found."));
-		msgBox.setInformativeText(tr("You might want to add a file through Maps → Add map")); // TODO
+		msgBox.setInformativeText(tr("You might want to add a file through Map → Add map.")); // TODO
 		msgBox.setIcon(QMessageBox::Warning);
 		msgBox.exec();
 	}
@@ -442,7 +443,7 @@ void dart::vSetNumberOfPlayers(int n) {
 			QLabel *lblScore;
 			lblScore = new QLabel(this);
 			gridLayout->addWidget(lblScore,i,0);
-			lblScore->setText(QString(tr("<span>%1 Points &#8960; %2, %3</span>")).arg(0).arg(0.0,0,'f',1).arg(0.0,0,'f',1));
+			lblScore->setText(QString(tr("<span>%n Point(s) &#8960; %1, %2</span>","",0)).arg(0.0,0,'f',1).arg(0.0,0,'f',1));
 			
 			QLabel *lblRating;
 			lblRating = new QLabel(this);
@@ -831,7 +832,7 @@ void dart::vShowScores() {
 
 void dart::vShowTotalScores() {
 	for(int i=0; i<qlPlayerLabels.count(); i++) { // show score for each player
-		qlPlayerLabels[i][0]->setText(QString(tr("<span>%1 Points &#8960; %2, %3</span>")).arg(qlTotalScores[i].score).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
+		qlPlayerLabels[i][0]->setText(QString(tr("<span>%n Point(s) &#8960; %1, %2</span>","",qlTotalScores[i].score)).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
 	}
 }
 
@@ -1563,6 +1564,11 @@ void dart::vShowPreferences() {
 
 void dart::vShowHighScores() {
 	highScoreWindow dialog(this,myIO,this);
+	dialog.exec();
+}
+
+void dart::vShowAboutWindow() {
+	aboutWindow dialog(this,this);
 	dialog.exec();
 }
 
