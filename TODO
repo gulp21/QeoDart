@@ -1,9 +1,9 @@
+add Astana [ ]->
 
 highscore: date (today), time (x ago, api?), pref lang
 Subset > [ ] 1-10; [ ] 11-20; bezogen auf gewhälte Orte
 debug-findplace w/ rectangle [check everything];
 rectangle(x,y,a); rectangle(m1,m2,a,b); rectangle(quadrant)
-small screen: rm "place [x of y]", "points"
 
 BUG: 2players: player 1 clicks -> change map -> colors are wrong
 

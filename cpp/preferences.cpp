@@ -51,6 +51,7 @@ void preferences::vReset() {
 	spbDelayNextPlayer->setValue(myDart->iDelayNextPlayer);
 	spbDelayNextPlace->setValue(myDart->iDelayNextPlace);
 	spbDelayNextPlaceTraining->setValue(myDart->iDelayNextPlaceTraining);
+	cbShortenToolbarText->setChecked(myDart->bShortenToolbarText);
 }
 
 void preferences::vRestoreDefaults() {
@@ -68,6 +69,7 @@ void preferences::vRestoreDefaults() {
 	spbDelayNextPlayer->setValue(500);
 	spbDelayNextPlace->setValue(2000);
 	spbDelayNextPlaceTraining->setValue(1000);
+	cbShortenToolbarText->setChecked(true);
 }
 
 void preferences::vSettingChanged() {
@@ -133,6 +135,8 @@ void preferences::vAccepted() {
 	myIO->settings->setValue("iDelayNextPlayer",spbDelayNextPlayer->value());
 	myIO->settings->setValue("iDelayNextPlace",spbDelayNextPlace->value());
 	myIO->settings->setValue("iDelayNextPlaceTraining",spbDelayNextPlaceTraining->value());
+	
+	myIO->settings->setValue("bShortenToolbarText",cbShortenToolbarText->isChecked());
 	
 	
 	myIO->vLoadSettings();

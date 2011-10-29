@@ -44,13 +44,20 @@ resultWindow::resultWindow(dart *TDart, int PLayer, io *TIO, QDialog *parent) : 
 	}
 	
 	if(myDart->iNumberOfPlayers==1) {
-		lblScore->setText(QString(tr("<span>You have a score of %n point(s) (&#8960; %1).</span>","",
-		                             myDart->qlTotalScores[0].score))
+//		lblScore->setText(QString(tr("<span>You have a score of %n point(s) (&#8960; %1).</span>","",
+//		                             myDart->qlTotalScores[0].score))
+//		                  .arg(myDart->qlTotalScores[0].score/myDart->iMaxPlaceCount,0,'f',1));
+		lblScore->setText(QString(tr("<span>You have a score of %1 points (&#8960; %2).</span>"))
+		                  .arg(myDart->qlTotalScores[0].score)
 		                  .arg(myDart->qlTotalScores[0].score/myDart->iMaxPlaceCount,0,'f',1));
 	} else {
-		lblScore->setText(QString(tr("<span>Player %1 has a score of %n point(s) (&#8960; %2).</span>","",
-		                             myDart->qlTotalScores[player].score))
+//		lblScore->setText(QString(tr("<span>Player %1 has a score of %n point(s) (&#8960; %2).</span>","",
+//		                             myDart->qlTotalScores[player].score))
+//		                  .arg(player+1)
+//		                  .arg(myDart->qlTotalScores[player].score/myDart->iMaxPlaceCount,0,'f',1));
+		lblScore->setText(QString(tr("<span>Player %1 has a score of %2 points (&#8960; %3).</span>"))
 		                  .arg(player+1)
+		                  .arg(myDart->qlTotalScores[player].score)
 		                  .arg(myDart->qlTotalScores[player].score/myDart->iMaxPlaceCount,0,'f',1));
 	}
 	

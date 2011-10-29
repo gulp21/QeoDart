@@ -107,7 +107,7 @@ Q_OBJECT
 		enAskForModes iAskForMode;
 		enToolMenuBarState iToolMenuBarState;
                 
-                bool bAgainstTime, bResetCursor;
+                bool bAgainstTime, bResetCursor, bShortenToolbarText;
 
 		double dZoomFactor, dPxToKm;
 		

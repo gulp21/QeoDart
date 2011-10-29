@@ -26,13 +26,19 @@ int main(int argc, char* argv[]) {
 	
 	QString lang=QLocale::system().name();
 	
+	qDebug() << "[i] system language is" << lang << ", we are running in" << QCoreApplication::applicationDirPath() << ", and Qt translations are installed in" << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+	
 	// Qt translations for default dialogs
 	QTranslator qtTranslator;
 	qtTranslator.load(QString("%1/qt_%2").arg(QLibraryInfo::location(QLibraryInfo::TranslationsPath)).arg(lang));
 	a.installTranslator(&qtTranslator);
+	// and when we are running on Windows, we probably do not have Qt installed, so we use our copy of the default translations
+	QTranslator qtOwnTranslator;
+	qtOwnTranslator.load(QString(QCoreApplication::applicationDirPath()+"/lang/qt_%1").arg(lang));
+	a.installTranslator(&qtOwnTranslator);
 	
 	QTranslator translator;
-	translator.load(QString(("lang/%1")).arg(lang));
+	translator.load(QString(QCoreApplication::applicationDirPath()+"/lang/%1").arg(lang));
 	a.installTranslator(&translator);
 	
         dart w;

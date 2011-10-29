@@ -24,7 +24,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -42,7 +42,7 @@
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>159</height>
+            <height>164</height>
            </rect>
           </property>
           <attribute name="label">
@@ -139,8 +139,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>479</width>
-            <height>159</height>
+            <width>322</width>
+            <height>116</height>
            </rect>
           </property>
           <attribute name="label">
@@ -281,8 +281,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>479</width>
-            <height>124</height>
+            <width>380</width>
+            <height>120</height>
            </rect>
           </property>
           <attribute name="label">
@@ -483,7 +483,7 @@ p, li { white-space: pre-wrap; }
           <bool>true</bool>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="page">
           <property name="geometry">
@@ -491,7 +491,7 @@ p, li { white-space: pre-wrap; }
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>159</height>
+            <height>164</height>
            </rect>
           </property>
           <attribute name="label">
@@ -598,8 +598,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>458</width>
-            <height>159</height>
+            <width>100</width>
+            <height>30</height>
            </rect>
           </property>
           <attribute name="label">
@@ -611,8 +611,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>458</width>
-            <height>159</height>
+            <width>479</width>
+            <height>164</height>
            </rect>
           </property>
           <attribute name="label">
@@ -633,12 +633,9 @@ p, li { white-space: pre-wrap; }
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="checkBox">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
+            <widget class="QCheckBox" name="cbShortenToolbarText">
              <property name="text">
-              <string>Shorten tool bar text, so that all buttons fit into the window</string>
+              <string>Shorten toolbar labels, so that all buttons fit into the window</string>
              </property>
              <property name="checkable">
               <bool>true</bool>

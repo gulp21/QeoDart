@@ -21,7 +21,7 @@ int io::iFindQcf() {
 	myDart->qlQcfxFiles.clear();
 	
 	QList<QDir> qlQcfDirs;
-	qlQcfDirs.append(QDir(QCoreApplication::applicationDirPath ()+"/qcf"));
+	qlQcfDirs.append(QDir(QCoreApplication::applicationDirPath()+"/qcf"));
 #ifdef Q_OS_UNIX
 	qlQcfDirs.append(QDir("/usr/share/QeoDart/qcf"));
 	qlQcfDirs.append(QDir(QDir::homePath()+"/.config/QeoDart/qcf"));
@@ -510,7 +510,7 @@ void io::vLoadSettings() {
 	myDart->iMaxTime=settings->value("iMaxTime",20).toInt();
 	if(myDart->iMaxTime<=0) myDart->iMaxTime=20;
 	
-	myDart->bResetCursor=settings->value("bResetCursor",TRUE).toBool();
+	myDart->bResetCursor=settings->value("bResetCursor",true).toBool();
 	
 	myDart->iScoreAreaMode=settings->value("iScoreAreaMode",1).toInt();
 	if(myDart->iScoreAreaMode<0 || myDart->iScoreAreaMode>2) myDart->iScoreAreaMode=1;
@@ -525,6 +525,8 @@ void io::vLoadSettings() {
 	myDart->iDelayNextPlayer=settings->value("iDelayNextPlayer",1000).toInt();
 	myDart->iDelayNextPlace=settings->value("iDelayNextPlace",2000).toInt();
 	myDart->iDelayNextPlaceTraining=settings->value("iDelayNextPlaceTraining",1000).toInt();
+	
+	myDart->bShortenToolbarText=settings->value("bShortenToolbarText",true).toBool();
 }
 
 void io::vLoadHighScores(QString mapName) {
