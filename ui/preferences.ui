@@ -24,7 +24,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -42,7 +42,7 @@
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>164</height>
+            <height>159</height>
            </rect>
           </property>
           <attribute name="label">
@@ -139,8 +139,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>322</width>
-            <height>116</height>
+            <width>479</width>
+            <height>159</height>
            </rect>
           </property>
           <attribute name="label">
@@ -281,8 +281,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>380</width>
-            <height>120</height>
+            <width>462</width>
+            <height>124</height>
            </rect>
           </property>
           <attribute name="label">
@@ -483,7 +483,7 @@ p, li { white-space: pre-wrap; }
           <bool>true</bool>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="page">
           <property name="geometry">
@@ -491,7 +491,7 @@ p, li { white-space: pre-wrap; }
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>164</height>
+            <height>159</height>
            </rect>
           </property>
           <attribute name="label">
@@ -612,7 +612,7 @@ p, li { white-space: pre-wrap; }
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>164</height>
+            <height>159</height>
            </rect>
           </property>
           <attribute name="label">

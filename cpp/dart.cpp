@@ -31,10 +31,14 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	pTrainingPlaceNumber=NULL;
 	iPaddingTop=0;
 	iMarginTop=0;
+	bGaveHint=false;
 	
 	setupUi(this);
 	
-	if(!(QCoreApplication::arguments().contains("--banner"))) lblAd->setVisible(false);
+	if(!(QCoreApplication::arguments().contains("--banner"))) {
+		lblAd->setVisible(false);
+		lblAd_2->setVisible(false);
+	}
 	
 	timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
@@ -117,6 +121,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionCounties, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionCities, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionTowns, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionHint, SIGNAL(triggered()), this, SLOT(vGiveHint()));
 	connect(actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 	connect(actionAbout_QeoDart, SIGNAL(triggered()), this, SLOT(vShowAboutWindow()));
 	connect(actionMenu_Bar, SIGNAL(triggered()), this, SLOT(vSetToolMenuBarState()));
@@ -132,7 +137,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(lineEdit, SIGNAL(textEdited(QString)), this, SLOT(vTextEditedEvent()));
 	connect(cbMatchBehaviour, SIGNAL(currentIndexChanged(int)), this, SLOT(vTextEditedEvent()));
 	
-	//these menus are needed for QToolButtons only and shouldn't be display in the main menus
+	//these menus are needed for QToolButtons only and shouldn't be displayed in the main menus
 	menubar->removeAction(menuApplication->menuAction());
 	menuSettings->removeAction(menuAskForMode->menuAction());
 	menuSettings->removeAction(menuPlaceType->menuAction());
@@ -142,6 +147,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	btApplication->setPopupMode(QToolButton::InstantPopup);
 	btApplication->setText(tr("Game"));
 	actionBtApplication=toolBar->addWidget(btApplication);
+	
+	menuApplication->addMenu(menuHelp);
 	
 	toolBar->addAction(actionNew_Game);
 	
@@ -528,6 +535,7 @@ void dart::resizeEvent(QResizeEvent *event) {
 	gridLayoutWidget->setGeometry(QRect(0,0,600*dZoomFactor+1,iPaddingTop+50));
 	
 	lblAd->setGeometry(0,iPaddingTop+600*dZoomFactor,600*dZoomFactor,111);
+	lblAd_2->setGeometry(600*dZoomFactor,iPaddingTop,245,600*dZoomFactor);
 
 	qDebug() << "[i] iPaddingTop" << iPaddingTop << "iMarginTop" << iMarginTop << "dZoomFactor" << dZoomFactor << "fontSize" << iGetFontSize();
 	
@@ -737,6 +745,10 @@ void dart::vMouseClickEvent(int x, int y) {
                 score.mark=dGetMarkFromScore(score.score);
 		timer->stop();
         }
+	if(bGaveHint) {
+		score.score*=0.75;
+		score.mark*=dGetMarkFromScore(score.score);
+	}
 	qlScoreHistory[iCurrentPlayer].append(score);
 	
 	if(! (iGameMode==enTraining && iPlaceCount>=5) ) {
@@ -1422,6 +1434,10 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
                 score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
 		timer->stop();
         }
+	if(bGaveHint) {
+		score.score*=0.75;
+		score.mark*=dGetMarkFromScore(score.score);
+	}
 	score.mark=dGetMarkFromScore(score.score);
         
 	qlScoreHistory[iCurrentPlayer].append(score);
@@ -1724,4 +1740,26 @@ void dart::vTextEditedEvent() {
 	}
 
 	lineEdit->setStyleSheet(found ? "" : "color:red");
+}
+ #include <QPropertyAnimation>
+void dart::vGiveHint() {
+	if(iAskForMode==enPositions) {
+		QRectangleLabel *lblHint;
+		lblHint=new QRectangleLabel(this,qlPlacesHistory[iPlaceCount-1]->x,qlPlacesHistory[iPlaceCount-1]->y,this);
+		bGaveHint=true;
+		lblHint->setStyleSheet("opacity:1");
+		//TODO this doesn't work
+//		QPropertyAnimation animation(static_cast<QLabel*>(lblHint), "styleSheet");
+//		animation.setDuration(1000);
+//		animation.setStartValue("opacity:1");
+//		animation.setEndValue("opacity:.1");
+//		animation.start();
+		mySleep(1000);
+		delete lblHint;
+	} else if(iAskForMode==enNames) {
+		lineEdit->setText(qlPlacesHistory[iPlaceCount-1]->name.left(1));
+		bGaveHint=true;
+	} else {
+		qDebug() << "[i] no hints available in mode" << iAskForMode;
+	}
 }

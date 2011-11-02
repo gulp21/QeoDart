@@ -132,7 +132,7 @@ Q_OBJECT
 		
 		io *myIO;
 		
-		bool bAcceptingClickEvent, bAcceptingResizeEvent;
+		bool bAcceptingClickEvent, bAcceptingResizeEvent, bGaveHint;
 		
 		int iCurrentPlayer, iTimerElapsed;
 		
@@ -223,6 +223,7 @@ Q_OBJECT
 		void vShowAboutWindow();
 		void vToolbarOverflow();
 		void vToggleMapLayer();
+		void vGiveHint();
 		
 	public slots:
 		void vReadQcf();
