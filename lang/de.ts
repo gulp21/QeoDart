@@ -922,7 +922,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/highscore.ui" line="72"/>
         <source>1</source>
-        <translation></translation>
+        <translation>1</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="88"/>

@@ -135,5 +135,60 @@ class QMouseReleaseLabel : public QLabel {
 		}
 };
 
+class QRectangleLabel : public QLabel {
+
+	private:
+		dart *myDart;
+		int x, y, a, b;
+	
+	public:
+		// center P(M1,M2), half width Dimx, half height Dimy; calculates upper left corner
+		QRectangleLabel(dart *TDart, int M1, int M2, int Dimx, int Dimy, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), x(M1), y(M2), a(Dimx), b(Dimy), QLabel(parent, f) {
+			resize(1,1);
+			setParent(myDart->centralwidget);
+			x=x-a/2;
+			y=y-b/2;
+			setVisible(true);
+		}
+		// center P(M1,M2); calculates quadrant, used for hint
+		QRectangleLabel(dart *TDart, int X, int Y, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), x(X), y(Y), QLabel(parent, f) {
+			resize(1,1);
+			setParent(myDart->centralwidget);
+			x>=300 ? x=300 : x=0;
+			y>=300 ? y=300 : y=0;
+			a=300;
+			b=300;
+			setVisible(true);
+		}
+		QRectangleLabel(const QString &text, QWidget *parent = 0,Qt::WindowFlags f = 0) : QLabel(text, parent, f) {}
+		~QRectangleLabel() {}
+
+		void paintEvent(QPaintEvent *event) {
+			QPainter p(this);
+			QPen pen;
+			
+			pen.setWidth(10);
+			QColor c=QColor(255,182,19,150);
+			pen.setColor(c);
+			p.setRenderHint(QPainter::Antialiasing);
+			p.setPen(pen);
+//			p.drawRect(x*myDart->dZoomFactor, y*myDart->dZoomFactor, a*myDart->dZoomFactor, b*myDart->dZoomFactor); //x,y,w,h
+			
+			p.drawRect(0, 0, a*myDart->dZoomFactor, b*myDart->dZoomFactor); 
+			p.end();
+			
+			resize(
+				a*myDart->dZoomFactor,
+			        b*myDart->dZoomFactor
+			);
+			move(
+				x*myDart->dZoomFactor,
+				y*myDart->dZoomFactor+myDart->iPaddingTop
+			);
+			
+			QLabel::paintEvent(event);
+		}
+};
+
 
 #endif //MYLABELS_HPP 

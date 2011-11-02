@@ -312,6 +312,10 @@ void dart::vRemoveAllCommonPoints() {
 		delete qlPointLabels[0];
 		qlPointLabels.removeAt(0);
 	}
+	while(qlDebugPlaceLabels.count()!=0){
+		delete qlDebugPlaceLabels[0];
+		qlDebugPlaceLabels.removeAt(0);
+	}
 }
 
 void dart::vTimeout() {
@@ -688,6 +692,14 @@ void dart::vDrawPoint(int x, int y, QList<QLabel*> &list, QColor color, QString 
 	vDrawPoint(x, y, list, name, color);
 }
 
+void dart::vDrawDebugPlace(int i) {
+	if(QCoreApplication::arguments().contains("--debug-places") || QCoreApplication::arguments().contains("-dp")) {
+		QLabel *lblRectangle;
+		lblRectangle = new QRectangleLabel(this,qlCurrentTypePlaces[i]->x,qlCurrentTypePlaces[i]->y,qlCurrentTypePlaces[i]->dimx,qlCurrentTypePlaces[i]->dimy,this);
+		qlDebugPlaceLabels.append(lblRectangle);
+	}
+}
+
 // draws the click positions of all players for round n
 void dart::vDrawClickPositions(int n) {
 	for(int i=0; i<iNumberOfPlayers; i++) { //draw circles for every player
@@ -698,6 +710,7 @@ void dart::vDrawClickPositions(int n) {
 void dart::vShowAllPlaces() {
 	for(int i=0, max=qlCurrentTypePlaces.count(); i<max; i++){ //TODO WITH?
 		vDrawPoint(qlCurrentTypePlaces[i]->x,qlCurrentTypePlaces[i]->y,qlPointLabels,qlCurrentTypePlaces[i]->name);
+		vDrawDebugPlace(i);
 	}
 }
 
@@ -1635,6 +1648,7 @@ void dart::vFindPlaceAround(int x, int y) {
 		
 		if(distance<=10) {
 			vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65,255));
+			vDrawDebugPlace(i);
 		} else if(distance<=20 && cbSearchDistance->currentIndex()>=1) {
 			vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65,170));
 		} else if(distance<=30 && cbSearchDistance->currentIndex()>=2) {
@@ -1671,6 +1685,7 @@ void dart::vTextEditedEvent() {
 				
 				if(m==2 || (qlCurrentTypePlaces[i]->name.indexOf(text,0,Qt::CaseInsensitive)==0)) { // contains or very beginning
 					vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65));
+					vDrawDebugPlace(i);
 					found=true;
 					
 				// if the character before the matching phrase matches [ -_/()]

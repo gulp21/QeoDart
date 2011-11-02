@@ -97,6 +97,7 @@ Q_OBJECT
 		QList<QList<scoreHistory> > qlScoreHistory; // [player][round].scores
 		QList<totalScore> qlTotalScores;
 		QList<QLabel*> qlPointLabels;
+		QList<QLabel*> qlDebugPlaceLabels;
 		QList<QString> qlLayersNames;
 		QList<QLabel*> qlMapLayers;
 		QList<highScoreEntry> qlHighScores;
@@ -164,6 +165,7 @@ Q_OBJECT
 		void vDrawPoint(int x, int y, QList<QLabel*> &list, QColor color, QString name="");
 		void vDrawPoint(int x, int y, QList<QLabel*> &list, QString name="", QColor color=QColor(249,199,65));
 		void vDrawClickPositions(int n);
+		void vDrawDebugPlace(int i);
 		void vRemoveAllCircles();
 		void vRemoveAllCommonPoints();
 		void vSetNumberOfPlayers(int player);

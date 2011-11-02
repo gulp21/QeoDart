@@ -6,7 +6,7 @@
     <message>
         <location filename="../ui/mainWindow.ui" line="23"/>
         <source>QeoDart</source>
-        <translation type="unfinished"></translation>
+        <translation>QeoDart</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="164"/>
@@ -89,12 +89,12 @@ p, li { white-space: pre-wrap; }
         <location filename="../ui/mainWindow.ui" line="302"/>
         <location filename="../ui/mainWindow.ui" line="399"/>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Lusus</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="311"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Auxilium</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="322"/>
@@ -104,7 +104,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainWindow.ui" line="326"/>
         <source>&amp;Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabula geographica</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="332"/>
@@ -144,7 +144,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainWindow.ui" line="445"/>
         <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+N</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="450"/>
@@ -154,47 +154,47 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainWindow.ui" line="453"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="464"/>
         <source>&amp;High Score List</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabulae Optimorum Lusorum</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="467"/>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="475"/>
         <source>&amp;Find Place</source>
-        <translation type="unfinished"></translation>
+        <translation>Reperire Locum</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="478"/>
         <source>F5</source>
-        <translation type="unfinished"></translation>
+        <translation>F5</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="486"/>
         <source>&amp;Position of Place</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Positio Loci</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="489"/>
         <source>F9</source>
-        <translation type="unfinished"></translation>
+        <translation>F9</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="497"/>
         <source>&amp;Name of Place</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nomen Loci</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="500"/>
         <source>F10</source>
-        <translation type="unfinished"></translation>
+        <translation>F10</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="508"/>
@@ -204,7 +204,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainWindow.ui" line="516"/>
         <source>About &amp;Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>De &amp;Qt</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="524"/>
@@ -214,17 +214,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainWindow.ui" line="527"/>
         <source>Ctrl+0</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+0</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="535"/>
         <source>&amp;Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Exercitium</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="538"/>
         <source>F6</source>
-        <translation type="unfinished"></translation>
+        <translation>F6</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="546"/>
@@ -239,22 +239,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainWindow.ui" line="552"/>
         <source>F7</source>
-        <translation type="unfinished"></translation>
+        <translation>F7</translation>
     </message>
     <message utf8="true">
         <location filename="../ui/mainWindow.ui" line="560"/>
         <source>Add Map…</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabulam Geographicam Addere…</translation>
     </message>
     <message utf8="true">
         <location filename="../ui/mainWindow.ui" line="563"/>
         <source>&amp;Add Map…</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabulam Geographicam &amp;Addere…</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="566"/>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="574"/>
@@ -294,27 +294,27 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainWindow.ui" line="625"/>
         <source>F2</source>
-        <translation type="unfinished"></translation>
+        <translation>F2</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="633"/>
         <source>&amp;Rivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Flumina</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="636"/>
         <source>F3</source>
-        <translation type="unfinished"></translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="644"/>
         <source>&amp;Elevations</source>
-        <translation type="unfinished"></translation>
+        <translation>Montes</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="647"/>
         <source>F4</source>
-        <translation type="unfinished"></translation>
+        <translation>F4</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="655"/>
@@ -324,7 +324,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainWindow.ui" line="658"/>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="666"/>
@@ -334,7 +334,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainWindow.ui" line="669"/>
         <source>Ctrl+B</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+B</translation>
     </message>
     <message utf8="true">
         <location filename="../ui/mainWindow.ui" line="674"/>
@@ -344,22 +344,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainWindow.ui" line="677"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="685"/>
         <source>Number Of &amp;Players</source>
-        <translation type="unfinished"></translation>
+        <translation>Numerus Lusorum</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="688"/>
         <source>Ctrl+P</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+P</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="693"/>
         <source>&amp;Players: </source>
-        <translation type="unfinished"></translation>
+        <translation>Lusor:</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="701"/>
@@ -369,22 +369,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainWindow.ui" line="704"/>
         <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+T</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="709"/>
         <source>&amp;About QeoDart</source>
-        <translation type="unfinished"></translation>
+        <translation>De QeoDart</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="723"/>
         <source>&amp;Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Rete</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="726"/>
         <source>F8</source>
-        <translation type="unfinished"></translation>
+        <translation>F8</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="734"/>
@@ -394,12 +394,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainWindow.ui" line="737"/>
         <source>Ctrl+Alt+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Alt+H</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="745"/>
         <source>Report Bug</source>
-        <translation type="unfinished"></translation>
+        <translation>Errores Vel Optati Renuntiare</translation>
     </message>
 </context>
 <context>
@@ -469,7 +469,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/about.ui" line="181"/>
         <source>Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabula geographica</translation>
     </message>
     <message>
         <location filename="../cpp/about.cpp" line="6"/>
@@ -479,7 +479,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../cpp/about.cpp" line="12"/>
         <source>compiled on %1</source>
-        <translation type="unfinished"></translation>
+        <translation>dies compilatri: %1</translation>
     </message>
 </context>
 <context>
@@ -577,7 +577,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../cpp/dart.cpp" line="143"/>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Lusus</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="170"/>
@@ -621,17 +621,17 @@ Do you want to continue?</source>
     <message>
         <location filename="../cpp/dart.cpp" line="390"/>
         <source>Set Number Of Players</source>
-        <translation type="unfinished"></translation>
+        <translation>Numerus Lusorum Mutare</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="390"/>
         <source>Number Of Players:</source>
-        <translation type="unfinished"></translation>
+        <translation>Numerus Lusorum:</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="393"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Praemonitus</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="394"/>
@@ -645,7 +645,7 @@ Do you want to continue anyway?</source>
         <location filename="../cpp/dart.cpp" line="411"/>
         <location filename="../cpp/dart.cpp" line="567"/>
         <source>Players: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Lusores: %1</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="447"/>
@@ -685,29 +685,29 @@ Do you want to continue anyway?</source>
         <location filename="../cpp/dart.cpp" line="563"/>
         <location filename="../cpp/dart.cpp" line="594"/>
         <source>Name of Place</source>
-        <translation type="unfinished"></translation>
+        <translation>Nomen Loci</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="563"/>
         <location filename="../cpp/dart.cpp" line="594"/>
         <source>Position of Place</source>
-        <translation type="unfinished"></translation>
+        <translation>Positio Loci</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="565"/>
         <location filename="../cpp/dart.cpp" line="1490"/>
         <source>Map: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabula Geographica: %1</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="571"/>
         <source>Find Place</source>
-        <translation type="unfinished"></translation>
+        <translation>Reperire Locum</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="572"/>
         <source>Training</source>
-        <translation type="unfinished"></translation>
+        <translation>Exercitium</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="573"/>
@@ -719,27 +719,27 @@ Do you want to continue anyway?</source>
         <location filename="../cpp/dart.cpp" line="606"/>
         <location filename="../cpp/dart.cpp" line="614"/>
         <source>%1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="602"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nomen</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="602"/>
         <source>Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Positio</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="610"/>
         <source>Places</source>
-        <translation type="unfinished"></translation>
+        <translation>Loci</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="666"/>
         <source>Player %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Lusor %1</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="827"/>
@@ -833,12 +833,12 @@ Do you want to continue?</source>
     <message>
         <location filename="../ui/highscore.ui" line="14"/>
         <source>High Score List</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabulae Optimorum Lusorum</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="35"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nomen</translation>
     </message>
     <message utf8="true">
         <location filename="../ui/highscore.ui" line="48"/>
@@ -852,57 +852,57 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/highscore.ui" line="72"/>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="88"/>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>II</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="104"/>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation>III</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="120"/>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>IV</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="136"/>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>V</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="152"/>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation>VI</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="168"/>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation>VII</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="184"/>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation>VIII</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="200"/>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation>IX</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="216"/>
         <source>10</source>
-        <translation type="unfinished"></translation>
+        <translation>X</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="369"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Vacuum Facere</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="379"/>
@@ -912,7 +912,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/highscore.ui" line="386"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Claudere</translation>
     </message>
 </context>
 <context>
@@ -945,12 +945,12 @@ QeoDart will be quit.</source>
     <message>
         <location filename="../ui/preferences.ui" line="49"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingua</translation>
     </message>
     <message>
         <location filename="../ui/preferences.ui" line="57"/>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingua:</translation>
     </message>
     <message>
         <location filename="../ui/preferences.ui" line="88"/>
@@ -960,7 +960,7 @@ QeoDart will be quit.</source>
     <message>
         <location filename="../ui/preferences.ui" line="101"/>
         <source>ui,en,default</source>
-        <translation type="unfinished"></translation>
+        <translation>ui,en,default</translation>
     </message>
     <message>
         <location filename="../ui/preferences.ui" line="108"/>
@@ -1064,7 +1064,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/preferences.ui" line="357"/>
         <source>Penalty</source>
-        <translation type="unfinished"></translation>
+        <translation>Poena</translation>
     </message>
     <message utf8="true">
         <location filename="../ui/preferences.ui" line="367"/>
@@ -1087,17 +1087,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/preferences.ui" line="387"/>
         <source>do not penalize</source>
-        <translation type="unfinished"></translation>
+        <translation>Nulla Poena</translation>
     </message>
     <message>
         <location filename="../ui/preferences.ui" line="392"/>
         <source>for spelling errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro Mendis</translation>
     </message>
     <message>
         <location filename="../ui/preferences.ui" line="397"/>
         <source>for severe spelling errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro Gravibus Mendis</translation>
     </message>
     <message>
         <location filename="../ui/preferences.ui" line="416"/>
@@ -1160,7 +1160,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/preferences.ui" line="606"/>
         <source>Warnings</source>
-        <translation type="unfinished"></translation>
+        <translation>Praemoniti</translation>
     </message>
     <message>
         <location filename="../ui/preferences.ui" line="619"/>
@@ -1213,7 +1213,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/resultWindow.ui" line="163"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Accipere</translation>
     </message>
     <message>
         <location filename="../cpp/results.cpp" line="50"/>
