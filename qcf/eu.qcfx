@@ -2,10 +2,10 @@
 <qcfx version="0.2">
 	<name default="Europe" de="Europa" en="Europe" la="Europa" />
 	<pxtokm value="10.06" />
-	<author
-	copyright_file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
-	copyright_background="Turkish Flame: CC-BY-SA-3.0 (derived from http://commons.wikimedia.org/wiki/File:Demographics_of_Europe.svg)"
-	copyright_borders="Turkish Flame: CC-BY-SA-3.0 (derived from http://commons.wikimedia.org/wiki/File:Demographics_of_Europe.svg)"
+	<copyright
+	file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
+	background="Turkish Flame: CC-BY-SA-3.0 (derived from http://commons.wikimedia.org/wiki/File:Demographics_of_Europe.svg)"
+	borders="Turkish Flame: CC-BY-SA-3.0 (derived from http://commons.wikimedia.org/wiki/File:Demographics_of_Europe.svg)"
 	/>
 	<!--.....states.....-->
 	<place

@@ -51,7 +51,7 @@ struct totalScore {
 };
 
 struct qcfCopyright {
-	QString fileCopyright, backgroundCopyright, elevationsCopyright, riversCopyright, bordersCopyright;
+	QString file, background, elevations, rivers, borders;
 };
 
 struct qcfFile {
@@ -108,7 +108,7 @@ Q_OBJECT
 		enAskForModes iAskForMode;
 		enToolMenuBarState iToolMenuBarState;
                 
-                bool bAgainstTime, bResetCursor, bShortenToolbarText;
+                bool bAgainstTime, bResetCursor, bShortenToolbarText, bAutoNewGame;
 
 		double dZoomFactor, dPxToKm;
 		
