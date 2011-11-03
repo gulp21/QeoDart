@@ -36,9 +36,9 @@
 	<place x="237" y="482" name="Rhein-Sieg-Kreis" dimx="138" dimy="104" placetype="county"/>
 	<place x="390" y="434" name="Kreis Siegen-Wittgenstein" dimx="118" dimy="123" placetype="county"/>
 	<place x="388" y="263" name="Kreis Soest" dimx="123" dimy="89" placetype="county"/>
-	<place x="278" y="88" name="Kreis Steinfurt" dimx="206" dimy="102" placetype="county"/>
+	<place x="278" y="88" name="Kreis Steinfurt" dimx="151" dimy="127" placetype="county"/>
 	<place x="295" y="266" name="Kreis Unna" dimx="71" dimy="90" placetype="county"/>
-	<place x="81" y="339" name="Kreis Viersen" dimx="91" dimy="86" placetype="county"/>
+	<place x="81" y="339" name="Kreis Viersen" dimx="92" dimy="68" placetype="county"/>
 	<place x="348" y="179" name="Kreis Warendorf" dimx="116" dimy="115" placetype="county"/>
 	<place x="125" y="258" name="Kreis Wesel" dimx="105" dimy="111" placetype="county"/>
 	<!--.....counties/cities.....Kreisfreie Städte.....-->
@@ -55,9 +55,9 @@
 	<place x="326" y="239" name="Hamm" name_de="Hamm" name_la="Hammona" dimx="51" dimy="42" placetype="county;city"/>
 	<place x="224" y="274" name="Herne" name_de="Herne" dimx="27" dimy="17" placetype="county;city"/>
 	<place x="188" y="428" name="Köln" name_de="Köln" name_en="Cologne" name_la="Colonia Agrippina" dimx="59" dimy="66" placetype="county;city"/>
-	<place x="121" y="326" name="Krefeld" name_de="Krefeld" dimx="35" dimy="30" placetype="county;city"/>
+	<place x="121" y="327" name="Krefeld" name_de="Krefeld" dimx="35" dimy="30" placetype="county;city"/>
 	<place x="193" y="402" name="Leverkusen" name_de="Leverkusen" dimx="35" dimy="22" placetype="county;city"/>
-	<place x="93" y="373" name="Mönchengladbach" name_de="Mönchengladbach" dimx="40" dimy="41" placetype="county;city"/>
+	<place x="93" y="374" name="Mönchengladbach" name_de="Mönchengladbach" dimx="40" dimy="41" placetype="county;city"/>
 	<place x="170" y="308" name="Mülheim an der Ruhr" name_de="Mülheim an der Ruhr" dimx="23" dimy="29" placetype="county;city"/>
 	<place x="290" y="162" name="Münster" name_de="Münster" dimx="47" dimy="57" placetype="county;city"/>
 	<place x="165" y="280" name="Oberhausen" name_de="Oberhausen" dimx="23" dimy="33" placetype="county;city"/>

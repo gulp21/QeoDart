@@ -1,9 +1,9 @@
 add Astana [ ]->
+check EU
 
 highscore: date (today), time (x ago, api?), pref lang
 Subset > [ ] 1-10; [ ] 11-20; bezogen auf gewhälte Orte
-debug-findplace w/ rectangle [check everything];
-kreis steinfurt, NRW (de)
+shortname=""?
 
 BUG: 2players: player 1 clicks -> change map -> colors are wrong
 
