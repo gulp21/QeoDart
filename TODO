@@ -3,7 +3,8 @@ add Astana [ ]->
 highscore: date (today), time (x ago, api?), pref lang
 Subset > [ ] 1-10; [ ] 11-20; bezogen auf gewhälte Orte
 debug-findplace w/ rectangle [check everything];
-rectangle(x,y,a); rectangle(m1,m2,a,b); rectangle(quadrant)
+kreis steinfurt
+give hint in findplace: Speicherzugriffsfehler
 
 BUG: 2players: player 1 clicks -> change map -> colors are wrong
 

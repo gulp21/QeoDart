@@ -78,6 +78,11 @@
                  <string notr="true">English</string>
                 </property>
                </item>
+               <item>
+                <property name="text">
+                 <string notr="true">Lingua Latina</string>
+                </property>
+               </item>
               </widget>
              </item>
             </layout>
@@ -258,6 +263,16 @@ p, li { white-space: pre-wrap; }
              </property>
              <property name="text">
               <string>Start a new game automatically after showing the results</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cbAutoNewGame_2">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Show high score list after adding a new high score</string>
              </property>
             </widget>
            </item>
