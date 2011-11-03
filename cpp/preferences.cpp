@@ -13,7 +13,14 @@ preferences::preferences(dart *TDart, io *TIO, QDialog *parent) : myDart(TDart),
 	connect(spbMaxTime, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
 	connect(cobScoreAreaMode, SIGNAL (currentIndexChanged(int)), this, SLOT(vSettingChanged()));
 	connect(cbResetCursor, SIGNAL (clicked()), this, SLOT(vSettingChanged()));
+	connect(cbAutoNewGame, SIGNAL (clicked()), this, SLOT(vSettingChanged()));
 	connect(spbLettersPerSecond, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
+	//Advanced
+	connect(spbDelayNextCircle, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
+	connect(spbDelayNextPlayer, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
+	connect(spbDelayNextPlace, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
+	connect(spbDelayNextPlaceTraining, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
+	connect(cbShortenToolbarText, SIGNAL (clicked()), this, SLOT(vSettingChanged()));
 	//buttons
 	connect(buttonBox, SIGNAL (accepted()), this, SLOT(vAccepted()));
 	connect(buttonBox->button(QDialogButtonBox::Reset), SIGNAL (clicked()), this, SLOT(vReset()));
@@ -28,7 +35,7 @@ preferences::preferences(dart *TDart, io *TIO, QDialog *parent) : myDart(TDart),
 	
 #ifdef QT_NO_CURSOR
 	cbResetCursor->hide();
-	//TODO cursor image
+	cbUseOurCursor->hide(); //TODO cursor image
 #endif
 	
 	lblStatusText->setVisible(false);
@@ -44,6 +51,7 @@ void preferences::vReset() {
 	spbMaxPlaceCount->setValue(myDart->iMaxPlaceCount);
 	spbMaxTime->setValue(myDart->iMaxTime);
 	cbResetCursor->setChecked(myDart->bResetCursor);
+	cbAutoNewGame->setChecked(myDart->bAutoNewGame);
 	cobScoreAreaMode->setCurrentIndex(myDart->iScoreAreaMode);
 	spbLettersPerSecond->setValue(myDart->iLettersPerSecond);
 	//Advanced
@@ -60,6 +68,7 @@ void preferences::vRestoreDefaults() {
 	spbMaxPlaceCount->setValue(10);
 	spbMaxTime->setValue(20);
 	cbResetCursor->setChecked(true);
+	cbAutoNewGame->setChecked(false);
 	
 	cobScoreAreaMode->setCurrentIndex(1);
 	
@@ -122,6 +131,7 @@ void preferences::vAccepted() {
 	myIO->settings->setValue("iMaxTime",spbMaxTime->value());
 	
 	myIO->settings->setValue("bResetCursor",cbResetCursor->isChecked());
+	myIO->settings->setValue("bAutoNewGame",cbAutoNewGame->isChecked());
 	
 	if(myDart->iScoreAreaMode!=cobScoreAreaMode->currentIndex()) newGameRequired=true;
 	myIO->settings->setValue("iScoreAreaMode",cobScoreAreaMode->currentIndex());

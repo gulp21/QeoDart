@@ -186,11 +186,21 @@ int io::iReadQcf(QString mapname) {
 		
 		if(!e.isNull()) {
 			
-			if(e.tagName()=="pxtokm") { // TODO -> meta data / struct
+			if(e.tagName()=="pxtokm") {
 				
 				myDart->dPxToKm=e.attribute("value","-1").toDouble();
 				
-			} else if(e.tagName()=="author") { // TODO -> meta data function
+			} else if(e.tagName()=="copyright") {
+				
+				qcfFile *f; f=&(myDart->qlQcfxFiles[myDart->iCurrentQcf]);
+				
+				if(f->copyright.file=="") { // only do this once
+					f->copyright.file=e.attribute("file","");
+					f->copyright.background=e.attribute("background","");
+					f->copyright.borders=e.attribute("borders","");
+					f->copyright.elevations=e.attribute("elevations","");
+					f->copyright.rivers=e.attribute("rivers","");
+				}
 				
 			} else if(e.tagName()=="place") {
 				
@@ -411,12 +421,12 @@ int io::iWriteQcf(QList<place> &places, qcfFile &f) {
 	cn.setAttribute("default",f.mapName);
 	root.appendChild(cn);
 	
-	cn=doc.createElement("author");
-	cn.setAttribute("copyright:file",f.copyright.fileCopyright);
-	cn.setAttribute("copyright:background",f.copyright.backgroundCopyright);
-	cn.setAttribute("copyright:borders",f.copyright.bordersCopyright);
-	cn.setAttribute("copyright:rivers",f.copyright.riversCopyright);
-	cn.setAttribute("copyright:elevations",f.copyright.elevationsCopyright);
+	cn=doc.createElement("copyright");
+	cn.setAttribute("file",f.copyright.file);
+	cn.setAttribute("background",f.copyright.background);
+	cn.setAttribute("borders",f.copyright.borders);
+	cn.setAttribute("rivers",f.copyright.rivers);
+	cn.setAttribute("elevations",f.copyright.elevations);
 	root.appendChild(cn);
 	
 	cn=doc.createElement("pxtokm");
@@ -511,6 +521,7 @@ void io::vLoadSettings() {
 	if(myDart->iMaxTime<=0) myDart->iMaxTime=20;
 	
 	myDart->bResetCursor=settings->value("bResetCursor",true).toBool();
+	myDart->bAutoNewGame=settings->value("bAutoNewGame",false).toBool();
 	
 	myDart->iScoreAreaMode=settings->value("iScoreAreaMode",1).toInt();
 	if(myDart->iScoreAreaMode<0 || myDart->iScoreAreaMode>2) myDart->iScoreAreaMode=1;

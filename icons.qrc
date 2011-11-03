@@ -20,5 +20,7 @@
         <file>icons/icon48.png</file>
         <file>icons/icon256.png</file>
         <file>icons/icon64.png</file>
+        <file>icons/icon90.png</file>
+        <file>icons/icon200.png</file>
     </qresource>
 </RCC>

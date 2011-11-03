@@ -747,7 +747,8 @@ void dart::vMouseClickEvent(int x, int y) {
         }
 	if(bGaveHint) {
 		score.score*=0.75;
-		score.mark*=dGetMarkFromScore(score.score);
+		score.mark=dGetMarkFromScore(score.score);
+		bGaveHint=false;
 	}
 	qlScoreHistory[iCurrentPlayer].append(score);
 	
@@ -833,6 +834,8 @@ void dart::vShowResultWindows() {
 	}
 	
 	iPlaceCount=0; // needed for quit?-dialog
+	
+	if(bAutoNewGame) vNewGame();
 }
 
 void dart::vResetScoreLabels() {
@@ -1436,7 +1439,8 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
         }
 	if(bGaveHint) {
 		score.score*=0.75;
-		score.mark*=dGetMarkFromScore(score.score);
+		score.mark=dGetMarkFromScore(score.score);
+		bGaveHint=false;
 	}
 	score.mark=dGetMarkFromScore(score.score);
         
@@ -1743,6 +1747,8 @@ void dart::vTextEditedEvent() {
 }
  #include <QPropertyAnimation>
 void dart::vGiveHint() {
+	if(qlPlacesHistory.size()<1) return;
+	
 	if(iAskForMode==enPositions) {
 		QRectangleLabel *lblHint;
 		lblHint=new QRectangleLabel(this,qlPlacesHistory[iPlaceCount-1]->x,qlPlacesHistory[iPlaceCount-1]->y,this);

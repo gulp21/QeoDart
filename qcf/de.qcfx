@@ -2,11 +2,11 @@
 <qcfx version="0.2">
 	<name default="Deutschland" de="Deutschland" en="Germany" la="Germania" />
 	<pxtokm value="1.438" />
-	<author
-	copyright_file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
-	copyright_background="Portal der statistischen Ämter des Bundes und der Länder (DeStatis); David Liuzzo: CC-BY-SA-2.0-DE (derived from http://commons.wikimedia.org/wiki/File:Karte_Bundesrepublik_Deutschland.svg)"
-	copyright_borders="Portal der statistischen Ämter des Bundes und der Länder (DeStatis); David Liuzzo: CC-BY-SA-2.0-DE (derived from http://commons.wikimedia.org/wiki/File:Karte_Bundesrepublik_Deutschland.svg)"
-	copyright_rivers="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
+	<copyright
+	file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
+	background="Portal der statistischen Ämter des Bundes und der Länder (DeStatis);\nDavid Liuzzo: CC-BY-SA-2.0-DE (derived from http://commons.wikimedia.org/wiki/File:Karte_Bundesrepublik_Deutschland.svg)"
+	borders="Portal der statistischen Ämter des Bundes und der Länder (DeStatis);\nDavid Liuzzo: CC-BY-SA-2.0-DE (derived from http://commons.wikimedia.org/wiki/File:Karte_Bundesrepublik_Deutschland.svg)"
+	rivers="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
 	/>
 	<!--.....state.....-->
 	<place

@@ -2,12 +2,12 @@
 <qcfx version="0.2">
 	<name default="Nordrhein-Westfalen" de="Nordrhein-Westfalen" en="North Rhine-Westphalia" la="Rhenania Septentrionalis-Guestfalia" />
 	<pxtokm value="0.416" />
-	<author
-	copyright_file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
-	copyright_background="TUBS: CC BY-SA 3.0 (derived from http://commons.wikimedia.org/wiki/File:North_rhine_w_Landschaftsverb%C3%A4nde.svg)"
-	copyright_borders="TUBS: CC BY-SA 3.0 (derived from http://commons.wikimedia.org/wiki/File:North_rhine_w_Landschaftsverb%C3%A4nde.svg)"
-	copyright_rivers="TUBS: CC BY-SA 3.0 (derived from http://commons.wikimedia.org/wiki/File:North_rhine_w_Landschaftsverb%C3%A4nde.svg)"
-	copyright_elevations="TUBS: CC BY-SA 3.0 (derived from http://commons.wikimedia.org/wiki/File:North_Rhine-Westphalia_Topography_01.svg)"
+	<copyright
+	file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
+	background="TUBS: CC BY-SA 3.0 (derived from http://commons.wikimedia.org/wiki/File:North_rhine_w_Landschaftsverb%C3%A4nde.svg)"
+	borders="TUBS: CC BY-SA 3.0 (derived from http://commons.wikimedia.org/wiki/File:North_rhine_w_Landschaftsverb%C3%A4nde.svg)"
+	rivers="TUBS: CC BY-SA 3.0 (derived from http://commons.wikimedia.org/wiki/File:North_rhine_w_Landschaftsverb%C3%A4nde.svg)"
+	elevations="TUBS: CC BY-SA 3.0 (derived from http://commons.wikimedia.org/wiki/File:North_Rhine-Westphalia_Topography_01.svg)"
 	/>
 	<!--.....counties.....Landkreise.....-->
 	<place x="56" y="492" name="Städteregion Aachen" dimx="73" dimy="119" placetype="county"/> <!--Kommunalverband besonderer Art-->

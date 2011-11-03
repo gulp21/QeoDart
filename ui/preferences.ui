@@ -42,7 +42,7 @@
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>159</height>
+            <height>164</height>
            </rect>
           </property>
           <attribute name="label">
@@ -145,7 +145,7 @@ p, li { white-space: pre-wrap; }
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>159</height>
+            <height>164</height>
            </rect>
           </property>
           <attribute name="label">
@@ -258,9 +258,6 @@ p, li { white-space: pre-wrap; }
            </item>
            <item>
             <widget class="QCheckBox" name="cbAutoNewGame">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
              <property name="text">
               <string>Start a new game automatically after showing the results</string>
              </property>
@@ -297,7 +294,7 @@ p, li { white-space: pre-wrap; }
             <x>0</x>
             <y>0</y>
             <width>462</width>
-            <height>124</height>
+            <height>120</height>
            </rect>
           </property>
           <attribute name="label">
@@ -506,7 +503,7 @@ p, li { white-space: pre-wrap; }
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>159</height>
+            <height>164</height>
            </rect>
           </property>
           <attribute name="label">
@@ -627,7 +624,7 @@ p, li { white-space: pre-wrap; }
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>159</height>
+            <height>164</height>
            </rect>
           </property>
           <attribute name="label">
@@ -635,7 +632,7 @@ p, li { white-space: pre-wrap; }
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_11">
            <item>
-            <widget class="QCheckBox" name="checkBox_2">
+            <widget class="QCheckBox" name="cbUseOurCursor">
              <property name="enabled">
               <bool>false</bool>
              </property>
