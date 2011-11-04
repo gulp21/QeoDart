@@ -143,7 +143,7 @@
 	placetype="country"
 	/>
 	<place
-	x="138" y="169" dimx="47" dimy="39"
+	x="139" y="170" dimx="47" dimy="39"
 	name="Ísland"
 	name_de="Island"
 	name_en="Iceland"
@@ -532,12 +532,13 @@
 	name_la="Roma"
 	placetype="capitalOfCountry;city"
 	/>
-	<!--<place
-	x="287" y="333"
+	<place
+	x="596" y="188" dimx="10" dimy="19"
 	name_de="Astana"
 	name_en="Astana"
+        name_la="Astana"
 	placetype="capitalOfCountry;city"
-	/> DOES NOT FIT-->
+	/>
 	<place
 	x="346" y="278"
 	name="Rīga"

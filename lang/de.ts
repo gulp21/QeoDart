@@ -489,7 +489,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/about.ui" line="14"/>
         <source>About QeoDart</source>
-        <translation type="unfinished"></translation>
+        <translation>Über QeoDart</translation>
     </message>
     <message>
         <location filename="../ui/about.ui" line="40"/>
@@ -497,12 +497,12 @@ p, li { white-space: pre-wrap; }
         <translation>QeoDart</translation>
     </message>
     <message>
-        <location filename="../ui/about.ui" line="101"/>
+        <location filename="../ui/about.ui" line="107"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/about.ui" line="107"/>
+        <location filename="../ui/about.ui" line="113"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -531,12 +531,12 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Programm erhalten haben. Falls nicht, siehe &lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;http://www.gnu.org/licenses/&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../ui/about.ui" line="143"/>
+        <location filename="../ui/about.ui" line="152"/>
         <source>Translation</source>
         <translation>Übersetzung</translation>
     </message>
     <message>
-        <location filename="../ui/about.ui" line="149"/>
+        <location filename="../ui/about.ui" line="158"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -563,7 +563,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Markus Brenneis&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../ui/about.ui" line="181"/>
+        <location filename="../ui/about.ui" line="193"/>
         <source>Map</source>
         <translation>Karte</translation>
     </message>
@@ -579,53 +579,73 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../cpp/about.cpp" line="16"/>
-        <source>The file (%1.qcfx) itself: %2
-
-</source>
-        <translation>Die Datei (%1.qcfx) selbst: %2
-
-</translation>
+        <source>&lt;b&gt;The file (%1.qcfx) itself:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</source>
+        <translation>&lt;b&gt;Die Datei (%1.qcfx) selbst:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../cpp/about.cpp" line="17"/>
-        <source>The image with the borders: %2
-
-</source>
-        <translation type="unfinished">Das Bild mit den Grenzen: %2
-
-</translation>
+        <source>&lt;b&gt;The image with the borders:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</source>
+        <translation>&lt;b&gt;Das Bild mit den Grenzen:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../cpp/about.cpp" line="18"/>
-        <source>The image with the rivers: %2
-
-</source>
-        <translation>Das Bild mit den Flüssen: %2
-
-</translation>
+        <source>&lt;b&gt;The image with the rivers:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</source>
+        <translation>&lt;b&gt;Das Bild mit den Flüssen:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../cpp/about.cpp" line="19"/>
-        <source>The image with the elevations: %2
-
-</source>
-        <translation>Das Bild mit dem Höhenprofil: %2
-
-</translation>
+        <source>&lt;b&gt;The image with the elevations:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</source>
+        <translation>&lt;b&gt;Das Bild mit dem Höhenprofil:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../cpp/about.cpp" line="21"/>
-        <source>The following licences apply to your current map (%1):
+        <source>&lt;p&gt;The following licences apply to your current map (%1):&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Die folgenden Lizenzen gelten für die aktuelle Karte (%1):&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../cpp/about.cpp" line="23"/>
+        <source>No licensing information is available for the map &quot;%1&quot; (%2).</source>
+        <translation>Für die Karte &quot;%1&quot; (%2) stehen keine Lizenzinformationen zur Verfügung.</translation>
+    </message>
+    <message>
+        <source>The file (%1.qcfx) itself: %2
 
 </source>
-        <translation>Die folgenden Lizenzen gelten für die aktuelle Karte (%1):
+        <translation type="obsolete">Die Datei (%1.qcfx) selbst: %2
 
 </translation>
     </message>
     <message>
-        <location filename="../cpp/about.cpp" line="23"/>
-        <source>The map &quot;%1&quot; (%2) does not provide any licensing information.</source>
-        <translation type="unfinished"></translation>
+        <source>The image with the borders: %2
+
+</source>
+        <translation type="obsolete">Das Bild mit den Grenzen: %2
+
+</translation>
+    </message>
+    <message>
+        <source>The image with the rivers: %2
+
+</source>
+        <translation type="obsolete">Das Bild mit den Flüssen: %2
+
+</translation>
+    </message>
+    <message>
+        <source>The image with the elevations: %2
+
+</source>
+        <translation type="obsolete">Das Bild mit dem Höhenprofil: %2
+
+</translation>
+    </message>
+    <message>
+        <source>The following licences apply to your current map (%1):
+
+</source>
+        <translation type="obsolete">Die folgenden Lizenzen gelten für die aktuelle Karte (%1):
+
+</translation>
     </message>
 </context>
 <context>
@@ -801,13 +821,13 @@ Wollen Sie trotzdem fortfahren?</translation>
         <location filename="../cpp/dart.cpp" line="458"/>
         <location filename="../cpp/dart.cpp" line="876"/>
         <source>&lt;span&gt;%1 Points &amp;#8960; %2, %3&lt;/span&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;span&gt;%1 Punkte &amp;#8960; %2, %3&lt;/span&gt;</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="563"/>
         <location filename="../cpp/dart.cpp" line="1228"/>
         <source>%1/%2</source>
-        <translation type="unfinished">%1/%2</translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="572"/>
@@ -921,7 +941,7 @@ Wollen Sie trotzdem fortfahren?</translation>
     <message>
         <location filename="../cpp/dart.cpp" line="878"/>
         <source>&lt;span&gt;%1, &amp;#8960; %2, %3&lt;/span&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;span&gt;%1, &amp;#8960; %2, %3&lt;/span&gt;</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="893"/>
@@ -1119,17 +1139,17 @@ QeoDart wird nun beendet.</translation>
         <translation>Sprache:</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="88"/>
+        <location filename="../ui/preferences.ui" line="93"/>
         <source>The names of the places are available in different languages. Please specify which langauge you prefer:</source>
         <translation>Die Namen der Orte sind in verschieden Sprachen verfügbar. Bitte geben Sie an, welche Sprache Sie bevorzugen:</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="101"/>
+        <location filename="../ui/preferences.ui" line="106"/>
         <source>ui,en,default</source>
         <translation>ui,en,default</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="108"/>
+        <location filename="../ui/preferences.ui" line="113"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1142,102 +1162,107 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Sie können durch Komma getrennte, aus zwei Buchstaben bestehende Sprachcodes gemäß dem alpha-2 Code von &lt;a href=&quot;http://www.loc.gov/standards/iso639-2/php/code_list.php&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;ISO&amp;nbsp;639-1&lt;/span&gt;&lt;/a&gt; verwenden; außerdem können Sie &amp;quot;ui&amp;quot; für die oben gewählte Sprache und &amp;quot;default&amp;quot; für den Namen in der Landessprache verwenden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="147"/>
+        <location filename="../ui/preferences.ui" line="152"/>
         <source>Gameplay</source>
         <translation>Spielablauf</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="155"/>
+        <location filename="../ui/preferences.ui" line="160"/>
         <source>Ask for</source>
         <translation>Nach</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="178"/>
+        <location filename="../ui/preferences.ui" line="183"/>
         <source>places</source>
         <translation>Orten fragen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="202"/>
+        <location filename="../ui/preferences.ui" line="207"/>
         <source>When playing against time, wait at most</source>
         <translation>Beim Spiel auf Zeit, warte höchstens</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="215"/>
+        <location filename="../ui/preferences.ui" line="220"/>
         <source>s</source>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="245"/>
+        <location filename="../ui/preferences.ui" line="250"/>
         <source>When you are playing with more than one player, you do not want the other players to see where you have clicked. Now you can either move the cursor to another position yourself, or you enable this feature which automatically moves the curosr.</source>
         <translation>Wenn Sie mit mehr als einem Spieler spielen, dann wollen Sie nach, dass die anderen Speiler sehen, wohin Sie geklickt haben. Sie können nun entweder den Mauszeiger selbst woanders hin bewegen oder Sie aktivieren diese Funktion, die dies automatisch erledigt.</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="248"/>
+        <location filename="../ui/preferences.ui" line="253"/>
         <source>Reset cursor when playing with more than one player</source>
         <translation>Mauszeiger beim Spiel mit mehr als einem Spieler zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="257"/>
+        <location filename="../ui/preferences.ui" line="262"/>
         <source>Start a new game automatically after showing the results</source>
         <translation>Nach dem Anzeigen der Ergebnisse automatisch ein neues Spiel beginnen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="286"/>
+        <location filename="../ui/preferences.ui" line="272"/>
+        <source>Show high score list after adding a new high score</source>
+        <translation>Highscoreliste nach dem Hinzufügen eines neuen Highscores anzeigen</translation>
+    </message>
+    <message>
+        <location filename="../ui/preferences.ui" line="301"/>
         <source>Scores and Marks</source>
         <translation>Punkte und Noten</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="294"/>
+        <location filename="../ui/preferences.ui" line="309"/>
         <source>When calculating the score, accepet</source>
         <translation>Beim berechnen der Punktzahl akzeptiere</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="301"/>
+        <location filename="../ui/preferences.ui" line="316"/>
         <source>When calculating the scores, QeoDart respects the whole area of the place. This area is discribed by a rectangle put around the place. As the area of this rectangle often includes areas of other places, the default is accepting only the inner 25% of the rectangle.</source>
         <translation>Beim Berechnen der Punkzahl beachtet QeoDart das ganze Gebiet des Ortes. Dieses Gebiet wird durch ein Rechteck, dass um den Ort gelegt wird, beschrieben. Da die Rechtecksfläche meist Gebiete anderer Orte enthällt, werden standardmäßig nur die inneren 25% des Rechtecks akzeptiert.</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="305"/>
+        <location filename="../ui/preferences.ui" line="320"/>
         <source>the point only</source>
         <translation>nur den Punkt</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="310"/>
+        <location filename="../ui/preferences.ui" line="325"/>
         <source>25% of the area</source>
         <translation>25% des Gebietes</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="315"/>
+        <location filename="../ui/preferences.ui" line="330"/>
         <source>100% of the area</source>
         <translation>100% des Gebietes</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="323"/>
+        <location filename="../ui/preferences.ui" line="338"/>
         <source>Use the following grade system:</source>
         <translation>Das folgende Bewertungssystem verwenden:</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="334"/>
+        <location filename="../ui/preferences.ui" line="349"/>
         <source>German (best: 1.0 - worst: 6.0)</source>
         <translation>Deutsch (Bestnote: 1.0 - Schlechteste Note: 6.0)</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="339"/>
+        <location filename="../ui/preferences.ui" line="354"/>
         <source>Do not display marks</source>
         <translation>Keine Noten anzeigen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="347"/>
+        <location filename="../ui/preferences.ui" line="362"/>
         <source>Letters per Second:</source>
         <translation>Buchstaben pro Sekunde:</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="354"/>
+        <location filename="../ui/preferences.ui" line="369"/>
         <source>Penalty</source>
         <translation>Punktabzug</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/preferences.ui" line="364"/>
+        <location filename="../ui/preferences.ui" line="379"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1268,70 +1293,70 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;- falsche Nutzung von doppelten Buchstaben und Dehnungsbuchstaben&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="384"/>
+        <location filename="../ui/preferences.ui" line="399"/>
         <source>do not penalize</source>
         <translation>kein Punktabzug</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="389"/>
+        <location filename="../ui/preferences.ui" line="404"/>
         <source>for spelling errors</source>
         <translation>für Rechtschreibfehler</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="394"/>
+        <location filename="../ui/preferences.ui" line="409"/>
         <source>for severe spelling errors</source>
         <translation>für schwere Rechtschreibfehler</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="413"/>
+        <location filename="../ui/preferences.ui" line="428"/>
         <source>In the mode &quot;Ask for: Name of Place&quot; in combination with &quot;Against Time&quot;, you get some &quot;free seconds&quot; depending on the length of the name and the number of letters you can type per second.</source>
         <translation>Im Modus &quot;Fragen nach: Ortsname&quot; in Kombination mit &quot;Auf Zeit&quot; bekommen Sie &quot;Bonussekunden&quot; in Abhängigkeit von der Länge des Namen und die Anzahl der Buchstaben, die Sie pro Sekunde eingeben können.</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/preferences.ui" line="445"/>
+        <location filename="../ui/preferences.ui" line="460"/>
         <source>Determine…</source>
         <translation>Bestimmen…</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="474"/>
+        <location filename="../ui/preferences.ui" line="489"/>
         <source>Advanced</source>
         <translation>Erweitert</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="495"/>
+        <location filename="../ui/preferences.ui" line="510"/>
         <source>Delays</source>
         <translation>Verzögerungen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="501"/>
+        <location filename="../ui/preferences.ui" line="516"/>
         <source>between distance circles</source>
         <translation>Zwischen Entfernungskreisen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="508"/>
+        <location filename="../ui/preferences.ui" line="523"/>
         <source>before next player</source>
         <translation>Vor nächstem Spieler</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="567"/>
+        <location filename="../ui/preferences.ui" line="582"/>
         <source>before next place</source>
         <translation>Vor nächstem Ort</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="574"/>
+        <location filename="../ui/preferences.ui" line="589"/>
         <source>before next place (training)</source>
         <translation>Vor nächstem Ort (Training)</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="635"/>
+        <location filename="../ui/preferences.ui" line="650"/>
         <source>Shorten toolbar labels, so that all buttons fit into the window</source>
         <translation>Symbolleistentext kürzen, damit alle Schaltflächen in das Fenster passen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="515"/>
-        <location filename="../ui/preferences.ui" line="528"/>
-        <location filename="../ui/preferences.ui" line="541"/>
-        <location filename="../ui/preferences.ui" line="554"/>
+        <location filename="../ui/preferences.ui" line="530"/>
+        <location filename="../ui/preferences.ui" line="543"/>
+        <location filename="../ui/preferences.ui" line="556"/>
+        <location filename="../ui/preferences.ui" line="569"/>
         <source>ms</source>
         <translation>ms</translation>
     </message>
@@ -1341,22 +1366,22 @@ p, li { white-space: pre-wrap; }
         <translation>Systemsprache</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="603"/>
+        <location filename="../ui/preferences.ui" line="618"/>
         <source>Warnings</source>
         <translation>Warnungen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="616"/>
+        <location filename="../ui/preferences.ui" line="631"/>
         <source>Miscellaneous</source>
         <translation>Verschiedenes</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="625"/>
+        <location filename="../ui/preferences.ui" line="640"/>
         <source>Enable this option if QeoDart doesn&apos;t recognize the positions of your clicks properly.</source>
         <translation>Aktivieren Sie diese Option, falls QeoDart die Position Ihrer Klicke nicht richtig erkennt.</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="628"/>
+        <location filename="../ui/preferences.ui" line="643"/>
         <source>Use non-default cursor image</source>
         <translation>Anderes Mauszeigerbild verwenden</translation>
     </message>

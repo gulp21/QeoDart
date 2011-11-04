@@ -420,12 +420,12 @@ p, li { white-space: pre-wrap; }
         <translation>QeoDart</translation>
     </message>
     <message>
-        <location filename="../ui/about.ui" line="101"/>
+        <location filename="../ui/about.ui" line="107"/>
         <source>About</source>
         <translation>De</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/about.ui" line="107"/>
+        <location filename="../ui/about.ui" line="113"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -442,12 +442,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/about.ui" line="143"/>
+        <location filename="../ui/about.ui" line="152"/>
         <source>Translation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/about.ui" line="149"/>
+        <location filename="../ui/about.ui" line="158"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -463,7 +463,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/about.ui" line="181"/>
+        <location filename="../ui/about.ui" line="193"/>
         <source>Map</source>
         <translation>Tabula geographica</translation>
     </message>
@@ -479,47 +479,49 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../cpp/about.cpp" line="16"/>
-        <source>The file (%1.qcfx) itself: %2
-
-</source>
+        <source>&lt;b&gt;The file (%1.qcfx) itself:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../cpp/about.cpp" line="17"/>
-        <source>The image with the borders: %2
-
-</source>
-        <translation>Imago cum finibus: %2
-
-</translation>
+        <source>&lt;b&gt;The image with the borders:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../cpp/about.cpp" line="18"/>
-        <source>The image with the rivers: %2
-
-</source>
-        <translation>Imago cum fluminibus: %2
-
-</translation>
+        <source>&lt;b&gt;The image with the rivers:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../cpp/about.cpp" line="19"/>
-        <source>The image with the elevations: %2
-
-</source>
+        <source>&lt;b&gt;The image with the elevations:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../cpp/about.cpp" line="21"/>
-        <source>The following licences apply to your current map (%1):
-
-</source>
+        <source>&lt;p&gt;The following licences apply to your current map (%1):&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../cpp/about.cpp" line="23"/>
-        <source>The map &quot;%1&quot; (%2) does not provide any licensing information.</source>
+        <source>No licensing information is available for the map &quot;%1&quot; (%2).</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The image with the borders: %2
+
+</source>
+        <translation type="obsolete">Imago cum finibus: %2
+
+</translation>
+    </message>
+    <message>
+        <source>The image with the rivers: %2
+
+</source>
+        <translation type="obsolete">Imago cum fluminibus: %2
+
+</translation>
     </message>
 </context>
 <context>
@@ -993,17 +995,17 @@ QeoDart will be quit.</source>
         <translation>Lingua:</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="88"/>
+        <location filename="../ui/preferences.ui" line="93"/>
         <source>The names of the places are available in different languages. Please specify which langauge you prefer:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="101"/>
+        <location filename="../ui/preferences.ui" line="106"/>
         <source>ui,en,default</source>
         <translation>ui,en,default</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="108"/>
+        <location filename="../ui/preferences.ui" line="113"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1012,102 +1014,107 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="147"/>
+        <location filename="../ui/preferences.ui" line="152"/>
         <source>Gameplay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="155"/>
+        <location filename="../ui/preferences.ui" line="160"/>
         <source>Ask for</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="178"/>
+        <location filename="../ui/preferences.ui" line="183"/>
         <source>places</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="202"/>
+        <location filename="../ui/preferences.ui" line="207"/>
         <source>When playing against time, wait at most</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="215"/>
+        <location filename="../ui/preferences.ui" line="220"/>
         <source>s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="245"/>
+        <location filename="../ui/preferences.ui" line="250"/>
         <source>When you are playing with more than one player, you do not want the other players to see where you have clicked. Now you can either move the cursor to another position yourself, or you enable this feature which automatically moves the curosr.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="248"/>
+        <location filename="../ui/preferences.ui" line="253"/>
         <source>Reset cursor when playing with more than one player</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="257"/>
+        <location filename="../ui/preferences.ui" line="262"/>
         <source>Start a new game automatically after showing the results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="286"/>
-        <source>Scores and Marks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/preferences.ui" line="294"/>
-        <source>When calculating the score, accepet</source>
+        <location filename="../ui/preferences.ui" line="272"/>
+        <source>Show high score list after adding a new high score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/preferences.ui" line="301"/>
+        <source>Scores and Marks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/preferences.ui" line="309"/>
+        <source>When calculating the score, accepet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/preferences.ui" line="316"/>
         <source>When calculating the scores, QeoDart respects the whole area of the place. This area is discribed by a rectangle put around the place. As the area of this rectangle often includes areas of other places, the default is accepting only the inner 25% of the rectangle.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="305"/>
+        <location filename="../ui/preferences.ui" line="320"/>
         <source>the point only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="310"/>
+        <location filename="../ui/preferences.ui" line="325"/>
         <source>25% of the area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="315"/>
+        <location filename="../ui/preferences.ui" line="330"/>
         <source>100% of the area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="323"/>
+        <location filename="../ui/preferences.ui" line="338"/>
         <source>Use the following grade system:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="334"/>
+        <location filename="../ui/preferences.ui" line="349"/>
         <source>German (best: 1.0 - worst: 6.0)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="339"/>
+        <location filename="../ui/preferences.ui" line="354"/>
         <source>Do not display marks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="347"/>
+        <location filename="../ui/preferences.ui" line="362"/>
         <source>Letters per Second:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="354"/>
+        <location filename="../ui/preferences.ui" line="369"/>
         <source>Penalty</source>
         <translation>Poena</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/preferences.ui" line="364"/>
+        <location filename="../ui/preferences.ui" line="379"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1125,70 +1132,70 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="384"/>
+        <location filename="../ui/preferences.ui" line="399"/>
         <source>do not penalize</source>
         <translation>Nulla Poena</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="389"/>
+        <location filename="../ui/preferences.ui" line="404"/>
         <source>for spelling errors</source>
         <translation>Pro Mendis</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="394"/>
+        <location filename="../ui/preferences.ui" line="409"/>
         <source>for severe spelling errors</source>
         <translation>Pro Gravibus Mendis</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="413"/>
+        <location filename="../ui/preferences.ui" line="428"/>
         <source>In the mode &quot;Ask for: Name of Place&quot; in combination with &quot;Against Time&quot;, you get some &quot;free seconds&quot; depending on the length of the name and the number of letters you can type per second.</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/preferences.ui" line="445"/>
+        <location filename="../ui/preferences.ui" line="460"/>
         <source>Determine…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="474"/>
+        <location filename="../ui/preferences.ui" line="489"/>
         <source>Advanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="495"/>
+        <location filename="../ui/preferences.ui" line="510"/>
         <source>Delays</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="501"/>
+        <location filename="../ui/preferences.ui" line="516"/>
         <source>between distance circles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="508"/>
+        <location filename="../ui/preferences.ui" line="523"/>
         <source>before next player</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="567"/>
+        <location filename="../ui/preferences.ui" line="582"/>
         <source>before next place</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="574"/>
+        <location filename="../ui/preferences.ui" line="589"/>
         <source>before next place (training)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="635"/>
+        <location filename="../ui/preferences.ui" line="650"/>
         <source>Shorten toolbar labels, so that all buttons fit into the window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="515"/>
-        <location filename="../ui/preferences.ui" line="528"/>
-        <location filename="../ui/preferences.ui" line="541"/>
-        <location filename="../ui/preferences.ui" line="554"/>
+        <location filename="../ui/preferences.ui" line="530"/>
+        <location filename="../ui/preferences.ui" line="543"/>
+        <location filename="../ui/preferences.ui" line="556"/>
+        <location filename="../ui/preferences.ui" line="569"/>
         <source>ms</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1198,22 +1205,22 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="603"/>
+        <location filename="../ui/preferences.ui" line="618"/>
         <source>Warnings</source>
         <translation>Praemoniti</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="616"/>
+        <location filename="../ui/preferences.ui" line="631"/>
         <source>Miscellaneous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="625"/>
+        <location filename="../ui/preferences.ui" line="640"/>
         <source>Enable this option if QeoDart doesn&apos;t recognize the positions of your clicks properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="628"/>
+        <location filename="../ui/preferences.ui" line="643"/>
         <source>Use non-default cursor image</source>
         <translation type="unfinished"></translation>
     </message>
