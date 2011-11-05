@@ -37,8 +37,8 @@ class io : public QWidget {
 		void vLoadSettings();
 		void vLoadHighScores(QString mapName);
 		void vSaveHighScores(QString mapName);
-		QString qsGetMapName(QDomDocument &doc);
  	private:
 		QStringList qslGetPreferedQcfLanguage();
+		void vGetMetaData(QDomDocument &doc, qcfFile &file);
 };
 #endif //IO_HPP 

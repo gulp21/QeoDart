@@ -1,6 +1,6 @@
 <!DOCTYPE qcfx>
 <qcfx version="0.2">
-	<name default="Nordrhein-Westfalen" de="Nordrhein-Westfalen" en="North Rhine-Westphalia" la="Rhenania Septentrionalis-Guestfalia" />
+	<name default="Nordrhein-Westfalen" short="NRW" de="Nordrhein-Westfalen" en="North Rhine-Westphalia" la="Rhenania Septentrionalis-Guestfalia" />
 	<pxtokm value="0.416" />
 	<copyright
 	file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"

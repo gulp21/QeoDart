@@ -55,7 +55,7 @@ struct qcfCopyright {
 };
 
 struct qcfFile {
-	QString mapName, path; // path: e.g. qcf/de
+	QString mapName, mapShortName, path; // path: e.g. qcf/de
 	int pxtokm;
 	qcfCopyright copyright;
 };

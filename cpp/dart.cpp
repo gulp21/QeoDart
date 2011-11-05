@@ -623,7 +623,7 @@ void dart::vToolbarOverflow() {
 					break;
 				case 7:
 					static_cast<QToolButton*>(toolBar->layout()->itemAt(6+d)->widget())
-						->setText(QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapName.left(2)));
+						->setText(QString(tr("%1")).arg(qlQcfxFiles[iCurrentQcf].mapShortName));
 					break;
 				case 8:
 					static_cast<QToolButton*>(toolBar->layout()->itemAt(1+d)->widget())

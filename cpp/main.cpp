@@ -19,6 +19,15 @@ You should have received a copy of the GNU General Public License along with thi
 #include "dart.hpp"
 
 int main(int argc, char* argv[]) {
+	
+	if(argc==2 && ((string)argv[1]=="-h" || (string)argv[1]=="--help") ) {
+		qDebug() << "Options:";
+		qDebug() << "  -h, --help:          prints this text (only works when it is the only command-line argument)";
+		qDebug() << "  --banner:            shows two QeoDart banners (cannot be visible at the same time, visibility depends on window geometry)";
+		qDebug() << "  -dp, --debug-places: when activating \"find place\", the rectangles describing the area are drawn around the places";
+		return 0;
+	}
+	
 	QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8")); 
 	
         QApplication a(argc, argv);

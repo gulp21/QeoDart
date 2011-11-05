@@ -45,7 +45,7 @@ int io::iFindQcf() {
 			if(iCheckQcf(file, doc)==0) {
 				qcfFile f;
 				f.path=file.fileName().left(file.fileName().length()-5);
-				f.mapName=qsGetMapName(doc);
+				vGetMetaData(doc, f);
 				qDebug() << f.path;
 				myDart->qlQcfxFiles << f; // TODO check if some name already exists
 			}
@@ -97,7 +97,7 @@ QStringList io::qslGetPreferedQcfLanguage() {
 	return l.replace("ui","de").split(",");// TODO ui=pref
 }
 
-QString io::qsGetMapName(QDomDocument &doc) { // TODO read complete meta data
+void io::vGetMetaData(QDomDocument &doc, qcfFile &file) {
 	QStringList qslPreferedQcfLanguage=qslGetPreferedQcfLanguage();
 	
 	QDomElement docElem = doc.documentElement();
@@ -110,14 +110,32 @@ QString io::qsGetMapName(QDomDocument &doc) { // TODO read complete meta data
 			for(int i=0; i<qslPreferedQcfLanguage.count() && n=="NONAME"; i++) {
 				n=e.attribute(qslPreferedQcfLanguage[i],"NONAME");
 			}
-			return n;
+			file.mapName=n;
+			file.mapShortName=e.attribute("short","NOSHORTNAME");
+			if(file.mapShortName=="NOSHORTNAME") file.mapShortName=file.mapName.left(2);
 		} else {
 			qDebug() << "[W] file has broken <name>";
-			return "NONAME";
+			file.mapName="NONAME";
 		}
 	} else {
 		qDebug() << "[W] file has no <name>";
-		return "NONAME";
+		file.mapName="NONAME";
+	}
+	
+	n = docElem.firstChildElement("copyright");
+	if(!n.isNull()) {
+		QDomElement e = n.toElement();
+		if(!e.isNull()) {
+			file.copyright.file=e.attribute("file","");
+			file.copyright.background=e.attribute("background","");
+			file.copyright.borders=e.attribute("borders","");
+			file.copyright.elevations=e.attribute("elevations","");
+			file.copyright.rivers=e.attribute("rivers","");
+		} else {
+			qDebug() << "[W] file has broken <copyright>";
+		}
+	} else {
+		qDebug() << "[I] file has no <copyright>";
 	}
 }
 
@@ -189,19 +207,7 @@ int io::iReadQcf(QString mapname) {
 			if(e.tagName()=="pxtokm") {
 				
 				myDart->dPxToKm=e.attribute("value","-1").toDouble();
-				
-			} else if(e.tagName()=="copyright") {
-				
-				qcfFile *f; f=&(myDart->qlQcfxFiles[myDart->iCurrentQcf]);
-				
-				if(f->copyright.file=="") { // only do this once
-					f->copyright.file=e.attribute("file","");
-					f->copyright.background=e.attribute("background","");
-					f->copyright.borders=e.attribute("borders","");
-					f->copyright.elevations=e.attribute("elevations","");
-					f->copyright.rivers=e.attribute("rivers","");
-				}
-				
+					
 			} else if(e.tagName()=="place") {
 				
 				place newPlace;
@@ -241,7 +247,7 @@ int io::iReadQcf(QString mapname) {
 				if(newPlace.placeType.contains("city")) myDart->actionCities->setVisible(TRUE);
 				if(newPlace.placeType.contains("town")) myDart->actionTowns->setVisible(TRUE);
 				
-			} else if(e.tagName()!="name") {
+			} else if(e.tagName()!="name" && e.tagName()!="copyright") {
 				
 				qDebug() << "[w] unknown tagName" << e.tagName();
 				

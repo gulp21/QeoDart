@@ -14,6 +14,7 @@ aboutWindow::aboutWindow(dart *TDart, QWidget *parent) : myDart(TDart), QDialog(
 	QString s;
 	qcfFile *f; f=&(myDart->qlQcfxFiles[myDart->iCurrentQcf]);
 	if(f->copyright.file!="") s+=tr("<b>The file (%1.qcfx) itself:</b><br/>%2<br/><br/>").arg(f->path).arg(f->copyright.file);
+	if(f->copyright.background!="") s+=tr("<b>The background image:</b><br/>%2<br/><br/>").arg(f->copyright.borders);
 	if(f->copyright.borders!="") s+=tr("<b>The image with the borders:</b><br/>%2<br/><br/>").arg(f->copyright.borders);
 	if(f->copyright.rivers!="") s+=tr("<b>The image with the rivers:</b><br/>%2<br/><br/>").arg(f->copyright.rivers);
 	if(f->copyright.elevations!="") s+=tr("<b>The image with the elevations:</b><br/>%2<br/><br/>").arg(f->copyright.elevations);
