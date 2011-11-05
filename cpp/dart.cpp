@@ -454,8 +454,7 @@ void dart::vSetNumberOfPlayers(int n) {
 			QLabel *lblScore;
 			lblScore = new QLabel(this);
 			gridLayout->addWidget(lblScore,i,0);
-//			lblScore->setText(QString(tr("<span>%n Point(s) &#8960; %1, %2</span>","",0)).arg(0.0,0,'f',1).arg(0.0,0,'f',1));
-			lblScore->setText(QString(tr("<span>%1 Points &#8960; %2, %3</span>")).arg(0).arg(0.0,0,'f',1).arg(0.0,0,'f',1));
+			lblScore->setText(QString(tr("<span>%n Point(s) &#8960; %1, %2</span>","",0)).arg(0.0,0,'f',1).arg(0.0,0,'f',1));
 			
 			QLabel *lblRating;
 			lblRating = new QLabel(this);
@@ -871,9 +870,8 @@ void dart::vShowScores() {
 
 void dart::vShowTotalScores() {
 	for(int i=0; i<qlPlayerLabels.count(); i++) { // show score for each player
-//		qlPlayerLabels[i][0]->setText(QString(tr("<span>%n Point(s) &#8960; %1, %2</span>","",qlTotalScores[i].score)).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
 		if(width()>300)
-			qlPlayerLabels[i][0]->setText(QString(tr("<span>%1 Points &#8960; %2, %3</span>")).arg(qlTotalScores[i].score).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
+			qlPlayerLabels[i][0]->setText(QString(tr("<span>%n Point(s) &#8960; %1, %2</span>","",qlTotalScores[i].score)).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
 		else
 			qlPlayerLabels[i][0]->setText(QString(tr("<span>%1, &#8960; %2, %3</span>")).arg(qlTotalScores[i].score).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
 	}
@@ -1621,6 +1619,13 @@ void dart::vShowHighScores() {
 void dart::vShowAboutWindow() {
 	aboutWindow dialog(this,this);
 	dialog.exec();
+}
+
+void dart::vRetranslate() {
+	QTranslator translator;
+	translator.load(QString(QCoreApplication::applicationDirPath()+"/lang/%1").arg(qsLanguage=="default" ? QLocale::system().name() : qsLanguage));
+	QApplication::installTranslator(&translator);
+	retranslateUi(this);
 }
 
 void dart::vUpdateActionsIsCheckedStates() {

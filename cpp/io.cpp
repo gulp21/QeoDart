@@ -518,6 +518,10 @@ void io::vLoadSettings() {
 	
 	// General
 	
+	if(myDart->qsLanguage!=settings->value("qsLanguage","default").toString()) {
+		myDart->qsLanguage=settings->value("qsLanguage","default").toString();
+		myDart->vRetranslate();
+	}
 	myDart->qsPreferedQcfLanguage=settings->value("qsPreferedQcfLanguage","ui,default,en").toString();
 	
 	myDart->iMaxPlaceCount=settings->value("iMaxPlaceCount",10).toInt();

@@ -26,7 +26,8 @@ SOURCES += cpp/dart.cpp cpp/io.cpp cpp/main.cpp cpp/qtwin.cpp \
 QT += xml
 
 TRANSLATIONS = lang/de.ts \
-	lang/la.ts
+    lang/la.ts \
+    lang/en.ts
 
 QMAKE_CXXFLAGS_WARN_OFF += -Wno-reorder
 

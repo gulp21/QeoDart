@@ -23,6 +23,7 @@ See main.cpp for details. */
 #include <QTime>
 #include <QTimer>
 #include <QToolButton>
+#include <QTranslator>
 #include <qstring.h>
 #include <time.h>
 
@@ -118,13 +119,14 @@ Q_OBJECT
 		int iScoreAreaMode; // 0=point only; 1=25%; 2=100%
 		int iDelayNextCircle, iDelayNextPlayer, iDelayNextPlace, iDelayNextPlaceTraining;
 		
-		QString qsCurrentPlaceType, qsPreferedQcfLanguage;
+		QString qsCurrentPlaceType, qsLanguage, qsPreferedQcfLanguage;
 		
 		void vMouseClickEvent(int x, int y);
 		void mySleep(int ms);
 		void vShowCurrentPlace();
 		void vSetPlaceType(QString placetype);
 		void vRepaintCommonLabels();
+		void vRetranslate();
 		
 		bool bCanLoseScore();
 

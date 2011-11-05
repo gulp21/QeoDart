@@ -8,6 +8,7 @@ preferences::preferences(dart *TDart, io *TIO, QDialog *parent) : myDart(TDart),
 	setupUi(this);
 	
 	//General
+	connect(cobLanguage, SIGNAL (currentIndexChanged(int)), this, SLOT(vSettingChanged()));
 	connect(lePreferedQcfLanguage, SIGNAL (textEdited(QString)), this, SLOT(vSettingChanged()));
 	connect(spbMaxPlaceCount, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
 	connect(spbMaxTime, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
@@ -47,6 +48,10 @@ preferences::~preferences() {
 
 void preferences::vReset() {
 	//General
+	if(myDart->qsLanguage=="de") cobLanguage->setCurrentIndex(1);
+	else if(myDart->qsLanguage=="en") cobLanguage->setCurrentIndex(2);
+	else if(myDart->qsLanguage=="la") cobLanguage->setCurrentIndex(3);
+	else cobLanguage->setCurrentIndex(0);
 	lePreferedQcfLanguage->setText(myDart->qsPreferedQcfLanguage);
 	spbMaxPlaceCount->setValue(myDart->iMaxPlaceCount);
 	spbMaxTime->setValue(myDart->iMaxTime);
@@ -64,6 +69,7 @@ void preferences::vReset() {
 
 void preferences::vRestoreDefaults() {
 	//General
+	cobLanguage->setCurrentIndex(0);
 	lePreferedQcfLanguage->setText("ui,default,en");
 	spbMaxPlaceCount->setValue(10);
 	spbMaxTime->setValue(20);
@@ -103,6 +109,12 @@ void preferences::vSettingChanged() {
 		} else {
 			lblStatusText->setVisible(false);
 		}
+		
+	} else if(QObject::sender()==cobLanguage) {
+		
+		lblStatusText->setVisible(true);
+		lblStatusText->setStyleSheet("font-weight:bold; color:gray;");
+		lblStatusText->setText(tr("A new user interface language will be completely applied after restarting QeoDart."));
 	
 	} else {
 		lblStatusText->setVisible(false);
@@ -115,6 +127,12 @@ void preferences::vAccepted() {
 	
 	
 	// General
+	
+	QString lang="default";
+	if(cobLanguage->currentText()=="Deutsch") lang="de";
+	else if(cobLanguage->currentText()=="English") lang="en";
+	else if(cobLanguage->currentText()=="Latina") lang="la";
+	myIO->settings->setValue("qsLanguage",lang);
 	
 	myDart->qsPreferedQcfLanguage=lePreferedQcfLanguage->text();
 	if(myDart->qsPreferedQcfLanguage[myDart->qsPreferedQcfLanguage.length()-1]!=',') myDart->qsPreferedQcfLanguage+=",";
