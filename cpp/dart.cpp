@@ -663,7 +663,7 @@ void dart::vRepaintPlayerLabels() {
 	}
 }
 
-//repaint all label which are not player-specific
+//repaints all labels which are not player-specific
 void dart::vRepaintCommonLabels() {
 	int fontSize=iGetFontSize();
         QString stylesheet=QString("color:%2;font-size:%1px;font-family:arial,sans-serif")
@@ -1042,7 +1042,7 @@ void dart::vSetGameMode(enGameModes mode) {
 			gridLayout->removeWidget(lineEdit);
 			gridLayout->addWidget(lineEdit,0,0);
 			
-			vSetNumberOfPlayers(1); // TODO save it
+			vSetNumberOfPlayers(1);
 			lineEdit->clear();
 			vTextEditedEvent(); return;
 			break;
@@ -1057,7 +1057,7 @@ void dart::vSetGameMode(enGameModes mode) {
 			vSetNumberOfPlayers(1);
 			break;
 		case enLocal:
-			vSetNumberOfPlayers(iNumberOfPlayers);
+			vSetNumberOfPlayers(myIO->settings->value("iNumberOfPlayers","1").toInt());
 			break;
 	}
 	
@@ -1127,9 +1127,10 @@ void dart::vResetForNewGame() {
 		qlTotalScores.append(ts);
 	}
 	iPlaceCount=0;
+	iCurrentPlayer=0;
 	
 	vShowTotalScores();
-//	vRepaintCommonLabels();
+	if(qlPlayerLabels.count()!=0) vRepaintCommonLabels();
 }
 
 void dart::vNewGame() {
@@ -1528,6 +1529,7 @@ void dart::vReadQcf() {
 	vRepaintMap();
 	mySleep(1);
 	vToggleMapLayer();
+	qDebug() << iCurrentPlayer << "--------------------";
 	vResetForNewGame();
 	vNextRound();
 	

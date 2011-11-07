@@ -13,3 +13,4 @@ osm/
 qcf/*test*
 qrc*cpp
 *.user
+*.pro.user.*

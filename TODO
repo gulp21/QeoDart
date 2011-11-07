@@ -1,8 +1,6 @@
 highscore: date (today), time (x ago, api?), pref lang
 Subset > [ ] 1-10; [ ] 11-20; bezogen auf gewhälte Orte
 
-BUG: 2players: player 1 clicks -> change map -> colors are wrong
-
 http://la.wikipedia.org/wiki/Index_civitatum_Europaearum
 http://de.wikipedia.org/wiki/Liste_der_Gro%C3%9Fst%C3%A4dte_in_Deutschland
 http://de.wikipedia.org/wiki/Liste_der_Millionenst%C3%A4dte

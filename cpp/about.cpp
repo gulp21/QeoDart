@@ -1,6 +1,9 @@
 #include "about.hpp"
 
 aboutWindow::aboutWindow(dart *TDart, QWidget *parent) : myDart(TDart), QDialog(parent) {
+	
+	setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint & ~Qt::WindowMinimizeButtonHint);
+	
 	setupUi(this);
 	
 	lblVersion->setText(tr("Version %1").arg("2.0a"));
@@ -18,10 +21,12 @@ aboutWindow::aboutWindow(dart *TDart, QWidget *parent) : myDart(TDart), QDialog(
 	if(f->copyright.borders!="") s+=tr("<b>The image with the borders:</b><br/>%1<br/><br/>").arg(f->copyright.borders);
 	if(f->copyright.rivers!="") s+=tr("<b>The image with the rivers:</b><br/>%1<br/><br/>").arg(f->copyright.rivers);
 	if(f->copyright.elevations!="") s+=tr("<b>The image with the elevations:</b><br/>%1<br/><br/>").arg(f->copyright.elevations);
-	if(s!="")
+	if(s!="") {
 		s.prepend(tr("<p>The following licences apply to your current map (%1):</p>").arg(f->mapName));
-	else
+		s.remove(QRegExp("<br/><br/>$")); // remove unnecessary <br/><br/> at the end of the string
+	} else {
 		s=tr("No licensing information is available for the map \"%1\" (%2).").arg(f->mapName).arg(f->path);
+	}
 	s=s.replace("\\n","<br/>");
 	lblMapLicense->setText(s);
 }
