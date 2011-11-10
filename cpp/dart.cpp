@@ -454,7 +454,7 @@ void dart::vSetNumberOfPlayers(int n) {
 			QLabel *lblScore;
 			lblScore = new QLabel(this);
 			gridLayout->addWidget(lblScore,i,0);
-			lblScore->setText(QString(tr("<span>%n Point(s) &#8960; %1, %2</span>","",0)).arg(0.0,0,'f',1).arg(0.0,0,'f',1));
+			lblScore->setText(QString(tr("%n Point(s) ø %1, %2","",0)).arg(0.0,0,'f',1).arg(0.0,0,'f',1));
 			
 			QLabel *lblRating;
 			lblRating = new QLabel(this);
@@ -871,9 +871,9 @@ void dart::vShowScores() {
 void dart::vShowTotalScores() {
 	for(int i=0; i<qlPlayerLabels.count(); i++) { // show score for each player
 		if(width()>300)
-			qlPlayerLabels[i][0]->setText(QString(tr("<span>%n Point(s) &#8960; %1, %2</span>","",qlTotalScores[i].score)).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
+			qlPlayerLabels[i][0]->setText(QString(tr("%n Point(s) ø %1, %2","",qlTotalScores[i].score)).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
 		else
-			qlPlayerLabels[i][0]->setText(QString(tr("<span>%1, &#8960; %2, %3</span>")).arg(qlTotalScores[i].score).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
+			qlPlayerLabels[i][0]->setText(QString(tr("%1, ø %2, %3")).arg(qlTotalScores[i].score).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
 	}
 }
 
