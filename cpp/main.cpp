@@ -20,6 +20,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 int main(int argc, char* argv[]) {
 	
+#ifndef Q_OS_WINCE
 	if(argc==2 && ((string)argv[1]=="-h" || (string)argv[1]=="--help") ) {
 		qDebug() << "Options:";
 		qDebug() << "  -h, --help:          prints this text (only works when it is the only command-line argument)";
@@ -27,7 +28,8 @@ int main(int argc, char* argv[]) {
 		qDebug() << "  -dp, --debug-places: when activating \"find place\", the rectangles describing the area are drawn around the places";
 		return 0;
 	}
-	
+#endif
+
 	QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8")); 
 	
         QApplication a(argc, argv);
