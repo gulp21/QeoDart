@@ -35,9 +35,21 @@ int main(int argc, char* argv[]) {
         QApplication a(argc, argv);
 	a.setAutoSipEnabled(true);
 	
-	QString lang=QLocale::system().name();
+//	TODO we should get dart::vRetranslate to work
+	QString configPath=QCoreApplication::applicationDirPath()+"/QeoDart.conf";
+	if( !QFile::exists(configPath) ) {
+#ifdef Q_OS_UNIX
+		configPath=QDir::homePath()+"/.config/QeoDart/QeoDart.conf";
+#endif
+#ifdef Q_OS_WIN32
+		configPath=QString(getenv("APPDATA"))+"/QeoDart/QeoDart.conf";
+#endif
+	}
+	QSettings *settings = new QSettings(configPath, QSettings::IniFormat);
+	QString lang=settings->value("qsLanguage","default").toString();
+	if(lang=="default") lang=QLocale::system().name();
 	
-	qDebug() << "[i] system language is" << lang << ", we are running in" << QCoreApplication::applicationDirPath() << ", and Qt translations are installed in" << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+	qDebug() << "[i] language is" << lang << ", we are running in" << QCoreApplication::applicationDirPath() << ", and Qt translations are installed in" << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
 	
 	// Qt translations for default dialogs
 	QTranslator qtTranslator;
@@ -47,6 +59,11 @@ int main(int argc, char* argv[]) {
 	QTranslator qtOwnTranslator;
 	qtOwnTranslator.load(QString(QCoreApplication::applicationDirPath()+"/lang/qt_%1").arg(lang));
 	a.installTranslator(&qtOwnTranslator);
+	
+	//English fallback
+	QTranslator translatore;
+	translatore.load(QString(QCoreApplication::applicationDirPath()+"/lang/en"));
+	a.installTranslator(&translatore);
 	
 	QTranslator translator;
 	translator.load(QString(QCoreApplication::applicationDirPath()+"/lang/%1").arg(lang));

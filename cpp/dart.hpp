@@ -11,6 +11,7 @@ See main.cpp for details. */
 #include <iostream>
 #include <math.h>
 #include <QDebug>
+#include <QDesktopServices>
 #include <QDesktopWidget>
 #include <QDialog>
 #include <QDir>
@@ -25,6 +26,7 @@ See main.cpp for details. */
 #include <QToolButton>
 #include <QTranslator>
 #include <qstring.h>
+#include <QUrl>
 #include <time.h>
 
 #ifdef Q_OS_WINCE 
@@ -103,13 +105,15 @@ Q_OBJECT
 		QList<QLabel*> qlMapLayers;
 		QList<highScoreEntry> qlHighScores;
 		
+		QLabel *lblMouseClickOverlay;
+		
 		QActionGroup *agLayers;
 		
 		enGameModes iGameMode;
 		enAskForModes iAskForMode;
 		enToolMenuBarState iToolMenuBarState;
                 
-                bool bAgainstTime, bResetCursor, bShortenToolbarText, bAutoNewGame;
+                bool bAgainstTime, bResetCursor, bShortenToolbarText, bUseOurCursor, bAutoNewGame, bAutoShowHighScores;
 
 		double dZoomFactor, dPxToKm;
 		
@@ -117,6 +121,7 @@ Q_OBJECT
 		int iMarginTop; // px between window decoration and toolbar
 		int iNumberOfPlayers, iMaxPlaceCount, iPlaceCount, iCurrentQcf, iMaxTime, iLettersPerSecond;
 		int iScoreAreaMode; // 0=point only; 1=25%; 2=100%
+		int iPenalty; // 0=no; 1=severe; 1=spelling
 		int iDelayNextCircle, iDelayNextPlayer, iDelayNextPlace, iDelayNextPlaceTraining;
 		
 		QString qsCurrentPlaceType, qsLanguage, qsPreferedQcfLanguage;
@@ -145,8 +150,6 @@ Q_OBJECT
 		QList<QList<QLabel*> > qlPlayerLabels;
 		QList<QColor> qlColorsOfPlayers;
 		QList<QString> qlComments;
-		
-		QLabel *lblMouseClickOverlay;
                 
                 QTimer *timer, *resizeTimer;
 		
@@ -226,6 +229,8 @@ Q_OBJECT
 		void vToolbarOverflow();
 		void vToggleMapLayer();
 		void vGiveHint();
+		void vAddMap();
+		void vReportBug();
 		
 	public slots:
 		void vReadQcf();

@@ -34,15 +34,15 @@
        <item>
         <widget class="QToolBox" name="toolBox_2">
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="page_4">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>479</width>
-            <height>164</height>
+            <width>462</width>
+            <height>139</height>
            </rect>
           </property>
           <attribute name="label">
@@ -141,8 +141,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>479</width>
-            <height>164</height>
+            <width>462</width>
+            <height>139</height>
            </rect>
           </property>
           <attribute name="label">
@@ -240,18 +240,14 @@ p, li { white-space: pre-wrap; }
             </layout>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
-             <item>
-              <widget class="QCheckBox" name="cbResetCursor">
-               <property name="whatsThis">
-                <string>When you are playing with more than one player, you do not want the other players to see where you have clicked. Now you can either move the cursor to another position yourself, or you enable this feature which automatically moves the curosr.</string>
-               </property>
-               <property name="text">
-                <string>Reset cursor when playing with more than one player</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
+            <widget class="QCheckBox" name="cbResetCursor">
+             <property name="whatsThis">
+              <string>When you are playing with more than one player, you do not want the other players to see where you have clicked. Now you can either move the cursor to another position yourself, or you enable this feature which automatically moves the curosr.</string>
+             </property>
+             <property name="text">
+              <string>Reset cursor when playing with more than one player</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QCheckBox" name="cbAutoNewGame">
@@ -261,10 +257,7 @@ p, li { white-space: pre-wrap; }
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="cbAutoNewGame_2">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
+            <widget class="QCheckBox" name="cbAutoShowHighScores">
              <property name="text">
               <string>Show high score list after adding a new high score</string>
              </property>
@@ -368,10 +361,7 @@ p, li { white-space: pre-wrap; }
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QComboBox" name="comboBox">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
+              <widget class="QComboBox" name="cobPenalty">
                <property name="whatsThis">
                 <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -630,9 +620,6 @@ p, li { white-space: pre-wrap; }
           <layout class="QVBoxLayout" name="verticalLayout_11">
            <item>
             <widget class="QCheckBox" name="cbUseOurCursor">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
              <property name="whatsThis">
               <string>Enable this option if QeoDart doesn't recognize the positions of your clicks properly.</string>
              </property>

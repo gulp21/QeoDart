@@ -21,5 +21,6 @@ Reporting Issues:
 * https://github.com/gulp21/QeoDart/issues
 * support.gulp21 (ä) googlemail.com
 
+For installation and compiling instructions, see INSTALL
 
 Run ./QeoDart --help to see the list of supported command-line arguments.

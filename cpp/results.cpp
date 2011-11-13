@@ -3,10 +3,12 @@
 
 using namespace std;
 
-resultWindow::resultWindow(dart *TDart, int PLayer, io *TIO, QDialog *parent) : myDart(TDart), player(PLayer), myIO(TIO), QDialog(parent) {
+resultWindow::resultWindow(bool &ShowHighScores, dart *TDart, int PLayer, io *TIO, QDialog *parent) : myDart(TDart), player(PLayer), myIO(TIO), QDialog(parent) {
 	const int R1=15, G1=135, B1=28, R2=255, G2=25, B2=25;
 	
 	myIO->vLoadHighScores(myDart->qlQcfxFiles[myDart->iCurrentQcf].mapName);
+	
+	bShowHighScores=&ShowHighScores;
 	
 	setParent(myDart);
 
@@ -127,6 +129,8 @@ void resultWindow::vClose() {
 	qDebug() << "[i] saved" << name<< score;
 	
 	myIO->vSaveHighScores(myDart->qlQcfxFiles[myDart->iCurrentQcf].mapName);
+	
+	*bShowHighScores=true;
 	
 	close();
 }
