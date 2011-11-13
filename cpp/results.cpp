@@ -44,11 +44,11 @@ resultWindow::resultWindow(dart *TDart, int PLayer, io *TIO, QDialog *parent) : 
 	}
 	
 	if(myDart->iNumberOfPlayers==1) {
-		lblScore->setText(QString(tr("You have a score of %n point(s) (ø %1).","",
+		lblScore->setText(QString(tr("You have a score of %n point(s) (Ø %1).","",
 		                             myDart->qlTotalScores[0].score))
 		                  .arg(myDart->qlTotalScores[0].score/myDart->iMaxPlaceCount,0,'f',1));
 	} else {
-		lblScore->setText(QString(tr("Player %1 has a score of %n point(s) (ø %2).","",
+		lblScore->setText(QString(tr("Player %1 has a score of %n point(s) (Ø %2).","",
 		                             myDart->qlTotalScores[player].score))
 		                  .arg(player+1)
 		                  .arg(myDart->qlTotalScores[player].score/myDart->iMaxPlaceCount,0,'f',1));

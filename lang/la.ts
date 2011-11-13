@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.0" language="la" sourcelanguage="en">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>MainWindow</name>
     <message>
@@ -27,17 +28,17 @@ Search within names:
     <message>
         <location filename="../ui/mainWindow.ui" line="180"/>
         <source>Match beginning of names</source>
-        <translation type="unfinished"></translation>
+        <translation>In initio nominum quaerere</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="185"/>
         <source>Match beginning of words</source>
-        <translation type="unfinished"></translation>
+        <translation>In initio verborum quaerere</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="190"/>
         <source>Search within names</source>
-        <translation type="unfinished"></translation>
+        <translation>In nominibus quaerere</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="198"/>
@@ -135,7 +136,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainWindow.ui" line="543"/>
         <source>&amp;Quit</source>
-        <translation>Finire</translation>
+        <translation>&amp;Exire</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="546"/>
@@ -227,12 +228,12 @@ p, li { white-space: pre-wrap; }
         <source>F7</source>
         <translation>F7</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/mainWindow.ui" line="653"/>
         <source>Add Map…</source>
         <translation>Tabulam Geographicam Addere…</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/mainWindow.ui" line="656"/>
         <source>&amp;Add Map…</source>
         <translation>Tabulam Geographicam &amp;Addere…</translation>
@@ -315,14 +316,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainWindow.ui" line="759"/>
         <source>Tool&amp;bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Linea signorum</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="762"/>
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/mainWindow.ui" line="767"/>
         <source>&amp;Configure QeoDart…</source>
         <translation type="unfinished"></translation>
@@ -405,7 +406,7 @@ p, li { white-space: pre-wrap; }
         <source>About</source>
         <translation>De</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/about.ui" line="120"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -471,7 +472,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../cpp/about.cpp" line="21"/>
         <source>&lt;b&gt;The image with the borders:&lt;/b&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Imago cum finibus:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt; {1&lt;?}</translation>
+        <translation>&lt;b&gt;Imago cum finibus:&lt;/b&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../cpp/about.cpp" line="22"/>
@@ -519,7 +520,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../cpp/dart.cpp" line="17"/>
         <source>Very Good!</source>
-        <translation type="unfinished"></translation>
+        <translation>Optime!</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="17"/>
@@ -529,12 +530,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../cpp/dart.cpp" line="17"/>
         <source>Very Fine!</source>
-        <translation type="unfinished"></translation>
+        <translation>Valde bonum!</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="18"/>
         <source>Well Done!</source>
-        <translation type="unfinished"></translation>
+        <translation>Well Done!</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="18"/>
@@ -567,34 +568,24 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="20"/>
-        <source>Not reallyâ¦</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../cpp/dart.cpp" line="20"/>
-        <source>Not quiteâ¦</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../cpp/dart.cpp" line="21"/>
         <source>Completely Wrong!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="21"/>
-        <source>That wasn&apos;t much of a hitâ¦</source>
-        <translation type="unfinished"></translation>
+        <source>Missed completely!</source>
+        <translation>Totum falsum!</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="21"/>
-        <source>Missed completely!</source>
-        <translation type="unfinished"></translation>
+        <source>That wasn&apos;t much of a hit…</source>
+        <translation>Non vero...</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="22"/>
         <source>Read wrongly?</source>
-        <translation type="unfinished"></translation>
+        <translation>Falsum lectum?</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="22"/>
@@ -604,7 +595,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../cpp/dart.cpp" line="22"/>
         <source>D&apos;oh!</source>
-        <translation type="unfinished"></translation>
+        <translation>Immo!!!</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="148"/>
@@ -625,6 +616,11 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../cpp/dart.cpp" line="201"/>
         <source>Sorry, no valid qcfx files could be found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="202"/>
+        <source>You might want to add a file through Map → Add map.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -688,11 +684,6 @@ Do you want to continue anyway?</source>
     <message>
         <location filename="../cpp/dart.cpp" line="571"/>
         <source>Against Time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../cpp/dart.cpp" line="202"/>
-        <source>You might want to add a file through Map â Add map.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -768,11 +759,6 @@ Do you want to continue anyway?</source>
         <translation>Lusor %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="854"/>
-        <source>â</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../cpp/dart.cpp" line="859"/>
         <source>Missed by %1 km </source>
         <translation type="unfinished"></translation>
@@ -787,17 +773,9 @@ Do you want to continue anyway?</source>
         <source>%1(%2)%3</source>
         <translation type="unfinished">%1(%2)%3</translation>
     </message>
-    <message numerus="yes">
-        <location filename="../cpp/dart.cpp" line="457"/>
-        <location filename="../cpp/dart.cpp" line="874"/>
-        <source>%n Point(s) Ã¸ %1, %2</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-        </translation>
-    </message>
     <message>
         <location filename="../cpp/dart.cpp" line="876"/>
-        <source>%1, Ã¸ %2, %3</source>
+        <source>%1, Ø %2, %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -844,6 +822,29 @@ Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../cpp/dart.cpp" line="20"/>
+        <source>Not really…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="20"/>
+        <source>Not quite…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../cpp/dart.cpp" line="457"/>
+        <location filename="../cpp/dart.cpp" line="874"/>
+        <source>%n Point(s) Ø %1, %2</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="854"/>
+        <source>∞</source>
+        <translation type="unfinished">∞</translation>
+    </message>
+    <message>
         <location filename="../cpp/dart.cpp" line="1513"/>
         <source>Chance Map</source>
         <translation type="unfinished"></translation>
@@ -874,9 +875,9 @@ Do you want to continue?</source>
         <source>Name</source>
         <translation>Nomen</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/highscore.ui" line="48"/>
-        <source>ø Score</source>
+        <source>Ø Score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -962,7 +963,7 @@ QeoDart will be quit.</source>
 </context>
 <context>
     <name>preferences</name>
-    <message utf8="true">
+    <message>
         <location filename="../ui/preferences.ui" line="14"/>
         <source>Configure – QeoDart</source>
         <translation type="unfinished"></translation>
@@ -1101,7 +1102,7 @@ p, li { white-space: pre-wrap; }
         <source>Penalty</source>
         <translation>Poena</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/preferences.ui" line="376"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -1139,7 +1140,7 @@ p, li { white-space: pre-wrap; }
         <source>In the mode &quot;Ask for: Name of Place&quot; in combination with &quot;Against Time&quot;, you get some &quot;free seconds&quot; depending on the length of the name and the number of letters you can type per second.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/preferences.ui" line="457"/>
         <source>Determine…</source>
         <translation type="unfinished"></translation>
@@ -1162,7 +1163,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/preferences.ui" line="520"/>
         <source>before next player</source>
-        <translation type="unfinished"></translation>
+        <translation>ante alternare lusores</translation>
     </message>
     <message>
         <location filename="../ui/preferences.ui" line="579"/>
@@ -1257,14 +1258,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message numerus="yes">
         <location filename="../cpp/results.cpp" line="47"/>
-        <source>You have a score of %n point(s) (Ã¸ %1).</source>
+        <source>You have a score of %n point(s) (Ø %1).</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../cpp/results.cpp" line="51"/>
-        <source>Player %1 has a score of %n point(s) (Ã¸ %2).</source>
+        <source>Player %1 has a score of %n point(s) (Ø %2).</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
@@ -1272,12 +1273,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../cpp/results.cpp" line="57"/>
         <source>That equals grade %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Id respondet %1.</translation>
     </message>
     <message>
         <location filename="../cpp/results.cpp" line="70"/>
-        <source>â</source>
-        <translation type="unfinished"></translation>
+        <source>∞</source>
+        <translation>∞</translation>
     </message>
     <message>
         <location filename="../cpp/results.cpp" line="73"/>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.0" language="de_DE" sourcelanguage="en">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>MainWindow</name>
     <message>
@@ -309,12 +310,12 @@ p, li { white-space: pre-wrap; }
         <source>F7</source>
         <translation>F7</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/mainWindow.ui" line="653"/>
         <source>Add Map…</source>
         <translation>Karte hinzufügen…</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/mainWindow.ui" line="656"/>
         <source>&amp;Add Map…</source>
         <translation>K&amp;arte hinzufügen…</translation>
@@ -404,7 +405,7 @@ p, li { white-space: pre-wrap; }
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/mainWindow.ui" line="767"/>
         <source>&amp;Configure QeoDart…</source>
         <translation>QeoDart &amp;einrichten…</translation>
@@ -499,7 +500,7 @@ p, li { white-space: pre-wrap; }
         <source>About</source>
         <translation>Über</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/about.ui" line="120"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -720,14 +721,12 @@ p, li { white-space: pre-wrap; }
         <translation>Au weia!</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="20"/>
         <source>Not reallyâ¦</source>
-        <translation>Nicht wirklich…</translation>
+        <translation type="obsolete">Nicht wirklich…</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="20"/>
         <source>Not quiteâ¦</source>
-        <translation>Nicht ganz…</translation>
+        <translation type="obsolete">Nicht ganz…</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="21"/>
@@ -735,14 +734,28 @@ p, li { white-space: pre-wrap; }
         <translation>Ganz falsch!</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="21"/>
         <source>That wasn&apos;t much of a hitâ¦</source>
-        <translation>Das war wohl nicht…</translation>
+        <translation type="obsolete">Das war wohl nicht…</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="20"/>
+        <source>Not really…</source>
+        <translation>Nicht wirklich…</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="20"/>
+        <source>Not quite…</source>
+        <translation>Nicht ganz…</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="21"/>
         <source>Missed completely!</source>
         <translation>Voll daneben!</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="21"/>
+        <source>That wasn&apos;t much of a hit…</source>
+        <translation>Das war wohl nicht…</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="22"/>
@@ -779,6 +792,11 @@ p, li { white-space: pre-wrap; }
         <location filename="../cpp/dart.cpp" line="201"/>
         <source>Sorry, no valid qcfx files could be found.</source>
         <translation>Entschuldigung, es konnte keine gültige qcfx-Datei gefunden werden.</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="202"/>
+        <source>You might want to add a file through Map → Add map.</source>
+        <translation>Vielleicht wollen Sie über Karte → Karte hinzufügen eine Karte hinzufügen.</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="217"/>
@@ -839,16 +857,43 @@ Wollen Sie trotzdem fortfahren?</translation>
     <message numerus="yes">
         <location filename="../cpp/dart.cpp" line="457"/>
         <location filename="../cpp/dart.cpp" line="874"/>
-        <source>%n Point(s) Ã¸ %1, %2</source>
+        <source>%n Point(s) Ø %1, %2</source>
         <translation>
+            <numerusform>%n Punkt Ø %1, %2</numerusform>
+            <numerusform>%n Punkt Ø %1, %2</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="876"/>
+        <source>%1, Ø %2, %3</source>
+        <translation>%1, Ø %2, %3</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n Point(s) ø %1, %2</source>
+        <translation type="obsolete">
             <numerusform>%n Punkt ø %1, %2</numerusform>
             <numerusform>%n Punkte ø %1, %2</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="876"/>
+        <location filename="../cpp/dart.cpp" line="854"/>
+        <source>∞</source>
+        <translation>∞</translation>
+    </message>
+    <message>
+        <source>%1, ø %2, %3</source>
+        <translation type="obsolete">%1, ø %2, %3</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n Point(s) Ã¸ %1, %2</source>
+        <translation type="obsolete">
+            <numerusform>%n Punkt ø %1, %2</numerusform>
+            <numerusform>%n Punkte ø %1, %2</numerusform>
+        </translation>
+    </message>
+    <message>
         <source>%1, Ã¸ %2, %3</source>
-        <translation>%1, ø %2, %3</translation>
+        <translation type="obsolete">%1, ø %2, %3</translation>
     </message>
     <message>
         <source>&lt;span&gt;%1 Points &amp;#8960; %2, %3&lt;/span&gt;</source>
@@ -866,9 +911,8 @@ Wollen Sie trotzdem fortfahren?</translation>
         <translation>Auf Zeit</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="202"/>
         <source>You might want to add a file through Map â Add map.</source>
-        <translation>Vielleicht wollen Sie über Karte → Karte hinzufügen eine Karte hinzufügen.</translation>
+        <translation type="obsolete">Vielleicht wollen Sie über Karte → Karte hinzufügen eine Karte hinzufügen.</translation>
     </message>
     <message numerus="yes">
         <source>&lt;span&gt;%n Point(s) &amp;#8960; %1, %2&lt;/span&gt;</source>
@@ -950,9 +994,8 @@ Wollen Sie trotzdem fortfahren?</translation>
         <translation>Spieler %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="854"/>
         <source>â</source>
-        <translation>∞</translation>
+        <translation type="obsolete">∞</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="859"/>
@@ -1057,7 +1100,7 @@ Wollen Sie fortfahren?</translation>
         <source>Name</source>
         <translation>Name</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1069,10 +1112,14 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:9pt; font-weight:600; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;⌀ Punktzahl&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
-    <message utf8="true">
-        <location filename="../ui/highscore.ui" line="48"/>
+    <message>
         <source>ø Score</source>
-        <translation>ø Punkte</translation>
+        <translation type="obsolete">ø Punkte</translation>
+    </message>
+    <message>
+        <location filename="../ui/highscore.ui" line="48"/>
+        <source>Ø Score</source>
+        <translation>Ø Punkte</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="68"/>
@@ -1159,7 +1206,7 @@ QeoDart wird nun beendet.</translation>
 </context>
 <context>
     <name>preferences</name>
-    <message utf8="true">
+    <message>
         <location filename="../ui/preferences.ui" line="14"/>
         <source>Configure – QeoDart</source>
         <translation>Einrichten – QeoDart</translation>
@@ -1302,7 +1349,7 @@ p, li { white-space: pre-wrap; }
         <source>Penalty</source>
         <translation>Punktabzug</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/preferences.ui" line="376"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -1353,7 +1400,7 @@ p, li { white-space: pre-wrap; }
         <source>In the mode &quot;Ask for: Name of Place&quot; in combination with &quot;Against Time&quot;, you get some &quot;free seconds&quot; depending on the length of the name and the number of letters you can type per second.</source>
         <translation>Im Modus &quot;Fragen nach: Ortsname&quot; in Kombination mit &quot;Auf Zeit&quot; bekommen Sie &quot;Bonussekunden&quot; in Abhängigkeit von der Länge des Namen und die Anzahl der Buchstaben, die Sie pro Sekunde eingeben können.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/preferences.ui" line="457"/>
         <source>Determine…</source>
         <translation>Bestimmen…</translation>
@@ -1503,19 +1550,47 @@ p, li { white-space: pre-wrap; }
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../cpp/results.cpp" line="47"/>
         <source>You have a score of %n point(s) (Ã¸ %1).</source>
-        <translation>
+        <translation type="obsolete">
             <numerusform>Sie haben %n Punkt (ø %1).</numerusform>
             <numerusform>Sie haben %n Punkte (ø %1).</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../cpp/results.cpp" line="51"/>
         <source>Player %1 has a score of %n point(s) (Ã¸ %2).</source>
-        <translation>
+        <translation type="obsolete">
             <numerusform>Spieler %1 hat %n Punkt (ø %2).</numerusform>
             <numerusform>Spieler %1 hat %n Punkte (ø %2).</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>You have a score of %n point(s) (ø %1).</source>
+        <translation type="obsolete">
+            <numerusform>Sie haben %n Punkt (ø %1).</numerusform>
+            <numerusform>Sie haben %n Punkte (ø %1).</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>Player %1 has a score of %n point(s) (ø %2).</source>
+        <translation type="obsolete">
+            <numerusform>Spieler %1 hat %n Punkt (ø %2).</numerusform>
+            <numerusform>Spieler %1 hat %n Punkte (ø %2).</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../cpp/results.cpp" line="47"/>
+        <source>You have a score of %n point(s) (Ø %1).</source>
+        <translation>
+            <numerusform>Sie haben %n Punkt (Ø %1).</numerusform>
+            <numerusform>Sie haben %n Punkte (Ø %1).</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../cpp/results.cpp" line="51"/>
+        <source>Player %1 has a score of %n point(s) (Ø %2).</source>
+        <translation>
+            <numerusform>Spieler %1 hat %n Punkt (Ø %2).</numerusform>
+            <numerusform>Spieler %1 hat %n Punkte (Ø %2).</numerusform>
         </translation>
     </message>
     <message>
@@ -1525,8 +1600,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../cpp/results.cpp" line="70"/>
-        <source>â</source>
+        <source>∞</source>
         <translation>∞</translation>
+    </message>
+    <message>
+        <source>â</source>
+        <translation type="obsolete">∞</translation>
     </message>
     <message>
         <location filename="../cpp/results.cpp" line="73"/>
