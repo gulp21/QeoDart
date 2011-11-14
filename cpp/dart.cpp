@@ -475,7 +475,7 @@ void dart::vSetNumberOfPlayers(int n) {
 			
 			// usually we do this when starting a new game, but since we allow increasing the number of players
 			// during the first round, we must add totalScore here
-			while(qlTotalScores.count()<iNumberOfPlayers) {
+			while(qlTotalScores.count()<iNumberOfPlayers) { // TODO redundant01
 				totalScore ts;
 				ts.score=0;
 				ts.mark=0;
@@ -733,7 +733,7 @@ void dart::vMouseClickEvent(int x, int y) {
 	y=iGetUnzoomed(y);
 	vDrawPoint(x,y,qlCircleLabels[iCurrentPlayer],qlColorsOfPlayers[iCurrentPlayer]);
 	
-	scoreHistory score;
+	scoreHistory score; // TODO redundant02
 	score.x=x;
 	score.y=y;
 	score.diffPxArea=dGetDistanceInPx(x,y,iPlaceCount-1); // respects area // TODO what about shown distance?
@@ -744,14 +744,14 @@ void dart::vMouseClickEvent(int x, int y) {
         if(bAgainstTime) {
                 score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
                 score.mark=dGetMarkFromScore(score.score);
-		timer->stop();
+		timer->stop(); // TODO redundant03
         }
 	if(bGaveHint) {
 		score.score*=0.75;
 		score.mark=dGetMarkFromScore(score.score);
 		bGaveHint=false;
 	}
-	qlScoreHistory[iCurrentPlayer].append(score);
+	qlScoreHistory[iCurrentPlayer].append(score); // TODO redundant04
 	
 	if(! (iGameMode==enTraining && iPlaceCount>=5) ) {
 		qlTotalScores[iCurrentPlayer].score+=score.score;
@@ -767,7 +767,7 @@ void dart::vMouseClickEvent(int x, int y) {
 		
 		if(bResetCursor) QCursor::setPos(QWidget::x()+5,QWidget::y()+iPaddingTop+iMarginTop+10);
 		
-		iCurrentPlayer++;
+		iCurrentPlayer++; // TODO redundant05
 		vRemoveAllCircles();
 		qDebug()<<"f";
 		vRepaintPlayerLabels();
@@ -775,7 +775,7 @@ void dart::vMouseClickEvent(int x, int y) {
                 vSetAgainstTime(bAgainstTime);
 		
 		bAcceptingClickEvent=TRUE;
-		
+		 // TODO redundant06
 	} else { // show results
 		
 		iCurrentPlayer=0;
@@ -1125,7 +1125,7 @@ void dart::vResetForNewGame() {
 	}
 	
 	qlTotalScores.clear();
-	for(int i=0; i<iNumberOfPlayers; i++) {
+	for(int i=0; i<iNumberOfPlayers; i++) { // TODO redundant01
 		totalScore ts;
 		ts.score=0;
 		ts.mark=0;
@@ -1426,7 +1426,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 		y=-1;
 	}
 
-	scoreHistory score;
+	scoreHistory score; // TODO redundant02
 	score.x=x;
 	score.y=y;
 	score.diffPxArea=dGetDistanceInPx(x,y,iPlaceCount-1); // respects area // TODO what about shown distance?
@@ -1440,7 +1440,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
                 iTimerElapsed-=bonusSeconds;
                 if(iTimerElapsed<0) iTimerElapsed=0;
                 score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
-		timer->stop();
+		timer->stop(); // TODO redundant03 ^why is this different?^
         }
 	if(bGaveHint) {
 		score.score*=0.75;
@@ -1449,7 +1449,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 	}
 	score.mark=dGetMarkFromScore(score.score);
         
-	qlScoreHistory[iCurrentPlayer].append(score);
+	qlScoreHistory[iCurrentPlayer].append(score); // TODO redundant04
 	
 	if(! (iGameMode==enTraining && iPlaceCount>=5) ) {
 		qlTotalScores[iCurrentPlayer].score+=score.score;
@@ -1462,7 +1462,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 	if(iCurrentPlayer<iNumberOfPlayers-1) { // next player
 		
 		mySleep(iDelayNextPlayer);
-		iCurrentPlayer++;
+		iCurrentPlayer++; // TODO redundant05
 		vRemoveAllCircles();
 		qDebug()<<"f";
 		vRepaintPlayerLabels();
@@ -1470,11 +1470,11 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 		
 		lineEdit->clear();
 		lineEdit->setStyleSheet("");
-		lineEdit->setEnabled(TRUE); //c//
+		lineEdit->setEnabled(true); //c//
 		lineEdit->setFocus(Qt::OtherFocusReason);
                 
                 vSetAgainstTime(bAgainstTime);
-		
+		 // TODO redundant06
 	} else { // show results
 		
 		iCurrentPlayer=0;

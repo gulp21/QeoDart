@@ -13,29 +13,20 @@ indien
 git update-index --assume-unchanged
 
 //TODOs
-
 http://doc.qt.nokia.com/4.7/qtestlib-tutorial1.html
 
 http://cppcheck.sourceforge.net/
 http://checkstyle.sourceforge.net/
-/home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp:321: 6 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 1.022
-/home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp:321: 6 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 351
-/home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp:322: 5 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 898
-/home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp:351: 6 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 1.022
-/home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp:352: 5 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 898
-/home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp:458: 5 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 1.073
-/home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp:692: 8 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 1.364
-/home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp:706: 13 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 1.383
-/home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp:722: 5 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 1.396
-/home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp:730: 34 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 1.408
-/home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp:898: 5 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 1.023
-/home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp:1091: 5 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 1.452
-/home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp:1645: 6 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 1.647
-/home/markus/Dokumente/GitHub/QeoDart/cpp/io.cpp:1: 7 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 1
-/home/markus/Dokumente/GitHub/QeoDart/cpp/qtwin.cpp:134: 6 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/qtwin.cpp, beginnend bei Zeile 172
-/home/markus/Dokumente/GitHub/QeoDart/cpp/template.cpp:1: 11 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/io.cpp, beginnend bei Zeile 1
-/home/markus/Dokumente/GitHub/QeoDart/cpp/template.cpp:1: 7 gleiche Zeilen in /home/markus/Dokumente/GitHub/QeoDart/cpp/dart.cpp, beginnend bei Zeile 1
 
+<module name="StrictDuplicateCode">
+  <property name="min" value="5"/>
+</module>
+
+java -jar checkstyle-5.4-all.jar -c sun_checks.xml ~/Dokumente/GitHub/QeoDart/cpp/* | grep gleich
+TO IGNORE:	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+		Q_OBJECT
+		This is free software, and you are welcome to redistribute
+		/*!
 
 
 http://www.wdr.de/tv/daheimundunterwegs/extras/lustigsteortsnamen/index.jsp

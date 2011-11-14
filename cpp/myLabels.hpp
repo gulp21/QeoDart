@@ -12,6 +12,8 @@ using namespace std;
 
 const int RADIUS=10, PENWIDTH=5;
 
+// TODO redundant code!
+
 class QCircleLabel : public QLabel {
 
 	private:
