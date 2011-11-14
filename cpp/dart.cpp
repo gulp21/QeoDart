@@ -125,10 +125,10 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionHint, SIGNAL(triggered()), this, SLOT(vGiveHint()));
 	actionHint->setIcon(QIcon::fromTheme("games-hint", QIcon(":/icons/oxygen/games-hint.png")));
 	connect(actionReport_Bug, SIGNAL(triggered()), this, SLOT(vReportBug()));
-	actionReport_Bug->setIcon(QIcon::fromTheme("tools-report-bug", QIcon(":/icons/oxygen/tools-report-bug.png"))); //TODO
+	actionReport_Bug->setIcon(QIcon::fromTheme("tools-report-bug", QIcon(":/icons/oxygen/tools-report-bug.png"))); //TODO icon
 	connect(actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 	connect(actionAbout_QeoDart, SIGNAL(triggered()), this, SLOT(vShowAboutWindow()));
-	actionAbout_QeoDart->setIcon(QIcon::fromTheme("help-about", QIcon(":/icons/oxygen/help-about.png"))); //TODO
+	actionAbout_QeoDart->setIcon(QIcon::fromTheme("help-about", QIcon(":/icons/oxygen/help-about.png"))); //TODO icon
 	connect(actionMenu_Bar, SIGNAL(triggered()), this, SLOT(vSetToolMenuBarState()));
 	actionMenu_Bar->setIcon(QIcon::fromTheme("show-menu", QIcon(":/icons/oxygen/show-menu.png")));
 	connect(actionToolbar, SIGNAL(triggered()), this, SLOT(vSetToolMenuBarState()));
