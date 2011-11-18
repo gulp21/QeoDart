@@ -1,7 +1,9 @@
+FAQ: slow Linux (raster)
 what happens when config is read-only? (inform user! [continue using home] [Quit])
 sort maps alphabetically
+//TODO icon
+add helpmenu to game menu
 
-Subset > [ ] 1-10; [ ] 11-20; bezogen auf gewählte Orte
 highscore: date (today), time (x ago, api?), pref lang
 
 http://la.wikipedia.org/wiki/Index_civitatum_Europaearum

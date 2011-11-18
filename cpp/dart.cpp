@@ -70,7 +70,6 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	lblMouseClickOverlay->setAlignment(Qt::AlignTop);
 	lblMouseClickOverlay->show();
 	lblMouseClickOverlay->setGeometry(0, 0, iGetWindowSize(), iGetWindowSize());
-//	lblMouseClickOverlay->setCursor(QCursor(QPixmap("test.png"),1,1)); //TODO
 	
 	agGameMode = new QActionGroup(this);
 	agGameMode->addAction(actionFind_Place);
@@ -121,17 +120,21 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionCounties, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionCities, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionTowns, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
+	connect(actionAdd_Map, SIGNAL(triggered()), this, SLOT(vAddMap()));
+	actionAdd_Map->setIcon(QIcon::fromTheme("list-add", QIcon(":/icons/oxygen/list-add.png")));
 	connect(actionHint, SIGNAL(triggered()), this, SLOT(vGiveHint()));
+	actionHint->setIcon(QIcon::fromTheme("games-hint", QIcon(":/icons/oxygen/games-hint.png")));
+	connect(actionReport_Bug, SIGNAL(triggered()), this, SLOT(vReportBug()));
+	actionReport_Bug->setIcon(QIcon::fromTheme("tools-report-bug", QIcon(":/icons/oxygen/tools-report-bug.png"))); //TODO icon
 	connect(actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 	connect(actionAbout_QeoDart, SIGNAL(triggered()), this, SLOT(vShowAboutWindow()));
+	actionAbout_QeoDart->setIcon(QIcon::fromTheme("help-about", QIcon(":/icons/oxygen/help-about.png"))); //TODO icon
 	connect(actionMenu_Bar, SIGNAL(triggered()), this, SLOT(vSetToolMenuBarState()));
 	actionMenu_Bar->setIcon(QIcon::fromTheme("show-menu", QIcon(":/icons/oxygen/show-menu.png")));
 	connect(actionToolbar, SIGNAL(triggered()), this, SLOT(vSetToolMenuBarState()));
 	connect(actionBorders, SIGNAL(triggered()), this, SLOT(vToggleMapLayer()));
 	connect(actionRivers, SIGNAL(triggered()), this, SLOT(vToggleMapLayer()));
 	connect(actionElevations, SIGNAL(triggered()), this, SLOT(vToggleMapLayer()));
-	actionAdd_Map->setIcon(QIcon::fromTheme("list-add", QIcon(":/icons/oxygen/list-add.png")));
-	actionHint->setIcon(QIcon::fromTheme("games-hint", QIcon(":/icons/oxygen/games-hint.png")));
 	
 	connect(lineEdit, SIGNAL(returnPressed()), this, SLOT(vReturnPressedEvent()));
 	connect(lineEdit, SIGNAL(textEdited(QString)), this, SLOT(vTextEditedEvent()));
@@ -193,7 +196,6 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	myIO = new io(this);
 	myIO->vLoadSettings();
-	
 	
 	if(myIO->iFindQcf()==0) {
 		qDebug() << "[E] No valid qcfx files found, exiting";
@@ -454,7 +456,8 @@ void dart::vSetNumberOfPlayers(int n) {
 			QLabel *lblScore;
 			lblScore = new QLabel(this);
 			gridLayout->addWidget(lblScore,i,0);
-			lblScore->setText(QString(tr("%n Point(s) ø %1, %2","",0)).arg(0.0,0,'f',1).arg(0.0,0,'f',1));
+			lblScore->setText(QString(tr("%n Point(s) &Oslash; %1, %2","",0)).arg(0.0,0,'f',1).arg(0.0,0,'f',1));
+			lblScore->setTextFormat(Qt::RichText);
 			
 			QLabel *lblRating;
 			lblRating = new QLabel(this);
@@ -821,18 +824,21 @@ void dart::vShowComment() {
 }
 
 void dart::vShowResultWindows() {
-	bAcceptingClickEvent=FALSE;
+	bAcceptingClickEvent=false;
+	bool bShowHighScores=false;
 	
 	for(int i=0,max=qlPlacesHistory.count(); i<max; i++) {
 		vDrawPoint(qlPlacesHistory[i]->x, qlPlacesHistory[i]->y, qlPointLabels, qlPlacesHistory[i]->name);
 	}
 	
 	for(int i=0; i<iNumberOfPlayers; i++) {
-		resultWindow dialog(this,i,myIO);
+		resultWindow dialog(bShowHighScores,this,i,myIO);
 		dialog.exec();
 	}
 	
 	iPlaceCount=0; // needed for quit?-dialog
+	
+	if(bShowHighScores && bAutoShowHighScores) vShowHighScores();
 	
 	if(bAutoNewGame) vNewGame();
 }
@@ -871,9 +877,9 @@ void dart::vShowScores() {
 void dart::vShowTotalScores() {
 	for(int i=0; i<qlPlayerLabels.count(); i++) { // show score for each player
 		if(width()>300)
-			qlPlayerLabels[i][0]->setText(QString(tr("%n Point(s) ø %1, %2","",qlTotalScores[i].score)).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
+			qlPlayerLabels[i][0]->setText(QString(tr("%n Point(s) &Oslash; %1, %2","",qlTotalScores[i].score)).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
 		else
-			qlPlayerLabels[i][0]->setText(QString(tr("%1, ø %2, %3")).arg(qlTotalScores[i].score).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
+			qlPlayerLabels[i][0]->setText(QString(tr("%1, &Oslash; %2, %3")).arg(qlTotalScores[i].score).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
 	}
 }
 
@@ -933,8 +939,8 @@ QColor dart::qcGetColorOfPlayer(int player) {
 	QColor c=QColor(0,0,0,255);
 	
 	if(m==0 || m==3 || m==5) c.setBlue(i);
-	if(m==1 || m==3 || m==4) c.setGreen(i);
-	if(m==2 || m==4 || m==5) c.setRed(i);
+	if(m==1 || m==3 || m==4) c.setGreen(i*0.85); // *x makes the colors a bit less bright
+	if(m==2 || m==4 || m==5) c.setRed(i*0.9);
 	
 	return c;
 }
@@ -1163,7 +1169,8 @@ void dart::vNextRound() {
 	
 	if(iGameMode==enTraining && iPlaceCount>=5) {
 		qDebug() << "Revise";
-		for(int i=0; i<qlScoreHistory[0].count() && pn==-1; i++) {
+		for(int i=0; i<qlScoreHistory[0].count() && ppn==NULL; i++) {
+		//for(int i=0; i<qlScoreHistory[0].count() && pn==-1; i++) {
 			qDebug() << qlScoreHistory[0][i].mark << qlTotalScores[0].mark;
 			if(qlScoreHistory[0][i].mark>=4 || (qlScoreHistory[0][i].mark>2 && qlScoreHistory[0][i].mark>qlTotalScores[0].mark) ) {
 				qDebug() << qlPlacesHistory[i]->name;
@@ -1178,12 +1185,12 @@ void dart::vNextRound() {
 				}
 			} //if (badscore)
 		} // for (scorehistory)
-		if(pn==-1) {
+		if(ppn==NULL) {
 			vResetForNewGame();
 		}
 	}
 	
-	if(pn<=-1 && ppn==NULL) {
+	if(ppn==NULL) {
 		int i=0;
 		do {
 			qDebug() << qlCurrentTypePlaces.count();
@@ -1410,6 +1417,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 			}
 		}
 	}
+	if(iPenalty==0 || (iPenalty==2 && f==0.75) ) f=1;
 	
 	int x,y;
 	if(iIndexOfPlace!=-1) {
@@ -1752,7 +1760,7 @@ void dart::vTextEditedEvent() {
 
 	lineEdit->setStyleSheet(found ? "" : "color:red");
 }
- #include <QPropertyAnimation>
+// #include <QPropertyAnimation>
 void dart::vGiveHint() {
 	if(qlPlacesHistory.size()<1) return;
 	
@@ -1774,5 +1782,25 @@ void dart::vGiveHint() {
 		bGaveHint=true;
 	} else {
 		qDebug() << "[i] no hints available in mode" << iAskForMode;
+	}
+}
+
+void dart::vAddMap() {
+	//: the translated wiki pages are called DE:Maps etc. Please do NOT translate when there is no such wiki page in your language
+	if(!QDesktopServices::openUrl(QUrl(tr("https://github.com/gulp21/QeoDart/wiki/Maps")))) {
+		QMessageBox msgBox;
+		msgBox.setText(tr("The default browser could not be opened."));
+		msgBox.setIcon(QMessageBox::Warning);
+		msgBox.exec();
+	}
+}
+
+void dart::vReportBug() {
+	//: the translated wiki pages are called DE:Contribute etc. Please do NOT translate when there is no such wiki page in your language
+	if(!QDesktopServices::openUrl(QUrl(tr("https://github.com/gulp21/QeoDart/wiki/Contribute")))) {
+		QMessageBox msgBox;
+		msgBox.setText(tr("The default browser could not be opened."));
+		msgBox.setIcon(QMessageBox::Warning);
+		msgBox.exec();
 	}
 }

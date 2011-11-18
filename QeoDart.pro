@@ -29,6 +29,8 @@ TRANSLATIONS = lang/de.ts \
     lang/la.ts \
     lang/en.ts
 
+CODECFORTR = UTF-8
+
 QMAKE_CXXFLAGS_WARN_OFF += -Wno-reorder
 
 RESOURCES += \

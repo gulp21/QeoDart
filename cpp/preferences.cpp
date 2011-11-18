@@ -1,3 +1,9 @@
+/*
+QeoDart Copyright (C) 2011 Markus Brenneis
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it under certain conditions.
+See main.cpp for details. */
+
 #include "preferences.hpp"
 
 using namespace std;
@@ -13,14 +19,17 @@ preferences::preferences(dart *TDart, io *TIO, QDialog *parent) : myDart(TDart),
 	connect(spbMaxPlaceCount, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
 	connect(spbMaxTime, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
 	connect(cobScoreAreaMode, SIGNAL (currentIndexChanged(int)), this, SLOT(vSettingChanged()));
+	connect(cobPenalty, SIGNAL (currentIndexChanged(int)), this, SLOT(vSettingChanged()));
 	connect(cbResetCursor, SIGNAL (clicked()), this, SLOT(vSettingChanged()));
 	connect(cbAutoNewGame, SIGNAL (clicked()), this, SLOT(vSettingChanged()));
+	connect(cbAutoShowHighScores, SIGNAL (clicked()), this, SLOT(vSettingChanged()));
 	connect(spbLettersPerSecond, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
 	//Advanced
 	connect(spbDelayNextCircle, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
 	connect(spbDelayNextPlayer, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
 	connect(spbDelayNextPlace, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
 	connect(spbDelayNextPlaceTraining, SIGNAL (valueChanged(int)), this, SLOT(vSettingChanged()));
+	connect(cbUseOurCursor, SIGNAL (clicked()), this, SLOT(vSettingChanged()));
 	connect(cbShortenToolbarText, SIGNAL (clicked()), this, SLOT(vSettingChanged()));
 	//buttons
 	connect(buttonBox, SIGNAL (accepted()), this, SLOT(vAccepted()));
@@ -31,12 +40,13 @@ preferences::preferences(dart *TDart, io *TIO, QDialog *parent) : myDart(TDart),
 	
 	cbResetCursor->setToolTip(cbResetCursor->whatsThis());
 	cobScoreAreaMode->setToolTip(cobScoreAreaMode->whatsThis());
+	cobPenalty->setToolTip(cobPenalty->whatsThis());
 	spbLettersPerSecond->setToolTip(spbLettersPerSecond->whatsThis());
-//	cbCursor TODO->setToolTip(cbCursor->whatsThis());
+	cbUseOurCursor->setToolTip(cbUseOurCursor->whatsThis());
 	
 #ifdef QT_NO_CURSOR
 	cbResetCursor->hide();
-	cbUseOurCursor->hide(); //TODO cursor image
+	cbUseOurCursor->hide();
 #endif
 	
 	lblStatusText->setVisible(false);
@@ -57,13 +67,16 @@ void preferences::vReset() {
 	spbMaxTime->setValue(myDart->iMaxTime);
 	cbResetCursor->setChecked(myDart->bResetCursor);
 	cbAutoNewGame->setChecked(myDart->bAutoNewGame);
+	cbAutoShowHighScores->setChecked(myDart->bAutoShowHighScores);
 	cobScoreAreaMode->setCurrentIndex(myDart->iScoreAreaMode);
+	cobPenalty->setCurrentIndex(myDart->iPenalty);
 	spbLettersPerSecond->setValue(myDart->iLettersPerSecond);
 	//Advanced
 	spbDelayNextCircle->setValue(myDart->iDelayNextCircle);
 	spbDelayNextPlayer->setValue(myDart->iDelayNextPlayer);
 	spbDelayNextPlace->setValue(myDart->iDelayNextPlace);
 	spbDelayNextPlaceTraining->setValue(myDart->iDelayNextPlaceTraining);
+	cbUseOurCursor->setChecked(myDart->bUseOurCursor);
 	cbShortenToolbarText->setChecked(myDart->bShortenToolbarText);
 }
 
@@ -75,8 +88,10 @@ void preferences::vRestoreDefaults() {
 	spbMaxTime->setValue(20);
 	cbResetCursor->setChecked(true);
 	cbAutoNewGame->setChecked(false);
+	cbAutoShowHighScores->setChecked(true);
 	
 	cobScoreAreaMode->setCurrentIndex(1);
+	cobPenalty->setCurrentIndex(1);
 	
 	spbLettersPerSecond->setValue(8);
 	//Advanced
@@ -84,6 +99,7 @@ void preferences::vRestoreDefaults() {
 	spbDelayNextPlayer->setValue(500);
 	spbDelayNextPlace->setValue(2000);
 	spbDelayNextPlaceTraining->setValue(1000);
+	cbUseOurCursor->setChecked(false);
 	cbShortenToolbarText->setChecked(true);
 }
 
@@ -100,6 +116,7 @@ void preferences::vSettingChanged() {
 			lblStatusText->setText(tr("Setting the number of places smaller than the current place number will start a new game automatically."));
 		} else if( (QObject::sender()==spbMaxTime && spbMaxTime->value()!=myDart->iMaxTime && myDart->bAgainstTime) ||
 			   (QObject::sender()==cobScoreAreaMode && cobScoreAreaMode->currentIndex()!=myDart->iScoreAreaMode) ||
+			   (QObject::sender()==cobPenalty && cobPenalty->currentIndex()!=myDart->iPenalty) ||
 		           (QObject::sender()==spbLettersPerSecond && spbLettersPerSecond->value()!=myDart->iLettersPerSecond)
 			 ) {
 			lblStatusText->setVisible(true);
@@ -150,9 +167,12 @@ void preferences::vAccepted() {
 	
 	myIO->settings->setValue("bResetCursor",cbResetCursor->isChecked());
 	myIO->settings->setValue("bAutoNewGame",cbAutoNewGame->isChecked());
+	myIO->settings->setValue("bAutoShowHighScores",cbAutoShowHighScores->isChecked());
 	
 	if(myDart->iScoreAreaMode!=cobScoreAreaMode->currentIndex()) newGameRequired=true;
 	myIO->settings->setValue("iScoreAreaMode",cobScoreAreaMode->currentIndex());
+	if(myDart->iPenalty!=cobPenalty->currentIndex()) newGameRequired=true;
+	myIO->settings->setValue("iPenalty",cobPenalty->currentIndex());
 	
 	if(myDart->iLettersPerSecond!=spbLettersPerSecond->value()) newGameRequired=true;
 	myIO->settings->setValue("iLettersPerSecond",spbLettersPerSecond->value());
@@ -164,6 +184,7 @@ void preferences::vAccepted() {
 	myIO->settings->setValue("iDelayNextPlace",spbDelayNextPlace->value());
 	myIO->settings->setValue("iDelayNextPlaceTraining",spbDelayNextPlaceTraining->value());
 	
+	myIO->settings->setValue("bUseOurCursor",cbUseOurCursor->isChecked());
 	myIO->settings->setValue("bShortenToolbarText",cbShortenToolbarText->isChecked());
 	
 	

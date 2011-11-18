@@ -22,5 +22,6 @@
         <file>icons/icon64.png</file>
         <file>icons/icon90.png</file>
         <file>icons/icon200.png</file>
+        <file alias="cursor.png">icons/cursor.png</file>
     </qresource>
 </RCC>

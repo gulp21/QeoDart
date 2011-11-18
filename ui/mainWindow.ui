@@ -646,9 +646,6 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
   <action name="actionAdd_Map">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
    <property name="text">
     <string>Add Map…</string>
    </property>
@@ -828,9 +825,6 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
   <action name="actionReport_Bug">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
    <property name="text">
     <string>Report Bug</string>
    </property>

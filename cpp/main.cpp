@@ -23,9 +23,9 @@ int main(int argc, char* argv[]) {
 #ifndef Q_OS_WINCE
 	if(argc==2 && ((string)argv[1]=="-h" || (string)argv[1]=="--help") ) {
 		qDebug() << "Options:";
-		qDebug() << "  -h, --help:          prints this text (only works when it is the only command-line argument)";
-		qDebug() << "  --banner:            shows two QeoDart banners (cannot be visible at the same time, visibility depends on window geometry)";
-		qDebug() << "  -dp, --debug-places: when activating \"find place\", the rectangles describing the area are drawn around the places";
+		qDebug() << "  -h,  --help          prints this text (only works when it is the only command-line argument)";
+		qDebug() << "       --banner        shows two QeoDart banners (cannot be visible at the same time, visibility depends on window geometry)";
+		qDebug() << "  -dp, --debug-places  when activating \"find place\", the rectangles describing the area are drawn around the places";
 		return 0;
 	}
 #endif
@@ -35,9 +35,21 @@ int main(int argc, char* argv[]) {
         QApplication a(argc, argv);
 	a.setAutoSipEnabled(true);
 	
-	QString lang=QLocale::system().name();
+//	TODO we should get dart::vRetranslate to work
+	QString configPath=QCoreApplication::applicationDirPath()+"/QeoDart.conf";
+	if( !QFile::exists(configPath) ) {
+#ifdef Q_OS_UNIX
+		configPath=QDir::homePath()+"/.config/QeoDart/QeoDart.conf";
+#endif
+#ifdef Q_OS_WIN32
+		configPath=QString(getenv("APPDATA"))+"/QeoDart/QeoDart.conf";
+#endif
+	}
+	QSettings *settings = new QSettings(configPath, QSettings::IniFormat);
+	QString lang=settings->value("qsLanguage","default").toString();
+	if(lang=="default") lang=QLocale::system().name();
 	
-	qDebug() << "[i] system language is" << lang << ", we are running in" << QCoreApplication::applicationDirPath() << ", and Qt translations are installed in" << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+	qDebug() << "[i] language is" << lang << ", we are running in" << QCoreApplication::applicationDirPath() << ", and Qt translations are installed in" << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
 	
 	// Qt translations for default dialogs
 	QTranslator qtTranslator;
@@ -47,6 +59,11 @@ int main(int argc, char* argv[]) {
 	QTranslator qtOwnTranslator;
 	qtOwnTranslator.load(QString(QCoreApplication::applicationDirPath()+"/lang/qt_%1").arg(lang));
 	a.installTranslator(&qtOwnTranslator);
+	
+	//English fallback
+	QTranslator translatore;
+	translatore.load(QString(QCoreApplication::applicationDirPath()+"/lang/en"));
+	a.installTranslator(&translatore);
 	
 	QTranslator translator;
 	translator.load(QString(QCoreApplication::applicationDirPath()+"/lang/%1").arg(lang));

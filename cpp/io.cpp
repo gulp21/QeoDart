@@ -94,7 +94,7 @@ int io::iCheckQcf(QFile &file, QDomDocument &doc) {
 
 QStringList io::qslGetPreferedQcfLanguage() {
 	QString l=myDart->qsPreferedQcfLanguage;
-	return l.replace("ui","de").split(",");// TODO ui=pref
+	return l.replace("ui",myDart->qsLanguage=="default" ? QLocale::system().name().left(2) : myDart->qsLanguage).split(",");
 }
 
 void io::vGetMetaData(QDomDocument &doc, qcfFile &file) {
@@ -532,9 +532,12 @@ void io::vLoadSettings() {
 	
 	myDart->bResetCursor=settings->value("bResetCursor",true).toBool();
 	myDart->bAutoNewGame=settings->value("bAutoNewGame",false).toBool();
+	myDart->bAutoShowHighScores=settings->value("bAutoShowHighScores",true).toBool();
 	
 	myDart->iScoreAreaMode=settings->value("iScoreAreaMode",1).toInt();
 	if(myDart->iScoreAreaMode<0 || myDart->iScoreAreaMode>2) myDart->iScoreAreaMode=1;
+	myDart->iPenalty=settings->value("iPenalty",1).toInt();
+	if(myDart->iPenalty<0 || myDart->iPenalty>2) myDart->iPenalty=1;
 	
 	myDart->iLettersPerSecond=settings->value("iLettersPerSecond",8).toInt();
 	if(myDart->iLettersPerSecond<1) myDart->iLettersPerSecond=8;
@@ -547,7 +550,12 @@ void io::vLoadSettings() {
 	myDart->iDelayNextPlace=settings->value("iDelayNextPlace",2000).toInt();
 	myDart->iDelayNextPlaceTraining=settings->value("iDelayNextPlaceTraining",1000).toInt();
 	
+	myDart->bUseOurCursor=settings->value("bUseOurCursor",false).toBool();
 	myDart->bShortenToolbarText=settings->value("bShortenToolbarText",true).toBool();
+	
+	
+	if(myDart->bUseOurCursor) myDart->lblMouseClickOverlay->setCursor(QCursor(QPixmap(":/icons/cursor.png"),1,1));
+	else myDart->lblMouseClickOverlay->setCursor(Qt::ArrowCursor);
 }
 
 void io::vLoadHighScores(QString mapName) {

@@ -8,7 +8,7 @@ Download:
 * http: http://gulp21.github.com/
 
 Supported Operating Systems:
-* Linux (tested Kubuntu 11.04 32/64 bit)
+* Linux (tested Kubuntu 11.10 32/64 bit)
 * Windows (tested Windows 7 32 bit)
 * Windows CE (tested Windows CE Core 5.0)
 * MacOSX is also supported by Qt, but is untested
@@ -21,6 +21,7 @@ Reporting Issues:
 * https://github.com/gulp21/QeoDart/issues
 * support.gulp21 (ä) googlemail.com
 
+For installation and compiling instructions, see INSTALL
 
 Run ./QeoDart --help to see the list of supported command-line arguments.
 Command-line arguments are not supported under Windows CE.

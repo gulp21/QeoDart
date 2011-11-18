@@ -1,3 +1,9 @@
+/*
+QeoDart Copyright (C) 2011 Markus Brenneis
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it under certain conditions.
+See main.cpp for details. */
+
 #ifndef DIALOGS_HPP
 #define DIALOGS_HPP
 
@@ -10,12 +16,13 @@
 class resultWindow : public QDialog, public Ui::resultWindow {
 	Q_OBJECT
 	
+	bool *bShowHighScores;
 	dart *myDart;
 	int player;
 	io *myIO;
 	
 	public:
-		resultWindow (dart*, int PLayer, io*, QDialog *parent = 0);
+		resultWindow (bool &ShowHighScores, dart*, int PLayer, io*, QDialog *parent = 0);
 		~resultWindow();
 	private slots:
 		void vClose();

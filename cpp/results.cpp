@@ -1,12 +1,20 @@
+/*
+QeoDart Copyright (C) 2011 Markus Brenneis
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it under certain conditions.
+See main.cpp for details. */
+
 #include "results.hpp"
 #include "qtwin.h"
 
 using namespace std;
 
-resultWindow::resultWindow(dart *TDart, int PLayer, io *TIO, QDialog *parent) : myDart(TDart), player(PLayer), myIO(TIO), QDialog(parent) {
+resultWindow::resultWindow(bool &ShowHighScores, dart *TDart, int PLayer, io *TIO, QDialog *parent) : myDart(TDart), player(PLayer), myIO(TIO), QDialog(parent) {
 	const int R1=15, G1=135, B1=28, R2=255, G2=25, B2=25;
 	
 	myIO->vLoadHighScores(myDart->qlQcfxFiles[myDart->iCurrentQcf].mapName);
+	
+	bShowHighScores=&ShowHighScores;
 	
 	setParent(myDart);
 
@@ -44,11 +52,11 @@ resultWindow::resultWindow(dart *TDart, int PLayer, io *TIO, QDialog *parent) : 
 	}
 	
 	if(myDart->iNumberOfPlayers==1) {
-		lblScore->setText(QString(tr("You have a score of %n point(s) (ø %1).","",
+		lblScore->setText(QString(tr("You have a score of %n point(s) (&Oslash; %1).","",
 		                             myDart->qlTotalScores[0].score))
 		                  .arg(myDart->qlTotalScores[0].score/myDart->iMaxPlaceCount,0,'f',1));
 	} else {
-		lblScore->setText(QString(tr("Player %1 has a score of %n point(s) (ø %2).","",
+		lblScore->setText(QString(tr("Player %1 has a score of %n point(s) (&Oslash; %2).","",
 		                             myDart->qlTotalScores[player].score))
 		                  .arg(player+1)
 		                  .arg(myDart->qlTotalScores[player].score/myDart->iMaxPlaceCount,0,'f',1));
@@ -127,6 +135,8 @@ void resultWindow::vClose() {
 	qDebug() << "[i] saved" << name<< score;
 	
 	myIO->vSaveHighScores(myDart->qlQcfxFiles[myDart->iCurrentQcf].mapName);
+	
+	*bShowHighScores=true;
 	
 	close();
 }
