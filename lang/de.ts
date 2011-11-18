@@ -635,7 +635,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="180"/>
-        <location filename="../cpp/dart.cpp" line="581"/>
+        <location filename="../cpp/dart.cpp" line="582"/>
         <source>Place Types</source>
         <translation>Ortstyp</translation>
     </message>
@@ -667,7 +667,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../cpp/dart.cpp" line="342"/>
         <location filename="../cpp/dart.cpp" line="372"/>
-        <location filename="../cpp/dart.cpp" line="1078"/>
+        <location filename="../cpp/dart.cpp" line="1079"/>
         <source>When you change this setting, your current score will be lost.
 Do you want to continue?</source>
         <translation>Wenn Sie diese Einstellung ändern, werden Ihre jetzigen Punkte verloren gehen.
@@ -706,206 +706,224 @@ Wollen Sie trotzdem fortfahren?</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="424"/>
-        <location filename="../cpp/dart.cpp" line="580"/>
+        <location filename="../cpp/dart.cpp" line="581"/>
         <source>Players: %1</source>
         <translation>Spieler: %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../cpp/dart.cpp" line="459"/>
-        <location filename="../cpp/dart.cpp" line="879"/>
         <source>%n Point(s) Ø %1, %2</source>
-        <translation>
+        <translation type="obsolete">
             <numerusform>%n Punkt Ø %1, %2</numerusform>
             <numerusform>%n Punkte Ø %1, %2</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="881"/>
         <source>%1, Ø %2, %3</source>
-        <translation>%1, Ø %2, %3</translation>
+        <translation type="obsolete">%1, Ø %2, %3</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1788"/>
+        <location filename="../cpp/dart.cpp" line="1790"/>
         <source>https://github.com/gulp21/QeoDart/wiki/Maps</source>
         <extracomment>the translated wiki pages are called DE:Maps etc. Please do NOT translate when there is no such wiki page in your language</extracomment>
         <translation>https://github.com/gulp21/QeoDart/wiki/DE:Maps</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1790"/>
-        <location filename="../cpp/dart.cpp" line="1800"/>
+        <location filename="../cpp/dart.cpp" line="1792"/>
+        <location filename="../cpp/dart.cpp" line="1802"/>
         <source>The default browser could not be opened.</source>
         <translation>Der Standardbrowser konnte nicht geöffnet werden.</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1798"/>
+        <location filename="../cpp/dart.cpp" line="1800"/>
         <source>https://github.com/gulp21/QeoDart/wiki/Contribute</source>
         <extracomment>the translated wiki pages are called DE:Contribute etc. Please do NOT translate when there is no such wiki page in your language</extracomment>
         <translation>https://github.com/gulp21/QeoDart/wiki/DE:Contribute</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="859"/>
+        <location filename="../cpp/dart.cpp" line="860"/>
         <source>∞</source>
         <translation>∞</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../cpp/dart.cpp" line="459"/>
+        <location filename="../cpp/dart.cpp" line="880"/>
+        <source>%n Point(s) &amp;Oslash; %1, %2</source>
+        <translation>
+            <numerusform>%n Punkt &amp;Oslash; %1, %2</numerusform>
+            <numerusform>%n Punkte &amp;Oslash; %1, %2</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="564"/>
-        <location filename="../cpp/dart.cpp" line="1232"/>
+        <location filename="../cpp/dart.cpp" line="565"/>
+        <location filename="../cpp/dart.cpp" line="1234"/>
         <source>%1/%2</source>
         <translation>%1/%2</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="573"/>
+        <location filename="../cpp/dart.cpp" line="574"/>
         <source>Against Time</source>
         <translation>Auf Zeit</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="574"/>
-        <location filename="../cpp/dart.cpp" line="1146"/>
+        <location filename="../cpp/dart.cpp" line="575"/>
+        <location filename="../cpp/dart.cpp" line="1147"/>
         <source>New Game</source>
         <translation>Neues Spiel</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="576"/>
-        <location filename="../cpp/dart.cpp" line="1084"/>
+        <location filename="../cpp/dart.cpp" line="577"/>
+        <location filename="../cpp/dart.cpp" line="1085"/>
         <source>Ask for: %1</source>
         <translation>Fragen nach: %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="576"/>
-        <location filename="../cpp/dart.cpp" line="607"/>
+        <location filename="../cpp/dart.cpp" line="577"/>
+        <location filename="../cpp/dart.cpp" line="608"/>
         <source>Name of Place</source>
         <translation>Ortsname</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="576"/>
-        <location filename="../cpp/dart.cpp" line="607"/>
+        <location filename="../cpp/dart.cpp" line="577"/>
+        <location filename="../cpp/dart.cpp" line="608"/>
         <source>Position of Place</source>
         <translation>Ortsposition</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="578"/>
-        <location filename="../cpp/dart.cpp" line="1528"/>
+        <location filename="../cpp/dart.cpp" line="579"/>
+        <location filename="../cpp/dart.cpp" line="1530"/>
         <source>Map: %1</source>
         <translation>Karte: %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="584"/>
+        <location filename="../cpp/dart.cpp" line="585"/>
         <source>Find Place</source>
         <translation>Ort finden</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="585"/>
+        <location filename="../cpp/dart.cpp" line="586"/>
         <source>Training</source>
         <translation>Training</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="586"/>
+        <location filename="../cpp/dart.cpp" line="587"/>
         <source>Local</source>
         <translation>Lokal</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="611"/>
-        <location filename="../cpp/dart.cpp" line="619"/>
-        <location filename="../cpp/dart.cpp" line="627"/>
+        <location filename="../cpp/dart.cpp" line="612"/>
+        <location filename="../cpp/dart.cpp" line="620"/>
+        <location filename="../cpp/dart.cpp" line="628"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="615"/>
+        <location filename="../cpp/dart.cpp" line="616"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="615"/>
+        <location filename="../cpp/dart.cpp" line="616"/>
         <source>Position</source>
         <translation>Position</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="623"/>
+        <location filename="../cpp/dart.cpp" line="624"/>
         <source>Places</source>
         <translation>Orte</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="679"/>
+        <location filename="../cpp/dart.cpp" line="680"/>
         <source>Player %1</source>
         <translation>Spieler %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="864"/>
+        <location filename="../cpp/dart.cpp" line="865"/>
         <source>Missed by %1 km </source>
         <translation>%1 km daneben </translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="865"/>
+        <location filename="../cpp/dart.cpp" line="866"/>
         <source>%1 km </source>
         <translation>%1 km </translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="869"/>
+        <location filename="../cpp/dart.cpp" line="870"/>
         <source>%1(%2)%3</source>
         <translation>%1(%2)%3</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="896"/>
+        <location filename="../cpp/dart.cpp" line="882"/>
+        <source>%1, &amp;Oslash; %2, %3</source>
+        <translation>%1, &amp;Oslash; %2, %3</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="897"/>
         <source>Quit QeoDart</source>
         <translation>QeoDart beenden</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="897"/>
+        <location filename="../cpp/dart.cpp" line="898"/>
         <source>Do you really want to quit QeoDart?</source>
         <translation>Wollen Sie QeoDart wirklich beenden?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="898"/>
+        <location filename="../cpp/dart.cpp" line="899"/>
         <source>Your current score will be lost.</source>
         <translation>Ihre jetzige Punktzahl wird verloren gehen.</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="952"/>
+        <location filename="../cpp/dart.cpp" line="953"/>
         <source>Chance Game Mode</source>
         <translation>Spielmodus ändern</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="953"/>
+        <location filename="../cpp/dart.cpp" line="954"/>
         <source>When you change the game mode, your current score will be lost.
 Do you want to continue?</source>
         <translation>Wenn Sie den Spielmodus ändern, wird ihre jetzige Punkzahl verloren gehen.
 Wollen Sie fortfahren?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1077"/>
+        <location filename="../cpp/dart.cpp" line="1078"/>
         <source>Chance Mode</source>
         <translation>Modus ändern</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1147"/>
+        <location filename="../cpp/dart.cpp" line="1148"/>
         <source>When you start a new game, your current score will be lost.
 Do you want to continue?</source>
         <translation>Wenn Sie ein neues Spiel beginnen, wird Ihre jetzige Punktzahl verloren gehen.
 Wollen Sie fortfahren?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="562"/>
-        <location filename="../cpp/dart.cpp" line="1230"/>
+        <location filename="../cpp/dart.cpp" line="563"/>
+        <location filename="../cpp/dart.cpp" line="1232"/>
         <source>Place %1 of %2</source>
         <translation>Ort %1 von %2</translation>
     </message>
+    <message numerus="yes">
+        <source>%n Point(s) Ã %1, %2</source>
+        <translation type="obsolete">
+            <numerusform>%n Points Ø %1, %2</numerusform>
+            <numerusform>%n Poinunkts Ø %1, %2</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1519"/>
+        <location filename="../cpp/dart.cpp" line="1521"/>
         <source>Chance Map</source>
         <translation>Karte auswählen</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1520"/>
+        <location filename="../cpp/dart.cpp" line="1522"/>
         <source>When you change the map, your current score will be lost.
 Do you want to continue?</source>
         <translation>Wenn Sie eine andere Karte auswählen, geht ihre jetzige Punktzahl verloren.
 Wollen Sie fortfahren?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1531"/>
-        <location filename="../cpp/dart.cpp" line="1532"/>
         <location filename="../cpp/dart.cpp" line="1533"/>
+        <location filename="../cpp/dart.cpp" line="1534"/>
+        <location filename="../cpp/dart.cpp" line="1535"/>
         <source>%1 km</source>
         <translation>%1 km</translation>
     </message>
@@ -923,72 +941,76 @@ Wollen Sie fortfahren?</translation>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../ui/highscore.ui" line="48"/>
         <source>Ø Score</source>
-        <translation>Ø Punkte</translation>
+        <translation type="obsolete">Ø Punkte</translation>
     </message>
     <message>
-        <location filename="../ui/highscore.ui" line="68"/>
+        <location filename="../ui/highscore.ui" line="48"/>
+        <source>&amp;Oslash; Score</source>
+        <translation>&amp;Oslash; Punkte</translation>
+    </message>
+    <message>
+        <location filename="../ui/highscore.ui" line="71"/>
         <source>1</source>
         <translation>1</translation>
     </message>
     <message>
-        <location filename="../ui/highscore.ui" line="84"/>
+        <location filename="../ui/highscore.ui" line="87"/>
         <source>2</source>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="../ui/highscore.ui" line="100"/>
+        <location filename="../ui/highscore.ui" line="103"/>
         <source>3</source>
         <translation>3</translation>
     </message>
     <message>
-        <location filename="../ui/highscore.ui" line="116"/>
+        <location filename="../ui/highscore.ui" line="119"/>
         <source>4</source>
         <translation>4</translation>
     </message>
     <message>
-        <location filename="../ui/highscore.ui" line="132"/>
+        <location filename="../ui/highscore.ui" line="135"/>
         <source>5</source>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="../ui/highscore.ui" line="148"/>
+        <location filename="../ui/highscore.ui" line="151"/>
         <source>6</source>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="../ui/highscore.ui" line="164"/>
+        <location filename="../ui/highscore.ui" line="167"/>
         <source>7</source>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="../ui/highscore.ui" line="180"/>
+        <location filename="../ui/highscore.ui" line="183"/>
         <source>8</source>
         <translation>8</translation>
     </message>
     <message>
-        <location filename="../ui/highscore.ui" line="196"/>
+        <location filename="../ui/highscore.ui" line="199"/>
         <source>9</source>
         <translation>9</translation>
     </message>
     <message>
-        <location filename="../ui/highscore.ui" line="212"/>
+        <location filename="../ui/highscore.ui" line="215"/>
         <source>10</source>
         <translation>10</translation>
     </message>
     <message>
-        <location filename="../ui/highscore.ui" line="365"/>
+        <location filename="../ui/highscore.ui" line="368"/>
         <source>Clear</source>
         <translation>Leeren</translation>
     </message>
     <message>
-        <location filename="../ui/highscore.ui" line="375"/>
+        <location filename="../ui/highscore.ui" line="378"/>
         <source>Details</source>
         <translation>Details</translation>
     </message>
     <message>
-        <location filename="../ui/highscore.ui" line="382"/>
+        <location filename="../ui/highscore.ui" line="385"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -1313,26 +1335,40 @@ p, li { white-space: pre-wrap; }
         <translation>Spiel beendet</translation>
     </message>
     <message>
-        <location filename="../ui/resultWindow.ui" line="97"/>
+        <location filename="../ui/resultWindow.ui" line="100"/>
         <source>Please enter your name:</source>
         <translation>Bitte geben Sie Ihren Namen ein:</translation>
     </message>
     <message>
-        <location filename="../ui/resultWindow.ui" line="163"/>
+        <location filename="../ui/resultWindow.ui" line="166"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message numerus="yes">
-        <location filename="../cpp/results.cpp" line="55"/>
         <source>You have a score of %n point(s) (Ø %1).</source>
-        <translation>
+        <translation type="obsolete">
             <numerusform>Sie haben %n Punkt (Ø %1).</numerusform>
             <numerusform>Sie haben %n Punkte (Ø %1).</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../cpp/results.cpp" line="59"/>
         <source>Player %1 has a score of %n point(s) (Ø %2).</source>
+        <translation type="obsolete">
+            <numerusform>Spieler %1 hat %n Punkt (Ø %2).</numerusform>
+            <numerusform>Spieler %1 hat %n Punkte (Ø %2).</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../cpp/results.cpp" line="55"/>
+        <source>You have a score of %n point(s) (&amp;Oslash; %1).</source>
+        <translation>
+            <numerusform>Sie haben %n Punkt (&amp;Oslash; %1).</numerusform>
+            <numerusform>Sie haben %n Punkte (&amp;Oslash; %1).</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../cpp/results.cpp" line="59"/>
+        <source>Player %1 has a score of %n point(s) (&amp;Oslash; %2).</source>
         <translation>
             <numerusform>Spieler %1 hat %n Punkt (Ø %2).</numerusform>
             <numerusform>Spieler %1 hat %n Punkte (Ø %2).</numerusform>
