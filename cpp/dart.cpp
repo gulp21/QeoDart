@@ -1168,7 +1168,8 @@ void dart::vNextRound() {
 	
 	if(iGameMode==enTraining && iPlaceCount>=5) {
 		qDebug() << "Revise";
-		for(int i=0; i<qlScoreHistory[0].count() && pn==-1; i++) {
+		for(int i=0; i<qlScoreHistory[0].count() && ppn==NULL; i++) {
+		//for(int i=0; i<qlScoreHistory[0].count() && pn==-1; i++) {
 			qDebug() << qlScoreHistory[0][i].mark << qlTotalScores[0].mark;
 			if(qlScoreHistory[0][i].mark>=4 || (qlScoreHistory[0][i].mark>2 && qlScoreHistory[0][i].mark>qlTotalScores[0].mark) ) {
 				qDebug() << qlPlacesHistory[i]->name;
@@ -1183,12 +1184,12 @@ void dart::vNextRound() {
 				}
 			} //if (badscore)
 		} // for (scorehistory)
-		if(pn==-1) {
+		if(ppn==NULL) {
 			vResetForNewGame();
 		}
 	}
 	
-	if(pn<=-1 && ppn==NULL) {
+	if(ppn==NULL) {
 		int i=0;
 		do {
 			qDebug() << qlCurrentTypePlaces.count();
