@@ -188,6 +188,10 @@ Q_OBJECT
 		void vUpdateActionsIsCheckedStates();
 		void vFindPlaceAround(int x, int y);
 		void vShowAllPlaces();
+		void vAppendEmptyTotalScore();
+		void vAddScoreForPlayer(int player, scoreHistory score);
+		void vNextPlayer();
+		void vShowResults();
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetDistanceInPx(int a, int b, int n);
@@ -206,6 +210,8 @@ Q_OBJECT
 		int iFindInputInList(double &f);
 		
 		bool bNewGameIsSafe();
+		
+		scoreHistory shCalculateScores(int x, int y, double f=1);
 		
 		QColor qcGetColorOfPlayer(int n);
 		

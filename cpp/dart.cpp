@@ -475,11 +475,8 @@ void dart::vSetNumberOfPlayers(int n) {
 			
 			// usually we do this when starting a new game, but since we allow increasing the number of players
 			// during the first round, we must add totalScore here
-			while(qlTotalScores.count()<iNumberOfPlayers) { // TODO redundant01
-				totalScore ts;
-				ts.score=0;
-				ts.mark=0;
-				qlTotalScores.append(ts);
+			while(qlTotalScores.count()<iNumberOfPlayers) {
+				vAppendEmptyTotalScore();
 			}
 			
 			qlColorsOfPlayers.append(qcGetColorOfPlayer(qlPlayerLabels.count()-1));
@@ -733,81 +730,15 @@ void dart::vMouseClickEvent(int x, int y) {
 	y=iGetUnzoomed(y);
 	vDrawPoint(x,y,qlCircleLabels[iCurrentPlayer],qlColorsOfPlayers[iCurrentPlayer]);
 	
-	scoreHistory score; // TODO redundant02
-	score.x=x;
-	score.y=y;
-	score.diffPxArea=dGetDistanceInPx(x,y,iPlaceCount-1); // respects area // TODO what about shown distance?
-	score.diffPx=dGetDistanceInPxBetween(x,y,qlPlacesHistory[iPlaceCount-1]->x,qlPlacesHistory[iPlaceCount-1]->y);
-	score.diffKm=dGetDistanceInKm(score.diffPxArea);
-	score.mark=dGetMarkFromDistance(score.diffPxArea);
-	score.score=dGetScore(score.mark);
-        if(bAgainstTime) {
-                score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
-                score.mark=dGetMarkFromScore(score.score);
-		timer->stop(); // TODO redundant03
-        }
-	if(bGaveHint) {
-		score.score*=0.75;
-		score.mark=dGetMarkFromScore(score.score);
-		bGaveHint=false;
-	}
-	qlScoreHistory[iCurrentPlayer].append(score); // TODO redundant04
 	
-	if(! (iGameMode==enTraining && iPlaceCount>=5) ) {
-		qlTotalScores[iCurrentPlayer].score+=score.score;
-		qlTotalScores[iCurrentPlayer].mark=dGetAverageMarkOfPlayer(iCurrentPlayer);
-	}
+	scoreHistory score=shCalculateScores(x,y);
 	
+	vAddScoreForPlayer(iCurrentPlayer, score);
 	
-	qDebug() << "Score for Player" << iCurrentPlayer << score.diffPx << "px" << score.diffPxArea << "px (area)" << score.diffKm << "km" << score.score << "p"  << score.mark << "TOTAL" << qlTotalScores[iCurrentPlayer].score << "p" << qlTotalScores[iCurrentPlayer].mark;
-	
-	if(iCurrentPlayer<iNumberOfPlayers-1) { // next player
-		
-		mySleep(iDelayNextPlayer);
-		
-		if(bResetCursor) QCursor::setPos(QWidget::x()+5,QWidget::y()+iPaddingTop+iMarginTop+10);
-		
-		iCurrentPlayer++; // TODO redundant05
-		vRemoveAllCircles();
-		qDebug()<<"f";
-		vRepaintPlayerLabels();
-		vRepaintCommonLabels();
-                vSetAgainstTime(bAgainstTime);
-		
-		bAcceptingClickEvent=TRUE;
-		 // TODO redundant06
-	} else { // show results
-		
-		iCurrentPlayer=0;
-		
-		vRemoveAllCircles();
-		vDrawClickPositions(iPlaceCount);
-		mySleep(iDelayNextCircle);
-		vDrawDistanceCircles(iPlaceCount, 0);
-		
-		// show real position
-		vShowCurrentPlace();
-		
-		vShowScores();
-                
-                vShowComment();
-		
-		if(iGameMode==enTraining) mySleep(iDelayNextPlaceTraining);
-		else mySleep(iDelayNextPlace);
-                
-                lblComment->setText("");
-		
-		vShowTotalScores();
-		
-		vRemoveAllCircles();
-		vRemoveAllCommonPoints();
-		
-		if(iGameMode!=enTraining) vResetScoreLabels();
-		
-		vRepaintCommonLabels();
-		
-		vNextRound();
-		
+	if(iCurrentPlayer<iNumberOfPlayers-1) {
+		vNextPlayer();
+	} else {
+		vShowResults();
 	}
 }
 
@@ -1125,17 +1056,22 @@ void dart::vResetForNewGame() {
 	}
 	
 	qlTotalScores.clear();
-	for(int i=0; i<iNumberOfPlayers; i++) { // TODO redundant01
-		totalScore ts;
-		ts.score=0;
-		ts.mark=0;
-		qlTotalScores.append(ts);
+	for(int i=0; i<iNumberOfPlayers; i++) {
+		vAppendEmptyTotalScore();
 	}
 	iPlaceCount=0;
 	iCurrentPlayer=0;
 	
 	vShowTotalScores();
 	if(qlPlayerLabels.count()!=0) vRepaintCommonLabels();
+}
+
+// appends empty totalScore to qlTotalScores
+void dart::vAppendEmptyTotalScore() {
+	totalScore ts;
+	ts.score=0;
+	ts.mark=0;
+	qlTotalScores.append(ts);
 }
 
 void dart::vNewGame() {
@@ -1426,89 +1362,112 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 		y=-1;
 	}
 
-	scoreHistory score; // TODO redundant02
+	scoreHistory score=shCalculateScores(x,y,f);
+	
+	vAddScoreForPlayer(iCurrentPlayer, score);
+	
+	if(iCurrentPlayer<iNumberOfPlayers-1) {
+		vNextPlayer();
+	} else {
+		vShowResults();
+	}
+}
+
+// returns a scoreHistory object containing the calculated scores, using coordinated x, y, f, and the current place
+scoreHistory dart::shCalculateScores(int x, int y, double f) { // TODO why is it called f?
+	scoreHistory score;
 	score.x=x;
 	score.y=y;
 	score.diffPxArea=dGetDistanceInPx(x,y,iPlaceCount-1); // respects area // TODO what about shown distance?
 	score.diffPx=dGetDistanceInPxBetween(x,y,qlPlacesHistory[iPlaceCount-1]->x,qlPlacesHistory[iPlaceCount-1]->y);
 	score.diffKm=dGetDistanceInKm(score.diffPxArea);
 	score.mark=dGetMarkFromDistance(score.diffPxArea);
-        score.score=dGetScore(score.mark)*f;
+	score.score=dGetScore(score.mark)*f;
         if(bAgainstTime) {
-                //typing against time can be hard, so there are some bonusSeconds
-                double bonusSeconds=lineEdit->text().length()/static_cast<double>(iLettersPerSecond);
-                iTimerElapsed-=bonusSeconds;
-                if(iTimerElapsed<0) iTimerElapsed=0;
+                if(iAskForMode==enNames) {
+			//typing against time can be hard, so there are some bonusSeconds
+			double bonusSeconds=lineEdit->text().length()/static_cast<double>(iLettersPerSecond);
+			iTimerElapsed-=bonusSeconds;
+			if(iTimerElapsed<0) iTimerElapsed=0;
+		}
                 score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
-		timer->stop(); // TODO redundant03 ^why is this different?^
+		timer->stop();
         }
 	if(bGaveHint) {
 		score.score*=0.75;
-		score.mark=dGetMarkFromScore(score.score);
 		bGaveHint=false;
 	}
 	score.mark=dGetMarkFromScore(score.score);
-        
-	qlScoreHistory[iCurrentPlayer].append(score); // TODO redundant04
+	
+	return score;
+}
+
+// appends score to the scoreHistory of the player, and calculates totalScores
+void dart::vAddScoreForPlayer(int player, scoreHistory score) {
+	qlScoreHistory[player].append(score);
 	
 	if(! (iGameMode==enTraining && iPlaceCount>=5) ) {
-		qlTotalScores[iCurrentPlayer].score+=score.score;
-		qlTotalScores[iCurrentPlayer].mark=dGetAverageMarkOfPlayer(iCurrentPlayer);
+		qlTotalScores[player].score+=score.score;
+		qlTotalScores[player].mark=dGetAverageMarkOfPlayer(player);
 	}
 	
+	qDebug() << "Score for Player" << player << score.diffPx << "px" << score.diffPxArea << "px (area)" << score.diffKm << "km" << score.score << "p"  << score.mark << "TOTAL" << qlTotalScores[player].score << "p" << qlTotalScores[player].mark;
 	
-	qDebug() << "Score for Player" << iCurrentPlayer << score.diffPx << "px" << score.diffPxArea << "px (area)" << score.diffKm << "km" << score.score << "p"  << score.mark << "TOTAL" << qlTotalScores[iCurrentPlayer].score << "p" << qlTotalScores[iCurrentPlayer].mark;
+}
+
+// prepares everything for the next player (i.e. resetting cursor/lineEdit, change color)
+void dart::vNextPlayer() {
+	mySleep(iDelayNextPlayer);
 	
-	if(iCurrentPlayer<iNumberOfPlayers-1) { // next player
-		
-		mySleep(iDelayNextPlayer);
-		iCurrentPlayer++; // TODO redundant05
-		vRemoveAllCircles();
-		qDebug()<<"f";
-		vRepaintPlayerLabels();
-		vRepaintCommonLabels();
-		
+	if(iAskForMode==enPositions && bResetCursor) QCursor::setPos(QWidget::x()+5,QWidget::y()+iPaddingTop+iMarginTop+10);
+	
+	iCurrentPlayer++;
+	vRemoveAllCircles();
+	qDebug()<<"f";
+	vRepaintPlayerLabels();
+	vRepaintCommonLabels();
+        vSetAgainstTime(bAgainstTime);
+	
+	if(iAskForMode==enNames) {
 		lineEdit->clear();
 		lineEdit->setStyleSheet("");
 		lineEdit->setEnabled(true); //c//
 		lineEdit->setFocus(Qt::OtherFocusReason);
-                
-                vSetAgainstTime(bAgainstTime);
-		 // TODO redundant06
-	} else { // show results
-		
-		iCurrentPlayer=0;
-		
-		vRemoveAllCircles();
-		vDrawClickPositions(iPlaceCount);
-		mySleep(iDelayNextCircle);
-		vDrawDistanceCircles(iPlaceCount, 0);
-		
-		// show real position
-		vShowCurrentPlace();
-		
-		vShowScores();
-                
-                vShowComment();
-		
-		if(iGameMode==enTraining) mySleep(iDelayNextPlaceTraining);
-		else mySleep(iDelayNextPlace);
-                
-                lblComment->setText("");
-		
-		vShowTotalScores();
-		
-		vRemoveAllCircles();
-		vRemoveAllCommonPoints();
-		
-		if(iGameMode!=enTraining) vResetScoreLabels();
-		
-		vRepaintCommonLabels();
-		
-		vNextRound();
-		
+	} else {	
+		bAcceptingClickEvent=true;
 	}
-	//cE//
+}
+
+void dart::vShowResults() {
+	iCurrentPlayer=0;
+	
+	vRemoveAllCircles();
+	vDrawClickPositions(iPlaceCount);
+	mySleep(iDelayNextCircle);
+	vDrawDistanceCircles(iPlaceCount, 0);
+	
+	// show real position
+	vShowCurrentPlace();
+	
+	vShowScores();
+        
+        vShowComment();
+	
+	if(iGameMode==enTraining) mySleep(iDelayNextPlaceTraining);
+	else mySleep(iDelayNextPlace);
+        
+        lblComment->setText("");
+	
+	vShowTotalScores();
+	
+	vRemoveAllCircles();
+	vRemoveAllCommonPoints();
+	
+	if(iGameMode!=enTraining) vResetScoreLabels();
+	
+	vRepaintCommonLabels();
+	
+	vNextRound();
 }
 
 void dart::vReadQcf() {
