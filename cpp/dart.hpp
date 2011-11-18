@@ -38,6 +38,7 @@ See main.cpp for details. */
 #include "about.hpp"
 #include "results.hpp"
 #include "preferences.hpp"
+#include "network.hpp"
 
 struct place {
 	int x, y, dimx, dimy;
@@ -138,6 +139,8 @@ Q_OBJECT
 	private:
 		
 		io *myIO;
+		
+		network *myNetwork;
 		
 		bool bAcceptingClickEvent, bAcceptingResizeEvent, bGaveHint;
 		

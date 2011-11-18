@@ -105,7 +105,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	actionTraining->setIcon(QIcon::fromTheme("user-identity", QIcon(":/icons/oxygen/user-identity.png")));
 	connect(actionLocal, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
 	actionLocal->setIcon(QIcon::fromTheme("system-users", QIcon(":/icons/oxygen/system-users.png")));
-//	connect(actionNetwork, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
+	connect(actionNetwork, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
 	actionNetwork->setIcon(QIcon::fromTheme("network-workgroup", QIcon(":/icons/oxygen/network-workgroup.png")));
 	connect(actionNumber_of_Players, SIGNAL(triggered()), this, SLOT(vSetNumberOfPlayers()));
 	connect(actionPlayers, SIGNAL(triggered()), this, SLOT(vSetNumberOfPlayers()));
@@ -267,6 +267,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	vResize(dZoomFactor);
 	
 	show();
+	
+	myNetwork=new network(this);
 }
 
 dart::~dart() {
@@ -281,6 +283,7 @@ dart::~dart() {
 	resizeTimer->stop();
 	delete resizeTimer;
         delete myIO;
+	delete myNetwork;
 }
 
 //draws distance circles using the saved click-coordinates of place n, iterating #count [recursion]
@@ -897,6 +900,8 @@ void dart::vSetGameMode() {
 		vSetGameMode(enTraining);
 	} else if(QObject::sender()==actionLocal) {
 		vSetGameMode(enLocal);
+	} else if(QObject::sender()==actionNetwork) {
+		vSetGameMode(enNetwork);
 	} else {
 		qDebug() << "[E] vSetGameMode: unknown sender";
 	}
@@ -994,6 +999,9 @@ void dart::vSetGameMode(enGameModes mode) {
 			break;
 		case enLocal:
 			vSetNumberOfPlayers(myIO->settings->value("iNumberOfPlayers","1").toInt());
+			break;
+		case enNetwork:
+			myNetwork->vNewNetworkGame();
 			break;
 	}
 	

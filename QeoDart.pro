@@ -12,7 +12,8 @@ HEADERS += cpp/dart.hpp cpp/io.hpp cpp/myLabels.hpp cpp/qtwin.h \
     cpp/preferences.hpp \
     cpp/results.hpp \
     cpp/highscores.hpp \
-    cpp/about.hpp
+    cpp/about.hpp \
+    cpp/network.hpp
 FORMS += ui/mainWindow.ui \
     ui/resultWindow.ui \
     ui/preferences.ui \
@@ -22,8 +23,9 @@ SOURCES += cpp/dart.cpp cpp/io.cpp cpp/main.cpp cpp/qtwin.cpp \
     cpp/preferences.cpp \
     cpp/results.cpp \
     cpp/highscores.cpp \
-    cpp/about.cpp
-QT += xml
+    cpp/about.cpp \
+    cpp/network.cpp
+QT += xml network
 
 TRANSLATIONS = lang/de.ts \
     lang/la.ts \

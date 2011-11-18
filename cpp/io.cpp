@@ -499,7 +499,7 @@ void io::vLoadSettings() {
 	myDart->bAgainstTime=settings->value("bAgainstTime",FALSE).toBool();
 	
 	myDart->iGameMode=static_cast<enGameModes>(settings->value("iGameMode",enLocal).toInt());
-	if(myDart->iGameMode!=enFind && myDart->iGameMode!=enTraining && myDart->iGameMode!=enLocal && myDart->iGameMode!=enNetwork) myDart->iGameMode=enLocal;
+	if(myDart->iGameMode!=enFind && myDart->iGameMode!=enTraining && myDart->iGameMode!=enLocal) myDart->iGameMode=enLocal;
 	
 	myDart->iToolMenuBarState=static_cast<enToolMenuBarState>(settings->value("iToolMenuBarState",enBoth).toInt());
 	if(myDart->iToolMenuBarState!=enBoth && myDart->iToolMenuBarState!=enMenuBarOnly && myDart->iToolMenuBarState!=enToolBarOnly) myDart->iToolMenuBarState=enBoth;
