@@ -1,5 +1,8 @@
+what happens when config is read-only? (inform user! [continue using home] [Quit])
+sort maps alphabetically
+
+Subset > [ ] 1-10; [ ] 11-20; bezogen auf gewählte Orte
 highscore: date (today), time (x ago, api?), pref lang
-Subset > [ ] 1-10; [ ] 11-20; bezogen auf gewhälte Orte
 
 http://la.wikipedia.org/wiki/Index_civitatum_Europaearum
 http://de.wikipedia.org/wiki/Liste_der_Gro%C3%9Fst%C3%A4dte_in_Deutschland

@@ -23,3 +23,4 @@ Reporting Issues:
 
 
 Run ./QeoDart --help to see the list of supported command-line arguments.
+Command-line arguments are not supported under Windows CE.
