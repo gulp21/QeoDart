@@ -62,18 +62,6 @@ Search within names:
         <translation>%1 km</translation>
     </message>
     <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img height=&quot;90&quot; width=&quot;90&quot; style=&quot;background-color:transparent&quot; src=&quot;:/icons/icons/icon90.png&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img height=&quot;90&quot; width=&quot;90&quot; style=&quot;background-color:transparent&quot; src=&quot;:/icons/icons/icon90.png&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <location filename="../ui/mainWindow.ui" line="269"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -152,10 +140,6 @@ p, li { white-space: pre-wrap; }
         <location filename="../ui/mainWindow.ui" line="472"/>
         <source>G&amp;ame Mode</source>
         <translation>G&amp;ame Mode</translation>
-    </message>
-    <message>
-        <source>toolBar</source>
-        <translation type="obsolete">toolBar</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="535"/>
@@ -263,162 +247,162 @@ p, li { white-space: pre-wrap; }
         <translation>F7</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="653"/>
+        <location filename="../ui/mainWindow.ui" line="650"/>
         <source>Add Map…</source>
         <translation>Add Map…</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="656"/>
+        <location filename="../ui/mainWindow.ui" line="653"/>
         <source>&amp;Add Map…</source>
         <translation>&amp;Add Map…</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="659"/>
+        <location filename="../ui/mainWindow.ui" line="656"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="667"/>
+        <location filename="../ui/mainWindow.ui" line="664"/>
         <source>Counties</source>
         <translation>Counties</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="675"/>
+        <location filename="../ui/mainWindow.ui" line="672"/>
         <source>Countries</source>
         <translation>Countries</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="683"/>
+        <location filename="../ui/mainWindow.ui" line="680"/>
         <source>States</source>
         <translation>States</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="691"/>
+        <location filename="../ui/mainWindow.ui" line="688"/>
         <source>Capitals of States</source>
         <translation>Capitals of States</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="699"/>
+        <location filename="../ui/mainWindow.ui" line="696"/>
         <source>Capitals of Countries</source>
         <translation>Capitals of Countries</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="707"/>
+        <location filename="../ui/mainWindow.ui" line="704"/>
         <source>Towns</source>
         <translation>Towns</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="715"/>
+        <location filename="../ui/mainWindow.ui" line="712"/>
         <source>&amp;Borders</source>
         <translation>&amp;Borders</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="718"/>
+        <location filename="../ui/mainWindow.ui" line="715"/>
         <source>F2</source>
         <translation>F2</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="726"/>
+        <location filename="../ui/mainWindow.ui" line="723"/>
         <source>&amp;Rivers</source>
         <translation>&amp;Rivers</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="729"/>
+        <location filename="../ui/mainWindow.ui" line="726"/>
         <source>F3</source>
         <translation>F3</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="737"/>
+        <location filename="../ui/mainWindow.ui" line="734"/>
         <source>&amp;Elevations</source>
         <translation>&amp;Elevations</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="740"/>
+        <location filename="../ui/mainWindow.ui" line="737"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="748"/>
+        <location filename="../ui/mainWindow.ui" line="745"/>
         <source>&amp;Menu Bar</source>
         <translation>&amp;Menu Bar</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="751"/>
+        <location filename="../ui/mainWindow.ui" line="748"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="759"/>
+        <location filename="../ui/mainWindow.ui" line="756"/>
         <source>Tool&amp;bar</source>
         <translation>Tool&amp;bar</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="762"/>
+        <location filename="../ui/mainWindow.ui" line="759"/>
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="767"/>
+        <location filename="../ui/mainWindow.ui" line="764"/>
         <source>&amp;Configure QeoDart…</source>
         <translation>&amp;Configure QeoDart…</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="770"/>
+        <location filename="../ui/mainWindow.ui" line="767"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="778"/>
+        <location filename="../ui/mainWindow.ui" line="775"/>
         <source>Number Of &amp;Players</source>
         <translation>Number Of &amp;Players</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="781"/>
+        <location filename="../ui/mainWindow.ui" line="778"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="786"/>
+        <location filename="../ui/mainWindow.ui" line="783"/>
         <source>&amp;Players: </source>
         <translation>&amp;Players: </translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="794"/>
+        <location filename="../ui/mainWindow.ui" line="791"/>
         <source>Against &amp;Time</source>
         <translation>Against &amp;Time</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="797"/>
+        <location filename="../ui/mainWindow.ui" line="794"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="802"/>
+        <location filename="../ui/mainWindow.ui" line="799"/>
         <source>&amp;About QeoDart</source>
         <translation>&amp;About QeoDart</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="816"/>
+        <location filename="../ui/mainWindow.ui" line="813"/>
         <source>&amp;Network</source>
         <translation>&amp;Network</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="819"/>
+        <location filename="../ui/mainWindow.ui" line="816"/>
         <source>F8</source>
         <translation>F8</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="824"/>
+        <location filename="../ui/mainWindow.ui" line="821"/>
         <source>Hint</source>
         <translation>Hint</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="827"/>
+        <location filename="../ui/mainWindow.ui" line="824"/>
         <source>Ctrl+Alt+H</source>
         <translation>Ctrl+Alt+H</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="835"/>
+        <location filename="../ui/mainWindow.ui" line="829"/>
         <source>Report Bug</source>
         <translation>Report Bug</translation>
     </message>
@@ -507,63 +491,47 @@ p, li { white-space: pre-wrap; }
         <translation>Map</translation>
     </message>
     <message>
-        <location filename="../cpp/about.cpp" line="9"/>
+        <location filename="../cpp/about.cpp" line="15"/>
         <source>Version %1</source>
         <translation>Version %1</translation>
     </message>
     <message>
-        <location filename="../cpp/about.cpp" line="15"/>
+        <location filename="../cpp/about.cpp" line="21"/>
         <source>compiled on %1</source>
         <translation>compiled on %1</translation>
     </message>
     <message>
-        <location filename="../cpp/about.cpp" line="19"/>
+        <location filename="../cpp/about.cpp" line="25"/>
         <source>&lt;b&gt;The file (%1.qcfx) itself:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;The file (%1.qcfx) itself:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../cpp/about.cpp" line="20"/>
+        <location filename="../cpp/about.cpp" line="26"/>
         <source>&lt;b&gt;The background image:&lt;/b&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;The background image:&lt;/b&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../cpp/about.cpp" line="21"/>
+        <location filename="../cpp/about.cpp" line="27"/>
         <source>&lt;b&gt;The image with the borders:&lt;/b&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;The image with the borders:&lt;/b&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../cpp/about.cpp" line="22"/>
+        <location filename="../cpp/about.cpp" line="28"/>
         <source>&lt;b&gt;The image with the rivers:&lt;/b&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;The image with the rivers:&lt;/b&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../cpp/about.cpp" line="23"/>
+        <location filename="../cpp/about.cpp" line="29"/>
         <source>&lt;b&gt;The image with the elevations:&lt;/b&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;The image with the elevations:&lt;/b&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <source>&lt;b&gt;The background image:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</source>
-        <translation type="obsolete">&lt;b&gt;The background image:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;The image with the borders:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</source>
-        <translation type="obsolete">&lt;b&gt;The image with the borders:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;The image with the rivers:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</source>
-        <translation type="obsolete">&lt;b&gt;The image with the rivers:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;The image with the elevations:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</source>
-        <translation type="obsolete">&lt;b&gt;The image with the elevations:&lt;/b&gt;&lt;br/&gt;%2&lt;br/&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <location filename="../cpp/about.cpp" line="25"/>
+        <location filename="../cpp/about.cpp" line="31"/>
         <source>&lt;p&gt;The following licences apply to your current map (%1):&lt;/p&gt;</source>
         <translation>&lt;p&gt;The following licences apply to your current map (%1):&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../cpp/about.cpp" line="28"/>
+        <location filename="../cpp/about.cpp" line="34"/>
         <source>No licensing information is available for the map &quot;%1&quot; (%2).</source>
         <translation>No licensing information is available for the map &quot;%1&quot; (%2).</translation>
     </message>
@@ -621,21 +589,9 @@ p, li { white-space: pre-wrap; }
         <translation>Oh boy!</translation>
     </message>
     <message>
-        <source>Not reallyâ¦</source>
-        <translation type="obsolete">Not really…</translation>
-    </message>
-    <message>
-        <source>Not quiteâ¦</source>
-        <translation type="obsolete">Not quite…</translation>
-    </message>
-    <message>
         <location filename="../cpp/dart.cpp" line="21"/>
         <source>Completely Wrong!</source>
         <translation>Completely Wrong!</translation>
-    </message>
-    <message>
-        <source>That wasn&apos;t much of a hitâ¦</source>
-        <translation type="obsolete">That wasn&apos;t much of a hit…</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="21"/>
@@ -658,71 +614,67 @@ p, li { white-space: pre-wrap; }
         <translation>D&apos;oh!</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="148"/>
+        <location filename="../cpp/dart.cpp" line="151"/>
         <source>Game</source>
         <translation>Game</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="177"/>
-        <location filename="../cpp/dart.cpp" line="579"/>
+        <location filename="../cpp/dart.cpp" line="180"/>
+        <location filename="../cpp/dart.cpp" line="581"/>
         <source>Place Types</source>
         <translation>Place Types</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="190"/>
+        <location filename="../cpp/dart.cpp" line="193"/>
         <source>View</source>
         <translation>View</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="201"/>
+        <location filename="../cpp/dart.cpp" line="203"/>
         <source>Sorry, no valid qcfx files could be found.</source>
         <translation>Sorry, no valid qcfx files could be found.</translation>
     </message>
     <message>
-        <source>You might want to add a file through Map â Add map.</source>
-        <translation type="obsolete">You might want to add a file through Map â Add map.</translation>
-    </message>
-    <message>
-        <location filename="../cpp/dart.cpp" line="217"/>
+        <location filename="../cpp/dart.cpp" line="219"/>
         <source>Load map of %1</source>
         <translation>Load map of %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="339"/>
+        <location filename="../cpp/dart.cpp" line="341"/>
         <source>Change Place Types</source>
         <translation>Change Place Types</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="340"/>
-        <location filename="../cpp/dart.cpp" line="370"/>
-        <location filename="../cpp/dart.cpp" line="1073"/>
+        <location filename="../cpp/dart.cpp" line="342"/>
+        <location filename="../cpp/dart.cpp" line="372"/>
+        <location filename="../cpp/dart.cpp" line="1078"/>
         <source>When you change this setting, your current score will be lost.
 Do you want to continue?</source>
         <translation>When you change this setting, your current score will be lost.
 Do you want to continue?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="369"/>
+        <location filename="../cpp/dart.cpp" line="371"/>
         <source>Enable Against Time</source>
         <translation>Enable Against Time</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="401"/>
+        <location filename="../cpp/dart.cpp" line="403"/>
         <source>Set Number Of Players</source>
         <translation>Set Number Of Players</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="401"/>
+        <location filename="../cpp/dart.cpp" line="403"/>
         <source>Number Of Players:</source>
         <translation>Number Of Players:</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="404"/>
+        <location filename="../cpp/dart.cpp" line="406"/>
         <source>Warning</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="405"/>
+        <location filename="../cpp/dart.cpp" line="407"/>
         <source>You want to play with more than 15 players.
 Although QeoDart theoretically supports an infinite number of players, some display problems might occur.
 
@@ -733,39 +685,10 @@ Although QeoDart theoretically supports an infinite number of players, some disp
 Do you want to continue anyway?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="422"/>
-        <location filename="../cpp/dart.cpp" line="578"/>
+        <location filename="../cpp/dart.cpp" line="424"/>
+        <location filename="../cpp/dart.cpp" line="580"/>
         <source>Players: %1</source>
         <translation>Players: %1</translation>
-    </message>
-    <message numerus="yes">
-        <source>&lt;span&gt;%n Point(s) Ã¸ %1, %2&lt;/span&gt;</source>
-        <translation type="obsolete">
-            <numerusform>&lt;span&gt;%n Point ø %1, %2&lt;/span&gt;</numerusform>
-            <numerusform>&lt;span&gt;%n Points ø %1, %2&lt;/span&gt;</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>%n Point(s) Ã¸ %1, %2</source>
-        <translation type="obsolete">
-            <numerusform>%n Point ø %1, %2</numerusform>
-            <numerusform>%n Points ø %1, %2</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>%1, Ã¸ %2, %3</source>
-        <translation type="obsolete">%1, ø %2, %3</translation>
-    </message>
-    <message numerus="yes">
-        <source>&lt;span&gt;%n Point(s) &amp;#8960; %1, %2&lt;/span&gt;</source>
-        <translation type="obsolete">
-            <numerusform>&lt;span&gt;%n Point(s) &amp;#8960; %1, %2&lt;/span&gt;</numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>&lt;span&gt;%1 Points &amp;#8960; %2, %3&lt;/span&gt;</source>
-        <translation type="obsolete">&lt;span&gt;%1 Points &amp;#8960; %2, %3&lt;/span&gt;</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="20"/>
@@ -783,20 +706,13 @@ Do you want to continue anyway?</translation>
         <translation>That wasn&apos;t much of a hit…</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="202"/>
+        <location filename="../cpp/dart.cpp" line="204"/>
         <source>You might want to add a file through Map → Add map.</source>
         <translation>You might want to add a file through Map → Add map.</translation>
     </message>
     <message numerus="yes">
-        <source>%n Point(s) ø %1, %2</source>
-        <translation type="obsolete">
-            <numerusform>%n Point ø %1, %2</numerusform>
-            <numerusform>%n Points ø %1, %2</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <location filename="../cpp/dart.cpp" line="457"/>
-        <location filename="../cpp/dart.cpp" line="874"/>
+        <location filename="../cpp/dart.cpp" line="459"/>
+        <location filename="../cpp/dart.cpp" line="879"/>
         <source>%n Point(s) Ø %1, %2</source>
         <translation>
             <numerusform>%n Point Ø %1, %2</numerusform>
@@ -804,186 +720,192 @@ Do you want to continue anyway?</translation>
         </translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="560"/>
-        <location filename="../cpp/dart.cpp" line="1225"/>
+        <location filename="../cpp/dart.cpp" line="562"/>
+        <location filename="../cpp/dart.cpp" line="1230"/>
         <source>Place %1 of %2</source>
         <translation>Place %1 of %2</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="562"/>
-        <location filename="../cpp/dart.cpp" line="1227"/>
+        <location filename="../cpp/dart.cpp" line="564"/>
+        <location filename="../cpp/dart.cpp" line="1232"/>
         <source>%1/%2</source>
         <translation>%1/%2</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="571"/>
+        <location filename="../cpp/dart.cpp" line="573"/>
         <source>Against Time</source>
         <translation>Against Time</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="572"/>
-        <location filename="../cpp/dart.cpp" line="1141"/>
+        <location filename="../cpp/dart.cpp" line="574"/>
+        <location filename="../cpp/dart.cpp" line="1146"/>
         <source>New Game</source>
         <translation>New Game</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="574"/>
-        <location filename="../cpp/dart.cpp" line="1079"/>
+        <location filename="../cpp/dart.cpp" line="576"/>
+        <location filename="../cpp/dart.cpp" line="1084"/>
         <source>Ask for: %1</source>
         <translation>Ask for: %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="574"/>
-        <location filename="../cpp/dart.cpp" line="605"/>
+        <location filename="../cpp/dart.cpp" line="576"/>
+        <location filename="../cpp/dart.cpp" line="607"/>
         <source>Name of Place</source>
         <translation>Name of Place</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="574"/>
-        <location filename="../cpp/dart.cpp" line="605"/>
+        <location filename="../cpp/dart.cpp" line="576"/>
+        <location filename="../cpp/dart.cpp" line="607"/>
         <source>Position of Place</source>
         <translation>Position of Place</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="576"/>
-        <location filename="../cpp/dart.cpp" line="1522"/>
+        <location filename="../cpp/dart.cpp" line="578"/>
+        <location filename="../cpp/dart.cpp" line="1528"/>
         <source>Map: %1</source>
         <translation>Map: %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="582"/>
+        <location filename="../cpp/dart.cpp" line="584"/>
         <source>Find Place</source>
         <translation>Find Place</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="583"/>
+        <location filename="../cpp/dart.cpp" line="585"/>
         <source>Training</source>
         <translation>Training</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="584"/>
+        <location filename="../cpp/dart.cpp" line="586"/>
         <source>Local</source>
         <translation>Local</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="609"/>
-        <location filename="../cpp/dart.cpp" line="617"/>
-        <location filename="../cpp/dart.cpp" line="625"/>
+        <location filename="../cpp/dart.cpp" line="611"/>
+        <location filename="../cpp/dart.cpp" line="619"/>
+        <location filename="../cpp/dart.cpp" line="627"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="613"/>
+        <location filename="../cpp/dart.cpp" line="615"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="613"/>
+        <location filename="../cpp/dart.cpp" line="615"/>
         <source>Position</source>
         <translation>Position</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="621"/>
+        <location filename="../cpp/dart.cpp" line="623"/>
         <source>Places</source>
         <translation>Places</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="677"/>
+        <location filename="../cpp/dart.cpp" line="679"/>
         <source>Player %1</source>
         <translation>Player %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="854"/>
+        <location filename="../cpp/dart.cpp" line="859"/>
         <source>∞</source>
         <translation>∞</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="876"/>
+        <location filename="../cpp/dart.cpp" line="881"/>
         <source>%1, Ø %2, %3</source>
         <translation>%1, Ø %2, %3</translation>
     </message>
     <message>
-        <source>%1, ø %2, %3</source>
-        <translation type="obsolete">%1, ø %2, %3</translation>
+        <location filename="../cpp/dart.cpp" line="1788"/>
+        <source>https://github.com/gulp21/QeoDart/wiki/Maps</source>
+        <extracomment>the translated wiki pages are called DE:Maps etc. Please do NOT translate when there is no such wiki page in your language</extracomment>
+        <translation>https://github.com/gulp21/QeoDart/wiki/Maps</translation>
     </message>
     <message>
-        <source>â</source>
-        <translation type="obsolete">∞</translation>
+        <location filename="../cpp/dart.cpp" line="1790"/>
+        <location filename="../cpp/dart.cpp" line="1800"/>
+        <source>The default browser could not be opened.</source>
+        <translation>The default browser could not be opened.</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="859"/>
+        <location filename="../cpp/dart.cpp" line="1798"/>
+        <source>https://github.com/gulp21/QeoDart/wiki/Contribute</source>
+        <extracomment>the translated wiki pages are called DE:Contribute etc. Please do NOT translate when there is no such wiki page in your language</extracomment>
+        <translation>https://github.com/gulp21/QeoDart/wiki/Contribute</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="864"/>
         <source>Missed by %1 km </source>
         <translation>Missed by %1 km </translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="860"/>
+        <location filename="../cpp/dart.cpp" line="865"/>
         <source>%1 km </source>
         <translation>%1 km </translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="864"/>
+        <location filename="../cpp/dart.cpp" line="869"/>
         <source>%1(%2)%3</source>
         <translation>%1(%2)%3</translation>
     </message>
     <message>
-        <source>&lt;span&gt;%1, &amp;#8960; %2, %3&lt;/span&gt;</source>
-        <translation type="obsolete">&lt;span&gt;%1, &amp;#8960; %2, %3&lt;/span&gt;</translation>
-    </message>
-    <message>
-        <location filename="../cpp/dart.cpp" line="891"/>
+        <location filename="../cpp/dart.cpp" line="896"/>
         <source>Quit QeoDart</source>
         <translation>Quit QeoDart</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="892"/>
+        <location filename="../cpp/dart.cpp" line="897"/>
         <source>Do you really want to quit QeoDart?</source>
         <translation>Do you really want to quit QeoDart?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="893"/>
+        <location filename="../cpp/dart.cpp" line="898"/>
         <source>Your current score will be lost.</source>
         <translation>Your current score will be lost.</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="947"/>
+        <location filename="../cpp/dart.cpp" line="952"/>
         <source>Chance Game Mode</source>
         <translation>Chance Game Mode</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="948"/>
+        <location filename="../cpp/dart.cpp" line="953"/>
         <source>When you change the game mode, your current score will be lost.
 Do you want to continue?</source>
         <translation>When you change the game mode, your current score will be lost.
 Do you want to continue?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1072"/>
+        <location filename="../cpp/dart.cpp" line="1077"/>
         <source>Chance Mode</source>
         <translation>Chance Mode</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1142"/>
+        <location filename="../cpp/dart.cpp" line="1147"/>
         <source>When you start a new game, your current score will be lost.
 Do you want to continue?</source>
         <translation>When you start a new game, your current score will be lost.
 Do you want to continue?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1513"/>
+        <location filename="../cpp/dart.cpp" line="1519"/>
         <source>Chance Map</source>
         <translation>Chance Map</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1514"/>
+        <location filename="../cpp/dart.cpp" line="1520"/>
         <source>When you change the map, your current score will be lost.
 Do you want to continue?</source>
         <translation>When you change the map, your current score will be lost.
 Do you want to continue?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1525"/>
-        <location filename="../cpp/dart.cpp" line="1526"/>
-        <location filename="../cpp/dart.cpp" line="1527"/>
+        <location filename="../cpp/dart.cpp" line="1531"/>
+        <location filename="../cpp/dart.cpp" line="1532"/>
+        <location filename="../cpp/dart.cpp" line="1533"/>
         <source>%1 km</source>
         <translation>%1 km</translation>
     </message>
@@ -999,22 +921,6 @@ Do you want to continue?</translation>
         <location filename="../ui/highscore.ui" line="35"/>
         <source>Name</source>
         <translation>Name</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:9pt; font-weight:600; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;⌀ Score&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:9pt; font-weight:600; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;⌀ Score&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>ø Score</source>
-        <translation type="obsolete">ø Score</translation>
     </message>
     <message>
         <location filename="../ui/highscore.ui" line="48"/>
@@ -1180,82 +1086,82 @@ p, li { white-space: pre-wrap; }
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="247"/>
+        <location filename="../ui/preferences.ui" line="245"/>
         <source>When you are playing with more than one player, you do not want the other players to see where you have clicked. Now you can either move the cursor to another position yourself, or you enable this feature which automatically moves the curosr.</source>
         <translation>When you are playing with more than one player, you do not want the other players to see where you have clicked. Now you can either move the cursor to another position yourself, or you enable this feature which automatically moves the curosr.</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="250"/>
+        <location filename="../ui/preferences.ui" line="248"/>
         <source>Reset cursor when playing with more than one player</source>
         <translation>Reset cursor when playing with more than one player</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="259"/>
+        <location filename="../ui/preferences.ui" line="255"/>
         <source>Start a new game automatically after showing the results</source>
         <translation>Start a new game automatically after showing the results</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="269"/>
+        <location filename="../ui/preferences.ui" line="262"/>
         <source>Show high score list after adding a new high score</source>
         <translation>Show high score list after adding a new high score</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="298"/>
+        <location filename="../ui/preferences.ui" line="291"/>
         <source>Scores and Marks</source>
         <translation>Scores and Marks</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="306"/>
+        <location filename="../ui/preferences.ui" line="299"/>
         <source>When calculating the score, accepet</source>
         <translation>When calculating the score, accepet</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="313"/>
+        <location filename="../ui/preferences.ui" line="306"/>
         <source>When calculating the scores, QeoDart respects the whole area of the place. This area is discribed by a rectangle put around the place. As the area of this rectangle often includes areas of other places, the default is accepting only the inner 25% of the rectangle.</source>
         <translation>When calculating the scores, QeoDart respects the whole area of the place. This area is discribed by a rectangle put around the place. As the area of this rectangle often includes areas of other places, the default is accepting only the inner 25% of the rectangle.</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="317"/>
+        <location filename="../ui/preferences.ui" line="310"/>
         <source>the point only</source>
         <translation>the point only</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="322"/>
+        <location filename="../ui/preferences.ui" line="315"/>
         <source>25% of the area</source>
         <translation>25% of the area</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="327"/>
+        <location filename="../ui/preferences.ui" line="320"/>
         <source>100% of the area</source>
         <translation>100% of the area</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="335"/>
+        <location filename="../ui/preferences.ui" line="328"/>
         <source>Use the following grade system:</source>
         <translation>Use the following grade system:</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="346"/>
+        <location filename="../ui/preferences.ui" line="339"/>
         <source>German (best: 1.0 - worst: 6.0)</source>
         <translation>German (best: 1.0 - worst: 6.0)</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="351"/>
+        <location filename="../ui/preferences.ui" line="344"/>
         <source>Do not display marks</source>
         <translation>Do not display marks</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="359"/>
+        <location filename="../ui/preferences.ui" line="352"/>
         <source>Letters per Second:</source>
         <translation>Letters per Second:</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="366"/>
+        <location filename="../ui/preferences.ui" line="359"/>
         <source>Penalty</source>
         <translation>Penalty</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="376"/>
+        <location filename="../ui/preferences.ui" line="366"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1286,115 +1192,115 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;- Wrong use of double letters and lengthening&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="396"/>
+        <location filename="../ui/preferences.ui" line="386"/>
         <source>do not penalize</source>
         <translation>do not penalize</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="401"/>
+        <location filename="../ui/preferences.ui" line="391"/>
         <source>for spelling errors</source>
         <translation>for spelling errors</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="406"/>
+        <location filename="../ui/preferences.ui" line="396"/>
         <source>for severe spelling errors</source>
         <translation>for severe spelling errors</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="425"/>
+        <location filename="../ui/preferences.ui" line="415"/>
         <source>In the mode &quot;Ask for: Name of Place&quot; in combination with &quot;Against Time&quot;, you get some &quot;free seconds&quot; depending on the length of the name and the number of letters you can type per second.</source>
         <translation>In the mode &quot;Ask for: Name of Place&quot; in combination with &quot;Against Time&quot;, you get some &quot;free seconds&quot; depending on the length of the name and the number of letters you can type per second.</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="457"/>
+        <location filename="../ui/preferences.ui" line="447"/>
         <source>Determine…</source>
         <translation>Determine…</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="486"/>
+        <location filename="../ui/preferences.ui" line="476"/>
         <source>Advanced</source>
         <translation>Advanced</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="507"/>
+        <location filename="../ui/preferences.ui" line="497"/>
         <source>Delays</source>
         <translation>Delays</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="513"/>
+        <location filename="../ui/preferences.ui" line="503"/>
         <source>between distance circles</source>
         <translation>between distance circles</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="520"/>
+        <location filename="../ui/preferences.ui" line="510"/>
         <source>before next player</source>
         <translation>before next player</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="527"/>
-        <location filename="../ui/preferences.ui" line="540"/>
-        <location filename="../ui/preferences.ui" line="553"/>
-        <location filename="../ui/preferences.ui" line="566"/>
+        <location filename="../ui/preferences.ui" line="517"/>
+        <location filename="../ui/preferences.ui" line="530"/>
+        <location filename="../ui/preferences.ui" line="543"/>
+        <location filename="../ui/preferences.ui" line="556"/>
         <source>ms</source>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="579"/>
+        <location filename="../ui/preferences.ui" line="569"/>
         <source>before next place</source>
         <translation>before next place</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="586"/>
+        <location filename="../ui/preferences.ui" line="576"/>
         <source>before next place (training)</source>
         <translation>before next place (training)</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="615"/>
+        <location filename="../ui/preferences.ui" line="605"/>
         <source>Warnings</source>
         <translation>Warnings</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="628"/>
+        <location filename="../ui/preferences.ui" line="618"/>
         <source>Miscellaneous</source>
         <translation>Miscellaneous</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="637"/>
+        <location filename="../ui/preferences.ui" line="624"/>
         <source>Enable this option if QeoDart doesn&apos;t recognize the positions of your clicks properly.</source>
         <translation>Enable this option if QeoDart doesn&apos;t recognize the positions of your clicks properly.</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="640"/>
+        <location filename="../ui/preferences.ui" line="627"/>
         <source>Use non-default cursor image</source>
         <translation>Use non-default cursor image</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="647"/>
+        <location filename="../ui/preferences.ui" line="634"/>
         <source>Shorten toolbar labels, so that all buttons fit into the window</source>
         <translation>Shorten toolbar labels, so that all buttons fit into the window</translation>
     </message>
     <message>
-        <location filename="../cpp/preferences.cpp" line="95"/>
+        <location filename="../cpp/preferences.cpp" line="111"/>
         <source>Changing this language setting will require reloading the map.</source>
         <translation>Changing this language setting will require reloading the map.</translation>
     </message>
     <message>
-        <location filename="../cpp/preferences.cpp" line="100"/>
+        <location filename="../cpp/preferences.cpp" line="116"/>
         <source>Setting the number of places smaller than the current place number will start a new game automatically.</source>
         <translation>Setting the number of places smaller than the current place number will start a new game automatically.</translation>
     </message>
     <message>
-        <location filename="../cpp/preferences.cpp" line="108"/>
+        <location filename="../cpp/preferences.cpp" line="125"/>
         <source>Chancing this setting will start a new game automatically.</source>
         <translation>Chancing this setting will start a new game automatically.</translation>
     </message>
     <message>
-        <location filename="../cpp/preferences.cpp" line="117"/>
+        <location filename="../cpp/preferences.cpp" line="134"/>
         <source>A new user interface language will be completely applied after restarting QeoDart.</source>
         <translation>A new user interface language will be completely applied after restarting QeoDart.</translation>
     </message>
     <message>
-        <location filename="../cpp/preferences.cpp" line="176"/>
+        <location filename="../cpp/preferences.cpp" line="197"/>
         <source>Place %1 of %2</source>
         <translation>Place %1 of %2</translation>
     </message>
@@ -1416,51 +1322,8 @@ p, li { white-space: pre-wrap; }
         <source>OK</source>
         <translation>OK</translation>
     </message>
-    <message>
-        <source>&lt;span&gt;You have a score of %1 points (&amp;#8960; %2).&lt;/span&gt;</source>
-        <translation type="obsolete">&lt;span&gt;You have a score of %1 points (&amp;#8960; %2).&lt;/span&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;span&gt;Player %1 has a score of %2 points (&amp;#8960; %3).&lt;/span&gt;</source>
-        <translation type="obsolete">&lt;span&gt;Player %1 has a score of %2 points (&amp;#8960; %3).&lt;/span&gt;</translation>
-    </message>
     <message numerus="yes">
-        <source>&lt;span&gt;You have a score of %n point(s) (&amp;#8960; %1).&lt;/span&gt;</source>
-        <translation type="obsolete">
-            <numerusform>&lt;span&gt;You have a score of %n point(s) (&amp;#8960; %1).&lt;/span&gt;</numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>You have a score of %n point(s) (Ã¸ %1).</source>
-        <translation type="obsolete">
-            <numerusform>You have a score of %n point (ø %1).</numerusform>
-            <numerusform>You have a score of %n points (ø %1).</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>Player %1 has a score of %n point(s) (Ã¸ %2).</source>
-        <translation type="obsolete">
-            <numerusform>Player %1 has a score of %n point (ø %2).</numerusform>
-            <numerusform>Player %1 has a score of %n points (ø %2).</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>You have a score of %n point(s) (ø %1).</source>
-        <translation type="obsolete">
-            <numerusform>You have a score of %n point (ø %1).</numerusform>
-            <numerusform>You have a score of %n points (ø %1).</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>Player %1 has a score of %n point(s) (ø %2).</source>
-        <translation type="obsolete">
-            <numerusform>Player %1 has a score of %n point (ø %2).</numerusform>
-            <numerusform>Player %1 has a score of %n points (ø %2).</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <location filename="../cpp/results.cpp" line="47"/>
+        <location filename="../cpp/results.cpp" line="55"/>
         <source>You have a score of %n point(s) (Ø %1).</source>
         <translation>
             <numerusform>You have a score of %n point (Ø %1).</numerusform>
@@ -1468,7 +1331,7 @@ p, li { white-space: pre-wrap; }
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../cpp/results.cpp" line="51"/>
+        <location filename="../cpp/results.cpp" line="59"/>
         <source>Player %1 has a score of %n point(s) (Ø %2).</source>
         <translation>
             <numerusform>Player %1 has a score of %n point (Ø %2).</numerusform>
@@ -1476,21 +1339,17 @@ p, li { white-space: pre-wrap; }
         </translation>
     </message>
     <message>
-        <location filename="../cpp/results.cpp" line="57"/>
+        <location filename="../cpp/results.cpp" line="65"/>
         <source>That equals grade %1.</source>
         <translation>That equals grade %1.</translation>
     </message>
     <message>
-        <location filename="../cpp/results.cpp" line="70"/>
+        <location filename="../cpp/results.cpp" line="78"/>
         <source>∞</source>
         <translation>∞</translation>
     </message>
     <message>
-        <source>â</source>
-        <translation type="obsolete">∞</translation>
-    </message>
-    <message>
-        <location filename="../cpp/results.cpp" line="73"/>
+        <location filename="../cpp/results.cpp" line="81"/>
         <source>&lt;span style=&quot;color:rgb(%5,%6,%7)&quot;&gt;%1&amp;nbsp;(%2&amp;nbsp;km,&amp;nbsp;%3&amp;nbsp;P.,&amp;nbsp;%4)&lt;/span&gt;, </source>
         <translation>&lt;span style=&quot;color:rgb(%5,%6,%7)&quot;&gt;%1&amp;nbsp;(%2&amp;nbsp;km,&amp;nbsp;%3&amp;nbsp;P.,&amp;nbsp;%4)&lt;/span&gt;, </translation>
     </message>

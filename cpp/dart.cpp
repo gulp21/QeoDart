@@ -938,8 +938,8 @@ QColor dart::qcGetColorOfPlayer(int player) {
 	QColor c=QColor(0,0,0,255);
 	
 	if(m==0 || m==3 || m==5) c.setBlue(i);
-	if(m==1 || m==3 || m==4) c.setGreen(i);
-	if(m==2 || m==4 || m==5) c.setRed(i);
+	if(m==1 || m==3 || m==4) c.setGreen(i*0.85); // *x makes the colors a bit less bright
+	if(m==2 || m==4 || m==5) c.setRed(i*0.9);
 	
 	return c;
 }
@@ -1787,7 +1787,7 @@ void dart::vAddMap() {
 	//: the translated wiki pages are called DE:Maps etc. Please do NOT translate when there is no such wiki page in your language
 	if(!QDesktopServices::openUrl(QUrl(tr("https://github.com/gulp21/QeoDart/wiki/Maps")))) {
 		QMessageBox msgBox;
-		msgBox.setText(tr("The default browser could not be opened"));
+		msgBox.setText(tr("The default browser could not be opened."));
 		msgBox.setIcon(QMessageBox::Warning);
 		msgBox.exec();
 	}
@@ -1797,7 +1797,7 @@ void dart::vReportBug() {
 	//: the translated wiki pages are called DE:Contribute etc. Please do NOT translate when there is no such wiki page in your language
 	if(!QDesktopServices::openUrl(QUrl(tr("https://github.com/gulp21/QeoDart/wiki/Contribute")))) {
 		QMessageBox msgBox;
-		msgBox.setText(tr("The default browser could not be opened"));
+		msgBox.setText(tr("The default browser could not be opened."));
 		msgBox.setIcon(QMessageBox::Warning);
 		msgBox.exec();
 	}
