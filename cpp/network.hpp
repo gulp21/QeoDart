@@ -8,9 +8,15 @@ See main.cpp for details. */
 #define NET_HPP
 
 #include <QHostAddress>
+#include <QProgressDialog>
+#include <QTcpSocket>
+#include <QTcpServer>
+#include <QtNetwork>
 #include <QWidget>
 
 class dart;
+
+const double dNetworkVersion=1.0;
 
 class network : public QWidget {
 	Q_OBJECT
@@ -25,7 +31,25 @@ class network : public QWidget {
 		
 		void vNewNetworkGame();
  	private:
+		bool bGameStarted, bExpectingImageData;
+		
+		QTcpServer *commandServer;
+		QList<QTcpSocket*> qlCommandSockets;
+		QProgressDialog *progressDialog;
+		
 		void vGameStartQuestion();
-		void vAskForServer();
+		void vSetServerOnline();
+		void vServerTimeout();
+		void vConnectToServer();
+		void vSendCommand(QString command);
+		void vShowProgressForServer();
+		void vShowProgressForClient();
+		
+		bool bAskForIp(QHostAddress &ip);
+		
+	private slots:
+		void vReadCommand();
+		void vNewClient();
+		void vShowConnectionError(QAbstractSocket::SocketError socketError);
 };
 #endif //NET_HPP 
