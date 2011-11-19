@@ -1,3 +1,9 @@
+/*
+QeoDart Copyright (C) 2011 Markus Brenneis
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it under certain conditions.
+See main.cpp for details. */
+
 #include "highscores.hpp"
 
 highScoreWindow::highScoreWindow(dart *TDart, io *TIO, QWidget *parent) : myDart(TDart), myIO(TIO), QDialog(parent) {

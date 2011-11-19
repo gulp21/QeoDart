@@ -459,7 +459,8 @@ void dart::vSetNumberOfPlayers(int n) {
 			QLabel *lblScore;
 			lblScore = new QLabel(this);
 			gridLayout->addWidget(lblScore,i,0);
-			lblScore->setText(QString(tr("%n Point(s) Ø %1, %2","",0)).arg(0.0,0,'f',1).arg(0.0,0,'f',1));
+			lblScore->setText(QString(tr("%n Point(s) &Oslash; %1, %2","",0)).arg(0.0,0,'f',1).arg(0.0,0,'f',1));
+			lblScore->setTextFormat(Qt::RichText);
 			
 			QLabel *lblRating;
 			lblRating = new QLabel(this);
@@ -810,9 +811,9 @@ void dart::vShowScores() {
 void dart::vShowTotalScores() {
 	for(int i=0; i<qlPlayerLabels.count(); i++) { // show score for each player
 		if(width()>300)
-			qlPlayerLabels[i][0]->setText(QString(tr("%n Point(s) Ø %1, %2","",qlTotalScores[i].score)).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
+			qlPlayerLabels[i][0]->setText(QString(tr("%n Point(s) &Oslash; %1, %2","",qlTotalScores[i].score)).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
 		else
-			qlPlayerLabels[i][0]->setText(QString(tr("%1, Ø %2, %3")).arg(qlTotalScores[i].score).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
+			qlPlayerLabels[i][0]->setText(QString(tr("%1, &Oslash; %2, %3")).arg(qlTotalScores[i].score).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
 	}
 }
 
@@ -872,8 +873,8 @@ QColor dart::qcGetColorOfPlayer(int player) {
 	QColor c=QColor(0,0,0,255);
 	
 	if(m==0 || m==3 || m==5) c.setBlue(i);
-	if(m==1 || m==3 || m==4) c.setGreen(i);
-	if(m==2 || m==4 || m==5) c.setRed(i);
+	if(m==1 || m==3 || m==4) c.setGreen(i*0.85); // *x makes the colors a bit less bright
+	if(m==2 || m==4 || m==5) c.setRed(i*0.9);
 	
 	return c;
 }
@@ -1112,7 +1113,8 @@ void dart::vNextRound() {
 	
 	if(iGameMode==enTraining && iPlaceCount>=5) {
 		qDebug() << "Revise";
-		for(int i=0; i<qlScoreHistory[0].count() && pn==-1; i++) {
+		for(int i=0; i<qlScoreHistory[0].count() && ppn==NULL; i++) {
+		//for(int i=0; i<qlScoreHistory[0].count() && pn==-1; i++) {
 			qDebug() << qlScoreHistory[0][i].mark << qlTotalScores[0].mark;
 			if(qlScoreHistory[0][i].mark>=4 || (qlScoreHistory[0][i].mark>2 && qlScoreHistory[0][i].mark>qlTotalScores[0].mark) ) {
 				qDebug() << qlPlacesHistory[i]->name;
@@ -1127,12 +1129,12 @@ void dart::vNextRound() {
 				}
 			} //if (badscore)
 		} // for (scorehistory)
-		if(pn==-1) {
+		if(ppn==NULL) {
 			vResetForNewGame();
 		}
 	}
 	
-	if(pn<=-1 && ppn==NULL) {
+	if(ppn==NULL) {
 		int i=0;
 		do {
 			qDebug() << qlCurrentTypePlaces.count();
@@ -1303,7 +1305,7 @@ QString dart::qsSimplifyString(QString str, int l) {
 			str=str.replace(QRegExp(QString::fromUtf8("[äáàãă]")), "a");
 			str=str.replace(QRegExp(QString::fromUtf8("[éèẽ]")), "e");
 			str=str.replace(QRegExp(QString::fromUtf8("[íìĩ]")), "i");
-			str=str.replace(QRegExp(QString::fromUtf8("[öṏØ]")), "o");
+			str=str.replace(QRegExp(QString::fromUtf8("[öṏø]")), "o");
 			str=str.replace(QRegExp(QString::fromUtf8("[üǘǜ]")), "u");
 			str=str.replace(QRegExp(QString::fromUtf8("[ßśş]")), "s");
 			str=str.replace("ss", "s");
@@ -1754,7 +1756,7 @@ void dart::vAddMap() {
 	//: the translated wiki pages are called DE:Maps etc. Please do NOT translate when there is no such wiki page in your language
 	if(!QDesktopServices::openUrl(QUrl(tr("https://github.com/gulp21/QeoDart/wiki/Maps")))) {
 		QMessageBox msgBox;
-		msgBox.setText(tr("The default browser could not be opened"));
+		msgBox.setText(tr("The default browser could not be opened."));
 		msgBox.setIcon(QMessageBox::Warning);
 		msgBox.exec();
 	}
@@ -1764,7 +1766,7 @@ void dart::vReportBug() {
 	//: the translated wiki pages are called DE:Contribute etc. Please do NOT translate when there is no such wiki page in your language
 	if(!QDesktopServices::openUrl(QUrl(tr("https://github.com/gulp21/QeoDart/wiki/Contribute")))) {
 		QMessageBox msgBox;
-		msgBox.setText(tr("The default browser could not be opened"));
+		msgBox.setText(tr("The default browser could not be opened."));
 		msgBox.setIcon(QMessageBox::Warning);
 		msgBox.exec();
 	}
