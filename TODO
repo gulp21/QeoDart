@@ -1,10 +1,10 @@
 FAQ: slow Linux (raster)
-what happens, when conf is read-only?
+what happens when config is read-only? (inform user! [continue using home] [Quit])
+sort maps alphabetically
 //TODO icon
 add helpmenu to game menu
 
 highscore: date (today), time (x ago, api?), pref lang
-Subset > [ ] 1-10; [ ] 11-20; bezogen auf gewhälte Orte
 
 http://la.wikipedia.org/wiki/Index_civitatum_Europaearum
 http://de.wikipedia.org/wiki/Liste_der_Gro%C3%9Fst%C3%A4dte_in_Deutschland
