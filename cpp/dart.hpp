@@ -123,6 +123,7 @@ Q_OBJECT
 		int iNumberOfPlayers, iMaxPlaceCount, iPlaceCount, iCurrentQcf, iMaxTime, iLettersPerSecond;
 		int iScoreAreaMode; // 0=point only; 1=25%; 2=100%
 		int iPenalty; // 0=no; 1=severe; 1=spelling
+		int iCurrentPlayer;
 		int iDelayNextCircle, iDelayNextPlayer, iDelayNextPlace, iDelayNextPlaceTraining;
 		
 		QString qsCurrentPlaceType, qsLanguage, qsPreferedQcfLanguage;
@@ -133,6 +134,10 @@ Q_OBJECT
 		void vSetPlaceType(QString placetype);
 		void vRepaintCommonLabels();
 		void vRetranslate();
+		void vSetNumberOfPlayers(int player);
+		void vNextRound();
+		void vAddScoreForPlayer(int player, scoreHistory score);
+		void vShowResults();
 		
 		bool bCanLoseScore();
 
@@ -144,7 +149,7 @@ Q_OBJECT
 		
 		bool bAcceptingClickEvent, bAcceptingResizeEvent, bGaveHint;
 		
-		int iCurrentPlayer, iTimerElapsed;
+		int iTimerElapsed;
 		
 		place *pTrainingPlaceNumber;
                 
@@ -176,11 +181,9 @@ Q_OBJECT
 		void vDrawDebugPlace(int i);
 		void vRemoveAllCircles();
 		void vRemoveAllCommonPoints();
-		void vSetNumberOfPlayers(int player);
 		void vSetGameMode(enGameModes mode);
 		void vSetAskForMode(enAskForModes mode);
                 void vSetAgainstTime(bool enable);
-		void vNextRound();
 		void vResetForNewGame();
 		void vShowTotalScores();
 		void vShowScores();
@@ -192,9 +195,7 @@ Q_OBJECT
 		void vFindPlaceAround(int x, int y);
 		void vShowAllPlaces();
 		void vAppendEmptyTotalScore();
-		void vAddScoreForPlayer(int player, scoreHistory score);
 		void vNextPlayer();
-		void vShowResults();
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetDistanceInPx(int a, int b, int n);

@@ -16,20 +16,25 @@ See main.cpp for details. */
 
 class dart;
 
+class io;
+
 const double dNetworkVersion=1.0;
 
 class network : public QWidget {
 	Q_OBJECT
 	
 	dart *myDart;
+	io *myIO;
 	
 	public:
-		network(dart*);
+		network(dart*, io*);
 		~network();
 		
-		int iNumberOfPlayers;
+		int iNumberOfPlayers, iReceivedScores;
 		
 		void vNewNetworkGame();
+		void vSendCommand(QString command);
+		
  	private:
 		bool bGameStarted, bExpectingImageData;
 		
@@ -41,9 +46,9 @@ class network : public QWidget {
 		void vSetServerOnline();
 		void vServerTimeout();
 		void vConnectToServer();
-		void vSendCommand(QString command);
 		void vShowProgressForServer();
 		void vShowProgressForClient();
+		void vDestroyProgressDialog();
 		
 		bool bAskForIp(QHostAddress &ip);
 		

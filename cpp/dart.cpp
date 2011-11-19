@@ -268,7 +268,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	show();
 	
-	myNetwork=new network(this);
+	myNetwork=new network(this,myIO);
 }
 
 dart::~dart() {
@@ -727,7 +727,7 @@ void dart::vShowAllPlaces() {
 void dart::vMouseClickEvent(int x, int y) {
 	if(iGameMode==enFind) { vFindPlaceAround(iGetUnzoomed(x),iGetUnzoomed(y)); return; }
 	if(!bAcceptingClickEvent) return;
-	bAcceptingClickEvent=FALSE;
+	bAcceptingClickEvent=false;
 	if(iAskForMode!=enPositions) return;
 	
 	x=iGetUnzoomed(x);
@@ -738,6 +738,8 @@ void dart::vMouseClickEvent(int x, int y) {
 	scoreHistory score=shCalculateScores(x,y);
 	
 	vAddScoreForPlayer(iCurrentPlayer, score);
+	
+	if(iGameMode==enNetwork) return;
 	
 	if(iCurrentPlayer<iNumberOfPlayers-1) {
 		vNextPlayer();
@@ -1003,6 +1005,7 @@ void dart::vSetGameMode(enGameModes mode) {
 			break;
 		case enNetwork:
 			myNetwork->vNewNetworkGame();
+			return;
 			break;
 	}
 	
@@ -1101,7 +1104,7 @@ void dart::vNewGame() {
 }
 
 void dart::vNextRound() {
-	iCurrentPlayer=0;
+	if(iGameMode!=enNetwork) iCurrentPlayer=0;
 	
 	if(iPlaceCount==iMaxPlaceCount && iGameMode!=enTraining) {
 		vShowResultWindows();
@@ -1134,7 +1137,7 @@ void dart::vNextRound() {
 		}
 	}
 	
-	if(ppn==NULL) {
+	if(ppn==NULL && (iGameMode!=enNetwork || iCurrentPlayer==0) ) {
 		int i=0;
 		do {
 			qDebug() << qlCurrentTypePlaces.count();
@@ -1150,7 +1153,11 @@ void dart::vNextRound() {
 	}
 	
 	iPlaceCount++;
-	qlPlacesHistory.append(ppn);
+	if(iGameMode!=enNetwork || iCurrentPlayer==0) qlPlacesHistory.append(ppn);
+	if(iGameMode==enNetwork && iCurrentPlayer==0) {
+		myNetwork->vSendCommand(QString("NEXTPLACE||%1").arg(pn));
+		myNetwork->iReceivedScores=0;
+	}
 	
 	qDebug() << "[i] next place:" << pn << qlPlacesHistory[iPlaceCount-1]->name << iPlaceCount << "/" << iMaxPlaceCount;
 	
@@ -1416,13 +1423,18 @@ scoreHistory dart::shCalculateScores(int x, int y, double f) { // TODO why is it
 void dart::vAddScoreForPlayer(int player, scoreHistory score) {
 	qlScoreHistory[player].append(score);
 	
-	if(! (iGameMode==enTraining && iPlaceCount>=5) ) {
+	if( !(iGameMode==enTraining && iPlaceCount>=5) ) {
 		qlTotalScores[player].score+=score.score;
 		qlTotalScores[player].mark=dGetAverageMarkOfPlayer(player);
 	}
 	
 	qDebug() << "Score for Player" << player << score.diffPx << "px" << score.diffPxArea << "px (area)" << score.diffKm << "km" << score.score << "p"  << score.mark << "TOTAL" << qlTotalScores[player].score << "p" << qlTotalScores[player].mark;
 	
+	if(iGameMode==enNetwork) {
+		if(player==iCurrentPlayer) myNetwork->vSendCommand(QString("SCORE||%1||%2||%3||%4||%5||%6||%7||%8") .arg(iCurrentPlayer).arg(score.diffPx).arg(score.diffPxArea).arg(score.diffKm).arg(score.score).arg(score.mark).arg(score.x).arg(score.y));
+		
+		if(myNetwork->iReceivedScores+1==myNetwork->iNumberOfPlayers) vShowResults();
+	}
 }
 
 // prepares everything for the next player (i.e. resetting cursor/lineEdit, change color)
@@ -1449,7 +1461,7 @@ void dart::vNextPlayer() {
 }
 
 void dart::vShowResults() {
-	iCurrentPlayer=0;
+	if(iGameMode!=enNetwork) iCurrentPlayer=0;
 	
 	vRemoveAllCircles();
 	vDrawClickPositions(iPlaceCount);
@@ -1477,7 +1489,7 @@ void dart::vShowResults() {
 	
 	vRepaintCommonLabels();
 	
-	vNextRound();
+	if(iGameMode!=enNetwork || iCurrentPlayer==0 || (iGameMode==enNetwork && iPlaceCount==iMaxPlaceCount) ) vNextRound();
 }
 
 void dart::vReadQcf() {

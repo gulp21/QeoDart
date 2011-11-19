@@ -14,3 +14,8 @@ qcf/*test*
 qrc*cpp
 *.user
 *.pro.user.*
+BACKGROUND.png
+BORDERS.png
+ELEVATIONS.png
+RIVERS.png
+
