@@ -26,6 +26,8 @@ class io : public QWidget {
 	public:
 		QSettings *settings;	
 		
+		bool bPortable;
+		
 		io(dart*);
 		~io();
 		int iReadQcf(QString mapname);
@@ -37,8 +39,12 @@ class io : public QWidget {
 		void vLoadSettings();
 		void vLoadHighScores(QString mapName);
 		void vSaveHighScores(QString mapName);
+		
  	private:
 		QStringList qslGetPreferedQcfLanguage();
+		
+		bool bDeterminedPortable;
+		
 		void vGetMetaData(QDomDocument &doc, qcfFile &file);
 };
 #endif //IO_HPP 
