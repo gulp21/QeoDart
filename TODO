@@ -1,3 +1,5 @@
+bug: ask for name -> findplace -> training -> <place>
+
 FAQ: slow Linux (raster)
 what happens when config is read-only? (inform user! [continue using home] [Quit])
 sort maps alphabetically

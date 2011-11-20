@@ -47,7 +47,7 @@ void network::vGameStartQuestion() {
 	msgBox.addButton(QMessageBox::Cancel);
 	msgBox.setWindowTitle(tr("Waiting For Other Players"));
 	msgBox.setText(tr("Do you want to start the game?"));
-	msgBox.setInformativeText(tr("At the moment there are %n player(s)","",iNumberOfPlayers));
+	msgBox.setInformativeText(tr("At the moment there are %n player(s).","",iNumberOfPlayers));
 	
 	msgBox.exec();
 	
@@ -161,6 +161,7 @@ void network::vReadCommand() {
 	commandSocket=static_cast<QTcpSocket*>(QObject::sender());
 	
 	if(!commandSocket->canReadLine()) qDebug() << "ERROR: vReadCommand: Cannot read line";
+	
 	while(commandSocket->canReadLine()) {
 		
 		QStringList command = static_cast<QString>(commandSocket->readLine()).split("||");
@@ -273,7 +274,7 @@ void network::vReadCommand() {
 			progressDialog->setLabelText(tr("Sende Einstellungen..."));
 			QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
 			
-			vSendCommand(QString("SETTINGS||%1||%2||%3||%4||%5||%6||%7") .arg(myDart->iAskForMode).arg(myDart->iGameMode).arg(myDart->iMaxPlaceCount).arg(myDart->qsCurrentPlaceType).arg(myDart->iMaxTime).arg(myDart->bAgainstTime).arg(myDart->iScoreAreaMode).toAscii().data()); // TODO send qcffile info // TODO layer visibility
+			vSendCommand(QString("SETTINGS||%1||%2||%3||%4||%5||%6") .arg(myDart->iAskForMode).arg(myDart->iMaxPlaceCount).arg(myDart->qsCurrentPlaceType).arg(myDart->iMaxTime).arg(myDart->bAgainstTime).arg(myDart->iScoreAreaMode).toAscii().data()); // TODO send qcffile info // TODO layer visibility
 			
 //			actionNetwork->setChecked(TRUE);
 			
@@ -380,20 +381,28 @@ void network::vReadCommand() {
 			actionHohen->setVisible(TRUE);
 			actionGrenzen_Kreise->setVisible(TRUE); TODO*/	
 			
-		} else if(command[0]=="SETTINGS" && command.size()>=8) {
+		} else if(command[0]=="SETTINGS" && command.size()>=7) {
 			
 			bExpectingImageData=false;
+			
+			qDebug() << "Reading command:" << command;
 			
 			progressDialog->setLabelText(tr("Receiving settings…"));
 			progressDialog->setValue(progressDialog->value()+1);
 			
-			myDart->iAskForMode=static_cast<enAskForModes>(command[1].toInt()); // TODO validate data
-			myDart->iGameMode=static_cast<enGameModes>(command[2].toInt());
-			myDart->iMaxPlaceCount=command[3].toInt();
-			myDart->qsCurrentPlaceType=command[4];
-			myDart->iMaxTime=command[5].toInt();
-			myDart->bAgainstTime=command[6]=="TRUE";
-			myDart->iScoreAreaMode=command[7].toInt();
+			myDart->iCurrentPlayer=1; // must set it here in order to avoid sending NEXTPLACE when changing askForMode
+			
+			if(command[1].toInt()<0 || command[1].toInt()>1) {
+				qDebug() << "[E] iAskForMode out of range (" << command[1] << ")";
+				command[1]="0";
+			}
+			myDart->iAskForMode=static_cast<enAskForModes>(command[1].toInt());
+			myDart->vSetAskForMode(myDart->iAskForMode);
+			myDart->iMaxPlaceCount=command[2].toInt();
+			myDart->qsCurrentPlaceType=command[3];
+			myDart->iMaxTime=command[4].toInt();
+			myDart->bAgainstTime=command[5]=="TRUE";
+			myDart->iScoreAreaMode=command[6].toInt();
 			
 			myIO->vFillCurrentTypePlaces();
 			

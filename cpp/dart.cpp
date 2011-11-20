@@ -668,6 +668,8 @@ void dart::vRepaintPlayerLabels() {
 
 //repaints all labels which are not player-specific
 void dart::vRepaintCommonLabels() {
+	if(qlPlayerLabels.count()<=iCurrentPlayer) return;
+	
 	int fontSize=iGetFontSize();
         QString stylesheet=QString("color:%2;font-size:%1px;font-family:arial,sans-serif")
                         .arg(fontSize)
@@ -733,7 +735,6 @@ void dart::vMouseClickEvent(int x, int y) {
 	x=iGetUnzoomed(x);
 	y=iGetUnzoomed(y);
 	vDrawPoint(x,y,qlCircleLabels[iCurrentPlayer],qlColorsOfPlayers[iCurrentPlayer]);
-	
 	
 	scoreHistory score=shCalculateScores(x,y);
 	
@@ -1072,10 +1073,10 @@ void dart::vResetForNewGame() {
 		vAppendEmptyTotalScore();
 	}
 	iPlaceCount=0;
-	iCurrentPlayer=0;
+	if(iGameMode!=enNetwork) iCurrentPlayer=0;
 	
 	vShowTotalScores();
-	if(qlPlayerLabels.count()!=0) vRepaintCommonLabels();
+	vRepaintCommonLabels();
 }
 
 // appends empty totalScore to qlTotalScores
@@ -1152,12 +1153,19 @@ void dart::vNextRound() {
 		}
 	}
 	
-	iPlaceCount++;
 	if(iGameMode!=enNetwork || iCurrentPlayer==0) qlPlacesHistory.append(ppn);
-	if(iGameMode==enNetwork && iCurrentPlayer==0) {
-		myNetwork->vSendCommand(QString("NEXTPLACE||%1").arg(pn));
-		myNetwork->iReceivedScores=0;
+	qDebug()<<"bla"<<iGameMode<<(iGameMode==enNetwork)<<iCurrentPlayer;
+	if(iGameMode==enNetwork) {
+		if(iCurrentPlayer==0) {
+			myNetwork->vSendCommand(QString("NEXTPLACE||%1").arg(pn));
+			myNetwork->iReceivedScores=0;
+		} else if(qlPlacesHistory.size()==0) { // this might happen when applying the game mode
+			qDebug() << "[i] stop next round; placesHistory.size:" << qlPlacesHistory.size() << "placeCount" << iPlaceCount;
+			return;
+		}
 	}
+	
+	iPlaceCount++;
 	
 	qDebug() << "[i] next place:" << pn << qlPlacesHistory[iPlaceCount-1]->name << iPlaceCount << "/" << iMaxPlaceCount;
 	
@@ -1348,12 +1356,12 @@ QString dart::qsSimplifyString(QString str, int l) {
 	return str;
 }
 
-void dart::vReturnPressedEvent() { // TODO split (net!)
+void dart::vReturnPressedEvent() {
 	if(iAskForMode!=enNames || iGameMode==enFind) {
 		qDebug() << "[i] vReturnPressedEvent rejected";
 		return;
 	}
-	lineEdit->setEnabled(FALSE);
+	lineEdit->setEnabled(false);
 	
 	double f;
 	int iIndexOfPlace=iFindInputInList(f);
@@ -1382,6 +1390,8 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 	scoreHistory score=shCalculateScores(x,y,f);
 	
 	vAddScoreForPlayer(iCurrentPlayer, score);
+	
+	if(iGameMode==enNetwork) return;
 	
 	if(iCurrentPlayer<iNumberOfPlayers-1) {
 		vNextPlayer();
