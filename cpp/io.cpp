@@ -553,9 +553,10 @@ void io::vLoadSettings() {
 	myDart->bUseOurCursor=settings->value("bUseOurCursor",false).toBool();
 	myDart->bShortenToolbarText=settings->value("bShortenToolbarText",true).toBool();
 	
-	
+#ifndef Q_OS_WINCE
 	if(myDart->bUseOurCursor) myDart->lblMouseClickOverlay->setCursor(QCursor(QPixmap(":/icons/cursor.png"),1,1));
 	else myDart->lblMouseClickOverlay->setCursor(Qt::ArrowCursor);
+#endif
 }
 
 void io::vLoadHighScores(QString mapName) {
