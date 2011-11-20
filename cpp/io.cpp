@@ -10,6 +10,8 @@ See main.cpp for details. */
 using namespace std;
 
 io::io(dart *TDart) : myDart(TDart) {
+	bPortable=false;
+	bDeterminedPortable=false;
 }
  
 io::~io() {
@@ -466,8 +468,33 @@ int io::iWriteQcf(QList<place> &places, qcfFile &f) {
 void io::vLoadSettings() {
 	QString configPath=QCoreApplication::applicationDirPath()+"/QeoDart.conf";
 	
-	if( !QFile::exists(configPath) ) {
-		qDebug() << "[i] no" << configPath << "-> not portable";
+	if(!bDeterminedPortable) {
+		bDeterminedPortable=true;
+		
+		QFile file(configPath);
+	
+		if(file.exists(configPath)) {
+			bPortable=true;
+			qDebug() << "[i] found" << configPath << "-> portable";
+			
+			if(!file.open(QIODevice::ReadWrite)) {
+				QMessageBox msgBox;
+				msgBox.addButton(tr("Continue anyway"), QMessageBox::AcceptRole);
+				QPushButton *leavePortableButton = msgBox.addButton(tr("Leave portable mode"), QMessageBox::AcceptRole);
+				msgBox.setText(QString(tr("The configuration file %1 cannot be accessed by QeoDart. Please ensure that you have got read and write privileges.\nDo you want QeoDart to ignore this error and continue without saving any settings, or do you want to leave the portable mode and use a configuration file in your user directory?")).arg(configPath));
+				msgBox.setIcon(QMessageBox::Warning);
+				msgBox.exec();
+				
+				if(msgBox.clickedButton()==leavePortableButton) bPortable=false;
+			} // if !ReadWrite
+		} else {
+			qDebug() << "[i] no" << configPath << "-> not portable";
+		}
+		
+		file.close();
+	}
+	
+	if( !bPortable ) {
 #ifdef Q_OS_UNIX
 		configPath=QDir::homePath()+"/.config/QeoDart/QeoDart.conf";
 #endif

@@ -916,7 +916,7 @@ void dart::vSetGameMode(enGameModes mode) {
 	// undo hiding lbls etc.
 	switch(iGameMode) {
 		case enFind:
-			lblCurrentPlace->show();
+			if(iAskForMode==enPositions) lblCurrentPlace->show();
 			lblCurrentRound->show();
 			lblCurrentPlayer->show();
 			lblTime->show();
@@ -934,7 +934,7 @@ void dart::vSetGameMode(enGameModes mode) {
 			gridLayout->removeItem(horizontalSpacer_2);
 			gridLayout->addItem(horizontalSpacer_2,0,3);
 			
-			lineEdit->hide();
+			if(iAskForMode!=enNames) lineEdit->hide();
 			
 			break;
 		case enTraining:
