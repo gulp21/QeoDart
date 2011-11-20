@@ -557,7 +557,7 @@ void dart::vToolbarOverflow() {
 	
 	int d=0;
 	if(iToolMenuBarState==enToolBarOnly) d=1;
-		
+	
 	vShowTotalScores();
 	
 	if(width()>320)
@@ -1191,12 +1191,11 @@ void dart::vNextRound() {
 		case enTraining:
 			break;
 		case enLocal:
+                case enNetwork:
 			if(width()>320)
 				lblCurrentRound->setText(QString(tr("Place %1 of %2")).arg(iPlaceCount).arg(iMaxPlaceCount));
 			else
 				lblCurrentRound->setText(QString(tr("%1/%2")).arg(iPlaceCount).arg(iMaxPlaceCount));
-			break;
-		case enNetwork:
 			break;
 	};
         

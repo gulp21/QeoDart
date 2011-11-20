@@ -181,7 +181,7 @@ void network::vReadCommand() {
 	
 	while(commandSocket->canReadLine()) {
 		
-		QStringList command = static_cast<QString>(commandSocket->readLine()).split("||");
+		QStringList command = QString::fromUtf8(commandSocket->readLine()).split("||");
 		
 		if(command.last().endsWith("\n")) command.last()=command.last().left(command.last().size()-1);
 		if(command.last().isEmpty()) command.removeLast();
@@ -416,7 +416,8 @@ void network::vReadCommand() {
 			myDart->iMaxPlaceCount=command[2].toInt();
 			myDart->qsCurrentPlaceType=command[3];
 			myDart->iMaxTime=command[4].toInt();
-			myDart->bAgainstTime=command[5]=="TRUE";
+			myDart->bAgainstTime=command[5]=="1";
+			myDart->vSetAgainstTime(myDart->bAgainstTime);
 			myDart->iScoreAreaMode=command[6].toInt();
 			
 			myIO->vFillCurrentTypePlaces();
@@ -561,6 +562,7 @@ void network::vStopNetworking() {
 	delete commandServer;
 	commandServer=NULL;
 	vDestroyProgressDialog();
+	myIO->vLoadSettings();
 }
 
 void network::vDeleteSockets() {

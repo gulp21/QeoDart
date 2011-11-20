@@ -140,6 +140,7 @@ Q_OBJECT
 		void vShowResults();
 		void vSetAskForMode(enAskForModes mode);
 		void vSetGameMode(enGameModes mode);
+		void vSetAgainstTime(bool enable);
 		
 		bool bCanLoseScore();
 
@@ -183,11 +184,10 @@ Q_OBJECT
 		void vDrawDebugPlace(int i);
 		void vRemoveAllCircles();
 		void vRemoveAllCommonPoints();
-                void vSetAgainstTime(bool enable);
 		void vResetForNewGame();
 		void vShowTotalScores();
 		void vShowScores();
-                void vShowComment();
+		void vShowComment();
 		void vResetScoreLabels();
 		void vShowResultWindows();
 		void vSetToolMenuBarState(enToolMenuBarState state);
@@ -228,11 +228,11 @@ Q_OBJECT
 		void vSetAskForMode();
 		void vReturnPressedEvent();
 		void vTextEditedEvent();
-                void vTimeout();
+		void vTimeout();
 		void vSetPlaceType();
 		void vSetToolMenuBarState();
 		void vSetNumberOfPlayers();
-                void vSetAgainstTime();
+		void vSetAgainstTime();
 		void vShowPreferences();
 		void vShowHighScores();
 		void vShowAboutWindow();
