@@ -253,7 +253,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 		case enTraining:
 			actionTraining->trigger(); break;
 		case enLocal:
-		        actionLocal->trigger(); break;
+		case enNetwork:
+			actionLocal->trigger(); break;
 	}
 	vSetToolMenuBarState(iToolMenuBarState);
 	
@@ -585,6 +586,7 @@ void dart::vToolbarOverflow() {
 			case enFind: longText=tr("Find Place"); break;
 			case enTraining: longText=tr("Training"); break;
 			case enLocal: longText=tr("Local"); break;
+			case enNetwork: longText=tr("Network"); break;
 		}
 		static_cast<QToolButton*>(toolBar->layout()->itemAt(1+d)->widget())->setText(longText);
 		
@@ -948,6 +950,7 @@ void dart::vSetGameMode(enGameModes mode) {
 			vResetScoreLabels();
 			break;
 		case enLocal:
+		case enNetwork:
 			break;
 	}
 	
@@ -1184,6 +1187,7 @@ void dart::vNextRound() {
 	};
 	
 	switch(iGameMode) {
+		case enFind:
 		case enTraining:
 			break;
 		case enLocal:
@@ -1191,6 +1195,8 @@ void dart::vNextRound() {
 				lblCurrentRound->setText(QString(tr("Place %1 of %2")).arg(iPlaceCount).arg(iMaxPlaceCount));
 			else
 				lblCurrentRound->setText(QString(tr("%1/%2")).arg(iPlaceCount).arg(iMaxPlaceCount));
+			break;
+		case enNetwork:
 			break;
 	};
         
@@ -1645,6 +1651,8 @@ void dart::vUpdateActionsIsCheckedStates() {
 			actionTraining->setChecked(true); break;
 		case enLocal:
 			actionLocal->setChecked(true); break;
+		case enNetwork:
+			actionNetwork->setChecked(true); break;
 	}
 	
 	agMap->actions()[iCurrentQcf]->setChecked(true);

@@ -1,4 +1,4 @@
-bug: ask for name -> findplace -> training -> <place>
+bug: refusing new game results in iPlaceCount++
 
 FAQ: slow Linux (raster)
 sort maps alphabetically

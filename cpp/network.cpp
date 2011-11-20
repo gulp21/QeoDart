@@ -15,6 +15,11 @@ network::network(dart *TDart, io *TIO) : myDart(TDart), myIO(TIO) {
 	
 	bGameStarted=false;
 	bExpectingImageData=false;
+	
+	deleteTimer = new QTimer(this);
+	connect(deleteTimer, SIGNAL(timeout()), this, SLOT(vDeleteSockets()));
+	deleteTimer->setSingleShot(true);
+	deleteTimer->setInterval(NETTIMEOUT+100);
 }
  
 network::~network() {
@@ -26,16 +31,20 @@ void network::vNewNetworkGame() {
 	QMessageBox msgBox;
 	QPushButton *serverButton = msgBox.addButton(tr("Player 1 (Server)"), QMessageBox::AcceptRole);
 	QPushButton *otherPlayerButton = msgBox.addButton(tr("Other Player"), QMessageBox::AcceptRole);
+	QPushButton *cancelButton = msgBox.addButton("Cancel", QMessageBox::RejectRole);
+	cancelButton->hide();
 	msgBox.setWindowTitle(tr("Start Network Game"));
 	msgBox.setText(tr("Do you want to be player 1 or another player?"));
 	msgBox.setInformativeText(tr("When you want to play with other players over the Internet, one player (player 1) has to be the so-called server. The settings and the map used during the game are determined by player 1."));
 	
 	msgBox.exec();
 	
-	if (msgBox.clickedButton()==serverButton) {
+	if(msgBox.clickedButton()==serverButton) {
 		vSetServerOnline();
-	} else if (msgBox.clickedButton()==otherPlayerButton) {
+	} else if(msgBox.clickedButton()==otherPlayerButton) {
 		vConnectToServer();
+	} else {
+		myDart->actionLocal->trigger();
 	}
 }
 
@@ -60,17 +69,6 @@ void network::vGameStartQuestion() {
 	}
 }
 
-void network::vShowProgressForServer() {
-	progressDialog=new QProgressDialog(tr("Waiting for connection request…"),tr("Cancel"),0,0,this);
-	//connect(progressDialog, SIGNAL(canceled()), this, SLOT(vSinglePlayer())); TODO
-	progressDialog->setWindowModality(Qt::WindowModal);
-	progressDialog->show();
-	
-	//bNETProgressShown=TRUE;
-	
-	//dn->setServerOnline();
-}
-
 void network::vSetServerOnline() {
 	if(commandServer==NULL) commandServer=new QTcpServer(this);
 	commandServer->listen(QHostAddress::Any,51483);
@@ -78,7 +76,17 @@ void network::vSetServerOnline() {
 	
 	qDebug() << "Server is online";
 	
-	vShowProgressForServer();
+	QList<QHostAddress> ips=QNetworkInterface::allAddresses();
+	QString ip;
+	qDebug() << ips;
+	for(int i=0; i<ips.size(); i++) {
+		if(!ips[i].toString().startsWith("127.") && !ips[i].toString().startsWith("0:0:0:0:0:0:0:")) { // TODO ipv6 not working?
+			ip=QString("%1, %2").arg(ip).arg(ips[i].toString());
+		}
+	}
+	if(ip.length()>0) ip=" ("+ip.right(ip.length()-2)+")";
+	
+	vShowProgress(tr("Waiting for connection request…\nThe other players must know your IP address%1.").arg(ip));
 }
 
 void network::vNewClient() {
@@ -107,19 +115,16 @@ void network::vConnectToServer(){
 	
 	if(!bAskForIp(ip)){return;} // TODO
 	
-	vShowProgressForClient();
+	vShowProgress(tr("Waiting for connection being accepted"));
 	
 	qlCommandSockets[0]->connectToHost(ip, 51483); // TODO port from config
 	qDebug() << "Sending request to server" << ip << endl;
 	
-	if(qlCommandSockets[0]->waitForConnected(10000)) {
-		//progressDialog->setLabelText(tr("Waiting for connection being accepted…"));
+	if(qlCommandSockets[0]->waitForConnected(NETTIMEOUT)) {
 		QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
 		
-		//bNETConnected=TRUE;
-		
-		vSendCommand(QString("NEW||%0||%1").arg(dNetworkVersion).arg(qlCommandSockets[0]->peerAddress().toString()));
-		//serverTimeout->start(10000);
+		vSendCommand(QString("NEW||%0||%1").arg(NETWORKVERSION).arg(qlCommandSockets[0]->peerAddress().toString()));
+		//serverTimeout->start(10000); TODO?
 		
 	} else {
 		vShowConnectionError(QAbstractSocket::SocketTimeoutError);
@@ -139,21 +144,33 @@ void network::vServerTimeout(){
 	vShowConnectionError(QAbstractSocket::SocketTimeoutError);
 }
 
-void network::vShowProgressForClient() {
-	progressDialog=new QProgressDialog(tr("Waiting for connection being accepted"),tr("Cancel"),0,0,this);
-	//connect(progressDialog, SIGNAL(canceled()), this, SLOT(vSinglePlayer())); TODO
+// common
+
+void network::vShowProgress(QString message) {
+	progressDialog=new QProgressDialog(message,tr("Cancel"),0,0,this);
+	connect(progressDialog, SIGNAL(canceled()), this, SLOT(vProgressDialogCancelled()));
 	progressDialog->setWindowModality(Qt::WindowModal);
 	progressDialog->show();
 }
 
-// common
+void network::vProgressDialogCancelled() {
+	vStopNetworking();
+	vDestroyProgressDialog();
+	myDart->actionLocal->trigger();
+}
 
 void network::vSendCommand(QString command){
-	//if(!bNETConnected) return;
+	if(qlCommandSockets.length()==0) {
+		qDebug() << "[E] qlCommandSockets.length is 0";
+		return;
+	}
+	
 	qDebug() << "Sending command:" << command;
 	command=command+"\n";
-	qlCommandSockets[0]->write(command.toAscii().data());
-	qlCommandSockets[0]->flush();
+	for(int i=0; i<qlCommandSockets.size(); i++) {
+		qlCommandSockets[i]->write(command.toUtf8().data());
+		qlCommandSockets[i]->flush();
+	}
 }
 
 void network::vReadCommand() {
@@ -180,8 +197,8 @@ void network::vReadCommand() {
 			QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
 			
 			double foreignVersion=command[1].toDouble();
-			qDebug() << "foreignVersion is" << foreignVersion << "and our dNetworkVersion is" << dNetworkVersion;
-			if(foreignVersion>dNetworkVersion || static_cast<int>(foreignVersion)!=static_cast<int>(dNetworkVersion)) {
+			qDebug() << "foreignVersion is" << foreignVersion << "and our NETWORKVERSION is" << NETWORKVERSION;
+			if(foreignVersion>NETWORKVERSION || static_cast<int>(foreignVersion)!=static_cast<int>(NETWORKVERSION)) {
 				qDebug() << "Protocol version incompatible";
 				progressDialog->setLabelText(tr("Got connection request: incompatible version"));
 				vSendCommand("INCOMP");
@@ -350,19 +367,13 @@ void network::vReadCommand() {
 			
 			socketstream >> pixmap;
 			
-			QString tempDir=QDir::tempPath();
-			
-			QString configPath=QCoreApplication::applicationDirPath()+"/QeoDart.conf"; // TODO should use bPartable or the like
-			if(QFile::exists(configPath)) { // portable
-				tempDir=QCoreApplication::applicationDirPath(); // TODO what if not writable?
-			}
+			QString tempDir=myIO->bPortable ? QCoreApplication::applicationDirPath() : QDir::tempPath();
 			
 			if(!tempDir.endsWith("\\") && !tempDir.endsWith("/")) tempDir+="/";
 			
 			QString filename=tempDir+command[1]+".png";
 			
 			qDebug() << "Saving" << filename;
-			
 			qDebug() << "successfull?" << pixmap.save(filename);
 			
 			int i=0;
@@ -371,7 +382,11 @@ void network::vReadCommand() {
 			else if(command[1]=="ELEVATIONS") i=1;
 			else if(command[1]=="BORDERS") i=2;
 			else if(command[1]=="RIVERS") i=3;
-			else { qDebug() << "[E] broken command"; return; } // TODO remove file
+			else {
+				qDebug() << "[E] broken command";
+				QFile(filename).remove();
+				return;
+			}
 			
 			myDart->qlMapLayers[i]->setText("");
 			myDart->qlMapLayers[i]->setText(QString("<img src=\"%2\" height=\"%1\" width=\"%1\"/>").arg(600*myDart->dZoomFactor).arg(filename));
@@ -461,60 +476,97 @@ void network::vShowConnectionError(QAbstractSocket::SocketError socketError){
 	
 //	serverTimeout->stop();
 	QMessageBox connectionErrorBox;
+	connectionErrorBox.setIcon(QMessageBox::Critical);
 	//qDebug() << commandSocket->QAbstractSocket::error();
 	QString errstr;
 	switch (socketError){
-		case QAbstractSocket::RemoteHostClosedError: // TODO ->en
+		case QAbstractSocket::RemoteHostClosedError:
 			errstr="RemoteHostClosedError";
-			connectionErrorBox.critical(this, QString(tr("Error")), QString(tr("<b>Verbindung getrennt</b><br/>Die Netzwerkverbindung wurde unerwartet getrennt. Ihr Mitspieler hat vielleicht die Verbindung getrennt.<br/><br/>Die Fehlermeldung lautet: %1")).arg(errstr));
+			connectionErrorBox.setWindowTitle(tr("Connection terminated"));
+			connectionErrorBox.setText(tr("The network connection has been closed unexpectedly. Maybe another player closed the connection."));
 			break;
 		case QAbstractSocket::ConnectionRefusedError:
 			errstr="ConnectionRefusedError";
-			connectionErrorBox.critical(this, QString(tr("Error")), QString(tr("<b>Verbindung verweigert</b><br/>Die Netzwerkverbindung kann nicht hergestellt werden. Stellen Sie sicher, dass Spieler 1 bereit ist und die Verbindung nicht abgelehnt hat.<br/><br/>Die Fehlermeldung lautet: %1")).arg(errstr));
+			connectionErrorBox.setWindowTitle(tr("Connection refused"));
+			connectionErrorBox.setText(tr("The network connection cannot be set up. Make sure that player 1 is ready, and did not refuse the connection."));
 			break;
 		case QAbstractSocket::HostNotFoundError:
 			errstr="HostNotFoundError";
-			connectionErrorBox.critical(this, QString(tr("Error")), QString(tr("<b>Server not found</b><br/>Mit den angegebenen Daten konnte kein Server gefunden werden. M&ouml;glicherweise ist der Spieler nicht bereit oder Adresse oder Port sind falsch.<br/><br/>Die Fehlermeldung lautet: %1")).arg(errstr));
+			connectionErrorBox.setWindowTitle(tr("Server not found"));
+			connectionErrorBox.setText(tr("No server with the given specifications could be found. Maybe the other player is not ready yet or address or port are wrong."));
 			break;
 		case QAbstractSocket::SocketAccessError:
 			errstr="SocketAccessError";
-			connectionErrorBox.critical(this, QString(tr("Error")), QString(tr("<b>Fehlende Zugriffsrechte</b><br/>Die vorgesehene Netzwerkoperation ist nicht m&ouml;glich, da die erforderlichen Rechte fehlen.<br/><br/>Die Fehlermeldung lautet: %1")).arg(errstr));
+			connectionErrorBox.setWindowTitle(tr("Missing permissions"));
+			connectionErrorBox.setText(tr("The planned network operation is not possible, bacuse necessary permissions are missing."));
 			break;
 		case QAbstractSocket::SocketResourceError:
 			errstr="SocketResourceError";
-			connectionErrorBox.critical(this, QString(tr("Error")), QString(tr("<b>Netzwerkoperation nicht m&ouml;glich</b><br/>Die vorgesehene Netzwerkoperation ist nicht m&ouml;glich, da sie m&ouml;glicherweise vom Betriebssystem oder der verwendeten Hardware nicht unterst&uuml;tzt wird.<br/><br/>Die Fehlermeldung lautet: %1")).arg(errstr));
+			connectionErrorBox.setWindowTitle(tr("Network operation not possible"));
+			connectionErrorBox.setText(tr("The planned network operation is not possible, because is may be not supported by the operating system, or the used hardware."));
 			break;
 		case QAbstractSocket::UnsupportedSocketOperationError:
 			errstr="UnsupportedSocketOperationError";
-			connectionErrorBox.critical(this, QString(tr("Error")), QString(tr("<b>Netzwerkoperation nicht m&ouml;glich</b><br/>Die vorgesehene Netzwerkoperation ist nicht m&ouml;glich, da sie m&ouml;glicherweise vom Betriebssystem oder der verwendeten Hardware nicht unterst&uuml;tzt wird.<br/><br/>Die Fehlermeldung lautet: %1")).arg(errstr));
+			connectionErrorBox.setWindowTitle(tr("Network operation not possible"));
+			connectionErrorBox.setText(tr("The planned network operation is not possible, because is may be not supported by the operating system, or the used hardware."));
 			break;
 		case QAbstractSocket::SocketTimeoutError:
 			errstr="SocketTimeoutError";
-			connectionErrorBox.critical(this, QString(tr("Error")), QString(tr("<b>Zeit&uuml;berschreitung</b><br/>Die angeforderte Netzwerkoperation dauerte zu lange und wurde abgebrochen. M&ouml;glicherweise ist der Server oder das Netzwerk zur Zeit &uuml;berlastet, versuchen Sie es daher sp&auml;ter noch einmal.<br/><br/>Die Fehlermeldung lautet: %1")).arg(errstr));
+			connectionErrorBox.setWindowTitle(tr("Timeout"));
+			connectionErrorBox.setText(tr("The requested network operation took too long and has been canceled. Maybe the server or the network is overloaded currently, please try again later."));
 			break;
 		case QAbstractSocket::DatagramTooLargeError:
 			errstr="DatagramTooLargeError";
-			connectionErrorBox.critical(this, QString(tr("Error")), QString(tr("<b>Datenlimit &uuml;berschritten</b><br/>Die zu versendenden Daten &uuml;berschreiten die vom Betriebssystem vorgegebene Grenze.<br/><br/>Die Fehlermeldung lautet: %1")).arg(errstr));
+			connectionErrorBox.setWindowTitle(tr("Data limit exceeded"));
+			connectionErrorBox.setText(tr("The data to be sent exceedes the limit given by the operating system."));
 			break;
 		case QAbstractSocket::NetworkError:
 			errstr="NetworkError";
-			connectionErrorBox.critical(this, QString(tr("Error")), QString(tr("<b>Netzwerkfehler</b><br/>Es trat ein unbekannter Fehler im Netzwerk auf. Dies kann zum Beispiel ein herausgezogenes Netzwerkkabel sein. Pr&uuml;fen Sie bitte Ihr Netzwerk und versuchen es dann noch einmal.<br/><br/>Die Fehlermeldung lautet: %1")).arg(errstr));
+			connectionErrorBox.setWindowTitle(tr("Network error"));
+			connectionErrorBox.setText(tr("An unknown error occured in the network. This might be for example an unplugged network cable. Please check you network and try again."));
 			break;
 		case QAbstractSocket::UnknownSocketError:
 			errstr="UnknownSocketError";
-			connectionErrorBox.critical(this, QString(tr("Error")), QString(tr("<b>Netzwerkoperation nicht m&ouml;glich</b><br/>Die vorgesehene Netzwerkoperation ist nicht m&ouml;glich, da sie m&ouml;glicherweise vom Betriebssystem oder der verwendeten Hardware nicht unterst&uuml;tzt wird.<br/><br/>Die Fehlermeldung lautet: %1")).arg(errstr));
+			connectionErrorBox.setWindowTitle(tr("Network operation not possible"));
+			connectionErrorBox.setText(tr("The planned network operation is not possible, because is may be not supported by the operating system, or the used hardware."));
 			break;
 		default:
 			errstr="Default";
-			connectionErrorBox.critical(this, QString(tr("Error")), QString(tr("<b>Netzwerkoperation nicht m&ouml;glich</b><br/>Die vorgesehene Netzwerkoperation ist nicht m&ouml;glich, da sie m&ouml;glicherweise vom Betriebssystem oder der verwendeten Hardware nicht unterst&uuml;tzt wird.<br/><br/>Die Fehlermeldung lautet: %1")).arg(errstr));
+			connectionErrorBox.setWindowTitle(tr("Network operation not possible"));
+			connectionErrorBox.setText(tr("The planned network operation is not possible, because is may be not supported by the operating system, or the used hardware."));
 	}
 	
-//	bNETConnected=FALSE; // We do not want to send "DISCONNECTED", since we are not connected
-//	vStopNet();
+	connectionErrorBox.setInformativeText(tr("The error message is: %1").arg(errstr));
+	connectionErrorBox.exec();
+	
+	vStopNetworking();
+	
+	myDart->actionLocal->trigger();
 }
 
 void network::vDestroyProgressDialog() {
-	progressDialog->close();
-	delete progressDialog;
+	if(progressDialog!=NULL) {
+		progressDialog->blockSignals(true); // otherwise we trigger cancelled() which would call vStopNetworking
+		progressDialog->close();
+		delete progressDialog;
+	}
 	progressDialog=NULL;
+}
+
+void network::vStopNetworking() {
+	vSendCommand("DISCONNECT||ERROR");
+	
+	deleteTimer->start(); // we must delay it, otherwise waitForConnected crashes
+	
+	delete commandServer;
+	commandServer=NULL;
+	vDestroyProgressDialog();
+}
+
+void network::vDeleteSockets() {
+	qDebug() << "[i] Delete Sockets";
+	while(qlCommandSockets.size()>0) {
+		delete qlCommandSockets.last();
+		qlCommandSockets.removeLast();
+	}
 }

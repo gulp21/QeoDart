@@ -18,7 +18,8 @@ class dart;
 
 class io;
 
-const double dNetworkVersion=1.0;
+const double NETWORKVERSION=1.0;
+const int NETTIMEOUT=5000;
 
 class network : public QWidget {
 	Q_OBJECT
@@ -41,20 +42,23 @@ class network : public QWidget {
 		QTcpServer *commandServer;
 		QList<QTcpSocket*> qlCommandSockets;
 		QProgressDialog *progressDialog;
+                QTimer *deleteTimer;
 		
 		void vGameStartQuestion();
 		void vSetServerOnline();
 		void vServerTimeout();
 		void vConnectToServer();
-		void vShowProgressForServer();
-		void vShowProgressForClient();
+		void vShowProgress(QString message);
 		void vDestroyProgressDialog();
+		void vStopNetworking();
 		
 		bool bAskForIp(QHostAddress &ip);
 		
 	private slots:
+		void vProgressDialogCancelled();
 		void vReadCommand();
 		void vNewClient();
 		void vShowConnectionError(QAbstractSocket::SocketError socketError);
+		void vDeleteSockets();
 };
 #endif //NET_HPP 

@@ -139,6 +139,7 @@ Q_OBJECT
 		void vAddScoreForPlayer(int player, scoreHistory score);
 		void vShowResults();
 		void vSetAskForMode(enAskForModes mode);
+		void vSetGameMode(enGameModes mode);
 		
 		bool bCanLoseScore();
 
@@ -182,7 +183,6 @@ Q_OBJECT
 		void vDrawDebugPlace(int i);
 		void vRemoveAllCircles();
 		void vRemoveAllCommonPoints();
-		void vSetGameMode(enGameModes mode);
                 void vSetAgainstTime(bool enable);
 		void vResetForNewGame();
 		void vShowTotalScores();
