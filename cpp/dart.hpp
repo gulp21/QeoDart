@@ -104,6 +104,7 @@ Q_OBJECT
 		QList<QString> qlLayersNames;
 		QList<QLabel*> qlMapLayers;
 		QList<highScoreEntry> qlHighScores;
+		QList<QAction*> qlPlacesSubsetsActions;
 		
 		QLabel *lblMouseClickOverlay;
 		
@@ -113,7 +114,7 @@ Q_OBJECT
 		enAskForModes iAskForMode;
 		enToolMenuBarState iToolMenuBarState;
                 
-                bool bAgainstTime, bResetCursor, bShortenToolbarText, bUseOurCursor, bAutoNewGame, bAutoShowHighScores;
+                bool bAgainstTime, bResetCursor, bShortenToolbarText, bUseOurCursor, bAutoNewGame, bAutoShowHighScores, bPlacesSubsetActive;
 
 		double dZoomFactor, dPxToKm;
 		
@@ -132,6 +133,7 @@ Q_OBJECT
 		void vSetPlaceType(QString placetype);
 		void vRepaintCommonLabels();
 		void vRetranslate();
+		void vCreatePlacesSubsetsActions();
 		
 		bool bCanLoseScore();
 
@@ -188,6 +190,7 @@ Q_OBJECT
 		void vUpdateActionsIsCheckedStates();
 		void vFindPlaceAround(int x, int y);
 		void vShowAllPlaces();
+		void vUpdatePlacesSubsetActive();
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetDistanceInPx(int a, int b, int n);

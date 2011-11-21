@@ -390,7 +390,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuGame">
@@ -430,21 +430,6 @@ p, li { white-space: pre-wrap; }
      <addaction name="actionPosition_of_Place"/>
      <addaction name="actionName_of_Place"/>
     </widget>
-    <widget class="QMenu" name="menuAsk_for">
-     <property name="title">
-      <string>Ask &amp;for</string>
-     </property>
-     <addaction name="actionPosition_of_Place"/>
-     <addaction name="actionName_of_Place"/>
-     <addaction name="separator"/>
-     <addaction name="actionCountries"/>
-     <addaction name="actionCapitals_of_Countries"/>
-     <addaction name="actionStates"/>
-     <addaction name="actionCapitals_of_States"/>
-     <addaction name="actionCounties"/>
-     <addaction name="actionCities"/>
-     <addaction name="actionTowns"/>
-    </widget>
     <widget class="QMenu" name="menuPlaceType">
      <property name="title">
       <string>Place Type</string>
@@ -456,6 +441,7 @@ p, li { white-space: pre-wrap; }
      <addaction name="actionCounties"/>
      <addaction name="actionCities"/>
      <addaction name="actionTowns"/>
+     <addaction name="separator"/>
     </widget>
     <widget class="QMenu" name="menuView">
      <property name="title">
@@ -475,6 +461,22 @@ p, li { white-space: pre-wrap; }
      <addaction name="actionTraining"/>
      <addaction name="actionLocal"/>
      <addaction name="actionNetwork"/>
+    </widget>
+    <widget class="QMenu" name="menuAsk_for">
+     <property name="title">
+      <string>Ask &amp;for</string>
+     </property>
+     <addaction name="actionPosition_of_Place"/>
+     <addaction name="actionName_of_Place"/>
+     <addaction name="separator"/>
+     <addaction name="actionCountries"/>
+     <addaction name="actionCapitals_of_Countries"/>
+     <addaction name="actionStates"/>
+     <addaction name="actionCapitals_of_States"/>
+     <addaction name="actionCounties"/>
+     <addaction name="actionCities"/>
+     <addaction name="actionTowns"/>
+     <addaction name="separator"/>
     </widget>
     <addaction name="menuGameMode"/>
     <addaction name="actionNumber_of_Players"/>

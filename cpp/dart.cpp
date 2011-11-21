@@ -32,6 +32,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iPaddingTop=0;
 	iMarginTop=0;
 	bGaveHint=false;
+	bPlacesSubsetActive=false;
 	
 	setupUi(this);
 	
@@ -171,8 +172,9 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	btAskForMode->setToolButtonStyle(Qt::ToolButtonTextOnly);
 	actionBtAskForMode=toolBar->addWidget(btAskForMode);
 	
-	menuPlace_Number = new QMenu(this);
+	menuPlace_Number = new QMenu(tr("Subset"),this);
 	menuPlaceType->addMenu(menuPlace_Number);
+	menuAsk_for->addMenu(menuPlace_Number);
 	btPlaceType = new QToolButton(toolBar);
 	btPlaceType->setMenu(menuPlaceType);
 	btPlaceType->setPopupMode(QToolButton::InstantPopup);
@@ -345,6 +347,8 @@ void dart::vSetPlaceType() {
 		if(msgBox.exec()==QMessageBox::Cancel) { vUpdateActionsIsCheckedStates(); return; }
 	}
 	
+	bPlacesSubsetActive=false;
+	
 	qsCurrentPlaceType="";
 	if(actionCountries->isChecked()) qsCurrentPlaceType+="country;";
 	if(actionCapitals_of_Countries->isChecked()) qsCurrentPlaceType+="capitalOfCountry;";
@@ -354,12 +358,42 @@ void dart::vSetPlaceType() {
 	if(actionCities->isChecked()) qsCurrentPlaceType+="city;";
 	if(actionTowns->isChecked()) qsCurrentPlaceType+="town;";
 	myIO->vFillCurrentTypePlaces();
+	vCreatePlacesSubsetsActions();
 	
 	vSetGameMode(iGameMode);
 }
 void dart::vSetPlaceType(QString placetype) {
 	qsCurrentPlaceType=placetype;
 	vUpdateActionsIsCheckedStates();
+	myIO->vFillCurrentTypePlaces();
+	vCreatePlacesSubsetsActions();
+}
+
+void dart::vCreatePlacesSubsetsActions() {
+	bool lastWasActive=false;
+	int lastIndex=-1;
+	
+	if(!qlPlacesSubsetsActions.isEmpty()) {
+		do { // the last menuitem must be removed since the label might be wrong
+			lastWasActive=qlPlacesSubsetsActions.last()->isChecked();
+			lastIndex=qlPlacesSubsetsActions.count()-1;
+			menuPlace_Number->removeAction(qlPlacesSubsetsActions.last());
+			delete qlPlacesSubsetsActions.last();
+			qlPlacesSubsetsActions.removeLast();
+		} while(qlPlacesSubsetsActions.count()*10>=qlCurrentTypePlaces.count());
+	}
+	
+	for(int i=qlPlacesSubsetsActions.count()*10; i<qlCurrentTypePlaces.count(); i+=10) {
+		QAction *action = new QAction(tr("Place %1 to %2").arg(i+1).arg(qlCurrentTypePlaces.count() < i+10 ? qlCurrentTypePlaces.count() : i+10),this);
+		action->setCheckable(true);
+		connect(action, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
+		menuPlace_Number->addAction(action);
+		qlPlacesSubsetsActions.append(action);
+	}
+	
+	if(lastWasActive && lastIndex!=-1 && qlPlacesSubsetsActions.count()>lastIndex) qlPlacesSubsetsActions[lastIndex]->setChecked(true);
+	
+	vUpdatePlacesSubsetActive();
 	myIO->vFillCurrentTypePlaces();
 }
 
@@ -1313,8 +1347,8 @@ double dart::dGetAverageMarkOfPlayer(int player) {
 }
 
 double dart::dGetAverageScoreOfPlayer(int player) {
-	if(iPlaceCount<1) return 0;
-	return qlTotalScores[player].score/iPlaceCount;
+	if(qlScoreHistory[player].count()<1) return 0;
+	return qlTotalScores[player].score/qlScoreHistory[player].count();
 }
 
 // looks for lineEdit->text() in the list of places; returns the index for place in qlAllPlaces
@@ -1663,6 +1697,13 @@ void dart::vUpdateActionsIsCheckedStates() {
 	actionAgainst_Time->setChecked(bAgainstTime);
 	
 	vToolbarOverflow(); // the "Against Time" label appears for some reason
+}
+
+void dart::vUpdatePlacesSubsetActive() {
+	bPlacesSubsetActive=false;
+	for(int i=0; i<qlPlacesSubsetsActions.count() && !bPlacesSubsetActive; i++) {
+		if(qlPlacesSubsetsActions[i]->isChecked()) bPlacesSubsetActive=true;
+	}
 }
 
 // shows a layer when the ckeckbox is checked and the layer is available
