@@ -114,7 +114,7 @@ Q_OBJECT
 		enAskForModes iAskForMode;
 		enToolMenuBarState iToolMenuBarState;
                 
-                bool bAgainstTime, bResetCursor, bShortenToolbarText, bUseOurCursor, bAutoNewGame, bAutoShowHighScores, bPlacesSubsetActive;
+		bool bAgainstTime, bResetCursor, bShortenToolbarText, bUseOurCursor, bAutoNewGame, bAutoShowHighScores, bPlacesSubsetActive;
 
 		double dZoomFactor, dPxToKm;
 		
@@ -134,6 +134,7 @@ Q_OBJECT
 		void vRepaintCommonLabels();
 		void vRetranslate();
 		void vCreatePlacesSubsetsActions();
+		void vUpdatePlacesSubsetActive();
 		
 		bool bCanLoseScore();
 
@@ -190,7 +191,6 @@ Q_OBJECT
 		void vUpdateActionsIsCheckedStates();
 		void vFindPlaceAround(int x, int y);
 		void vShowAllPlaces();
-		void vUpdatePlacesSubsetActive();
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetDistanceInPx(int a, int b, int n);
@@ -234,6 +234,7 @@ Q_OBJECT
 		void vGiveHint();
 		void vAddMap();
 		void vReportBug();
+		void vPlacesSubsetClicked();
 		
 	public slots:
 		void vReadQcf();

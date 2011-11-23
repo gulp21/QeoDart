@@ -358,7 +358,6 @@ void dart::vSetPlaceType() {
 	if(actionCities->isChecked()) qsCurrentPlaceType+="city;";
 	if(actionTowns->isChecked()) qsCurrentPlaceType+="town;";
 	myIO->vFillCurrentTypePlaces();
-	vCreatePlacesSubsetsActions();
 	
 	vSetGameMode(iGameMode);
 }
@@ -366,7 +365,6 @@ void dart::vSetPlaceType(QString placetype) {
 	qsCurrentPlaceType=placetype;
 	vUpdateActionsIsCheckedStates();
 	myIO->vFillCurrentTypePlaces();
-	vCreatePlacesSubsetsActions();
 }
 
 void dart::vCreatePlacesSubsetsActions() {
@@ -386,15 +384,24 @@ void dart::vCreatePlacesSubsetsActions() {
 	for(int i=qlPlacesSubsetsActions.count()*10; i<qlCurrentTypePlaces.count(); i+=10) {
 		QAction *action = new QAction(tr("Place %1 to %2").arg(i+1).arg(qlCurrentTypePlaces.count() < i+10 ? qlCurrentTypePlaces.count() : i+10),this);
 		action->setCheckable(true);
-		connect(action, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
+		connect(action, SIGNAL(triggered()), this, SLOT(vPlacesSubsetClicked()));
 		menuPlace_Number->addAction(action);
 		qlPlacesSubsetsActions.append(action);
 	}
 	
 	if(lastWasActive && lastIndex!=-1 && qlPlacesSubsetsActions.count()>lastIndex) qlPlacesSubsetsActions[lastIndex]->setChecked(true);
-	
-	vUpdatePlacesSubsetActive();
+}
+
+void dart::vPlacesSubsetClicked() {
 	myIO->vFillCurrentTypePlaces();
+	vSetGameMode(iGameMode);
+}
+
+void dart::vUpdatePlacesSubsetActive() {
+	bPlacesSubsetActive=false;
+	for(int i=0; i<qlPlacesSubsetsActions.count() && !bPlacesSubsetActive; i++) {
+		if(qlPlacesSubsetsActions[i]->isChecked()) bPlacesSubsetActive=true;
+	}
 }
 
 void dart::vSetAgainstTime() {
@@ -1697,13 +1704,6 @@ void dart::vUpdateActionsIsCheckedStates() {
 	actionAgainst_Time->setChecked(bAgainstTime);
 	
 	vToolbarOverflow(); // the "Against Time" label appears for some reason
-}
-
-void dart::vUpdatePlacesSubsetActive() {
-	bPlacesSubsetActive=false;
-	for(int i=0; i<qlPlacesSubsetsActions.count() && !bPlacesSubsetActive; i++) {
-		if(qlPlacesSubsetsActions[i]->isChecked()) bPlacesSubsetActive=true;
-	}
 }
 
 // shows a layer when the ckeckbox is checked and the layer is available

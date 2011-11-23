@@ -279,7 +279,6 @@ int io::iReadQcf(QString mapname) {
 	
 	myDart->bPlacesSubsetActive=false;
 	vFillCurrentTypePlaces();
-	myDart->vCreatePlacesSubsetsActions();
 	
 	QString path=myDart->qlQcfxFiles[myDart->iCurrentQcf].path;
 	
@@ -316,9 +315,12 @@ void io::vFillCurrentTypePlaces() {
 		}
 	}
 	
+	myDart->vCreatePlacesSubsetsActions();
+	myDart->vUpdatePlacesSubsetActive();
+	
 	qDebug()<<myDart->bPlacesSubsetActive<<"<<<";
 	if(myDart->bPlacesSubsetActive) {
-		qDebug() << "found" << myDart->qlCurrentTypePlaces.count() << "places for current place type, will remove some of them";
+		qDebug() << "[i] found" << myDart->qlCurrentTypePlaces.count() << "places for current place type, will remove some of them";
 		for(int i=0; i<myDart->qlPlacesSubsetsActions.count(); i++) {
 			if(!myDart->qlPlacesSubsetsActions[i]->isChecked()) {
 				for(int j=i*10; j<i*10+10 && j<myDart->qlCurrentTypePlaces.count(); j++) {
@@ -326,7 +328,7 @@ void io::vFillCurrentTypePlaces() {
 				}
 			}
 		}
-		qDebug() << "removed" << myDart->qlCurrentTypePlaces.removeAll(NULL) << "places because of subset setting";
+		qDebug() << "[i] removed" << myDart->qlCurrentTypePlaces.removeAll(NULL) << "places because of subset setting";
 	}
 	
 	if(myDart->qlCurrentTypePlaces.count()==0) {
