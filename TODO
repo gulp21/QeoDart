@@ -1,5 +1,3 @@
-bug: translations with … are not loaded
-
 would this work: #ifdef wince #define no_cursor
 
 FAQ: slow Linux (raster)
