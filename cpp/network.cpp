@@ -134,7 +134,11 @@ void network::vConnectToServer(){
 bool network::bAskForIp(QHostAddress &ip) {
 	bool ok=true;
 	while(ip.isNull() && ok) {
-		ip = QInputDialog::getText(this, tr("Network Game"), tr("Please enter the IP address of player 1:"), QLineEdit::Normal, "127.0.0.1", &ok); // TODO load IP from setting
+		ip = QInputDialog::getText(this, tr("Network Game"), tr("Please enter the IP address of player 1:"), QLineEdit::Normal, myIO->settings->value("qsLastIP", "127.0.0.1").toString(), &ok);
+	}
+	
+	if(ok && !ip.isNull()) {
+		myIO->settings->setValue("qsLastIP", ip.toString());
 	}
 	
 	return ok;

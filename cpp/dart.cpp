@@ -421,7 +421,7 @@ void dart::vSetAgainstTime() {
 	}
 	
 	vSetAgainstTime(actionAgainst_Time->isChecked());
-
+	
 	myIO->settings->setValue("bAgainstTime", bAgainstTime);
 	
 	vSetGameMode(iGameMode);
