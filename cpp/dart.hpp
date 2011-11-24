@@ -113,9 +113,9 @@ Q_OBJECT
 		enGameModes iGameMode;
 		enAskForModes iAskForMode;
 		enToolMenuBarState iToolMenuBarState;
-                
+		
 		bool bAgainstTime, bResetCursor, bShortenToolbarText, bUseOurCursor, bAutoNewGame, bAutoShowHighScores, bPlacesSubsetActive;
-
+		
 		double dZoomFactor, dPxToKm;
 		
 		int iPaddingTop; // px between toolbar and map
@@ -147,14 +147,14 @@ Q_OBJECT
 		int iCurrentPlayer, iTimerElapsed;
 		
 		place *pTrainingPlaceNumber;
-                
+		
 		QList<QList<QLabel*> > qlCircleLabels; //contains all circles (incl. points) for each user
 // 		QList<QLabel*> qlPlayerLabel;
 		QList<QList<QLabel*> > qlPlayerLabels;
 		QList<QColor> qlColorsOfPlayers;
 		QList<QString> qlComments;
-                
-                QTimer *timer, *resizeTimer;
+		
+		QTimer *timer, *resizeTimer;
 		
 		QActionGroup *agGameMode, *agAskForMode, *agMap;
 		
@@ -168,7 +168,7 @@ Q_OBJECT
 		void resizeEvent(QResizeEvent *event);
 		void vRepaintPlayerLabels();
 		void vRepaintMap();
-		void vDrawCircle(int x, int y,  int r, int player);
+		void vDrawCircle(int x, int y, int r, int player);
 		void vDrawDistanceCircles(int n, int count=0);
 		void vDrawPoint(int x, int y, QList<QLabel*> &list, QColor color, QString name="");
 		void vDrawPoint(int x, int y, QList<QLabel*> &list, QString name="", QColor color=QColor(249,199,65));
@@ -179,12 +179,12 @@ Q_OBJECT
 		void vSetNumberOfPlayers(int player);
 		void vSetGameMode(enGameModes mode);
 		void vSetAskForMode(enAskForModes mode);
-                void vSetAgainstTime(bool enable);
+		void vSetAgainstTime(bool enable);
 		void vNextRound();
 		void vResetForNewGame();
 		void vShowTotalScores();
 		void vShowScores();
-                void vShowComment();
+		void vShowComment();
 		void vResetScoreLabels();
 		void vShowResultWindows();
 		void vSetToolMenuBarState(enToolMenuBarState state);
@@ -221,11 +221,11 @@ Q_OBJECT
 		void vSetAskForMode();
 		void vReturnPressedEvent();
 		void vTextEditedEvent();
-                void vTimeout();
+		void vTimeout();
 		void vSetPlaceType();
 		void vSetToolMenuBarState();
 		void vSetNumberOfPlayers();
-                void vSetAgainstTime();
+		void vSetAgainstTime();
 		void vShowPreferences();
 		void vShowHighScores();
 		void vShowAboutWindow();

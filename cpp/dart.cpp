@@ -680,7 +680,7 @@ void dart::vToolbarOverflow() {
 }
 
 void dart::vResize(double dNewZoomFactor) {
-        showNormal();
+	showNormal();
 	
 	dZoomFactor=dNewZoomFactor;
 	iPaddingTop=iGetPaddingTop();
@@ -710,16 +710,16 @@ void dart::vRepaintPlayerLabels() {
 //repaints all labels which are not player-specific
 void dart::vRepaintCommonLabels() {
 	int fontSize=iGetFontSize();
-        QString stylesheet=QString("color:%2;font-size:%1px;font-family:arial,sans-serif")
+	QString stylesheet=QString("color:%2;font-size:%1px;font-family:arial,sans-serif")
                         .arg(fontSize)
                         .arg(qlColorsOfPlayers[iCurrentPlayer].name());
 	lblCurrentPlace->setStyleSheet(stylesheet);
 	lblComment->setStyleSheet(stylesheet);
 	lblCurrentRound->setStyleSheet(stylesheet);
-        lblTime->setStyleSheet(stylesheet);
+	lblTime->setStyleSheet(stylesheet);
 	lblCurrentPlayer->setStyleSheet(stylesheet);
 	lblCurrentPlayer->setText(QString(tr("Player %1")).arg(iCurrentPlayer+1));
-        lineEdit->setMaximumHeight(fontSize+2);
+	lineEdit->setMaximumHeight(fontSize+2);
 }
 
 int dart::iGetFontSize() {
@@ -783,11 +783,11 @@ void dart::vMouseClickEvent(int x, int y) {
 	score.diffKm=dGetDistanceInKm(score.diffPxArea);
 	score.mark=dGetMarkFromDistance(score.diffPxArea);
 	score.score=dGetScore(score.mark);
-        if(bAgainstTime) {
-                score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
-                score.mark=dGetMarkFromScore(score.score);
+	if(bAgainstTime) {
+		score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
+		score.mark=dGetMarkFromScore(score.score);
 		timer->stop();
-        }
+	}
 	if(bGaveHint) {
 		score.score*=0.75;
 		score.mark=dGetMarkFromScore(score.score);
@@ -801,7 +801,7 @@ void dart::vMouseClickEvent(int x, int y) {
 	}
 	
 	
-	qDebug() << "Score for Player" << iCurrentPlayer << score.diffPx << "px" << score.diffPxArea << "px (area)" << score.diffKm << "km" << score.score << "p"  << score.mark << "TOTAL" << qlTotalScores[iCurrentPlayer].score << "p" << qlTotalScores[iCurrentPlayer].mark;
+	qDebug() << "Score for Player" << iCurrentPlayer << score.diffPx << "px" << score.diffPxArea << "px (area)" << score.diffKm << "km" << score.score << "p" << score.mark << "TOTAL" << qlTotalScores[iCurrentPlayer].score << "p" << qlTotalScores[iCurrentPlayer].mark;
 	
 	if(iCurrentPlayer<iNumberOfPlayers-1) { // next player
 		
@@ -814,7 +814,7 @@ void dart::vMouseClickEvent(int x, int y) {
 		qDebug()<<"f";
 		vRepaintPlayerLabels();
 		vRepaintCommonLabels();
-                vSetAgainstTime(bAgainstTime);
+		vSetAgainstTime(bAgainstTime);
 		
 		bAcceptingClickEvent=TRUE;
 		
@@ -831,13 +831,13 @@ void dart::vMouseClickEvent(int x, int y) {
 		vShowCurrentPlace();
 		
 		vShowScores();
-                
-                vShowComment();
+		
+		vShowComment();
 		
 		if(iGameMode==enTraining) mySleep(iDelayNextPlaceTraining);
 		else mySleep(iDelayNextPlace);
-                
-                lblComment->setText("");
+		
+		lblComment->setText("");
 		
 		vShowTotalScores();
 		
@@ -854,14 +854,14 @@ void dart::vMouseClickEvent(int x, int y) {
 }
 
 void dart::vShowComment() {
-        if(iNumberOfPlayers==1 && iGameMode!=enTraining) {
+	if(iNumberOfPlayers==1 && iGameMode!=enTraining) {
 		// we shoudln't use the saved mark here as inappropriate comments could be shown
 		// (e.g "clicked wrongly", although clicked correctly, but bad time)
 		double mark=dGetMarkFromDistance(qlScoreHistory[0][iPlaceCount-1].diffPxArea);
-                int i = rand() % 3 + 3*(static_cast<int>(mark-1));
-                qDebug() << "[i]" << mark << "comment #" << i;
-                lblComment->setText(qlComments[i]);
-        }
+		int i = rand() % 3 + 3*(static_cast<int>(mark-1));
+		qDebug() << "[i]" << mark << "comment #" << i;
+		lblComment->setText(qlComments[i]);
+	}
 }
 
 void dart::vShowResultWindows() {
@@ -965,7 +965,7 @@ void dart::mySleep(int ms) {
 		QCoreApplication::processEvents(QEventLoop::AllEvents, ms);
 #ifdef Q_OS_UNIX
 		struct timespec t;
-		t.tv_sec  = 0;
+		t.tv_sec = 0;
 		t.tv_nsec = 10000;
 		nanosleep(&t,NULL);
 #endif
@@ -1275,8 +1275,8 @@ void dart::vNextRound() {
 				lblCurrentRound->setText(QString(tr("%1/%2")).arg(iPlaceCount).arg(iMaxPlaceCount));
 			break;
 	};
-        
-        vSetAgainstTime(bAgainstTime);
+	
+	vSetAgainstTime(bAgainstTime);
 }
 
 //returns the distance between P(a|b) and Q(x|y); a,b,x,y should be unzoomed
@@ -1325,7 +1325,7 @@ double dart::dGetMarkFromDistance(double distance) {
 		return mark<1 ? 1 : mark;
 	} else {
 		mark=4+(mark-4)/2;
-		return mark>6 ?  6 : mark;
+		return mark>6 ? 6 : mark;
 	}
 }
 
@@ -1339,14 +1339,14 @@ double dart::dGetScore(double mark) {
 }
 
 double dart::dGetMarkFromScore(double score) {
-        double mark;
+	double mark;
 	if(score>=50) {
-                mark=(score-116.66)/-16.66;
-                return mark<1 ? 1 : mark;
+		mark=(score-116.66)/-16.66;
+		return mark<1 ? 1 : mark;
 	} else {
-                mark=(score-150)/-25;
-                return mark>6 ? 6 : mark;
-        }
+		mark=(score-150)/-25;
+		return mark>6 ? 6 : mark;
+	}
 }
 
 double dart::dGetAverageMarkOfPlayer(int player) {
@@ -1418,19 +1418,19 @@ QString dart::qsSimplifyString(QString str, int l) {
 				str=str.replace("g", "k");
 				str=str.replace("w", "v");
 				str=str.replace("f", "v");
-                                //remove double letters and lengthening
-                                for(int i=0; i<str.length()-1; i++) {
-                                        if(
-                                           str[i]==str[i+1] ||
-                                           (QString(str[i]).contains(QRegExp("[aeiou]")) && str[i+1]=='h') ||
-                                           (QString(str[i]).contains(QRegExp("[aeou]")) && str[i+1]=='r') ||
+				//remove double letters and lengthening
+				for(int i=0; i<str.length()-1; i++) {
+					if(
+					   str[i]==str[i+1] ||
+					   (QString(str[i]).contains(QRegExp("[aeiou]")) && str[i+1]=='h') ||
+					   (QString(str[i]).contains(QRegExp("[aeou]")) && str[i+1]=='r') ||
 					   (QString(str[i]).contains(QRegExp("[ou]")) && str[i+1]=='i')
-                                          ) {
-                                                str=str.remove(i+1,1);
-                                                i--;
-                                        }
-                                }
-                                qDebug()<<str;
+					  ) {
+						str=str.remove(i+1,1);
+						i--;
+					}
+				}
+				qDebug()<<str;
 			} // 2
 		} // 1
 	} // 0
@@ -1476,22 +1476,22 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 	score.diffPx=dGetDistanceInPxBetween(x,y,qlPlacesHistory[iPlaceCount-1]->x,qlPlacesHistory[iPlaceCount-1]->y);
 	score.diffKm=dGetDistanceInKm(score.diffPxArea);
 	score.mark=dGetMarkFromDistance(score.diffPxArea);
-        score.score=dGetScore(score.mark)*f;
-        if(bAgainstTime) {
-                //typing against time can be hard, so there are some bonusSeconds
-                double bonusSeconds=lineEdit->text().length()/static_cast<double>(iLettersPerSecond);
-                iTimerElapsed-=bonusSeconds;
-                if(iTimerElapsed<0) iTimerElapsed=0;
-                score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
+	score.score=dGetScore(score.mark)*f;
+	if(bAgainstTime) {
+		//typing against time can be hard, so there are some bonusSeconds
+		double bonusSeconds=lineEdit->text().length()/static_cast<double>(iLettersPerSecond);
+		iTimerElapsed-=bonusSeconds;
+		if(iTimerElapsed<0) iTimerElapsed=0;
+		score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
 		timer->stop();
-        }
+	}
 	if(bGaveHint) {
 		score.score*=0.75;
 		score.mark=dGetMarkFromScore(score.score);
 		bGaveHint=false;
 	}
 	score.mark=dGetMarkFromScore(score.score);
-        
+	
 	qlScoreHistory[iCurrentPlayer].append(score);
 	
 	if(! (iGameMode==enTraining && iPlaceCount>=5) ) {
@@ -1500,7 +1500,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 	}
 	
 	
-	qDebug() << "Score for Player" << iCurrentPlayer << score.diffPx << "px" << score.diffPxArea << "px (area)" << score.diffKm << "km" << score.score << "p"  << score.mark << "TOTAL" << qlTotalScores[iCurrentPlayer].score << "p" << qlTotalScores[iCurrentPlayer].mark;
+	qDebug() << "Score for Player" << iCurrentPlayer << score.diffPx << "px" << score.diffPxArea << "px (area)" << score.diffKm << "km" << score.score << "p" << score.mark << "TOTAL" << qlTotalScores[iCurrentPlayer].score << "p" << qlTotalScores[iCurrentPlayer].mark;
 	
 	if(iCurrentPlayer<iNumberOfPlayers-1) { // next player
 		
@@ -1515,8 +1515,8 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 		lineEdit->setStyleSheet("");
 		lineEdit->setEnabled(TRUE); //c//
 		lineEdit->setFocus(Qt::OtherFocusReason);
-                
-                vSetAgainstTime(bAgainstTime);
+		
+		vSetAgainstTime(bAgainstTime);
 		
 	} else { // show results
 		
@@ -1531,13 +1531,13 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 		vShowCurrentPlace();
 		
 		vShowScores();
-                
-                vShowComment();
+		
+		vShowComment();
 		
 		if(iGameMode==enTraining) mySleep(iDelayNextPlaceTraining);
 		else mySleep(iDelayNextPlace);
-                
-                lblComment->setText("");
+		
+		lblComment->setText("");
 		
 		vShowTotalScores();
 		

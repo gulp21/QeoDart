@@ -53,15 +53,15 @@ int io::iFindQcf() {
 			}
 		}
 	}
-        
-        if(myDart->qlQcfxFiles.count()==0) {
-                qcfFile f;
-                f.path="NULL";
-                f.mapName="dummyfile";
-                myDart->qlQcfxFiles.append(f);
-                qDebug() << "[I] added dummyfile";
-                return 0;
-        }
+	
+	if(myDart->qlQcfxFiles.count()==0) {
+		qcfFile f;
+		f.path="NULL";
+		f.mapName="dummyfile";
+		myDart->qlQcfxFiles.append(f);
+		qDebug() << "[I] added dummyfile";
+		return 0;
+	}
 	
 	return myDart->qlQcfxFiles.count();
 }
@@ -72,7 +72,7 @@ int io::iCheckQcf(QFile &file, QDomDocument &doc) {
 		return -1;
 	}
 	bool namespaceProcessing=false; QString errorMsg; int errorLine, errorColumn;
-	if(!doc.setContent(&file, namespaceProcessing, &errorMsg, &errorLine,  &errorColumn )){
+	if(!doc.setContent(&file, namespaceProcessing, &errorMsg, &errorLine, &errorColumn )){
 		file.close();
 		qDebug() << "[W] Problem reading file" << file.fileName();
 		qDebug() << "     Line" << errorLine << "Column" << errorColumn << errorMsg;
@@ -142,22 +142,22 @@ void io::vGetMetaData(QDomDocument &doc, qcfFile &file) {
 }
 
 int io::iReadQcf(QString mapname) {
-        
-        if(mapname=="dummyfile") {
-                place newPlace;
-                newPlace.x=0;
-                newPlace.y=0;
-                newPlace.dimx=0;
-                newPlace.dimy=0;
-                newPlace.name="DUMMYFILE";
-                newPlace.placeType="everything";
-                myDart->qlAllPlaces.append(newPlace);
-                myDart->iCurrentQcf=0;
-                
-                vFillCurrentTypePlaces();
-                
-                return 0;
-        }
+	
+	if(mapname=="dummyfile") {
+		place newPlace;
+		newPlace.x=0;
+		newPlace.y=0;
+		newPlace.dimx=0;
+		newPlace.dimy=0;
+		newPlace.name="DUMMYFILE";
+		newPlace.placeType="everything";
+		myDart->qlAllPlaces.append(newPlace);
+		myDart->iCurrentQcf=0;
+		
+		vFillCurrentTypePlaces();
+		
+		return 0;
+	}
 	
 	QString filename;
 	
@@ -363,21 +363,21 @@ int io::iReadOsm(QString filename) {
 		QString line = in.readLine();
 		
 		if (line.contains("map-clipping-rect")) { // map size
-		       QStringList list;
-		       list = line.split(line.contains("\"") ? "\"" : "\'"); // support ' as well as "
-		       for(int i=0, max=list.count(); i<max; i++){
-			       if(list[i].contains("height=")) {
-				       i++;
-				       height=list[i].left(list[i].length()-2).toDouble(); // remove "px"
-				       qDebug() << "height" << height;
-			       } else if(list[i].contains("width=")) {
-				       i++;
-				       width=list[i].left(list[i].length()-2).toDouble(); // remove "px"
-				       qDebug() << "width" << width;
-			       }
-		       }
-		       
-	       } else if(line.contains("<text")) { // if there is a place label
+			QStringList list;
+			list = line.split(line.contains("\"") ? "\"" : "\'"); // support ' as well as "
+			for(int i=0, max=list.count(); i<max; i++){
+				if(list[i].contains("height=")) {
+					i++;
+					height=list[i].left(list[i].length()-2).toDouble(); // remove "px"
+					qDebug() << "height" << height;
+				} else if(list[i].contains("width=")) {
+					i++;
+					width=list[i].left(list[i].length()-2).toDouble(); // remove "px"
+					qDebug() << "width" << width;
+				}
+			}
+		
+		} else if(line.contains("<text")) { // if there is a place label
 			QStringList list;
 			list = line.split(line.contains("\"") ? "\"" : "\'"); // support ' as well as "
 			

@@ -9,6 +9,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <fstream>
 #include <iostream>
 #include <stdlib.h>
 #include <QApplication>
@@ -18,10 +19,14 @@ You should have received a copy of the GNU General Public License along with thi
 
 #include "dart.hpp"
 
+bool bLogging=false;
+
+void MyOutputHandler(QtMsgType type, const char *msg);
+
 int main(int argc, char* argv[]) {
 	
 #ifndef Q_OS_WINCE
-	if(argc==2 && ((string)argv[1]=="-h" || (string)argv[1]=="--help") ) {
+	if(argc==2 && (static_cast<string>(argv[1])=="-h" || static_cast<string>(argv[1])=="--help") ) {
 		qDebug() << "Options:";
 		qDebug() << "  -h,  --help          prints this text (only works when it is the only command-line argument)";
 		qDebug() << "       --banner        shows two QeoDart banners (cannot be visible at the same time, visibility depends on window geometry)";
@@ -29,10 +34,25 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 #endif
-
+	
+	qInstallMsgHandler(MyOutputHandler);
+	
+	if(argc>=2 && (static_cast<string>(argv[1])=="-l" || static_cast<string>(argv[1])=="--log") ) {
+		ofstream logfile;
+		logfile.open((QCoreApplication::applicationDirPath().toStdString()+"qeodart.log").c_str(), ios::app);
+		if(logfile) {
+			bLogging=true;
+			qDebug() << "##### Logging - Application started #####";
+			qDebug() << "[i] logfile" << QCoreApplication::applicationDirPath()+"qeodart.log";
+		} else {
+			qDebug() << "[E] logfile" << QCoreApplication::applicationDirPath()+"qeodart.log" << "could not be opened";
+		}
+		logfile.close();
+	}
+	
 	QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8")); 
 	
-        QApplication a(argc, argv);
+	QApplication a(argc, argv);
 	a.setAutoSipEnabled(true);
 	
 //	TODO we should get dart::vRetranslate to work
@@ -69,7 +89,34 @@ int main(int argc, char* argv[]) {
 	translator.load(QString(QCoreApplication::applicationDirPath()+"/lang/%1").arg(lang));
 	a.installTranslator(&translator);
 	
-        dart w;
-        w.show();
-        return a.exec();
+	dart w;
+	w.show();
+	return a.exec();
+}
+
+void MyOutputHandler(QtMsgType type, const char *msg) {
+	cout << msg << endl;
+	if(bLogging) {
+		ofstream logfile;
+		logfile.open("qeodart.log", ios::app);
+// 		logfile.open((QCoreApplication::applicationDirPath().toStdString()+"qeodart.log").c_str(), ios::app);
+		if(logfile){
+			switch(type){
+				case QtDebugMsg:
+					logfile << QTime::currentTime().toString().toAscii().data() << " Debug: " << msg << "\n";
+					break;
+				case QtCriticalMsg:
+					logfile << QTime::currentTime().toString().toAscii().data() << " Critical: " << msg << "\n";
+					break;
+				case QtWarningMsg:
+					logfile << QTime::currentTime().toString().toAscii().data() << " Warning: " << msg << "\n";
+					break;
+				case QtFatalMsg:
+					logfile << QTime::currentTime().toString().toAscii().data() <<  " Fatal: " << msg << "\n";
+					logfile.close();
+					abort();
+			}
+			logfile.close();
+		}
+	}
 }

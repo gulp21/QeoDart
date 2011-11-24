@@ -1,5 +1,7 @@
 would this work: #ifdef wince #define no_cursor
 
+--log -> README
+
 FAQ: slow Linux (raster)
 sort maps alphabetically
 //TODO icon

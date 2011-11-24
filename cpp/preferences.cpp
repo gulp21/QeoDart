@@ -117,7 +117,7 @@ void preferences::vSettingChanged() {
 		} else if( (QObject::sender()==spbMaxTime && spbMaxTime->value()!=myDart->iMaxTime && myDart->bAgainstTime) ||
 			   (QObject::sender()==cobScoreAreaMode && cobScoreAreaMode->currentIndex()!=myDart->iScoreAreaMode) ||
 			   (QObject::sender()==cobPenalty && cobPenalty->currentIndex()!=myDart->iPenalty) ||
-		           (QObject::sender()==spbLettersPerSecond && spbLettersPerSecond->value()!=myDart->iLettersPerSecond)
+			   (QObject::sender()==spbLettersPerSecond && spbLettersPerSecond->value()!=myDart->iLettersPerSecond)
 			 ) {
 			lblStatusText->setVisible(true);
 			qDebug()<<"ffsf";
