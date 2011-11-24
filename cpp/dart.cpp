@@ -32,6 +32,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	iPaddingTop=0;
 	iMarginTop=0;
 	bGaveHint=false;
+	bPlacesSubsetActive=false;
 	
 	setupUi(this);
 	
@@ -171,8 +172,9 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	btAskForMode->setToolButtonStyle(Qt::ToolButtonTextOnly);
 	actionBtAskForMode=toolBar->addWidget(btAskForMode);
 	
-	menuPlace_Number = new QMenu(this);
+	menuPlace_Number = new QMenu(tr("Subset"),this);
 	menuPlaceType->addMenu(menuPlace_Number);
+	menuAsk_for->addMenu(menuPlace_Number);
 	btPlaceType = new QToolButton(toolBar);
 	btPlaceType->setMenu(menuPlaceType);
 	btPlaceType->setPopupMode(QToolButton::InstantPopup);
@@ -349,6 +351,8 @@ void dart::vSetPlaceType() {
 		if(msgBox.exec()==QMessageBox::Cancel) { vUpdateActionsIsCheckedStates(); return; }
 	}
 	
+	bPlacesSubsetActive=false;
+	
 	qsCurrentPlaceType="";
 	if(actionCountries->isChecked()) qsCurrentPlaceType+="country;";
 	if(actionCapitals_of_Countries->isChecked()) qsCurrentPlaceType+="capitalOfCountry;";
@@ -365,6 +369,43 @@ void dart::vSetPlaceType(QString placetype) {
 	qsCurrentPlaceType=placetype;
 	vUpdateActionsIsCheckedStates();
 	myIO->vFillCurrentTypePlaces();
+}
+
+void dart::vCreatePlacesSubsetsActions() {
+	bool lastWasActive=false;
+	int lastIndex=-1;
+	
+	if(!qlPlacesSubsetsActions.isEmpty()) {
+		do { // the last menuitem must be removed since the label might be wrong
+			lastWasActive=qlPlacesSubsetsActions.last()->isChecked();
+			lastIndex=qlPlacesSubsetsActions.count()-1;
+			menuPlace_Number->removeAction(qlPlacesSubsetsActions.last());
+			delete qlPlacesSubsetsActions.last();
+			qlPlacesSubsetsActions.removeLast();
+		} while(qlPlacesSubsetsActions.count()*10>=qlCurrentTypePlaces.count());
+	}
+	
+	for(int i=qlPlacesSubsetsActions.count()*10; i<qlCurrentTypePlaces.count(); i+=10) {
+		QAction *action = new QAction(tr("Place %1 to %2").arg(i+1).arg(qlCurrentTypePlaces.count() < i+10 ? qlCurrentTypePlaces.count() : i+10),this);
+		action->setCheckable(true);
+		connect(action, SIGNAL(triggered()), this, SLOT(vPlacesSubsetClicked()));
+		menuPlace_Number->addAction(action);
+		qlPlacesSubsetsActions.append(action);
+	}
+	
+	if(lastWasActive && lastIndex!=-1 && qlPlacesSubsetsActions.count()>lastIndex) qlPlacesSubsetsActions[lastIndex]->setChecked(true);
+}
+
+void dart::vPlacesSubsetClicked() {
+	myIO->vFillCurrentTypePlaces();
+	vSetGameMode(iGameMode);
+}
+
+void dart::vUpdatePlacesSubsetActive() {
+	bPlacesSubsetActive=false;
+	for(int i=0; i<qlPlacesSubsetsActions.count() && !bPlacesSubsetActive; i++) {
+		if(qlPlacesSubsetsActions[i]->isChecked()) bPlacesSubsetActive=true;
+	}
 }
 
 void dart::vSetAgainstTime() {
@@ -641,7 +682,7 @@ void dart::vToolbarOverflow() {
 }
 
 void dart::vResize(double dNewZoomFactor) {
-        showNormal();
+	showNormal();
 	
 	dZoomFactor=dNewZoomFactor;
 	iPaddingTop=iGetPaddingTop();
@@ -673,16 +714,16 @@ void dart::vRepaintCommonLabels() {
 	if(qlPlayerLabels.count()<=iCurrentPlayer) return;
 	
 	int fontSize=iGetFontSize();
-        QString stylesheet=QString("color:%2;font-size:%1px;font-family:arial,sans-serif")
+	QString stylesheet=QString("color:%2;font-size:%1px;font-family:arial,sans-serif")
                         .arg(fontSize)
                         .arg(qlColorsOfPlayers[iCurrentPlayer].name());
 	lblCurrentPlace->setStyleSheet(stylesheet);
 	lblComment->setStyleSheet(stylesheet);
 	lblCurrentRound->setStyleSheet(stylesheet);
-        lblTime->setStyleSheet(stylesheet);
+	lblTime->setStyleSheet(stylesheet);
 	lblCurrentPlayer->setStyleSheet(stylesheet);
 	lblCurrentPlayer->setText(QString(tr("Player %1")).arg(iCurrentPlayer+1));
-        lineEdit->setMaximumHeight(fontSize+2);
+	lineEdit->setMaximumHeight(fontSize+2);
 }
 
 int dart::iGetFontSize() {
@@ -752,14 +793,14 @@ void dart::vMouseClickEvent(int x, int y) {
 }
 
 void dart::vShowComment() {
-        if(iNumberOfPlayers==1 && iGameMode!=enTraining) {
+	if(iNumberOfPlayers==1 && iGameMode!=enTraining) {
 		// we shoudln't use the saved mark here as inappropriate comments could be shown
 		// (e.g "clicked wrongly", although clicked correctly, but bad time)
 		double mark=dGetMarkFromDistance(qlScoreHistory[0][iPlaceCount-1].diffPxArea);
-                int i = rand() % 3 + 3*(static_cast<int>(mark-1));
-                qDebug() << "[i]" << mark << "comment #" << i;
-                lblComment->setText(qlComments[i]);
-        }
+		int i = rand() % 3 + 3*(static_cast<int>(mark-1));
+		qDebug() << "[i]" << mark << "comment #" << i;
+		lblComment->setText(qlComments[i]);
+	}
 }
 
 void dart::vShowResultWindows() {
@@ -863,7 +904,7 @@ void dart::mySleep(int ms) {
 		QCoreApplication::processEvents(QEventLoop::AllEvents, ms);
 #ifdef Q_OS_UNIX
 		struct timespec t;
-		t.tv_sec  = 0;
+		t.tv_sec = 0;
 		t.tv_nsec = 10000;
 		nanosleep(&t,NULL);
 #endif
@@ -1198,8 +1239,8 @@ void dart::vNextRound() {
 				lblCurrentRound->setText(QString(tr("%1/%2")).arg(iPlaceCount).arg(iMaxPlaceCount));
 			break;
 	};
-        
-        vSetAgainstTime(bAgainstTime);
+	
+	vSetAgainstTime(bAgainstTime);
 }
 
 //returns the distance between P(a|b) and Q(x|y); a,b,x,y should be unzoomed
@@ -1248,7 +1289,7 @@ double dart::dGetMarkFromDistance(double distance) {
 		return mark<1 ? 1 : mark;
 	} else {
 		mark=4+(mark-4)/2;
-		return mark>6 ?  6 : mark;
+		return mark>6 ? 6 : mark;
 	}
 }
 
@@ -1262,14 +1303,14 @@ double dart::dGetScore(double mark) {
 }
 
 double dart::dGetMarkFromScore(double score) {
-        double mark;
+	double mark;
 	if(score>=50) {
-                mark=(score-116.66)/-16.66;
-                return mark<1 ? 1 : mark;
+		mark=(score-116.66)/-16.66;
+		return mark<1 ? 1 : mark;
 	} else {
-                mark=(score-150)/-25;
-                return mark>6 ? 6 : mark;
-        }
+		mark=(score-150)/-25;
+		return mark>6 ? 6 : mark;
+	}
 }
 
 double dart::dGetAverageMarkOfPlayer(int player) {
@@ -1277,8 +1318,8 @@ double dart::dGetAverageMarkOfPlayer(int player) {
 }
 
 double dart::dGetAverageScoreOfPlayer(int player) {
-	if(iPlaceCount<1) return 0;
-	return qlTotalScores[player].score/iPlaceCount;
+	if(qlScoreHistory[player].count()<1) return 0;
+	return qlTotalScores[player].score/qlScoreHistory[player].count();
 }
 
 // looks for lineEdit->text() in the list of places; returns the index for place in qlAllPlaces
@@ -1341,19 +1382,19 @@ QString dart::qsSimplifyString(QString str, int l) {
 				str=str.replace("g", "k");
 				str=str.replace("w", "v");
 				str=str.replace("f", "v");
-                                //remove double letters and lengthening
-                                for(int i=0; i<str.length()-1; i++) {
-                                        if(
-                                           str[i]==str[i+1] ||
-                                           (QString(str[i]).contains(QRegExp("[aeiou]")) && str[i+1]=='h') ||
-                                           (QString(str[i]).contains(QRegExp("[aeou]")) && str[i+1]=='r') ||
+				//remove double letters and lengthening
+				for(int i=0; i<str.length()-1; i++) {
+					if(
+					   str[i]==str[i+1] ||
+					   (QString(str[i]).contains(QRegExp("[aeiou]")) && str[i+1]=='h') ||
+					   (QString(str[i]).contains(QRegExp("[aeou]")) && str[i+1]=='r') ||
 					   (QString(str[i]).contains(QRegExp("[ou]")) && str[i+1]=='i')
-                                          ) {
-                                                str=str.remove(i+1,1);
-                                                i--;
-                                        }
-                                }
-                                qDebug()<<str;
+					  ) {
+						str=str.remove(i+1,1);
+						i--;
+					}
+				}
+				qDebug()<<str;
 			} // 2
 		} // 1
 	} // 0
@@ -1415,16 +1456,16 @@ scoreHistory dart::shCalculateScores(int x, int y, double f) { // TODO why is it
 	score.diffKm=dGetDistanceInKm(score.diffPxArea);
 	score.mark=dGetMarkFromDistance(score.diffPxArea);
 	score.score=dGetScore(score.mark)*f;
-        if(bAgainstTime) {
-                if(iAskForMode==enNames) {
+	if(bAgainstTime) {
+		if(iAskForMode==enNames) {
 			//typing against time can be hard, so there are some bonusSeconds
 			double bonusSeconds=lineEdit->text().length()/static_cast<double>(iLettersPerSecond);
 			iTimerElapsed-=bonusSeconds;
 			if(iTimerElapsed<0) iTimerElapsed=0;
 		}
-                score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
+		score.score*=1-static_cast<double>(iTimerElapsed)/iMaxTime;
 		timer->stop();
-        }
+	}
 	if(bGaveHint) {
 		score.score*=0.75;
 		bGaveHint=false;
@@ -1470,7 +1511,7 @@ void dart::vNextPlayer() {
 		lineEdit->setStyleSheet("");
 		lineEdit->setEnabled(true); //c//
 		lineEdit->setFocus(Qt::OtherFocusReason);
-	} else {	
+	} else {
 		bAcceptingClickEvent=true;
 	}
 }

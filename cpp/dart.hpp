@@ -105,6 +105,7 @@ Q_OBJECT
 		QList<QString> qlLayersNames;
 		QList<QLabel*> qlMapLayers;
 		QList<highScoreEntry> qlHighScores;
+		QList<QAction*> qlPlacesSubsetsActions;
 		
 		QLabel *lblMouseClickOverlay;
 		
@@ -113,9 +114,9 @@ Q_OBJECT
 		enGameModes iGameMode;
 		enAskForModes iAskForMode;
 		enToolMenuBarState iToolMenuBarState;
-                
-                bool bAgainstTime, bResetCursor, bShortenToolbarText, bUseOurCursor, bAutoNewGame, bAutoShowHighScores;
-
+		
+		bool bAgainstTime, bResetCursor, bShortenToolbarText, bUseOurCursor, bAutoNewGame, bAutoShowHighScores, bPlacesSubsetActive;
+		
 		double dZoomFactor, dPxToKm;
 		
 		int iPaddingTop; // px between toolbar and map
@@ -141,6 +142,8 @@ Q_OBJECT
 		void vSetAskForMode(enAskForModes mode);
 		void vSetGameMode(enGameModes mode);
 		void vSetAgainstTime(bool enable);
+		void vCreatePlacesSubsetsActions();
+		void vUpdatePlacesSubsetActive();
 		
 		bool bCanLoseScore();
 
@@ -155,14 +158,14 @@ Q_OBJECT
 		int iTimerElapsed;
 		
 		place *pTrainingPlaceNumber;
-                
+		
 		QList<QList<QLabel*> > qlCircleLabels; //contains all circles (incl. points) for each user
 // 		QList<QLabel*> qlPlayerLabel;
 		QList<QList<QLabel*> > qlPlayerLabels;
 		QList<QColor> qlColorsOfPlayers;
 		QList<QString> qlComments;
-                
-                QTimer *timer, *resizeTimer;
+		
+		QTimer *timer, *resizeTimer;
 		
 		QActionGroup *agGameMode, *agAskForMode, *agMap;
 		
@@ -176,7 +179,7 @@ Q_OBJECT
 		void resizeEvent(QResizeEvent *event);
 		void vRepaintPlayerLabels();
 		void vRepaintMap();
-		void vDrawCircle(int x, int y,  int r, int player);
+		void vDrawCircle(int x, int y, int r, int player);
 		void vDrawDistanceCircles(int n, int count=0);
 		void vDrawPoint(int x, int y, QList<QLabel*> &list, QColor color, QString name="");
 		void vDrawPoint(int x, int y, QList<QLabel*> &list, QString name="", QColor color=QColor(249,199,65));
@@ -241,6 +244,7 @@ Q_OBJECT
 		void vGiveHint();
 		void vAddMap();
 		void vReportBug();
+		void vPlacesSubsetClicked();
 		
 	public slots:
 		void vReadQcf();

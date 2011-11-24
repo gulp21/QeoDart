@@ -187,7 +187,7 @@ class QRectangleLabel : public QLabel {
 			
 			resize(
 				a*myDart->dZoomFactor,
-			        b*myDart->dZoomFactor
+				b*myDart->dZoomFactor
 			);
 			move(
 				x*myDart->dZoomFactor,

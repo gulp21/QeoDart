@@ -14,8 +14,8 @@ qcf/*test*
 qrc*cpp
 *.user
 *.pro.user.*
+*qeodart.log
 BACKGROUND.png
 BORDERS.png
 ELEVATIONS.png
 RIVERS.png
-

@@ -6,7 +6,7 @@ See main.cpp for details. */
 
 #include "dart.hpp"
 #include "io.hpp"
-    
+
 using namespace std;
  
 io::io(dart *TDart) : myDart(TDart){
