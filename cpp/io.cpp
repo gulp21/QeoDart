@@ -177,7 +177,7 @@ int io::iReadQcf(QString mapname) {
 	if(iCheckQcf(file, doc)!=0) {
 		qDebug() << "[E] File" << filename << "is not valid";
 		QMessageBox msgBox;
-		msgBox.setText(QString(tr("An unexpected error occured while reading %1.\nQeoDart will be quit.")).arg(filename));
+		msgBox.setText(QString(tr("An unexpected error occurred while reading %1.\nQeoDart will be quit.")).arg(filename));
 		msgBox.setIcon(QMessageBox::Critical);
 		msgBox.exec();
 		return -1;
@@ -337,6 +337,14 @@ void io::vFillCurrentTypePlaces() {
 		myDart->vSetPlaceType("");
 	} else {
 		qDebug() << "[i] found" << myDart->qlCurrentTypePlaces.count() << "places for current place type";
+		
+		QString s=tr("%1 out of %2 places selected")
+		             .arg(myDart->qlCurrentTypePlaces.count())
+			     .arg(myDart->qlAllPlaces.count());
+		if(myDart->qlCurrentTypePlaces.count()==myDart->qlAllPlaces.count())
+			s=tr("All %1 places selected").arg(myDart->qlCurrentTypePlaces.count());
+		myDart->actionNumberOfSelectedPlaces->setText(s);
+		myDart->actionNumberOfSelectedPlaces2->setText(s);
 	}
 	
 	settings->setValue("qsCurrentPlaceType", myDart->qsCurrentPlaceType);

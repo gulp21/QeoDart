@@ -42,7 +42,7 @@
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>164</height>
+            <height>159</height>
            </rect>
           </property>
           <attribute name="label">
@@ -87,7 +87,7 @@
            <item>
             <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>The names of the places are available in different languages. Please specify which langauge you prefer:</string>
+              <string>The names of the places are available in different languages. Please specify which language you prefer:</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -111,7 +111,7 @@
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You may use comma separated, two letter language codes according to the alpha-2 code of &lt;a href=&quot;http://www.loc.gov/standards/iso639-2/php/code_list.php&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;ISO&amp;nbsp;639-1&lt;/span&gt;&lt;/a&gt;; in addition, you can use &amp;quot;ui&amp;quot; for the languagen chosen above, and &amp;quot;default&amp;quot; for the domestic name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You may use comma separated, two letter language codes according to the alpha-2 code of &lt;a href=&quot;http://www.loc.gov/standards/iso639-2/php/code_list.php&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;ISO&amp;nbsp;639-1&lt;/span&gt;&lt;/a&gt;; in addition, you can use &amp;quot;ui&amp;quot; for the language chosen above, and &amp;quot;default&amp;quot; for the domestic name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -142,7 +142,7 @@ p, li { white-space: pre-wrap; }
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>164</height>
+            <height>159</height>
            </rect>
           </property>
           <attribute name="label">
@@ -283,8 +283,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>462</width>
-            <height>120</height>
+            <width>479</width>
+            <height>159</height>
            </rect>
           </property>
           <attribute name="label">
@@ -296,14 +296,14 @@ p, li { white-space: pre-wrap; }
              <item row="0" column="0">
               <widget class="QLabel" name="label_10">
                <property name="text">
-                <string>When calculating the score, accepet</string>
+                <string>When calculating the score, accept</string>
                </property>
               </widget>
              </item>
              <item row="0" column="1">
               <widget class="QComboBox" name="cobScoreAreaMode">
                <property name="whatsThis">
-                <string>When calculating the scores, QeoDart respects the whole area of the place. This area is discribed by a rectangle put around the place. As the area of this rectangle often includes areas of other places, the default is accepting only the inner 25% of the rectangle.</string>
+                <string>When calculating the scores, QeoDart respects the whole area of the place. This area is described by a rectangle put around the place. As the area of this rectangle often includes areas of other places, the default is accepting only the inner 25% of the rectangle.</string>
                </property>
                <item>
                 <property name="text">
@@ -490,7 +490,7 @@ p, li { white-space: pre-wrap; }
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>164</height>
+            <height>159</height>
            </rect>
           </property>
           <attribute name="label">
@@ -610,8 +610,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>342</width>
-            <height>58</height>
+            <width>479</width>
+            <height>159</height>
            </rect>
           </property>
           <attribute name="label">
@@ -631,7 +631,7 @@ p, li { white-space: pre-wrap; }
            <item>
             <widget class="QCheckBox" name="cbShortenToolbarText">
              <property name="text">
-              <string>Shorten toolbar labels, so that all buttons fit into the window</string>
+              <string>Shorten tool bar labels, so that all buttons fit into the window</string>
              </property>
              <property name="checkable">
               <bool>true</bool>

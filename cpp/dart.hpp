@@ -162,7 +162,7 @@ Q_OBJECT
 		
 		QAction *actionBtApplication, *actionBtAskForMode;
 		
-		QMenu *menuPlace_Number;
+		QMenu *menuSubset;
 		
 		void closeEvent(QCloseEvent *event);
 		void resizeEvent(QResizeEvent *event);
@@ -191,6 +191,7 @@ Q_OBJECT
 		void vUpdateActionsIsCheckedStates();
 		void vFindPlaceAround(int x, int y);
 		void vShowAllPlaces();
+		void vOpenLinkInBrowser(QUrl link);
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetDistanceInPx(int a, int b, int n);
