@@ -378,7 +378,7 @@ void dart::vCreatePlacesSubsetsActions() {
 			menuPlace_Number->removeAction(qlPlacesSubsetsActions.last());
 			delete qlPlacesSubsetsActions.last();
 			qlPlacesSubsetsActions.removeLast();
-		} while(qlPlacesSubsetsActions.count()*10>=qlCurrentTypePlaces.count());
+		} while(qlPlacesSubsetsActions.count()*10>=qlCurrentTypePlaces.count() && !qlPlacesSubsetsActions.isEmpty());
 	}
 	
 	for(int i=qlPlacesSubsetsActions.count()*10; i<qlCurrentTypePlaces.count(); i+=10) {
