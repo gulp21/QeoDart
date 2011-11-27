@@ -172,9 +172,9 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	btAskForMode->setToolButtonStyle(Qt::ToolButtonTextOnly);
 	actionBtAskForMode=toolBar->addWidget(btAskForMode);
 	
-	menuPlace_Number = new QMenu(tr("Subset"),this);
-	menuPlaceType->addMenu(menuPlace_Number);
-	menuAsk_for->addMenu(menuPlace_Number);
+	menuSubset = new QMenu(tr("Subset"),this);
+	menuPlaceType->addMenu(menuSubset);
+	menuAsk_for->addMenu(menuSubset);
 	btPlaceType = new QToolButton(toolBar);
 	btPlaceType->setMenu(menuPlaceType);
 	btPlaceType->setPopupMode(QToolButton::InstantPopup);
@@ -379,17 +379,17 @@ void dart::vCreatePlacesSubsetsActions() {
 		do { // the last menuitem must be removed since the label might be wrong
 			lastWasActive=qlPlacesSubsetsActions.last()->isChecked();
 			lastIndex=qlPlacesSubsetsActions.count()-1;
-			menuPlace_Number->removeAction(qlPlacesSubsetsActions.last());
+			menuSubset->removeAction(qlPlacesSubsetsActions.last());
 			delete qlPlacesSubsetsActions.last();
 			qlPlacesSubsetsActions.removeLast();
-		} while(qlPlacesSubsetsActions.count()*10>=qlCurrentTypePlaces.count());
+		} while(qlPlacesSubsetsActions.count()*10>=qlCurrentTypePlaces.count() && !qlPlacesSubsetsActions.isEmpty());
 	}
 	
 	for(int i=qlPlacesSubsetsActions.count()*10; i<qlCurrentTypePlaces.count(); i+=10) {
 		QAction *action = new QAction(tr("Place %1 to %2").arg(i+1).arg(qlCurrentTypePlaces.count() < i+10 ? qlCurrentTypePlaces.count() : i+10),this);
 		action->setCheckable(true);
 		connect(action, SIGNAL(triggered()), this, SLOT(vPlacesSubsetClicked()));
-		menuPlace_Number->addAction(action);
+		menuSubset->addAction(action);
 		qlPlacesSubsetsActions.append(action);
 	}
 	
@@ -843,7 +843,10 @@ void dart::vShowScores() {
 		if(iGameMode!=enTraining) score=QString(" +%1").arg(qlScoreHistory[i][iPlaceCount-1].score);
 		
 		// the important score is not readable on small displays
-		if(dZoomFactor>0.5) missedBy=QString(tr("Missed by %1 km ")).arg(km);
+		if(dZoomFactor>0.5) {
+			if(km=="0.0") missedBy=tr("Hit the mark ");
+			else missedBy=tr("Missed by %1 km ").arg(km);
+		}
 		else missedBy=QString(tr("%1 km ")).arg(km);
 		
 		if(dPxToKm==-1) missedBy="";
@@ -1825,19 +1828,19 @@ void dart::vGiveHint() {
 
 void dart::vAddMap() {
 	//: the translated wiki pages are called DE:Maps etc. Please do NOT translate when there is no such wiki page in your language
-	if(!QDesktopServices::openUrl(QUrl(tr("https://github.com/gulp21/QeoDart/wiki/Maps")))) {
-		QMessageBox msgBox;
-		msgBox.setText(tr("The default browser could not be opened."));
-		msgBox.setIcon(QMessageBox::Warning);
-		msgBox.exec();
-	}
+	vOpenLinkInBrowser(QUrl(tr("https://github.com/gulp21/QeoDart/wiki/Maps")));
 }
 
 void dart::vReportBug() {
 	//: the translated wiki pages are called DE:Contribute etc. Please do NOT translate when there is no such wiki page in your language
-	if(!QDesktopServices::openUrl(QUrl(tr("https://github.com/gulp21/QeoDart/wiki/Contribute")))) {
+	vOpenLinkInBrowser(QUrl(tr("https://github.com/gulp21/QeoDart/wiki/Contribute")));
+}
+
+void dart::vOpenLinkInBrowser(QUrl link) {
+	if(!QDesktopServices::openUrl(link)) {
 		QMessageBox msgBox;
 		msgBox.setText(tr("The default browser could not be opened."));
+		msgBox.setInformativeText(tr("The following URL could not be opened: %1").arg(link.toString()));
 		msgBox.setIcon(QMessageBox::Warning);
 		msgBox.exec();
 	}

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 bugs:	refusing new game results in iPlaceCount++
 	game end dialog shown to early when player 2 clicks first (test w/ 2 places)
 
@@ -18,6 +17,8 @@ http://de.wikipedia.org/wiki/Liste_der_Gro%C3%9Fst%C3%A4dte_in_Deutschland
 http://de.wikipedia.org/wiki/Liste_der_Millionenst%C3%A4dte
 indien
 git update-index --assume-unchanged
+
+cat lang/de.ts | grep translation\> | sed -e "s/.*<translation>//g" | sed -e "s/<\/translation>.*//g" | sed -e "s/&amp;//g" > out
 
 //TODOs
 http://doc.qt.nokia.com/4.7/qtestlib-tutorial1.html

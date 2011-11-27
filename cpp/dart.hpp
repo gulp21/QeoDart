@@ -146,7 +146,7 @@ Q_OBJECT
 		void vUpdatePlacesSubsetActive();
 		
 		bool bCanLoseScore();
-
+	
 	private:
 		
 		io *myIO;
@@ -173,7 +173,7 @@ Q_OBJECT
 		
 		QAction *actionBtApplication, *actionBtAskForMode;
 		
-		QMenu *menuPlace_Number;
+		QMenu *menuSubset;
 		
 		void closeEvent(QCloseEvent *event);
 		void resizeEvent(QResizeEvent *event);
@@ -199,6 +199,7 @@ Q_OBJECT
 		void vShowAllPlaces();
 		void vAppendEmptyTotalScore();
 		void vNextPlayer();
+		void vOpenLinkInBrowser(QUrl link);
 		
 		double dGetDistanceInPxBetween(int a, int b, int x, int y);
 		double dGetDistanceInPx(int a, int b, int n);

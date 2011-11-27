@@ -13,6 +13,7 @@
         <file alias="system-users.png">icons/oxygen/system-users.png</file>
         <file alias="user-identity.png">icons/oxygen/user-identity.png</file>
         <file alias="zoom-original.png">icons/oxygen/zoom-original.png</file>
+        <file alias="help-about.png">icons/oxygen/help-about.png</file>
         <file alias="index.theme">icons/oxygen/index.theme</file>
     </qresource>
     <qresource prefix="/icons">

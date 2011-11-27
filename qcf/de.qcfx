@@ -121,7 +121,7 @@
 	name_de="Berlin"
 	name_en="Berlin"
 	name_la="Berolinum"
-	placetype="state;city;town;capitalOfState;capitalOfCountry"
+	placetype="state;city;capitalOfState;capitalOfCountry"
 	/>
 	<place
 	x="221" y="151" dimx="23" dimy="18"
@@ -129,7 +129,7 @@
 	name_de="Bremen"
 	name_en="Bremen"
 	name_la="Brema"
-	placetype="state;city;town;capitalOfState"
+	placetype="state;city;capitalOfState"
 	/>
 	<place
 	x="279" y="116" dimx="27" dimy="28"
@@ -137,7 +137,7 @@
 	name_de="Hamburg"
 	name_en="Hamburg"
 	name_la="Hamburgum"
-	placetype="state;city;town;capitalOfState"
+	placetype="state;city;capitalOfState"
 	/>
 	<!--.....CapitalOfState.....-->
 	<place
@@ -146,7 +146,7 @@
 	name_de="Düsseldorf"
 	name_en="Düsseldorf"
 	name_la="Dusseldorpium"
-	placetype="city;town;capitalOfState"
+	placetype="city;capitalOfState"
 	/>
 	<place
 	x="266" y="210"
@@ -154,7 +154,7 @@
 	name_de="Hannover"
 	name_en="Hannover"
 	name_la="Hannovera"
-	placetype="city;town;capitalOfState"
+	placetype="city;capitalOfState"
 	/>
 	<place
 	x="342" y="109"
@@ -171,7 +171,7 @@
 	name_de="Kiel"
 	name_en="Kiel"
 	name_la="Kielia"
-	placetype="city;town;capitalOfState"
+	placetype="city;capitalOfState"
 	/>
 	<place
 	x="419" y="202"
@@ -179,7 +179,7 @@
 	name_de="Potsdam"
 	name_en="Potsdam"
 	name_la="Potestampium"
-	placetype="city;town;capitalOfState"
+	placetype="city;capitalOfState"
 	/>
 	<place
 	x="355" y="225"
@@ -187,7 +187,7 @@
 	name_de="Magdeburg"
 	name_en="Magdeburg"
 	name_la="Magdeburgum"
-	placetype="city;town;capitalOfState"
+	placetype="city;capitalOfState"
 	/>
 	<place
 	x="456" y="296"
@@ -195,7 +195,7 @@
 	name_de="Dresden"
 	name_en="Dresden"
 	name_la="Dresda"
-	placetype="city;town;capitalOfState"
+	placetype="city;capitalOfState"
 	/>
 	<place
 	x="328" y="315"
@@ -203,7 +203,7 @@
 	name_de="Erfurt"
 	name_en="Erfurt"
 	name_la="Erfordia"
-	placetype="city;town;capitalOfState"
+	placetype="city;capitalOfState"
 	/>
 	<place
 	x="192" y="382"
@@ -211,7 +211,7 @@
 	name_de="Wiesbaden"
 	name_en="Wiesbaden"
 	name_la="Aquae Mattiacae"
-	placetype="city;town;capitalOfState"
+	placetype="city;capitalOfState"
 	/>
 	<place
 	x="191" y="393"
@@ -219,7 +219,7 @@
 	name_de="Mainz"
 	name_en="Mainz"
 	name_la="Moguntiacum"
-	placetype="city;town;capitalOfState"
+	placetype="city;capitalOfState"
 	/>
 	<place
 	x="126" y="440"
@@ -227,7 +227,7 @@
 	name_de="Saarbrücken"
 	name_en="Saarbrücken"
 	name_la="Saravipontus"
-	placetype="city;town;capitalOfState"
+	placetype="city;capitalOfState"
 	/>
 	<place
 	x="365" y="527"
@@ -235,7 +235,7 @@
 	name_de="München"
 	name_en="Munich"
 	name_la="Mon&aacute;cum"
-	placetype="city;town;capitalOfState"
+	placetype="city;capitalOfState"
 	/>
 	<place
 	x="240" y="486"
@@ -243,7 +243,7 @@
 	name_de="Stuttgart"
 	name_en="Stuttgart"
 	name_la="Stutgardia"
-	placetype="city;town;capitalOfState"
+	placetype="city;capitalOfState"
 	/>
 	<!--30-->
 	<!--  -52 -->
