@@ -26,6 +26,15 @@ network::~network() {
 }
 
 void network::vNewNetworkGame() {
+	if(!qlCommandSockets.isEmpty() && !deleteTimer->isActive()) {
+		qDebug() << "[w] vNewNetworkGame: !qlCommandSockets.isEmpty(); this is OK when we start a new game (and only in this case!)";
+		if(myDart->iCurrentPlayer==0) { // TODO wait for all players
+			vSendCommand("GAMESTART");
+			myDart->vNextRound();
+		}
+		return;
+	}
+	
 	iNumberOfPlayers=1;
 	
 	QMessageBox msgBox;

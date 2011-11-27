@@ -764,7 +764,7 @@ void dart::vDrawClickPositions(int n) {
 }
 
 void dart::vShowAllPlaces() {
-	for(int i=0, max=qlCurrentTypePlaces.count(); i<max; i++){ //TODO WITH?
+	for(int i=0, max=qlCurrentTypePlaces.count(); i<max; i++) { //TODO WITH?
 		vDrawPoint(qlCurrentTypePlaces[i]->x,qlCurrentTypePlaces[i]->y,qlPointLabels,qlCurrentTypePlaces[i]->name);
 		vDrawDebugPlace(i);
 	}
@@ -819,9 +819,25 @@ void dart::vShowResultWindows() {
 	
 	iPlaceCount=0; // needed for quit?-dialog
 	
+	if(iGameMode==enNetwork) {
+		if(bContinueNetworkMode()) vNewGame();
+		return;
+	}
+	
 	if(bShowHighScores && bAutoShowHighScores) vShowHighScores();
 	
 	if(bAutoNewGame) vNewGame();
+}
+
+// returns true when the player wants to continue network mode
+bool dart::bContinueNetworkMode() {
+	QMessageBox msgBox;
+	msgBox.setWindowTitle(tr("Network mode"));
+	msgBox.setText(tr("Do you want to start a new game in network mode?"));
+	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+	msgBox.setDefaultButton(QMessageBox::Cancel);
+	if(msgBox.exec()==QMessageBox::Yes) return true;
+	else return false;
 }
 
 void dart::vResetScoreLabels() {
@@ -1006,6 +1022,8 @@ void dart::vSetGameMode(enGameModes mode) {
 	// TODO can we do it like this for everything here?
 	cbSearchDistance->setVisible(iGameMode==enFind);
 	cbMatchBehaviour->setVisible(iGameMode==enFind);
+	toolBar->setEnabled(iGameMode!=enNetwork);
+	menubar->setEnabled(iGameMode!=enNetwork);
 	
 	switch(iGameMode) {
 		case enFind:
@@ -1147,7 +1165,7 @@ void dart::vNewGame() {
 		if(msgBox.exec()==QMessageBox::Cancel) return;
 	}
 	
-	iCurrentPlayer=0;
+	if(iGameMode!=enNetwork) iCurrentPlayer=0;
 	vSetNumberOfPlayers(iNumberOfPlayers);
 	vSetGameMode(iGameMode);
 }
@@ -1630,7 +1648,7 @@ void dart::vSetToolMenuBarState(enToolMenuBarState state) {
 }
 
 bool dart::bCanLoseScore() {
-	return ( (iPlaceCount>1 || iCurrentPlayer!=0) && iGameMode!=enTraining && iGameMode!=enFind);
+	return ( (iPlaceCount>1 || (iCurrentPlayer!=0 && iGameMode!=enNetwork) ) && iGameMode!=enTraining && iGameMode!=enFind);
 }
 
 // this function checks if we can start a new game safely

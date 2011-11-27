@@ -218,6 +218,7 @@ Q_OBJECT
 		int iFindInputInList(double &f);
 		
 		bool bNewGameIsSafe();
+		bool bContinueNetworkMode();
 		
 		scoreHistory shCalculateScores(int x, int y, double f=1);
 		

@@ -89,7 +89,8 @@ resultWindow::resultWindow(bool &ShowHighScores, dart *TDart, int PLayer, io *TI
 	
 	lblPlaces->setText(places.left(places.length()-2)); // remove the last ", "
 	
-	if(myDart->qlHighScores[9].score>=myDart->qlTotalScores[player].score) {
+	if(myDart->qlHighScores[9].score>=myDart->qlTotalScores[player].score
+	   || (myDart->iGameMode==enNetwork && myDart->iCurrentPlayer!=player) ) {
 		lblName->hide();
 		leName->hide();
 		connect(btOk, SIGNAL(clicked()), this, SLOT(close()));
