@@ -1,0 +1,49 @@
+<!DOCTYPE qcfx>
+<qcfx version="0.2">
+	<name default="भारत गणराज्य" short="IN" de="Indien" en="India" la="India" />
+	<pxtokm value="6.25" />
+	<copyright
+	file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
+	background="CC-by-sa PlaneMad/Wikipedia (derived from http://zh-min-nan.wikipedia.org/wiki/File:India_Kerala_locator_map.svg)"
+	borders="CC-by-sa PlaneMad/Wikipedia (derived from http://zh-min-nan.wikipedia.org/wiki/File:India_Kerala_locator_map.svg)"
+	/>
+	<!--.....lands.....--><!-- -4 -60-->
+	<place x="209" y="194" name="Jammu and Kashmir" dimy="19" dimx="40" />
+	<place x="220" y="233" name="Himachal Pradesh" dimy="20" dimx="21" />
+	<place x="191" y="252" name="Punjab" dimy="25" dimx="20" />
+	<place x="211" y="255" name="Chandigarh" dimy="0" dimx="0" />
+	<place x="454" y="354" name="Meghalaya" dimy="6" dimx="25" />
+	<place x="250" y="267" name="Uttarakhand" dimy="22" dimx="25" />
+	<place x="203" y="286" name="Haryana" dimy="25" dimx="20" />
+	<place x="216" y="295" name="National Capital Territory of Delhi" dimy="1" dimx="1" />
+	<place x="276" y="331" name="Uttar Pradesh" dimy="30" dimx="52" />
+	<!--10-->
+	<place x="361" y="356" name="Bihar" dimy="20" dimx="35" />
+	<place x="405" y="316" name="Sikkim" dimy="7" dimx="5" />
+	<place x="509" y="299" name="Arunachal Pradesh" dimy="20" dimx="45" />
+	<place x="483" y="341" name="Assam" dimy="27" dimx="50" />
+	<place x="510" y="340" name="Nagaland" dimy="13" dimx="15" />
+	<place x="499" y="364" name="Manipur" dimy="10" dimx="10" />
+	<place x="485" y="393" name="Mizoram" dimy="40" dimx="10" />
+	<place x="464" y="385" name="Tripura" dimy="10" dimx="10" />
+	<place x="227" y="387" name="Madhya Pradesh" dimy="50" dimx="70" />
+	<place x="295" y="436" name="Chhattisgarh" dimy="50" dimx="30" />
+	<!--20-->
+	<place x="357" y="394" name="Jharkhand" dimy="25" dimx="40" />
+	<place x="397" y="396" name="West Bengal" dimy="40" dimx="20" />
+	<place x="108" y="394" name="Gujarat" dimy="45" dimx="50" />
+	<place x="97"  y="433" name="Daman and Diu" dimy="0" dimx="0" />
+	<place x="191" y="463" name="Maharashtra" dimy="50" dimx="70" />
+	<place x="254" y="529" name="Andhra Pradesh" dimy="70" dimx="70" />
+	<place x="143" y="539" name="Goa" dimy="8" dimx="3" />
+	<place x="182" y="553" name="Karnataka" dimy="70" dimx="30" />
+	<place x="179" y="638" name="Kerala" dimy="40" dimx="20" />
+	<place x="340" y="451" name="Orissa" dimy="40" dimx="45" />
+	<!--30-->
+	<place x="158" y="330" name="Rajasthan" dimy="70" dimx="70" />
+	<place x="224" y="628" name="Tamil Nadu" dimy="50" dimx="30" />
+	<place x="134" y="448" name="Dadra and Nagar Haveli" dimy="0" dimx="0" />
+	<place x="114" y="636" name="Lakshadweep" dimy="50" dimx="30" />
+	<place x="296" y="521" name="Puducherry" dimy="0" dimx="0" />
+	<place x="498" y="639" name="Andaman and Nicobar Islands" dimy="75" dimx="30" />
+</qcfx>
