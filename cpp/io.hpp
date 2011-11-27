@@ -30,6 +30,9 @@ class io : public QWidget {
 		
 		io(dart*);
 		~io();
+		
+		QString qsGetTempDir();
+		
 		int iReadQcf(QString mapname);
 		int iReadOsm(QString filename);
 		int iWriteQcf(QList<place> &places, qcfFile &f);

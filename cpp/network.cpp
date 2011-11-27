@@ -105,6 +105,11 @@ void network::vNewClient() {
 // client stuff
 
 void network::vConnectToServer(){
+	if(deleteTimer->isActive()) { // this it true when commandSockets of an old connection exists; we must delete them now
+		deleteTimer->stop();
+		vDeleteSockets();
+	}
+	
 	if(qlCommandSockets.isEmpty() || qlCommandSockets[0]==NULL) qlCommandSockets.append(new QTcpSocket(this));
 	
 	connect(qlCommandSockets[0], SIGNAL(readyRead()), this, SLOT(vReadCommand()));
@@ -295,7 +300,16 @@ void network::vReadCommand() {
 			progressDialog->setLabelText(tr("Sende Einstellungen..."));
 			QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
 			
-			vSendCommand(QString("SETTINGS||%1||%2||%3||%4||%5||%6") .arg(myDart->iAskForMode).arg(myDart->iMaxPlaceCount).arg(myDart->qsCurrentPlaceType).arg(myDart->iMaxTime).arg(myDart->bAgainstTime).arg(myDart->iScoreAreaMode).toAscii().data()); // TODO send qcffile info // TODO layer visibility
+			vSendCommand(QString("SETTINGS||%1||%2||%3||%4||%5||%6||%7||%8||%9")
+			             .arg(myDart->iAskForMode)
+			             .arg(myDart->iMaxPlaceCount)
+			             .arg(myDart->qsCurrentPlaceType) // TODO is this necessary?
+			             .arg(myDart->iMaxTime).arg(myDart->bAgainstTime)
+			             .arg(myDart->iScoreAreaMode)
+			             .arg(myDart->agLayers->actions()[0]->isChecked() && myDart->agLayers->actions()[0]->isVisible())
+			             .arg(myDart->agLayers->actions()[1]->isChecked() && myDart->agLayers->actions()[1]->isVisible())
+			             .arg(myDart->agLayers->actions()[2]->isChecked() && myDart->agLayers->actions()[2]->isVisible())
+			             .toAscii().data()); // TODO send qcffile info
 			
 //			actionNetwork->setChecked(TRUE);
 			
@@ -371,11 +385,7 @@ void network::vReadCommand() {
 			
 			socketstream >> pixmap;
 			
-			QString tempDir=myIO->bPortable ? QCoreApplication::applicationDirPath() : QDir::tempPath();
-			
-			if(!tempDir.endsWith("\\") && !tempDir.endsWith("/")) tempDir+="/";
-			
-			QString filename=tempDir+command[1]+".png";
+			QString filename=myIO->qsGetTempDir()+command[1]+".png";
 			
 			qDebug() << "Saving" << filename;
 			qDebug() << "successfull?" << pixmap.save(filename);
@@ -400,7 +410,7 @@ void network::vReadCommand() {
 			actionHohen->setVisible(TRUE);
 			actionGrenzen_Kreise->setVisible(TRUE); TODO*/	
 			
-		} else if(command[0]=="SETTINGS" && command.size()>=7) {
+		} else if(command[0]=="SETTINGS" && command.size()>=10) {
 			
 			bExpectingImageData=false;
 			
@@ -423,6 +433,9 @@ void network::vReadCommand() {
 			myDart->bAgainstTime=command[5]=="1";
 			myDart->vSetAgainstTime(myDart->bAgainstTime);
 			myDart->iScoreAreaMode=command[6].toInt();
+			myDart->qlMapLayers[1]->setVisible(command[7]=="1");
+			myDart->qlMapLayers[2]->setVisible(command[8]=="1");
+			myDart->qlMapLayers[3]->setVisible(command[9]=="1");
 			
 			myIO->vFillCurrentTypePlaces();
 			

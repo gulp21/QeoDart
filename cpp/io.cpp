@@ -628,3 +628,10 @@ void io::vSaveHighScores(QString mapName) {
 		qDebug() << myDart->qlHighScores[i].name << "W highsc" << myDart->qlHighScores[i].score;
 	}
 }
+
+// returns the location of the directory for temporary files, and ensures that it ends with "/"
+QString io::qsGetTempDir() {
+	QString tempDir = bPortable ? QCoreApplication::applicationDirPath() : QDir::tempPath();
+	if(!tempDir.endsWith("\\") && !tempDir.endsWith("/")) tempDir+="/";
+	return tempDir;
+}

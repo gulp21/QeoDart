@@ -694,7 +694,8 @@ void dart::vRepaintMap() {
 	
 	for(int i=0; i<4; i++) {
 		qlMapLayers[i]->resize(600*dZoomFactor,600*dZoomFactor);
-		qlMapLayers[i]->setText(QString("<img src=\"%2/%3.png\" height=\"%1\" width=\"%1\"/>").arg(600*dZoomFactor).arg(path).arg(qlLayersNames[i]));
+		if(iGameMode!=enNetwork) qlMapLayers[i]->setText(QString("<img src=\"%2/%3.png\" height=\"%1\" width=\"%1\"/>").arg(600*dZoomFactor).arg(path).arg(qlLayersNames[i]));
+		else qlMapLayers[i]->setText(QString("<img src=\"%2%3.png\" height=\"%1\" width=\"%1\"/>").arg(600*dZoomFactor).arg(myIO->qsGetTempDir()).arg(qlLayersNames[i].toUpper()));
 		qlMapLayers[i]->move(0,iPaddingTop);
 	}
 }
