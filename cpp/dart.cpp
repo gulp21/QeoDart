@@ -141,7 +141,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(lineEdit, SIGNAL(textEdited(QString)), this, SLOT(vTextEditedEvent()));
 	connect(cbMatchBehaviour, SIGNAL(currentIndexChanged(int)), this, SLOT(vTextEditedEvent()));
 	
-	//these menus are needed for QToolButtons only and shouldn't be displayed in the main menus
+	// these menus are needed for QToolButtons only and shouldn't be displayed in the main menus
 	menubar->removeAction(menuApplication->menuAction());
 	menuSettings->removeAction(menuAskForMode->menuAction());
 	menuSettings->removeAction(menuPlaceType->menuAction());
@@ -199,6 +199,10 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	myIO = new io(this);
 	myIO->vLoadSettings();
 	
+	// when calling this in class io it doesn't work for some reason
+	cbMatchBehaviour->setCurrentIndex(myIO->settings->value("iMatchBehaviour",1).toInt());
+	cbSearchDistance->setCurrentIndex(myIO->settings->value("iSearchDistance",2).toInt());
+	
 	if(myIO->iFindQcf()==0) {
 		qDebug() << "[E] No valid qcfx files found, exiting";
 		QMessageBox msgBox;
@@ -212,7 +216,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	bool foundMapName=false;
 	for(int i=0; i<qlQcfxFiles.count(); i++) {
 		QAction *menuItem;
-//QIcon produces crash in WinCE
+// QIcon produces crash in WinCE
 #ifdef Q_OS_WINCE
 		menuItem = new QAction(qlQcfxFiles[i].mapName, this);
 #else
@@ -229,7 +233,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 			foundMapName=true;
 		}
 	}
-	//…or the first map as fall-back
+	// …or the first map as fall-back
 	if(!foundMapName) agMap->actions()[0]->trigger();
 	menuMap->addSeparator();
 	menuMap->addAction(actionAdd_Map);
@@ -285,21 +289,22 @@ dart::~dart() {
         delete myIO;
 }
 
-//draws distance circles using the saved click-coordinates of place n, iterating #count [recursion]
-void dart::vDrawDistanceCircles(int n, int count) {
-	bool drewCircle=FALSE;
+// draws distance circles using the saved click-coordinates of place n
+void dart::vDrawDistanceCircles(int n) {
+	bool drewCircle=true;
 	
-	for(int i=0; i<iNumberOfPlayers; i++) { // draw circles for each player
-		if(count*RADIUS+3*PENWIDTH < qlScoreHistory[i][n-1].diffPx) {
-			vDrawCircle(qlScoreHistory[i][n-1].x,qlScoreHistory[i][n-1].y,(count+1)*RADIUS,i);
-			drewCircle=TRUE;
-		}
-	}
-	
-	if(drewCircle && count<7) {
+	for(int i=0; i<7 && drewCircle; i++) {
+		drewCircle=false;
+		
+		for(int j=0; j<iNumberOfPlayers; j++) { // draw circles for each player
+			if(i*RADIUS+3*PENWIDTH < qlScoreHistory[j][n-1].diffPx) {
+				vDrawCircle(qlScoreHistory[j][n-1].x,qlScoreHistory[j][n-1].y,(i+1)*RADIUS,j);
+				drewCircle=true;
+			}
+		} // for each player
+		
 		mySleep(iDelayNextCircle);
-		vDrawDistanceCircles(n,++count);
-	}
+	} // for(i<7)
 }
 
 void dart::vDrawCircle(int x, int y, int r, int player) {
@@ -825,7 +830,7 @@ void dart::vMouseClickEvent(int x, int y) {
 		vRemoveAllCircles();
 		vDrawClickPositions(iPlaceCount);
 		mySleep(iDelayNextCircle);
-		vDrawDistanceCircles(iPlaceCount, 0);
+		vDrawDistanceCircles(iPlaceCount);
 		
 		// show real position
 		vShowCurrentPlace();
@@ -1528,7 +1533,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 		vRemoveAllCircles();
 		vDrawClickPositions(iPlaceCount);
 		mySleep(iDelayNextCircle);
-		vDrawDistanceCircles(iPlaceCount, 0);
+		vDrawDistanceCircles(iPlaceCount);
 		
 		// show real position
 		vShowCurrentPlace();

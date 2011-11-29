@@ -169,7 +169,7 @@ Q_OBJECT
 		void vRepaintPlayerLabels();
 		void vRepaintMap();
 		void vDrawCircle(int x, int y, int r, int player);
-		void vDrawDistanceCircles(int n, int count=0);
+		void vDrawDistanceCircles(int n);
 		void vDrawPoint(int x, int y, QList<QLabel*> &list, QColor color, QString name="");
 		void vDrawPoint(int x, int y, QList<QLabel*> &list, QString name="", QColor color=QColor(249,199,65));
 		void vDrawClickPositions(int n);

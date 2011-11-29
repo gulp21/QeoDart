@@ -561,9 +561,6 @@ void io::vLoadSettings() {
 	myDart->actionRivers->setChecked(settings->value("bRivers",true).toBool());
 	myDart->actionElevations->setChecked(settings->value("bElevations",true).toBool());
 	
-	myDart->cbMatchBehaviour->setCurrentIndex(settings->value("iMatchBehaviour",1).toInt());
-	myDart->cbSearchDistance->setCurrentIndex(settings->value("iSearchDistance",2).toInt());
-	
 	for(int i=0; i<3; i++) {
 		myDart->agLayers->actions()[i]->setChecked(settings->value(myDart->qlLayersNames[i+1],true).toBool());
 	}
