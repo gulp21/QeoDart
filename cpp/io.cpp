@@ -161,7 +161,7 @@ int io::iReadQcf(QString mapname) {
 	
 	QString filename;
 	
-	//find the file with the given mapname in the list
+	// find the file with the given mapname in the list
 	for(int i=0; i<myDart->qlQcfxFiles.count(); i++) {
 		if(myDart->qlQcfxFiles[i].mapName==mapname) {
 			filename=myDart->qlQcfxFiles[i].path+".qcfx";
@@ -332,7 +332,7 @@ void io::vFillCurrentTypePlaces() {
 	}
 	
 	if(myDart->qlCurrentTypePlaces.count()==0) {
-		qDebug() << "[I] there is no place for placetype" << myDart->qsCurrentPlaceType; // TODO can this happan at all?
+		qDebug() << "[I] there is no place for placetype" << myDart->qsCurrentPlaceType;
 		qDebug() << "    falling back to everything";
 		myDart->vSetPlaceType("");
 	} else {
@@ -543,7 +543,7 @@ void io::vLoadSettings() {
 	myDart->iAskForMode=static_cast<enAskForModes>(settings->value("iAskForMode",enPositions).toInt());
 	if(myDart->iAskForMode!=enPositions && myDart->iAskForMode!=enNames) myDart->iAskForMode=enPositions;
 	
-	myDart->iNumberOfPlayers=settings->value("iNumberOfPlayers",1).toInt();// TODO we shouldn't change it in training mode (iNumberOfPlayersTrainingCache)
+	myDart->iNumberOfPlayers=settings->value("iNumberOfPlayers",1).toInt();
 	if(myDart->iNumberOfPlayers<=0) myDart->iNumberOfPlayers=1;
 	
 	myDart->qsCurrentPlaceType=settings->value("qsCurrentPlaceType","").toString();
@@ -561,7 +561,7 @@ void io::vLoadSettings() {
 	myDart->actionRivers->setChecked(settings->value("bRivers",true).toBool());
 	myDart->actionElevations->setChecked(settings->value("bElevations",true).toBool());
 	
-	myDart->cbMatchBehaviour->setCurrentIndex(settings->value("iMatchBehaviour",1).toInt());
+	myDart->cbMatchBehaviour->setCurrentIndex(settings->value("iMatchBehaviour",1).toInt()); // TODO doesn't work
 	myDart->cbSearchDistance->setCurrentIndex(settings->value("iSearchDistance",2).toInt());
 	
 	for(int i=0; i<3; i++) {
