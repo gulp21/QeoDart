@@ -1,7 +1,7 @@
 <!DOCTYPE qcfx>
 <qcfx version="0.2">
 	<name default="भारत गणराज्य" short="IN" de="Indien" en="India" la="India" />
-	<pxtokm value="6.25" /><!--TODO-->
+	<pxtokm value="6.05" />
 	<copyright
 	file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
 	background="CC-by-sa PlaneMad/Wikipedia (derived from http://zh-min-nan.wikipedia.org/wiki/File:India_Kerala_locator_map.svg)"
@@ -45,5 +45,5 @@
 	<place x="130" y="332" name_en="Daman and Diu" dimx="0" dimy="0" placetype="state" /> <!-- TODO south only -->
 	<place x="123" y="527" name_en="Lakshadweep" dimx="42" dimy="50" placetype="state" />
 	<place x="215" y="178" name_en="National Capital Territory of Delhi" dimx="5" dimy="7" placetype="state" />
-	<place x="248" y="496" name_en="Puducherry" dimx="5" dimy="5" placetype="state" /> <!-- middle south only -->
+	<place x="248" y="496" name_en="Puducherry" dimx="5" dimy="5" placetype="state" /> <!-- TODO middle south only -->
 </qcfx>

@@ -4,7 +4,6 @@ would this work: #ifdef wince #define no_cursor
 
 FAQ: slow Linux (raster)
 sort maps alphabetically
-add helpmenu to game menu
 update check
 
 highscore: date (today), time (x ago, api?), pref lang

@@ -152,7 +152,10 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	btApplication->setText(tr("Game"));
 	actionBtApplication=toolBar->addWidget(btApplication);
 	
+	menuApplication->removeAction(actionQuit);
 	menuApplication->addMenu(menuHelp);
+	menuApplication->addSeparator();
+	menuApplication->addAction(actionQuit);
 	
 	toolBar->addAction(actionNew_Game);
 	
@@ -223,7 +226,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 		menuItem = new QAction(QIcon(qlQcfxFiles[i].path+"/background.png"), qlQcfxFiles[i].mapName, this);
 #endif
 		menuItem->setToolTip(QString(tr("Load map of %1")).arg(qlQcfxFiles[i].mapName));
-		menuItem->setCheckable(TRUE);
+		menuItem->setCheckable(true);
+		if(i<9) menuItem->setShortcut(QKeySequence(tr("Ctrl+%1").arg(i+1)));
 		connect(menuItem, SIGNAL(triggered()), this, SLOT(vReadQcf()));
 		menuMap->addAction(menuItem);
 		agMap->addAction(menuItem);
