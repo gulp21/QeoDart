@@ -12,6 +12,8 @@ using namespace std;
 io::io(dart *TDart) : myDart(TDart) {
 	bPortable=false;
 	bDeterminedPortable=false;
+	
+	qslPlaceTypesNamesRegExps << "state" << "capitalOfState" << "country" << "capitalOfCountry" << "county" << "city" << "town";
 }
  
 io::~io() {
@@ -49,7 +51,18 @@ int io::iFindQcf() {
 				f.path=file.fileName().left(file.fileName().length()-5);
 				vGetMetaData(doc, f);
 				qDebug() << f.path;
-				myDart->qlQcfxFiles << f; // TODO check if some name already exists
+				
+				QString suffix="";
+				int c=-1;
+				for(int i=2; qsGetQcfFilePath(f.mapName+suffix, c)!="NULL"; i++) {
+					//: this string is appended to the name of the map when there is already a map with the same name; %1 is a number
+					suffix=tr(" #%1").arg(i);
+					qDebug() << "[w] there is already a map with the mapName" << f.mapName << ", trying" << f.mapName+suffix;
+				}
+				
+				f.mapName+=suffix;
+				
+				myDart->qlQcfxFiles << f;
 			}
 		}
 	}
@@ -141,6 +154,19 @@ void io::vGetMetaData(QDomDocument &doc, qcfFile &file) {
 	}
 }
 
+// returns the path of the qcfx-file with the given mapname; returns "NULL" when the file does not exist
+// sets index to the index of the qcfx-file in qlQcfxFiles
+QString io::qsGetQcfFilePath(QString mapname, int &index) {
+	for(int i=0; i<myDart->qlQcfxFiles.count(); i++) {
+		if(myDart->qlQcfxFiles[i].mapName==mapname) {
+			index=i;
+			return myDart->qlQcfxFiles[i].path+".qcfx";
+		}
+	}
+	
+	return "NULL";
+}
+
 int io::iReadQcf(QString mapname) {
 	
 	if(mapname=="dummyfile") {
@@ -161,13 +187,8 @@ int io::iReadQcf(QString mapname) {
 	
 	QString filename;
 	
-	//find the file with the given mapname in the list
-	for(int i=0; i<myDart->qlQcfxFiles.count(); i++) {
-		if(myDart->qlQcfxFiles[i].mapName==mapname) {
-			filename=myDart->qlQcfxFiles[i].path+".qcfx";
-			myDart->iCurrentQcf=i;
-		}
-	}
+	// find the file with the given mapname and set iCurrentQcf to its index
+	filename=qsGetQcfFilePath(mapname, myDart->iCurrentQcf);
 	
 	qDebug() << "[i] Reading file" << filename << "with mapName" << mapname;
 	
@@ -185,13 +206,8 @@ int io::iReadQcf(QString mapname) {
 	
 	myDart->qlAllPlaces.clear();
 	
-	myDart->actionStates->setVisible(FALSE);
-	myDart->actionCapitals_of_States->setVisible(FALSE);
-	myDart->actionCountries->setVisible(FALSE);
-	myDart->actionCapitals_of_Countries->setVisible(FALSE);
-	myDart->actionCounties->setVisible(FALSE);
-	myDart->actionCities->setVisible(FALSE);
-	myDart->actionTowns->setVisible(FALSE);
+	QList<int> qlPlaceTypeCount; // TODO is there a more flexible way?
+	qlPlaceTypeCount << 0 << 0 << 0 << 0 << 0 << 0 << 0;
 	
 	myDart->dPxToKm=-1;
 	
@@ -241,13 +257,9 @@ int io::iReadQcf(QString mapname) {
 					qDebug() << "[W] place" << myDart->qlAllPlaces.count() << "has at least one coordinate out of range";
 				}
 				
-				if(newPlace.placeType.contains("state")) myDart->actionStates->setVisible(TRUE); // TODO count + show count; actiongroup caption with total count? [x of y]
-				if(newPlace.placeType.contains("capitalOfState")) myDart->actionCapitals_of_States->setVisible(TRUE);
-				if(newPlace.placeType.contains("country")) myDart->actionCountries->setVisible(TRUE);
-				if(newPlace.placeType.contains("capitalOfCountry")) myDart->actionCapitals_of_Countries->setVisible(TRUE);
-				if(newPlace.placeType.contains("county")) myDart->actionCounties->setVisible(TRUE);
-				if(newPlace.placeType.contains("city")) myDart->actionCities->setVisible(TRUE);
-				if(newPlace.placeType.contains("town")) myDart->actionTowns->setVisible(TRUE);
+				for(int i=0; i<qslPlaceTypesNamesRegExps.count(); i++) {
+					if(newPlace.placeType.contains(qslPlaceTypesNamesRegExps[i])) qlPlaceTypeCount[i]++;
+				}
 				
 			} else if(e.tagName()!="name" && e.tagName()!="copyright") {
 				
@@ -273,6 +285,13 @@ int io::iReadQcf(QString mapname) {
 		msgBox.setText(QString(tr("The file %1 contains no <place>.\nQeoDart will be quit.")).arg(filename));
 		msgBox.exec();
 		return -1;
+	}
+	
+	for(int i=0; i<myDart->qlPlaceTypesNames.count(); i++) {
+		myDart->agPlaceTypes->actions()[i]->setVisible(qlPlaceTypeCount[i]>0);
+		myDart->agPlaceTypes->actions()[i]->setText(QString(tr("%1 (%2)")
+		                                                    .arg(myDart->qlPlaceTypesNames[i])
+		                                                    .arg(qlPlaceTypeCount[i])));
 	}
 	
 	qDebug() << "[i] current placetype is" << myDart->qsCurrentPlaceType;

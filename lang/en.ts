@@ -614,77 +614,117 @@ p, li { white-space: pre-wrap; }
         <translation>D&apos;oh!</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="152"/>
+        <location filename="../cpp/dart.cpp" line="24"/>
+        <source>States</source>
+        <translation type="unfinished">States</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="24"/>
+        <source>Capitals of States</source>
+        <translation type="unfinished">Capitals of States</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="24"/>
+        <source>Countries</source>
+        <translation type="unfinished">Countries</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="24"/>
+        <source>Capitals of Countries</source>
+        <translation type="unfinished">Capitals of Countries</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="24"/>
+        <source>Counties</source>
+        <translation type="unfinished">Counties</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="24"/>
+        <source>Cities</source>
+        <translation type="unfinished">Cities</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="24"/>
+        <source>Towns</source>
+        <translation type="unfinished">Towns</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="164"/>
         <source>Game</source>
         <translation>Game</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="175"/>
+        <location filename="../cpp/dart.cpp" line="190"/>
         <source>Subset</source>
         <translation>Subset</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="182"/>
-        <location filename="../cpp/dart.cpp" line="623"/>
+        <location filename="../cpp/dart.cpp" line="197"/>
+        <location filename="../cpp/dart.cpp" line="644"/>
         <source>Place Types</source>
         <translation>Place Types</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="195"/>
+        <location filename="../cpp/dart.cpp" line="210"/>
         <source>View</source>
         <translation>View</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="205"/>
+        <location filename="../cpp/dart.cpp" line="224"/>
         <source>Sorry, no valid qcfx files could be found.</source>
         <translation>Sorry, no valid qcfx files could be found.</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="221"/>
+        <location filename="../cpp/dart.cpp" line="240"/>
         <source>Load map of %1</source>
         <translation>Load map of %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="343"/>
+        <location filename="../cpp/dart.cpp" line="242"/>
+        <source>Ctrl+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="364"/>
         <source>Change Place Types</source>
         <translation>Change Place Types</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="344"/>
-        <location filename="../cpp/dart.cpp" line="413"/>
-        <location filename="../cpp/dart.cpp" line="1123"/>
+        <location filename="../cpp/dart.cpp" line="365"/>
+        <location filename="../cpp/dart.cpp" line="434"/>
+        <location filename="../cpp/dart.cpp" line="1144"/>
         <source>When you change this setting, your current score will be lost.
 Do you want to continue?</source>
         <translation>When you change this setting, your current score will be lost.
 Do you want to continue?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="385"/>
+        <location filename="../cpp/dart.cpp" line="406"/>
         <source>Place %1 to %2</source>
         <translation>Place %1 to %2</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="412"/>
+        <location filename="../cpp/dart.cpp" line="433"/>
         <source>Enable Against Time</source>
         <translation>Enable Against Time</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="444"/>
+        <location filename="../cpp/dart.cpp" line="465"/>
         <source>Set Number Of Players</source>
         <translation>Set Number Of Players</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="444"/>
+        <location filename="../cpp/dart.cpp" line="465"/>
         <source>Number Of Players:</source>
         <translation>Number Of Players:</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="447"/>
+        <location filename="../cpp/dart.cpp" line="468"/>
         <source>Warning</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="448"/>
+        <location filename="../cpp/dart.cpp" line="469"/>
         <source>You want to play with more than 15 players.
 Although QeoDart theoretically supports an infinite number of players, some display problems might occur.
 
@@ -695,13 +735,13 @@ Although QeoDart theoretically supports an infinite number of players, some disp
 Do you want to continue anyway?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="465"/>
-        <location filename="../cpp/dart.cpp" line="622"/>
+        <location filename="../cpp/dart.cpp" line="486"/>
+        <location filename="../cpp/dart.cpp" line="643"/>
         <source>Players: %1</source>
         <translation>Players: %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1846"/>
+        <location filename="../cpp/dart.cpp" line="1867"/>
         <source>The following URL could not be opened: %1</source>
         <translation>The following URL could not be opened: %1</translation>
     </message>
@@ -721,129 +761,129 @@ Do you want to continue anyway?</translation>
         <translation>That wasn&apos;t much of a hit…</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="206"/>
+        <location filename="../cpp/dart.cpp" line="225"/>
         <source>You might want to add a file through Map → Add map.</source>
         <translation>You might want to add a file through Map → Add map.</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="604"/>
-        <location filename="../cpp/dart.cpp" line="1276"/>
+        <location filename="../cpp/dart.cpp" line="625"/>
+        <location filename="../cpp/dart.cpp" line="1297"/>
         <source>Place %1 of %2</source>
         <translation>Place %1 of %2</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="606"/>
-        <location filename="../cpp/dart.cpp" line="1278"/>
+        <location filename="../cpp/dart.cpp" line="627"/>
+        <location filename="../cpp/dart.cpp" line="1299"/>
         <source>%1/%2</source>
         <translation>%1/%2</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="615"/>
+        <location filename="../cpp/dart.cpp" line="636"/>
         <source>Against Time</source>
         <translation>Against Time</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="616"/>
-        <location filename="../cpp/dart.cpp" line="1191"/>
+        <location filename="../cpp/dart.cpp" line="637"/>
+        <location filename="../cpp/dart.cpp" line="1212"/>
         <source>New Game</source>
         <translation>New Game</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="618"/>
-        <location filename="../cpp/dart.cpp" line="1129"/>
+        <location filename="../cpp/dart.cpp" line="639"/>
+        <location filename="../cpp/dart.cpp" line="1150"/>
         <source>Ask for: %1</source>
         <translation>Ask for: %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="618"/>
-        <location filename="../cpp/dart.cpp" line="649"/>
+        <location filename="../cpp/dart.cpp" line="639"/>
+        <location filename="../cpp/dart.cpp" line="670"/>
         <source>Name of Place</source>
         <translation>Name of Place</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="618"/>
-        <location filename="../cpp/dart.cpp" line="649"/>
+        <location filename="../cpp/dart.cpp" line="639"/>
+        <location filename="../cpp/dart.cpp" line="670"/>
         <source>Position of Place</source>
         <translation>Position of Place</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="620"/>
-        <location filename="../cpp/dart.cpp" line="1574"/>
+        <location filename="../cpp/dart.cpp" line="641"/>
+        <location filename="../cpp/dart.cpp" line="1595"/>
         <source>Map: %1</source>
         <translation>Map: %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="626"/>
+        <location filename="../cpp/dart.cpp" line="647"/>
         <source>Find Place</source>
         <translation>Find Place</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="627"/>
+        <location filename="../cpp/dart.cpp" line="648"/>
         <source>Training</source>
         <translation>Training</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="628"/>
+        <location filename="../cpp/dart.cpp" line="649"/>
         <source>Local</source>
         <translation>Local</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="653"/>
-        <location filename="../cpp/dart.cpp" line="661"/>
-        <location filename="../cpp/dart.cpp" line="669"/>
+        <location filename="../cpp/dart.cpp" line="674"/>
+        <location filename="../cpp/dart.cpp" line="682"/>
+        <location filename="../cpp/dart.cpp" line="690"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="657"/>
+        <location filename="../cpp/dart.cpp" line="678"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="657"/>
+        <location filename="../cpp/dart.cpp" line="678"/>
         <source>Position</source>
         <translation>Position</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="665"/>
+        <location filename="../cpp/dart.cpp" line="686"/>
         <source>Places</source>
         <translation>Places</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="721"/>
+        <location filename="../cpp/dart.cpp" line="742"/>
         <source>Player %1</source>
         <translation>Player %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="901"/>
+        <location filename="../cpp/dart.cpp" line="922"/>
         <source>∞</source>
         <translation>∞</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1834"/>
+        <location filename="../cpp/dart.cpp" line="1855"/>
         <source>https://github.com/gulp21/QeoDart/wiki/Maps</source>
         <extracomment>the translated wiki pages are called DE:Maps etc. Please do NOT translate when there is no such wiki page in your language</extracomment>
         <translation>https://github.com/gulp21/QeoDart/wiki/Maps</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1845"/>
+        <location filename="../cpp/dart.cpp" line="1866"/>
         <source>The default browser could not be opened.</source>
         <translation>The default browser could not be opened.</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1839"/>
+        <location filename="../cpp/dart.cpp" line="1860"/>
         <source>https://github.com/gulp21/QeoDart/wiki/Contribute</source>
         <extracomment>the translated wiki pages are called DE:Contribute etc. Please do NOT translate when there is no such wiki page in your language</extracomment>
         <translation>https://github.com/gulp21/QeoDart/wiki/Contribute</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="908"/>
+        <location filename="../cpp/dart.cpp" line="929"/>
         <source>Missed by %1 km </source>
         <translation>Missed by %1 km </translation>
     </message>
     <message numerus="yes">
-        <location filename="../cpp/dart.cpp" line="500"/>
-        <location filename="../cpp/dart.cpp" line="924"/>
+        <location filename="../cpp/dart.cpp" line="521"/>
+        <location filename="../cpp/dart.cpp" line="945"/>
         <source>%n Point(s) &amp;Oslash; %1, %2</source>
         <translation>
             <numerusform>%n Point &amp;Oslash; %1, %2</numerusform>
@@ -851,80 +891,80 @@ Do you want to continue anyway?</translation>
         </translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="907"/>
+        <location filename="../cpp/dart.cpp" line="928"/>
         <source>Hit the mark </source>
         <translation>Hit the mark </translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="910"/>
+        <location filename="../cpp/dart.cpp" line="931"/>
         <source>%1 km </source>
         <translation>%1 km </translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="914"/>
+        <location filename="../cpp/dart.cpp" line="935"/>
         <source>%1(%2)%3</source>
         <translation>%1(%2)%3</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="926"/>
+        <location filename="../cpp/dart.cpp" line="947"/>
         <source>%1, &amp;Oslash; %2, %3</source>
         <translation>%1, &amp;Oslash; %2, %3</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="941"/>
+        <location filename="../cpp/dart.cpp" line="962"/>
         <source>Quit QeoDart</source>
         <translation>Quit QeoDart</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="942"/>
+        <location filename="../cpp/dart.cpp" line="963"/>
         <source>Do you really want to quit QeoDart?</source>
         <translation>Do you really want to quit QeoDart?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="943"/>
+        <location filename="../cpp/dart.cpp" line="964"/>
         <source>Your current score will be lost.</source>
         <translation>Your current score will be lost.</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="997"/>
+        <location filename="../cpp/dart.cpp" line="1018"/>
         <source>Chance Game Mode</source>
         <translation>Chance Game Mode</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="998"/>
+        <location filename="../cpp/dart.cpp" line="1019"/>
         <source>When you change the game mode, your current score will be lost.
 Do you want to continue?</source>
         <translation>When you change the game mode, your current score will be lost.
 Do you want to continue?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1122"/>
+        <location filename="../cpp/dart.cpp" line="1143"/>
         <source>Chance Mode</source>
         <translation>Chance Mode</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1192"/>
+        <location filename="../cpp/dart.cpp" line="1213"/>
         <source>When you start a new game, your current score will be lost.
 Do you want to continue?</source>
         <translation>When you start a new game, your current score will be lost.
 Do you want to continue?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1565"/>
+        <location filename="../cpp/dart.cpp" line="1586"/>
         <source>Chance Map</source>
         <translation>Chance Map</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1566"/>
+        <location filename="../cpp/dart.cpp" line="1587"/>
         <source>When you change the map, your current score will be lost.
 Do you want to continue?</source>
         <translation>When you change the map, your current score will be lost.
 Do you want to continue?</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="1577"/>
-        <location filename="../cpp/dart.cpp" line="1578"/>
-        <location filename="../cpp/dart.cpp" line="1579"/>
+        <location filename="../cpp/dart.cpp" line="1598"/>
+        <location filename="../cpp/dart.cpp" line="1599"/>
+        <location filename="../cpp/dart.cpp" line="1600"/>
         <source>%1 km</source>
         <translation>%1 km</translation>
     </message>
@@ -1015,41 +1055,52 @@ Do you want to continue?</translation>
 <context>
     <name>io</name>
     <message>
-        <location filename="../cpp/io.cpp" line="180"/>
+        <location filename="../cpp/io.cpp" line="59"/>
+        <source> #%1</source>
+        <extracomment>this string is appended to the name of the map when there is already a map with the same name; %1 is a number</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cpp/io.cpp" line="201"/>
         <source>An unexpected error occurred while reading %1.
 QeoDart will be quit.</source>
         <translation>An unexpected error occurred while reading %1.
 QeoDart will be quit.</translation>
     </message>
     <message>
-        <location filename="../cpp/io.cpp" line="273"/>
+        <location filename="../cpp/io.cpp" line="293"/>
         <source>The file %1 contains no &lt;place&gt;.
 QeoDart will be quit.</source>
         <translation>The file %1 contains no &lt;place&gt;.
 QeoDart will be quit.</translation>
     </message>
     <message>
-        <location filename="../cpp/io.cpp" line="341"/>
+        <location filename="../cpp/io.cpp" line="300"/>
+        <source>%1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cpp/io.cpp" line="368"/>
         <source>%1 out of %2 places selected</source>
         <translation>%1 out of %2 places selected</translation>
     </message>
     <message>
-        <location filename="../cpp/io.cpp" line="345"/>
+        <location filename="../cpp/io.cpp" line="372"/>
         <source>All %1 places selected</source>
         <translation>All %1 places selected</translation>
     </message>
     <message>
-        <location filename="../cpp/io.cpp" line="507"/>
+        <location filename="../cpp/io.cpp" line="534"/>
         <source>Continue anyway</source>
         <translation>Continue anyway</translation>
     </message>
     <message>
-        <location filename="../cpp/io.cpp" line="508"/>
+        <location filename="../cpp/io.cpp" line="535"/>
         <source>Leave portable mode</source>
         <translation>Leave portable mode</translation>
     </message>
     <message>
-        <location filename="../cpp/io.cpp" line="509"/>
+        <location filename="../cpp/io.cpp" line="536"/>
         <source>The configuration file %1 cannot be accessed by QeoDart. Please ensure that you have got read and write privileges.
 Do you want QeoDart to ignore this error and continue without saving any settings, or do you want to leave the portable mode and use a configuration file in your user directory?</source>
         <translation>The configuration file %1 cannot be accessed by QeoDart. Please ensure that you have got read and write privileges.

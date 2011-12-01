@@ -390,7 +390,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuGame">
@@ -602,7 +602,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Cities</string>
+    <string notr="true">Cities</string>
    </property>
   </action>
   <action name="actionAbout_Qt">
@@ -665,7 +665,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Counties</string>
+    <string notr="true">Counties</string>
    </property>
   </action>
   <action name="actionCountries">
@@ -673,7 +673,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Countries</string>
+    <string notr="true">Countries</string>
    </property>
   </action>
   <action name="actionStates">
@@ -681,7 +681,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>States</string>
+    <string notr="true">States</string>
    </property>
   </action>
   <action name="actionCapitals_of_States">
@@ -689,7 +689,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Capitals of States</string>
+    <string notr="true">Capitals of States</string>
    </property>
   </action>
   <action name="actionCapitals_of_Countries">
@@ -697,7 +697,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Capitals of Countries</string>
+    <string notr="true">Capitals of Countries</string>
    </property>
   </action>
   <action name="actionTowns">
@@ -705,7 +705,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Towns</string>
+    <string notr="true">Towns</string>
    </property>
   </action>
   <action name="actionBorders">

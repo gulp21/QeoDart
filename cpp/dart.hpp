@@ -102,13 +102,14 @@ Q_OBJECT
 		QList<QLabel*> qlPointLabels;
 		QList<QLabel*> qlDebugPlaceLabels;
 		QList<QString> qlLayersNames;
+		QList<QString> qlPlaceTypesNames;
 		QList<QLabel*> qlMapLayers;
 		QList<highScoreEntry> qlHighScores;
 		QList<QAction*> qlPlacesSubsetsActions;
 		
 		QLabel *lblMouseClickOverlay;
 		
-		QActionGroup *agLayers;
+		QActionGroup *agLayers, *agPlaceTypes;
 		
 		enGameModes iGameMode;
 		enAskForModes iAskForMode;

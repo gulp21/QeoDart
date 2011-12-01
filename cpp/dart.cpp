@@ -21,6 +21,8 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	           << tr("Completely Wrong!") << tr("That wasn't much of a hit…") << tr("Missed completely!")
 	           << tr("Read wrongly?") << tr("Clicked wrongly?") << tr("D'oh!"); // TODO typed wrongly?
 	
+	qlPlaceTypesNames << tr("States") << tr("Capitals of States") << tr("Countries") << tr("Capitals of Countries") << tr("Counties") << tr("Cities") << tr("Towns");
+	
 	iPlaceCount=0;
 	iCurrentPlayer=0;
 	bAcceptingClickEvent=TRUE;
@@ -89,6 +91,16 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	agLayers->addAction(actionElevations);
 	agLayers->addAction(actionBorders);
 	agLayers->addAction(actionRivers);
+	
+	agPlaceTypes = new QActionGroup(this);
+	agPlaceTypes->setExclusive(false);
+	agPlaceTypes->addAction(actionStates);
+	agPlaceTypes->addAction(actionCapitals_of_States);
+	agPlaceTypes->addAction(actionCountries);
+	agPlaceTypes->addAction(actionCapitals_of_Countries);
+	agPlaceTypes->addAction(actionCounties);
+	agPlaceTypes->addAction(actionCities);
+	agPlaceTypes->addAction(actionTowns);
 	
 	connect(actionHigh_Score_List, SIGNAL(triggered()), this, SLOT(vShowHighScores()));
 	actionHigh_Score_List->setIcon(QIcon::fromTheme("games-highscores", QIcon(":/icons/oxygen/games-highscores.png")));

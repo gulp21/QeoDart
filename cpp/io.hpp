@@ -41,7 +41,9 @@ class io : public QWidget {
 		void vSaveHighScores(QString mapName);
 		
  	private:
-		QStringList qslGetPreferedQcfLanguage();
+		QString qsGetQcfFilePath(QString mapname, int &index);
+		
+		QStringList qslGetPreferedQcfLanguage(), qslPlaceTypesNamesRegExps;
 		
 		bool bDeterminedPortable;
 		
