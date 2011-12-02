@@ -62,7 +62,7 @@ int io::iFindQcf() {
 				
 				f.mapName+=suffix;
 				
-				myDart->qlQcfxFiles << f;
+				vInsertQcfxFile(f);
 			}
 		}
 	}
@@ -77,6 +77,16 @@ int io::iFindQcf() {
 	}
 	
 	return myDart->qlQcfxFiles.count();
+}
+
+// adds the given qcfFile to qlQcfxFiles, alphabetically ordered
+void io::vInsertQcfxFile(qcfFile &f) {
+	int i=0;
+	while(i<myDart->qlQcfxFiles.count()
+	      && QString::localeAwareCompare(f.mapName, myDart->qlQcfxFiles[i].mapName) > 0) {
+		i++;
+	}
+	myDart->qlQcfxFiles.insert(i, f);
 }
 
 int io::iCheckQcf(QFile &file, QDomDocument &doc) {
@@ -128,6 +138,8 @@ void io::vGetMetaData(QDomDocument &doc, qcfFile &file) {
 			file.mapName=n;
 			file.mapShortName=e.attribute("short","NOSHORTNAME");
 			if(file.mapShortName=="NOSHORTNAME") file.mapShortName=file.mapName.left(2);
+			file.id=e.attribute("id","NOID_"+file.mapShortName.toUpper());
+			if(file.id.startsWith("NOID_")) qDebug() << "[W] map with mapName" << file.mapName << "does not have an id, using" << file.id;
 		} else {
 			qDebug() << "[W] file has broken <name>";
 			file.mapName="NONAME";
@@ -631,7 +643,7 @@ void io::vLoadHighScores(QString mapName) {
 	myDart->qlHighScores.clear();
 	
 	for(int i=0; i<10; i++) {
-		QStringList list=settings->value(QString("Highscores/%1.%2").arg(mapName).arg(i),"---||0").toString().split("||"); // TODO mapid
+		QStringList list=settings->value(QString("Highscores/%1.%2").arg(qsGetIdFromMapName(mapName)).arg(i),"---||0").toString().split("||");
 		qDebug() << list;
 		if(list.count()<2) list=QString("---||0").split("||");
 		
@@ -644,11 +656,19 @@ void io::vLoadHighScores(QString mapName) {
 	}
 }
 
-void io::vSaveHighScores(QString mapName) {
+void io::vSaveHighScores(QString id) {
 	for(int i=0; i<10; i++) {
-		settings->setValue(QString("Highscores/%1.%2").arg(mapName).arg(i),
+		settings->setValue(QString("Highscores/%1.%2").arg(id).arg(i),
 		                   QString("%1||%2").arg(myDart->qlHighScores[i].name).arg(myDart->qlHighScores[i].score));
 		
 		qDebug() << myDart->qlHighScores[i].name << "W highsc" << myDart->qlHighScores[i].score;
 	}
+}
+
+// returns the id of the map with the given mapName
+QString io::qsGetIdFromMapName(QString mapName) {
+	for(int i=0; i<myDart->qlQcfxFiles.count(); i++) {
+		if(myDart->qlQcfxFiles[i].mapName==mapName) return myDart->qlQcfxFiles[i].id;
+	}
+	return "NULL";
 }

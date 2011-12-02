@@ -134,7 +134,7 @@ void resultWindow::vClose() {
 	
 	qDebug() << "[i] saved" << name<< score;
 	
-	myIO->vSaveHighScores(myDart->qlQcfxFiles[myDart->iCurrentQcf].mapName);
+	myIO->vSaveHighScores(myDart->qlQcfxFiles[myDart->iCurrentQcf].id);
 	
 	*bShowHighScores=true;
 	

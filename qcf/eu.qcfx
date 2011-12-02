@@ -1,6 +1,6 @@
 <!DOCTYPE qcfx>
 <qcfx version="0.2">
-	<name default="Europe" short="EU" de="Europa" en="Europe" la="Europa" />
+	<name id="EUROPE" default="Europe" short="EU" de="Europa" en="Europe" la="Europa" />
 	<pxtokm value="10.06" />
 	<copyright
 	file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"

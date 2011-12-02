@@ -1,6 +1,6 @@
 <!DOCTYPE qcfx>
 <qcfx version="0.2">
-	<name default="भारत गणराज्य" short="IN" de="Indien" en="India" la="India" />
+	<name id="INDIA" default="भारत गणराज्य" short="IN" de="Indien" en="India" la="India" />
 	<pxtokm value="6.05" />
 	<copyright
 	file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
