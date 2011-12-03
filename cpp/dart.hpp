@@ -211,6 +211,7 @@ Q_OBJECT
 		int iFindInputInList(double &f);
 		
 		bool bNewGameIsSafe();
+		bool bStartNewGameWarning(QString title, QString message);
 		
 		QColor qcGetColorOfPlayer(int n);
 		
