@@ -906,7 +906,7 @@ void dart::vShowResultWindows() {
 }
 
 void dart::vResetScoreLabels() {
-	for(int i=0; i<iNumberOfPlayers; i++) { // reset score labels of each player
+	for(int i=0; i<qlPlayerLabels.count(); i++) { // reset score labels of each player
 		qlPlayerLabels[i][1]->setText("");
 	}
 }
@@ -1169,10 +1169,17 @@ void dart::vSetAskForMode(enAskForModes mode) {
 		case enPositions:
 			lineEdit->hide();
 			lblCurrentPlace->show();
+#ifndef Q_OS_WINCE
+			if(bUseOurCursor) lblMouseClickOverlay->setCursor(QCursor(QPixmap(":/icons/cursor.png"),1,1));
+			else lblMouseClickOverlay->setCursor(Qt::ArrowCursor);
+#endif
 			break;
 		case enNames:
 			lineEdit->show();
 			lblCurrentPlace->hide();
+#ifndef Q_OS_WINCE
+			lblMouseClickOverlay->setCursor(Qt::ArrowCursor);
+#endif
 			break;
 	}
 	

@@ -574,7 +574,7 @@ void io::vLoadSettings() {
 	myDart->iAskForMode=static_cast<enAskForModes>(settings->value("iAskForMode",enPositions).toInt());
 	if(myDart->iAskForMode!=enPositions && myDart->iAskForMode!=enNames) myDart->iAskForMode=enPositions;
 	
-	myDart->iNumberOfPlayers=settings->value("iNumberOfPlayers",1).toInt();// TODO we shouldn't change it in training mode (iNumberOfPlayersTrainingCache)
+	myDart->iNumberOfPlayers=settings->value("iNumberOfPlayers",1).toInt();
 	if(myDart->iNumberOfPlayers<=0) myDart->iNumberOfPlayers=1;
 	
 	myDart->qsCurrentPlaceType=settings->value("qsCurrentPlaceType","").toString();
