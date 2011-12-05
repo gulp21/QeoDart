@@ -59,13 +59,20 @@ int io::iFindQcf() {
 					suffix=tr(" #%1").arg(i);
 					qDebug() << "[w] there is already a map with the mapName" << f.mapName << ", trying" << f.mapName+suffix;
 				}
-				
 				f.mapName+=suffix;
 				
-				vInsertQcfxFile(f);
-			}
-		}
-	}
+				int i=0;
+				for(; i<myDart->qlQcfxFiles.count(); i++) {
+					if(myDart->qlQcfxFiles[i].id==f.id) {
+						qDebug() << "[W] there is already a map with the id" << f.id << "-> won't add it";
+						i=myDart->qlQcfxFiles.count()+1;
+					}
+				}
+				
+				if(i==myDart->qlQcfxFiles.count()) vInsertQcfxFile(f);
+			} // if(iCheckQcf)
+		} // for(lQcfDirs[i].entryList())
+	} // for(qlQcfDirs)
 	
 	if(myDart->qlQcfxFiles.count()==0) {
 		qcfFile f;
@@ -349,7 +356,6 @@ void io::vFillCurrentTypePlaces() {
 	myDart->vCreatePlacesSubsetsActions();
 	myDart->vUpdatePlacesSubsetActive();
 	
-	qDebug()<<myDart->bPlacesSubsetActive<<"<<<";
 	if(myDart->bPlacesSubsetActive) {
 		qDebug() << "[i] found" << myDart->qlCurrentTypePlaces.count() << "places for current place type, will remove some of them";
 		for(int i=0; i<myDart->qlPlacesSubsetsActions.count(); i++) {
@@ -587,10 +593,9 @@ void io::vLoadSettings() {
 	myDart->iToolMenuBarState=static_cast<enToolMenuBarState>(settings->value("iToolMenuBarState",enBoth).toInt());
 	if(myDart->iToolMenuBarState!=enBoth && myDart->iToolMenuBarState!=enMenuBarOnly && myDart->iToolMenuBarState!=enToolBarOnly) myDart->iToolMenuBarState=enBoth;
 	
-	qDebug()<<(settings->value("bBorders",true).toBool());
-	myDart->actionBorders->setChecked(settings->value("bBorders",true).toBool());
-	myDart->actionRivers->setChecked(settings->value("bRivers",true).toBool());
-	myDart->actionElevations->setChecked(settings->value("bElevations",true).toBool());
+	myDart->actionBorders->setChecked(settings->value("borders",true).toBool());
+	myDart->actionRivers->setChecked(settings->value("rivers",true).toBool());
+	myDart->actionElevations->setChecked(settings->value("elevations",true).toBool());
 	
 	for(int i=0; i<3; i++) {
 		myDart->agLayers->actions()[i]->setChecked(settings->value(myDart->qlLayersNames[i+1],true).toBool());

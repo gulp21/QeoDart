@@ -359,13 +359,10 @@ void dart::vTimeout() {
 void dart::vSetPlaceType() {
 	if(!bNewGameIsSafe()) { vUpdateActionsIsCheckedStates(); return; }
 	
-	if( bCanLoseScore() ) {
-		QMessageBox msgBox;
-		msgBox.setWindowTitle(tr("Change Place Types"));
-		msgBox.setText(tr("When you change this setting, your current score will be lost.\nDo you want to continue?"));
-		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-		msgBox.setDefaultButton(QMessageBox::Cancel);
-		if(msgBox.exec()==QMessageBox::Cancel) { vUpdateActionsIsCheckedStates(); return; }
+	if(bCanLoseScore() &&
+	   !bStartNewGameWarning(tr("Change Place Types"), tr("When you change this setting, your current score will be lost.\nDo you want to continue?"))) {
+		vUpdateActionsIsCheckedStates();
+		return;
 	}
 	
 	bPlacesSubsetActive=false;
@@ -414,6 +411,13 @@ void dart::vCreatePlacesSubsetsActions() {
 }
 
 void dart::vPlacesSubsetClicked() {
+	if(!bNewGameIsSafe() ||
+	   (bCanLoseScore() &&
+	   !bStartNewGameWarning(tr("Change Place Types"), tr("When you change this setting, your current score will be lost.\nDo you want to continue?"))) ) {
+		static_cast<QAction*>(QObject::sender())->setChecked(!static_cast<QAction*>(QObject::sender())->isChecked());
+		return;
+	}
+	
 	myIO->vFillCurrentTypePlaces();
 	vSetGameMode(iGameMode);
 }
@@ -426,15 +430,11 @@ void dart::vUpdatePlacesSubsetActive() {
 }
 
 void dart::vSetAgainstTime() {
-	if(!bNewGameIsSafe()) { vUpdateActionsIsCheckedStates(); return; }
-	
-	if( bCanLoseScore() ) {
-		QMessageBox msgBox;
-		msgBox.setWindowTitle(tr("Enable Against Time"));
-		msgBox.setText(tr("When you change this setting, your current score will be lost.\nDo you want to continue?"));
-		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-		msgBox.setDefaultButton(QMessageBox::Cancel);
-		if(msgBox.exec()==QMessageBox::Cancel) { vUpdateActionsIsCheckedStates(); return; }
+	if(!bNewGameIsSafe() ||
+	   (bCanLoseScore() &&
+	    !bStartNewGameWarning(tr("Enable Against Time"), tr("When you change this setting, your current score will be lost.\nDo you want to continue?"))) ) {
+		vUpdateActionsIsCheckedStates();
+		return;
 	}
 	
 	vSetAgainstTime(actionAgainst_Time->isChecked());
@@ -484,8 +484,6 @@ void dart::vSetNumberOfPlayers(int n) {
 	if(iNumberOfPlayers>15) qDebug() << "[w] very much players";
 	
 	actionPlayers->setText(QString(tr("Players: %1")).arg(iNumberOfPlayers));
-	
-	qDebug()<<qlPlayerLabels.count()<<"sssssssssss"<<n;
 	
 	if(qlPlayerLabels.count()>n) {
 		
@@ -1011,15 +1009,11 @@ QColor dart::qcGetColorOfPlayer(int player) {
 }
 
 void dart::vSetGameMode() {
-	if(!bNewGameIsSafe()) { vUpdateActionsIsCheckedStates(); return; }
-	
-	if( bCanLoseScore() ) {
-		QMessageBox msgBox;
-		msgBox.setWindowTitle(tr("Chance Game Mode"));
-		msgBox.setText(tr("When you change the game mode, your current score will be lost.\nDo you want to continue?"));
-		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-		msgBox.setDefaultButton(QMessageBox::Cancel);
-		if(msgBox.exec()==QMessageBox::Cancel) { vUpdateActionsIsCheckedStates(); return; }
+	if(!bNewGameIsSafe() ||
+	   (bCanLoseScore() &&
+	    !bStartNewGameWarning(tr("Chance Game Mode"), tr("When you change the game mode, your current score will be lost.\nDo you want to continue?"))) ) {
+		vUpdateActionsIsCheckedStates();
+		return;
 	}
 	
 	btGameMode->setText(QString("%1").arg(static_cast<QAction*>(QObject::sender())->text()));
@@ -1136,15 +1130,11 @@ void dart::vSetGameMode(enGameModes mode) {
 }
 
 void dart::vSetAskForMode() {
-	if(!bNewGameIsSafe()) { vUpdateActionsIsCheckedStates(); return; }
-	
-	if( bCanLoseScore() ) {
-		QMessageBox msgBox;
-		msgBox.setWindowTitle(tr("Chance Mode"));
-		msgBox.setText(tr("When you change this setting, your current score will be lost.\nDo you want to continue?"));
-		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-		msgBox.setDefaultButton(QMessageBox::Cancel);
-		if(msgBox.exec()==QMessageBox::Cancel) { vUpdateActionsIsCheckedStates(); return; }
+	if(!bNewGameIsSafe() ||
+	   (bCanLoseScore() &&
+	    !bStartNewGameWarning(tr("Chance Mode"), tr("When you change this setting, your current score will be lost.\nDo you want to continue?"))) ) {
+		vUpdateActionsIsCheckedStates();
+		return;
 	}
 	
 	btAskForMode->setText(QString(tr("Ask for: %1").arg(static_cast<QAction*>(QObject::sender())->text())));
@@ -1212,15 +1202,10 @@ void dart::vResetForNewGame() {
 }
 
 void dart::vNewGame() {
-	if(!bNewGameIsSafe()) return;
-	
-	if( bCanLoseScore() ) {
-		QMessageBox msgBox;
-		msgBox.setWindowTitle(tr("New Game"));
-		msgBox.setText(tr("When you start a new game, your current score will be lost.\nDo you want to continue?"));
-		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-		msgBox.setDefaultButton(QMessageBox::Cancel);
-		if(msgBox.exec()==QMessageBox::Cancel) return;
+	if(!bNewGameIsSafe() ||
+	   (bCanLoseScore() &&
+	    !bStartNewGameWarning(tr("New Game"), tr("When you start a new game, your current score will be lost.\nDo you want to continue?"))) ) {
+		return;
 	}
 	
 	iCurrentPlayer=0;
@@ -1586,15 +1571,11 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 }
 
 void dart::vReadQcf() {
-	if(!bNewGameIsSafe()) { vUpdateActionsIsCheckedStates(); return; }
-	
-	if(bCanLoseScore()) {
-		QMessageBox msgBox;
-		msgBox.setWindowTitle(tr("Chance Map"));
-		msgBox.setText(tr("When you change the map, your current score will be lost.\nDo you want to continue?"));
-		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-		msgBox.setDefaultButton(QMessageBox::Cancel);
-		if(msgBox.exec()==QMessageBox::Cancel) return;
+	if(!bNewGameIsSafe() ||
+	   (bCanLoseScore() &&
+	    !bStartNewGameWarning(tr("Chance Map"), tr("When you change the map, your current score will be lost.\nDo you want to continue?"))) ) {
+		vUpdateActionsIsCheckedStates();
+		return;
 	}
 	
 	if(myIO->iReadQcf(static_cast<QAction*>(QObject::sender())->text())!=0) exit(-1);
@@ -1609,7 +1590,6 @@ void dart::vReadQcf() {
 	vRepaintMap();
 	mySleep(1);
 	vToggleMapLayer();
-	qDebug() << iCurrentPlayer << "--------------------";
 	vResetForNewGame();
 	vNextRound();
 	
@@ -1742,7 +1722,7 @@ void dart::vToggleMapLayer() {
 	for(int i=0; i<3; i++) {
 		bool visible=agLayers->actions()[i]->isChecked() && agLayers->actions()[i]->isVisible();
 		qlMapLayers[i+1]->setVisible(visible);
-		myIO->settings->setValue(qlLayersNames[i+1],visible);
+		if(agLayers->actions()[i]->isVisible()) myIO->settings->setValue(qlLayersNames[i+1],visible); // do not change the saved setting only because the layer is not available for the current map
 	}
 }
 
@@ -1875,4 +1855,16 @@ void dart::vOpenLinkInBrowser(QUrl link) {
 		msgBox.setIcon(QMessageBox::Warning);
 		msgBox.exec();
 	}
+}
+
+bool dart::bStartNewGameWarning(QString title, QString message) {
+	QMessageBox msgBox;
+	msgBox.setWindowTitle(title);
+	msgBox.setText(message);
+	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+	msgBox.setDefaultButton(QMessageBox::Cancel);
+	if(msgBox.exec()==QMessageBox::Yes) {
+		return true;
+	}
+	return false;
 }
