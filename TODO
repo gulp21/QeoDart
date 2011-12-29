@@ -1,9 +1,9 @@
 would this work: #ifdef wince #define no_cursor
 
---log -> README
+edit-clear.svg
+window-close.svg
 
 FAQ: slow Linux (raster)
-sort maps alphabetically
 update check
 
 highscore: date (today), time (x ago, api?), pref lang

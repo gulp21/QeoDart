@@ -28,9 +28,10 @@ int main(int argc, char* argv[]) {
 #ifndef Q_OS_WINCE
 	if(argc==2 && (static_cast<string>(argv[1])=="-h" || static_cast<string>(argv[1])=="--help") ) {
 		qDebug() << "Options:";
-		qDebug() << "  -h,  --help          prints this text (only works when it is the only command-line argument)";
+		qDebug() << "  -h,  --help          prints this text; only works when it is the only command-line argument";
 		qDebug() << "       --banner        shows two QeoDart banners (cannot be visible at the same time, visibility depends on window geometry)";
 		qDebug() << "  -dp, --debug-places  when activating \"find place\", the rectangles describing the area are drawn around the places";
+		qDebug() << "  -l,  --log           creates a log file; must be the first option";
 		return 0;
 	}
 #endif

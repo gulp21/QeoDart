@@ -85,7 +85,7 @@ static bool resolveLibs()
 #endif
 
 /*!
-  * Chekcs and returns true if Windows DWM composition
+  * Checks and returns true if Windows DWM composition
   * is currently enabled on the system.
   *
   * To get live notification on the availability of

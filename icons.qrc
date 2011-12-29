@@ -3,6 +3,7 @@
         <file alias="application-exit.png">icons/oxygen/application-exit.png</file>
         <file alias="configure.png">icons/oxygen/configure.png</file>
         <file alias="document-new.png">icons/oxygen/document-new.png</file>
+        <file alias="edit-clear.png">icons/oxygen/edit-clear.png</file>
         <file alias="edit-find.png">icons/oxygen/edit-find.png</file>
         <file alias="games-highscores.png">icons/oxygen/games-highscores.png</file>
         <file alias="games-hint.png">icons/oxygen/games-hint.png</file>
@@ -14,6 +15,7 @@
         <file alias="system-users.png">icons/oxygen/system-users.png</file>
         <file alias="tools-report-bug.png">icons/oxygen/tools-report-bug.png</file>
         <file alias="user-identity.png">icons/oxygen/user-identity.png</file>
+        <file alias="window-close.png">icons/oxygen/window-close.png</file>
         <file alias="zoom-original.png">icons/oxygen/zoom-original.png</file>
         <file alias="index.theme">icons/oxygen/index.theme</file>
     </qresource>

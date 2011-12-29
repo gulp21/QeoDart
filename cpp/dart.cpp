@@ -25,10 +25,10 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	
 	iPlaceCount=0;
 	iCurrentPlayer=0;
-	bAcceptingClickEvent=TRUE;
-	bAcceptingResizeEvent=FALSE;
+	bAcceptingClickEvent=true;
+	bAcceptingResizeEvent=false;
 	dPxToKm=1;
-	iCurrentQcf=0; // TODO allow saving name;
+	iCurrentQcf=0;
 	iScoreAreaMode=1;
 	pTrainingPlaceNumber=NULL;
 	iPaddingTop=0;
@@ -47,7 +47,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(timer, SIGNAL(timeout()), this, SLOT(vTimeout()));
 	
 	resizeTimer = new QTimer(this);
-	resizeTimer->setSingleShot(TRUE);
+	resizeTimer->setSingleShot(true);
 	connect(resizeTimer, SIGNAL(timeout()), this, SLOT(vToolbarOverflow()));
 	
 // "error: unresolved external symbol time" when compiling for WinCE
@@ -57,7 +57,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	srand(time(NULL));
 #endif
 
-	toolBar->setMovable(FALSE);
+	toolBar->setMovable(false);
 	
 	for(int i=0; i<4; i++) {
 		QLabel *lblMap = new QLabel(this);
@@ -285,7 +285,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	gridLayout->removeWidget(lblCurrentRound); // we do not want to seg fault
 	gridLayout->addWidget(lblCurrentRound,0,4);
 	
-	bAcceptingResizeEvent=TRUE;
+	bAcceptingResizeEvent=true;
 	vResize(dZoomFactor);
 	
 	show();
@@ -787,7 +787,7 @@ void dart::vShowAllPlaces() {
 void dart::vMouseClickEvent(int x, int y) {
 	if(iGameMode==enFind) { vFindPlaceAround(iGetUnzoomed(x),iGetUnzoomed(y)); return; }
 	if(!bAcceptingClickEvent) return;
-	bAcceptingClickEvent=FALSE;
+	bAcceptingClickEvent=false;
 	if(iAskForMode!=enPositions) return;
 	
 	x=iGetUnzoomed(x);
@@ -835,7 +835,7 @@ void dart::vMouseClickEvent(int x, int y) {
 		vRepaintCommonLabels();
 		vSetAgainstTime(bAgainstTime);
 		
-		bAcceptingClickEvent=TRUE;
+		bAcceptingClickEvent=true;
 		
 	} else { // show results
 		
@@ -1269,14 +1269,14 @@ void dart::vNextRound() {
 	
 	switch(iAskForMode) {
 		case enPositions:
-			bAcceptingClickEvent=TRUE;
+			bAcceptingClickEvent=true;
 			lblCurrentPlace->setText(qlPlacesHistory[iPlaceCount-1]->name);
 			break;
 		case enNames:
 			vDrawPoint(qlPlacesHistory[iPlaceCount-1]->x, qlPlacesHistory[iPlaceCount-1]->y, qlPointLabels);
 			lineEdit->clear();
 			lineEdit->setStyleSheet("");
-			lineEdit->setEnabled(TRUE);
+			lineEdit->setEnabled(true);
 			lineEdit->setFocus(Qt::OtherFocusReason);
 			break;
 	};
@@ -1459,7 +1459,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 		qDebug() << "[i] vReturnPressedEvent rejected";
 		return;
 	}
-	lineEdit->setEnabled(FALSE);
+	lineEdit->setEnabled(false);
 	
 	double f;
 	int iIndexOfPlace=iFindInputInList(f);
@@ -1529,7 +1529,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 		
 		lineEdit->clear();
 		lineEdit->setStyleSheet("");
-		lineEdit->setEnabled(TRUE); //c//
+		lineEdit->setEnabled(true); //c//
 		lineEdit->setFocus(Qt::OtherFocusReason);
 		
 		vSetAgainstTime(bAgainstTime);
@@ -1595,7 +1595,7 @@ void dart::vReadQcf() {
 	
 	if(iGameMode==enFind) vTextEditedEvent();
 	
-	myIO->settings->setValue("qsCurrentMapName",static_cast<QAction*>(QObject::sender())->text());
+	myIO->settings->setValue("qsCurrentMapName",static_cast<QAction*>(QObject::sender())->text()); // TODO use id
 }
 
 void dart::vSetToolMenuBarState() {
@@ -1607,20 +1607,20 @@ void dart::vSetToolMenuBarState() {
 	switch(iToolMenuBarState) {
 		case enBoth:
 			toolBar->removeAction(actionBtApplication);
-			menuApplication->setVisible(FALSE);
-			menubar->setVisible(TRUE);
-			toolBar->setVisible(TRUE);
+			menuApplication->setVisible(false);
+			menubar->setVisible(true);
+			toolBar->setVisible(true);
 			break;
 			
 		case enToolBarOnly:
 			toolBar->insertAction(actionNew_Game, actionBtApplication);
-			menubar->setVisible(FALSE);
-			toolBar->setVisible(TRUE);
+			menubar->setVisible(false);
+			toolBar->setVisible(true);
 			break;
 			
 		case enMenuBarOnly:
-			menubar->setVisible(TRUE);
-			toolBar->setVisible(FALSE);
+			menubar->setVisible(true);
+			toolBar->setVisible(false);
 			break;
 	}
 	
