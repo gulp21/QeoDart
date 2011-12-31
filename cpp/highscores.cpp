@@ -28,8 +28,8 @@ highScoreWindow::~highScoreWindow() {
 
 /*!
   Reloads the highscores of the selected map using myIO::vLoadHighScores and displays them.
-  @param index The index of the map in comboBox and qlQcfxFiles
-  @see myIO::vLoadHighScores
+  @param index the index of the map in comboBox and qlQcfxFiles
+  @see io::vLoadHighScores(QString mapName)
   */
 void highScoreWindow::vLoadHighScores(int index) {
 	myIO->vLoadHighScores(comboBox->itemText(index));

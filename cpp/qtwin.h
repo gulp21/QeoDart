@@ -15,6 +15,7 @@
 #include <QColor>
 #include <QWidget>
 /**
+  * \class QtWin
   * This is a helper class for using the Desktop Window Manager
   * functionality on Windows 7 and Windows Vista. On other platforms
   * these functions will simply not do anything.

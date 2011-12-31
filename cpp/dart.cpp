@@ -305,7 +305,12 @@ dart::~dart() {
         delete myIO;
 }
 
-// draws distance circles using the saved click-coordinates of place n
+/*!
+  Draws distance circles for all players using the saved click-coordinates of the given place.
+  @param n the place number in qlScoreHistory
+  @see dart::vDrawCircle(int x, int y, int r, int player)
+  @see dart::vDrawClickPositions(int n)
+  */
 void dart::vDrawDistanceCircles(int n) {
 	bool drewCircle=true;
 	
@@ -323,6 +328,14 @@ void dart::vDrawDistanceCircles(int n) {
 	} // for(i<7)
 }
 
+/*!
+  Draws a distance circle.
+  @param x x-coordinate
+  @param y y-coordinate
+  @param r radius
+  @param player the player number (determines the color)
+  @see dart::vDrawDistanceCircles(int n)
+  */
 void dart::vDrawCircle(int x, int y, int r, int player) {
 	QLabel *circleLabel;
 	circleLabel = new QCircleLabel(this,x,y,r,qlColorsOfPlayers[player],this);
@@ -749,7 +762,15 @@ int dart::iGetPaddingTop() {
 	return (qlPlayerLabels.count()+1*(iGameMode!=enTraining && iGameMode!=enFind)) * (iGetFontSize()+6);
 }
 
-// draws a point at P(x|y) with the label name, and adds it to the list list
+/*!
+  Draws a point at P(x|y) with the label, and adds it to the given list.
+  @param x x-coordinate
+  @param y y-coordinate
+  @param list the list to which a reference to the new QPointLabel is stored
+  @param name the label text
+  @param color the color
+  @see dart::vDrawPoint(int x, int y, QList<QLabel*> &list, QColor color, QString name)
+  */
 void dart::vDrawPoint(int x, int y, QList<QLabel*> &list, QString name, QColor color) {
 	QLabel *lblCurrentPlacePosition;
 	lblCurrentPlacePosition = new QPointLabel(this, name, x, y, color, this);
@@ -758,6 +779,9 @@ void dart::vDrawPoint(int x, int y, QList<QLabel*> &list, QString name, QColor c
 // 	lblCurrentPlace->show();
 	qDebug() << "[i] drew point" << x << y << "+" << iMarginTop;
 }
+/*!
+  overloads vDrawPoint(int x, int y, QList<QLabel*> &list, QString name, QColor color)
+  */
 void dart::vDrawPoint(int x, int y, QList<QLabel*> &list, QColor color, QString name) {
 	vDrawPoint(x, y, list, name, color);
 }
@@ -770,7 +794,11 @@ void dart::vDrawDebugPlace(int i) {
 	}
 }
 
-// draws the click positions of all players for round n
+/*!
+  Draws the click positions of all players.
+  @param n round
+  @see dart::vDrawDistanceCircles(int n)
+  */
 void dart::vDrawClickPositions(int n) {
 	for(int i=0; i<iNumberOfPlayers; i++) { //draw circles for every player
 		vDrawPoint(qlScoreHistory[i][n-1].x,qlScoreHistory[i][n-1].y,qlCircleLabels[i],qlColorsOfPlayers[i]);
@@ -1295,13 +1323,24 @@ void dart::vNextRound() {
 	vSetAgainstTime(bAgainstTime);
 }
 
-//returns the distance between P(a|b) and Q(x|y); a,b,x,y should be unzoomed
+/*!
+  @return the distance between P(a|b) and Q(x|y)
+  @param a unzoomed x-coordinate of the first point
+  @param b unzoomed y-coordinate of the first point
+  @param x unzoomed x-coordinate of the second point
+  @param y unzoomed y-coordinate of the second point
+ */
 double dart::dGetDistanceInPxBetween(int a, int b, int x, int y) {
 	if( (a==-1 && b==-1) || (x==-1 && y==-1) ) return -1;
 	return sqrt( pow(a-x,2) + pow(b-y,2) ); //thx Pythagoras
 }
 
-//returns the distance between P(a|b) and place #n [>=0], respecting iScoreAreaMode
+/*!
+  @return the distance between P(a|b) and place #n [>=0], respecting iScoreAreaMode
+  @param a unzoomed x-coordinate of the point
+  @param b unzoomed y-coordinate of the point
+  @param n round number
+ */
 double dart::dGetDistanceInPx(int a, int b, int n) {
 	if(a==-1 && b==-1) return -1;
 	
@@ -1329,7 +1368,10 @@ double dart::dGetDistanceInKm(double px) {
 	return px*dPxToKm;
 }
 
-//calculate the mark (German system TODO other systems) using unzoomed distance in px
+/*!
+  @return the mark (German system TODO other systems)
+  @param distance unzoomed distance in px
+ */
 double dart::dGetMarkFromDistance(double distance) {
 	if(distance==-1) return 6;
 	
@@ -1374,7 +1416,11 @@ double dart::dGetAverageScoreOfPlayer(int player) {
 	return qlTotalScores[player].score/qlScoreHistory[player].count();
 }
 
-// looks for lineEdit->text() in the list of places; returns the index for place in qlAllPlaces
+/*!
+  Looks for lineEdit->text() in the list of places.
+  @return the index of the place in qlAllPlaces
+  @param f factor for possible penalty
+ */
 int dart::iFindInputInList(double &f) {
 	QString input=lineEdit->text();
 	qDebug() << "[i] input" << input;
@@ -1386,7 +1432,7 @@ int dart::iFindInputInList(double &f) {
 		
 		if(l==0) f=1;
 		else if(l==1) f=0.75;
-		else if(l==2) f=0.5; //TODO setting
+		else if(l==2) f=0.5;
 		
 		input=qsSimplifyString(input, l);
 		
@@ -1646,8 +1692,10 @@ bool dart::bCanLoseScore() {
 	return ( (iPlaceCount>1 || iCurrentPlayer!=0) && iGameMode!=enTraining && iGameMode!=enFind);
 }
 
-// this function checks if we can start a new game safely
-// (i.e. "sum up scores" and stuff has finished [otherwise we could get a segfault])
+/*!
+  Checks if we can start a new game safely (i.e. "sum up scores" and stuff has finished [otherwise we could get a segfault]).
+  @return true when new game is safe
+ */
 bool dart::bNewGameIsSafe() {
 	bool val=false;
 	
@@ -1717,7 +1765,9 @@ void dart::vUpdateActionsIsCheckedStates() {
 	vToolbarOverflow(); // the "Against Time" label appears for some reason
 }
 
-// shows a layer when the ckeckbox is checked and the layer is available
+/*!
+  Shows a layer when the ckeckbox is checked and the layer is available.
+ */
 void dart::vToggleMapLayer() {
 	for(int i=0; i<3; i++) {
 		bool visible=agLayers->actions()[i]->isChecked() && agLayers->actions()[i]->isVisible();

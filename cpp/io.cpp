@@ -20,7 +20,9 @@ io::~io() {
 	delete settings;
 }
 
-// looks for .qcfx files and adds valid files to qlQcfxFiles;
+/*!
+  Looks for .qcfx files, and adds valid files to qlQcfxFiles.
+  */
 int io::iFindQcf() {
 	myDart->qlQcfxFiles.clear();
 	
@@ -86,7 +88,10 @@ int io::iFindQcf() {
 	return myDart->qlQcfxFiles.count();
 }
 
-// adds the given qcfFile to qlQcfxFiles, alphabetically ordered
+/*!
+  Adds the given qcfFile to qlQcfxFiles, keeping alphabetical order.
+  @param f the qcfFile which is added to qlQcfxFiles
+  */
 void io::vInsertQcfxFile(qcfFile &f) {
 	int i=0;
 	while(i<myDart->qlQcfxFiles.count()
@@ -173,8 +178,11 @@ void io::vGetMetaData(QDomDocument &doc, qcfFile &file) {
 	}
 }
 
-// returns the path of the qcfx-file with the given mapname; returns "NULL" when the file does not exist
-// sets index to the index of the qcfx-file in qlQcfxFiles
+/*!
+  @return the path of the qcfx-file with the given mapname; "NULL" when the file does not exist
+  @param mapname the name of the map for which the path is determined
+  @param index will be set to the index of the qcfx-file in qlQcfxFiles
+  */
 QString io::qsGetQcfFilePath(QString mapname, int &index) {
 	for(int i=0; i<myDart->qlQcfxFiles.count(); i++) {
 		if(myDart->qlQcfxFiles[i].mapName==mapname) {
@@ -387,6 +395,11 @@ void io::vFillCurrentTypePlaces() {
 	settings->setValue("qsCurrentPlaceType", myDart->qsCurrentPlaceType);
 }
 
+/*!
+  Converts a svg created by osmarender to a qcfx-file.
+  @param filename the svg-file
+  @see io::iReadQcf
+  */
 int io::iReadOsm(QString filename) {
 	qDebug() << "[i] Reading" << filename;
 	
@@ -476,7 +489,12 @@ int io::iReadOsm(QString filename) {
 	return 0;
 }
 
-// writes a qcfx-file containing places to the path specified in f
+/*!
+  Writes a qcfx-file containing the given places to the path specified in f.
+  @param places the list of places which are written
+  @param f the file which contains the path of the destination directory
+  @see io::iReadQcf
+  */
 int io::iWriteQcf(QList<place> &places, qcfFile &f) {
 	
 	qDebug() << "[i] going to write file" << f.path;
@@ -644,6 +662,12 @@ void io::vLoadSettings() {
 #endif
 }
 
+/*!
+  Clears qlHighScores and loads the the high score for the given map.
+  @param mapName the name of the map for which the high scores are loaded
+  @see io::vSaveHighScores(QString id)
+  @see highScoreWindow::vLoadHighScores(int index)
+  */
 void io::vLoadHighScores(QString mapName) {
 	myDart->qlHighScores.clear();
 	
@@ -661,6 +685,11 @@ void io::vLoadHighScores(QString mapName) {
 	}
 }
 
+/*!
+  Saves the high scores stored in qlHighScores using the given id.
+  @param id the id of the map for which the high scores are saved
+  @see io::vLoadHighScores(QString mapName)
+  */
 void io::vSaveHighScores(QString id) {
 	for(int i=0; i<10; i++) {
 		settings->setValue(QString("Highscores/%1.%2").arg(id).arg(i),
@@ -670,7 +699,10 @@ void io::vSaveHighScores(QString id) {
 	}
 }
 
-// returns the id of the map with the given mapName
+/*!
+  @return the id of the map with the given name
+  @param mapName the name of the map for which the id is determined
+  */
 QString io::qsGetIdFromMapName(QString mapName) {
 	for(int i=0; i<myDart->qlQcfxFiles.count(); i++) {
 		if(myDart->qlQcfxFiles[i].mapName==mapName) return myDart->qlQcfxFiles[i].id;
