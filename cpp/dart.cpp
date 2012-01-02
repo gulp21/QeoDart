@@ -115,7 +115,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionFind_Place, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
 	actionFind_Place->setIcon(QIcon::fromTheme("edit-find", QIcon(":/icons/oxygen/edit-find.png")));
 	connect(actionTraining, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
-	actionTraining->setIcon(QIcon::fromTheme("user-identity", QIcon(":/icons/oxygen/user-identity.png")));
+	actionTraining->setIcon(QIcon::fromTheme("user-identity", QIcon::fromTheme("emblem-personal", QIcon(":/icons/oxygen/system-users.png"))));
 	connect(actionLocal, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
 	actionLocal->setIcon(QIcon::fromTheme("system-users", QIcon(":/icons/oxygen/system-users.png")));
 //	connect(actionNetwork, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
@@ -123,7 +123,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionNumber_of_Players, SIGNAL(triggered()), this, SLOT(vSetNumberOfPlayers()));
 	connect(actionPlayers, SIGNAL(triggered()), this, SLOT(vSetNumberOfPlayers()));
 	connect(actionAgainst_Time, SIGNAL(triggered()), this, SLOT(vSetAgainstTime()));
-	actionAgainst_Time->setIcon(QIcon::fromTheme("player-time", QIcon(":/icons/oxygen/player-time.png")));
+	actionAgainst_Time->setIcon(QIcon::fromTheme("time", QIcon::fromTheme("player-time", QIcon(":/icons/oxygen/player-time.png"))));
 	connect(actionName_of_Place, SIGNAL(triggered()), this, SLOT(vSetAskForMode()));
 	connect(actionPosition_of_Place, SIGNAL(triggered()), this, SLOT(vSetAskForMode()));
 	connect(actionCountries, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
@@ -136,9 +136,9 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionAdd_Map, SIGNAL(triggered()), this, SLOT(vAddMap()));
 	actionAdd_Map->setIcon(QIcon::fromTheme("list-add", QIcon(":/icons/oxygen/list-add.png")));
 	connect(actionHint, SIGNAL(triggered()), this, SLOT(vGiveHint()));
-	actionHint->setIcon(QIcon::fromTheme("games-hint", QIcon(":/icons/oxygen/games-hint.png")));
+	actionHint->setIcon(QIcon::fromTheme("games-hint", QIcon::fromTheme("help-hint", QIcon(":/icons/oxygen/games-hint.png"))));
 	connect(actionReport_Bug, SIGNAL(triggered()), this, SLOT(vReportBug()));
-	actionReport_Bug->setIcon(QIcon::fromTheme("tools-report-bug", QIcon(":/icons/oxygen/tools-report-bug.png")));
+	actionReport_Bug->setIcon(QIcon::fromTheme("tools-report-bug", QIcon::fromTheme("lpi-bug", QIcon(":/icons/oxygen/tools-report-bug.png"))));
 	connect(actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 	connect(actionAbout_QeoDart, SIGNAL(triggered()), this, SLOT(vShowAboutWindow()));
 	actionAbout_QeoDart->setIcon(QIcon::fromTheme("help-about", QIcon(":/icons/oxygen/help-about.png")));
