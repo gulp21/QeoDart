@@ -810,6 +810,7 @@ void dart::vShowAllPlaces() {
 		vDrawPoint(qlCurrentTypePlaces[i]->x,qlCurrentTypePlaces[i]->y,qlPointLabels,qlCurrentTypePlaces[i]->name);
 		vDrawDebugPlace(i);
 	}
+	lblMouseClickOverlay->raise();
 }
 
 void dart::vMouseClickEvent(int x, int y) {
@@ -1792,6 +1793,7 @@ void dart::vFindPlaceAround(int x, int y) {
 			vDrawPoint(qlCurrentTypePlaces[i]->x, qlCurrentTypePlaces[i]->y, qlPointLabels, qlCurrentTypePlaces[i]->name, QColor(249,199,65,85));
 		}
 	}
+	lblMouseClickOverlay->raise();
 }
 
 void dart::vTextEditedEvent() {
@@ -1846,8 +1848,6 @@ void dart::vTextEditedEvent() {
 		}
 	}
 	
-	qDebug()<<found<<"fdf";
-	
 	// if there's no match
 	for(int l=0; !found && l<4; l++) {
 		QString textl=qsSimplifyString(text,l);
@@ -1861,8 +1861,11 @@ void dart::vTextEditedEvent() {
 	}
 
 	lineEdit->setStyleSheet(found ? "" : "color:red");
+	
+	lblMouseClickOverlay->raise();
 }
-// #include <QPropertyAnimation>
+//#include <QPropertyAnimation>
+//#include <QGraphicsOpacityEffect>
 void dart::vGiveHint() {
 	if(qlPlacesHistory.size()<1) return;
 	
@@ -1870,13 +1873,24 @@ void dart::vGiveHint() {
 		QRectangleLabel *lblHint;
 		lblHint=new QRectangleLabel(this,qlPlacesHistory[iPlaceCount-1]->x,qlPlacesHistory[iPlaceCount-1]->y,this);
 		bGaveHint=true;
-		lblHint->setStyleSheet("opacity:1");
-		//TODO this doesn't work
-//		QPropertyAnimation animation(static_cast<QLabel*>(lblHint), "styleSheet");
-//		animation.setDuration(1000);
-//		animation.setStartValue("opacity:1");
-//		animation.setEndValue("opacity:.1");
-//		animation.start();
+		
+		//TODO enable this; delete opacityEffect
+//		QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(this);
+//		opacityEffect->setOpacity(0);
+//		lblHint->setGraphicsEffect(opacityEffect);
+//		QPropertyAnimation* anim = new QPropertyAnimation(this);
+//		anim->setTargetObject(opacityEffect);
+//		anim->setPropertyName("opacity");
+//		anim->setDuration(700);
+//		anim->setStartValue(opacityEffect->opacity());
+//		anim->setEndValue(1);
+//		anim->setEasingCurve(QEasingCurve::InQuad);
+//		anim->start();
+//		mySleep(1000);
+//		anim->setStartValue(opacityEffect->opacity());
+//		anim->setEndValue(0);
+//		anim->setEasingCurve(QEasingCurve::OutQuad);
+//		anim->start(QAbstractAnimation::DeleteWhenStopped);
 		mySleep(1000);
 		delete lblHint;
 	} else if(iAskForMode==enNames) {

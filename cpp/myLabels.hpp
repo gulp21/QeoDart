@@ -145,7 +145,7 @@ class QRectangleLabel : public QLabel {
 
 	private:
 		dart *myDart;
-		int x, y, a, b;
+		int x, y, a, b, opacity;
 	
 	public:
 		// center P(M1,M2), half width Dimx, half height Dimy; calculates upper left corner
@@ -154,6 +154,7 @@ class QRectangleLabel : public QLabel {
 			setParent(myDart->centralwidget);
 			x=x-a/2;
 			y=y-b/2;
+			opacity=150;
 			setVisible(true);
 		}
 		// center P(M1,M2); calculates quadrant, used for hint
@@ -164,6 +165,7 @@ class QRectangleLabel : public QLabel {
 			y>=300 ? y=300 : y=0;
 			a=300;
 			b=300;
+			opacity=255;
 			setVisible(true);
 		}
 		QRectangleLabel(const QString &text, QWidget *parent = 0,Qt::WindowFlags f = 0) : QLabel(text, parent, f) {}
@@ -174,7 +176,7 @@ class QRectangleLabel : public QLabel {
 			QPen pen;
 			
 			pen.setWidth(10);
-			QColor c=QColor(255,182,19,150);
+			QColor c=QColor(255,182,19,opacity);
 			pen.setColor(c);
 			p.setRenderHint(QPainter::Antialiasing);
 			p.setPen(pen);
