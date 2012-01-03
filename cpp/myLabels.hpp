@@ -19,6 +19,11 @@ using namespace std;
 const int RADIUS=10, PENWIDTH=5;
 
 class QCircleLabel : public QLabel {
+	
+	/*!
+	  \class QCircleLabel
+	  Draws a circle.
+	  */
 
 	private:
 		dart *myDart;
@@ -26,12 +31,17 @@ class QCircleLabel : public QLabel {
 		QColor color;
 	
 	public:
-		QCircleLabel( dart *TDart, int X, int Y, int R, QColor COlor, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), x(X), y(Y), r(R), color(COlor), QLabel(parent, f) {
+		/*!
+		  @param x x-coordinate of the center of the circle
+		  @param y y-coordinate
+		  @param r radius
+		  @param color bordor color
+		  */
+		QCircleLabel(dart *TDart, int X, int Y, int R, QColor COlor, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), x(X), y(Y), r(R), color(COlor), QLabel(parent, f) {
 			resize(1,1); // otherwise the circles would be visible at the wrong position, as paintEvent hasn't been triggered yet
 			setParent(myDart->centralwidget);
-			setVisible(TRUE);
+			setVisible(true);
 		}
-		QCircleLabel(const QString &text, QWidget *parent = 0,Qt::WindowFlags f = 0) : QLabel(text, parent, f) {}
 		~QCircleLabel() {}
 
 		void paintEvent(QPaintEvent *event) {
@@ -68,20 +78,30 @@ class QCircleLabel : public QLabel {
 
 class QPointLabel : public QLabel {
 
-	dart *myDart;
+	/*!
+	  \class QPointLabel
+	  Draws a point with an optional label.
+	  */
 
 	private:
+		dart *myDart;
 		QString name;
 		int x, y;
 		QColor color;
 
 	public:
-		QPointLabel( dart *TDart, QString Name, int X, int Y, QColor COlor, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), name(Name), x(X), y(Y), color(COlor), QLabel(parent, f) {
+		/*!
+		  @param name label text
+		  @param x x-coordinate of the center of the circle
+		  @param y y-coordinate
+		  @param r radius
+		  @param color bordor color
+		  */
+		QPointLabel(dart *TDart, QString Name, int X, int Y, QColor COlor, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), name(Name), x(X), y(Y), color(COlor), QLabel(parent, f) {
 			resize(1,1);
 			setParent(myDart->centralwidget);
-			setVisible(TRUE);
+			setVisible(true);
 		}
-		QPointLabel(const QString &text, QWidget *parent = 0,Qt::WindowFlags f = 0) : QLabel(text, parent, f) {}
 		~QPointLabel() {}
 		
 		void paintEvent(QPaintEvent *event) {
@@ -125,7 +145,14 @@ class QPointLabel : public QLabel {
 };
 
 class QMouseReleaseLabel : public QLabel {
-	dart *myDart;
+	
+	/*!
+	  \class QMouseReleaseLabel
+	  Label which passes mouseReleaseEvents to @ref dart.
+	  */
+	
+	private:
+		dart *myDart;
 
 	public:
 		QMouseReleaseLabel(dart *TDart, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), QLabel(parent, f) {}
@@ -142,13 +169,24 @@ class QMouseReleaseLabel : public QLabel {
 };
 
 class QRectangleLabel : public QLabel {
-
+	
+	/*!
+	  \class QRectangleLabel
+	  Draws a rectangle.
+	  */
+	
 	private:
 		dart *myDart;
 		int x, y, a, b, opacity;
 	
 	public:
-		// center P(M1,M2), half width Dimx, half height Dimy; calculates upper left corner
+		/*!
+		  Draws a rectangle with the center P(M1,M2), and calculates the upper left corner.
+		  @param M1 x-coordinate of the center
+		  @param M2 y-coordinate of the center
+		  @param Dimx half width
+		  @param Dimy half height
+		  */
 		QRectangleLabel(dart *TDart, int M1, int M2, int Dimx, int Dimy, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), x(M1), y(M2), a(Dimx), b(Dimy), QLabel(parent, f) {
 			resize(1,1);
 			setParent(myDart->centralwidget);
@@ -157,7 +195,11 @@ class QRectangleLabel : public QLabel {
 			opacity=150;
 			setVisible(true);
 		}
-		// center P(M1,M2); calculates quadrant, used for hint
+		/*!
+		  Draws a rectangle at the quadrant where the givin point is (used for hint)
+		  @param X the x-coordinate of a point which is in the rectangle
+		  @param Y the y-coordinate of a point which is in the rectangle
+		  */
 		QRectangleLabel(dart *TDart, int X, int Y, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), x(X), y(Y), QLabel(parent, f) {
 			resize(1,1);
 			setParent(myDart->centralwidget);
@@ -168,7 +210,6 @@ class QRectangleLabel : public QLabel {
 			opacity=255;
 			setVisible(true);
 		}
-		QRectangleLabel(const QString &text, QWidget *parent = 0,Qt::WindowFlags f = 0) : QLabel(text, parent, f) {}
 		~QRectangleLabel() {}
 
 		void paintEvent(QPaintEvent *event) {

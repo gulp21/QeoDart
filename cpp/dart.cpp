@@ -135,6 +135,10 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionTowns, SIGNAL(triggered()), this, SLOT(vSetPlaceType()));
 	connect(actionAdd_Map, SIGNAL(triggered()), this, SLOT(vAddMap()));
 	actionAdd_Map->setIcon(QIcon::fromTheme("list-add", QIcon(":/icons/oxygen/list-add.png")));
+	connect(actionHelp, SIGNAL(triggered()), this, SLOT(vShowHelp()));
+	actionHelp->setIcon(QIcon::fromTheme("help-contents", QIcon(":/icons/oxygen/help-contents.png")));
+	connect(action_Whats_this, SIGNAL(triggered()), this, SLOT(vActivateContextHelp()));
+	action_Whats_this->setIcon(QIcon::fromTheme("help-contextual", QIcon(":/icons/oxygen/help-contextual.png")));
 	connect(actionHint, SIGNAL(triggered()), this, SLOT(vGiveHint()));
 	actionHint->setIcon(QIcon::fromTheme("games-hint", QIcon::fromTheme("help-hint", QIcon(":/icons/oxygen/games-hint.png"))));
 	connect(actionReport_Bug, SIGNAL(triggered()), this, SLOT(vReportBug()));
@@ -1654,6 +1658,7 @@ void dart::vSetToolMenuBarState() {
 	switch(iToolMenuBarState) {
 		case enBoth:
 			toolBar->removeAction(actionBtApplication);
+			menuHelp->setIcon(QIcon());
 			menuApplication->setVisible(false);
 			menubar->setVisible(true);
 			toolBar->setVisible(true);
@@ -1661,11 +1666,13 @@ void dart::vSetToolMenuBarState() {
 			
 		case enToolBarOnly:
 			toolBar->insertAction(actionNew_Game, actionBtApplication);
+			menuHelp->setIcon(QIcon::fromTheme("help-contents", QIcon(":/icons/oxygen/help-contents.png")));
 			menubar->setVisible(false);
 			toolBar->setVisible(true);
 			break;
 			
 		case enMenuBarOnly:
+			menuHelp->setIcon(QIcon());
 			menubar->setVisible(true);
 			toolBar->setVisible(false);
 			break;
@@ -1931,4 +1938,12 @@ bool dart::bStartNewGameWarning(QString title, QString message) {
 		return true;
 	}
 	return false;
+}
+
+void dart::vShowHelp() {
+	vOpenLinkInBrowser(QUrl("https://github.com/gulp21/QeoDart/wiki"));
+}
+
+void dart::vActivateContextHelp() {
+	QWhatsThis::enterWhatsThisMode();
 }
