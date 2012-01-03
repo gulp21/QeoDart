@@ -27,6 +27,7 @@ See main.cpp for details. */
 #include <QTranslator>
 #include <qstring.h>
 #include <QUrl>
+#include <QWhatsThis>
 #include <time.h>
 
 #ifdef Q_OS_WINCE 
@@ -59,7 +60,7 @@ struct qcfCopyright {
 };
 
 struct qcfFile {
-	QString mapName, mapShortName, path; // path: e.g. qcf/de
+	QString mapName, mapShortName, id, path; // path: e.g. qcf/de
 	int pxtokm;
 	qcfCopyright copyright;
 };
@@ -95,21 +96,22 @@ Q_OBJECT
 		~dart();
 		
 		QList<qcfFile> qlQcfxFiles;
-		QList<place> qlAllPlaces; //contains all places of the current map
-		QList<place*> qlCurrentTypePlaces; //contains pointers pointing to the places in qlAllPlaces which fit the current placetype
+		QList<place> qlAllPlaces; //! contains all places of the current map
+		QList<place*> qlCurrentTypePlaces; //! contains pointers pointing to the places in qlAllPlaces which fit the current placetype
 		QList<place*> qlPlacesHistory;
-		QList<QList<scoreHistory> > qlScoreHistory; // [player][round].scores
+		QList<QList<scoreHistory> > qlScoreHistory; //! [player][round].scores
 		QList<totalScore> qlTotalScores;
 		QList<QLabel*> qlPointLabels;
 		QList<QLabel*> qlDebugPlaceLabels;
 		QList<QString> qlLayersNames;
+		QList<QString> qlPlaceTypesNames;
 		QList<QLabel*> qlMapLayers;
 		QList<highScoreEntry> qlHighScores;
 		QList<QAction*> qlPlacesSubsetsActions;
 		
 		QLabel *lblMouseClickOverlay;
 		
-		QActionGroup *agLayers;
+		QActionGroup *agLayers, *agPlaceTypes;
 		
 		enGameModes iGameMode;
 		enAskForModes iAskForMode;
@@ -119,11 +121,11 @@ Q_OBJECT
 		
 		double dZoomFactor, dPxToKm;
 		
-		int iPaddingTop; // px between toolbar and map
-		int iMarginTop; // px between window decoration and toolbar
+		int iPaddingTop; //! px between toolbar and map
+		int iMarginTop; //! px between window decoration and toolbar
 		int iNumberOfPlayers, iMaxPlaceCount, iPlaceCount, iCurrentQcf, iMaxTime, iLettersPerSecond;
-		int iScoreAreaMode; // 0=point only; 1=25%; 2=100%
-		int iPenalty; // 0=no; 1=severe; 1=spelling
+		int iScoreAreaMode; //! 0=point only; 1=25%; 2=100%
+		int iPenalty; //! 0=no; 1=severe; 1=spelling
 		int iCurrentPlayer;
 		int iDelayNextCircle, iDelayNextPlayer, iDelayNextPlace, iDelayNextPlaceTraining;
 		
@@ -159,8 +161,7 @@ Q_OBJECT
 		
 		place *pTrainingPlaceNumber;
 		
-		QList<QList<QLabel*> > qlCircleLabels; //contains all circles (incl. points) for each user
-// 		QList<QLabel*> qlPlayerLabel;
+		QList<QList<QLabel*> > qlCircleLabels; //! contains all circles (incl. points) for each user
 		QList<QList<QLabel*> > qlPlayerLabels;
 		QList<QColor> qlColorsOfPlayers;
 		QList<QString> qlComments;
@@ -180,7 +181,7 @@ Q_OBJECT
 		void vRepaintPlayerLabels();
 		void vRepaintMap();
 		void vDrawCircle(int x, int y, int r, int player);
-		void vDrawDistanceCircles(int n, int count=0);
+		void vDrawDistanceCircles(int n);
 		void vDrawPoint(int x, int y, QList<QLabel*> &list, QColor color, QString name="");
 		void vDrawPoint(int x, int y, QList<QLabel*> &list, QString name="", QColor color=QColor(249,199,65));
 		void vDrawClickPositions(int n);
@@ -219,6 +220,7 @@ Q_OBJECT
 		
 		bool bNewGameIsSafe();
 		bool bContinueNetworkMode();
+		bool bStartNewGameWarning(QString title, QString message);
 		
 		scoreHistory shCalculateScores(int x, int y, double f=1);
 		
@@ -247,6 +249,8 @@ Q_OBJECT
 		void vAddMap();
 		void vReportBug();
 		void vPlacesSubsetClicked();
+		void vShowHelp();
+		void vActivateContextHelp();
 		
 	public slots:
 		void vReadQcf();

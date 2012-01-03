@@ -41,13 +41,17 @@ class io : public QWidget {
 		void vFillCurrentTypePlaces();
 		void vLoadSettings();
 		void vLoadHighScores(QString mapName);
-		void vSaveHighScores(QString mapName);
+		void vSaveHighScores(QString id);
 		
  	private:
-		QStringList qslGetPreferedQcfLanguage();
+		QString qsGetQcfFilePath(QString mapname, int &index);
+		QString qsGetIdFromMapName(QString mapName);
+		
+		QStringList qslGetPreferedQcfLanguage(), qslPlaceTypesNamesRegExps;
 		
 		bool bDeterminedPortable;
 		
+		void vInsertQcfxFile(qcfFile &f);
 		void vGetMetaData(QDomDocument &doc, qcfFile &file);
 };
 #endif //IO_HPP 

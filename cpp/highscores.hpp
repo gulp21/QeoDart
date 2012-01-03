@@ -22,6 +22,7 @@ class highScoreWindow : public QDialog, public Ui::highScoreWindow {
 		~highScoreWindow();
 	private slots:
 		void vLoadHighScores(int index);
+		void vClear();
 };
 
 #endif // HIGHSCORES_HPP

@@ -1,0 +1,85 @@
+<!DOCTYPE qcfx>
+<qcfx version="0.2">
+	<name id="INDIA" default="भारत गणराज्य" short="IN" de="Indien" en="India" la="India" />
+	<pxtokm value="6.05" />
+	<copyright
+	file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
+	background="CC-by-sa PlaneMad/Wikipedia (derived from http://zh-min-nan.wikipedia.org/wiki/File:India_Kerala_locator_map.svg)"
+	borders="CC-by-sa PlaneMad/Wikipedia (derived from http://zh-min-nan.wikipedia.org/wiki/File:India_Kerala_locator_map.svg)"
+	/>
+	<!--.....states.....-->
+	<place x="269" y="411" name_en="Andhra Pradesh" dimx="148" dimy="137" placetype="state" />
+	<place x="506" y="185" name_en="Arunachal Pradesh" dimx="95" dimy="53" placetype="state" />
+	<place x="480" y="223" name_en="Assam" dimx="105" dimy="74" placetype="state" />
+	<place x="361" y="234" name_en="Bihar" dimx="84" dimy="61" placetype="state" />
+	<place x="299" y="326" name_en="Chhattisgarh" dimx="75" dimy="118" placetype="state" />
+	<place x="143" y="424" name_en="Goa" dimx="13" dimy="18" placetype="state" />
+	<place x="109" y="289" name_en="Gujarat" dimx="109" dimy="88" placetype="state" />
+	<place x="199" y="166" name_en="Haryana" dimx="51" dimy="63" placetype="state" />
+	<place x="221" y="120" name_en="Himachal Pradesh" dimx="55" dimy="52" placetype="state" />
+	<!--10-->
+	<place x="214" y="79" name_en="Jammu and Kashmir" dimx="93" dimy="59" placetype="state" />
+	<place x="358" y="276" name_en="Jharkhand" dimx="77" dimy="60" placetype="state" />
+	<place x="186" y="435" name_en="Karnataka" dimx="83" dimy="127" placetype="state" />
+	<place x="179" y="519" name_en="Kerala" dimx="45" dimy="89" placetype="state" />
+	<place x="233" y="267" name_en="Madhya Pradesh" dimx="154" dimy="105" placetype="state" />
+	<place x="201" y="360" name_en="Maharashtra" dimx="146" dimy="116" placetype="state" />
+	<place x="500" y="248" name_en="Manipur" dimx="28" dimy="32" placetype="state" />
+	<place x="457" y="237" name_en="Meghalaya" dimx="49" dimy="18" placetype="state" />
+	<place x="484" y="279" name_en="Mizoram" dimx="20" dimy="45" placetype="state" />
+	<place x="506" y="224" name_en="Nagaland" dimx="30" dimy="32" placetype="state" />
+	<!--20-->
+	<place x="337" y="340" name_en="Orissa" dimx="112" dimy="89" placetype="state" />
+	<place x="189" y="132" name_en="Punjab" dimx="49" dimy="55" placetype="state" />
+	<place x="159" y="213" name_en="Rajasthan" dimx="148" dimy="133" placetype="state" />
+	<place x="405" y="200" name_en="Sikkim" dimx="15" dimy="19" placetype="state" />
+	<place x="221" y="516" name_en="Tamil Nadu" dimx="78" dimy="103" placetype="state" />
+	<place x="464" y="271" name_en="Tripura" dimx="19" dimy="27" placetype="state" />
+	<place x="279" y="209" name_en="Uttar Pradesh" dimx="125" dimy="125" placetype="state" />
+	<place x="253" y="153" name_en="Uttarakhand" dimx="56" dimy="53" placetype="state" />
+	<place x="398" y="262" name_en="West Bengal" dimx="66" dimy="106" placetype="state" />
+	<place x="501" y="514" name_en="Andaman and Nicobar Islands" dimx="44" dimy="154" placetype="state" />
+	<!--30-->
+	<place x="212" y="137" name="चण्डीगढ़" name_en="Chandigarh" dimx="4" dimy="5" placetype="state;capitalOfState;city" />
+	<place x="135" y="332" name_en="Dadra and Nagar Haveli" dimx="4" dimy="5" placetype="state" />
+	<place x="130" y="332" name_en="Daman and Diu" dimx="0" dimy="0" placetype="state" /> <!-- TODO south only -->
+	<place x="123" y="527" name_en="Lakshadweep" dimx="42" dimy="50" placetype="state" />
+	<place x="215" y="178" name_en="National Capital Territory of Delhi" dimx="5" dimy="7" placetype="state" />
+	<place x="248" y="496" name_en="Pondicherry" dimx="5" dimy="5" placetype="state;capitalOfState;city" /> <!-- TODO middle south only -->
+	<!--capitals-->
+	<place x="228" y="391" name_en="Hyderabad" placetype="capitalOfState;city" />
+	<place x="487" y="204" name="ईटानगर" name_en="Itanagar" placetype="capitalOfState;town" />
+	<place x="462" y="225" name="দিছপুৰ" name_en="Dispur" placetype="capitalOfState;town" />
+	<place x="351" y="239" name="पटना" name_en="Patna" placetype="capitalOfState;city" />
+	<!--40-->
+	<place x="281" y="318" name="रायपुर" name_en="Raipur" placetype="capitalOfState;city" />
+	<place x="141" y="421" name_en="Panaji" placetype="capitalOfState;town" />
+	<place x="132" y="272" name="ગાંધીનગર" name_en="Gandhinagar" placetype="capitalOfState;city" />
+	<place x="217" y="134" name="शिमला" name_en="Shimla" placetype="capitalOfState;city" />
+	<place x="179" y="84" name_en="Srinagar" placetype="capitalOfState;city" /> <!--summer-->
+	<place x="182" y="97" name_en="Jammu" placetype="capitalOfState;city" /> <!--winter-->
+	<place x="343" y="276" name="राँची" name_en="Ranchi" placetype="capitalOfState;city" />
+	<place x="207" y="473" name_en="Bangalore" placetype="capitalOfState;city" />
+	<place x="193" y="560" name="തിരുവനന്തപുരം" name_en="Thiruvananthapuram" placetype="capitalOfState;city" />
+	<place x="212" y="279" name="भोपाल" name_en="Bhopal" placetype="capitalOfState;city" />
+	<!--50-->
+	<place x="128" y="353" name="मुंबई" name_en="Mumbai" placetype="capitalOfState;city" />
+	<place x="499" y="247" name_en="Imphal" placetype="capitalOfState;city" />
+	<place x="464" y="237" name_en="Shillong" placetype="capitalOfState;city" />
+	<place x="485" y="275" name_en="Aizawl" placetype="capitalOfState;city" />
+	<place x="501" y="230" name="कोहिमा" name_en="Kohima" placetype="capitalOfState;city" />
+	<place x="348" y="329" name="ଭୁବନେଶ୍ଵର" name_en="Bhubaneswar" placetype="capitalOfState;city" />
+	<place x="187" y="209" name="जयपुर" name_en="Jaipur" placetype="capitalOfState;city" />
+	<place x="408" y="202" name_en="Gangtok" placetype="capitalOfState;town" />
+	<place x="258" y="473" name="சென்னை" name_en="Chennai" placetype="capitalOfState;city" />
+	<place x="456" y="270" name_en="Agartala" placetype="capitalOfState;city" />
+	<!--60-->
+	<place x="280" y="218" name_en="Lucknow" placetype="capitalOfState;city" />
+	<place x="230" y="147" name="देहरादून" name_en="Dehradun" placetype="capitalOfState;city" />
+	<place x="406" y="293" name_en="Kolkata" placetype="capitalOfState;city" />
+	<place x="495" y="496" name_en="Port Blair" placetype="capitalOfState;city" />
+	<place x="134" y="332" name_en="Silvassa" placetype="capitalOfState;town" />
+	<place x="130" y="332" name_en="Daman" placetype="capitalOfState;town" />
+	<place x="123" y="527" name="കവരത്തി" name_en="Kavaratti" placetype="capitalOfState;town" />
+	<place x="215" y="178" name_en="New Delhi" placetype="capitalOfState;city;capitalOfCountry" />
+</qcfx>

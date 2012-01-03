@@ -3,26 +3,29 @@
         <file alias="application-exit.png">icons/oxygen/application-exit.png</file>
         <file alias="configure.png">icons/oxygen/configure.png</file>
         <file alias="document-new.png">icons/oxygen/document-new.png</file>
+        <file alias="edit-clear.png">icons/oxygen/edit-clear.png</file>
         <file alias="edit-find.png">icons/oxygen/edit-find.png</file>
         <file alias="games-highscores.png">icons/oxygen/games-highscores.png</file>
         <file alias="games-hint.png">icons/oxygen/games-hint.png</file>
+        <file alias="help-about.png">icons/oxygen/help-about.png</file>
         <file alias="list-add.png">icons/oxygen/list-add.png</file>
         <file alias="network-workgroup.png">icons/oxygen/network-workgroup.png</file>
         <file alias="player-time.png">icons/oxygen/player-time.png</file>
         <file alias="show-menu.png">icons/oxygen/show-menu.png</file>
         <file alias="system-users.png">icons/oxygen/system-users.png</file>
+        <file alias="tools-report-bug.png">icons/oxygen/tools-report-bug.png</file>
         <file alias="user-identity.png">icons/oxygen/user-identity.png</file>
+        <file alias="window-close.png">icons/oxygen/window-close.png</file>
         <file alias="zoom-original.png">icons/oxygen/zoom-original.png</file>
-        <file alias="help-about.png">icons/oxygen/help-about.png</file>
         <file alias="index.theme">icons/oxygen/index.theme</file>
     </qresource>
     <qresource prefix="/icons">
         <file>icons/icon16.png</file>
         <file>icons/icon48.png</file>
-        <file>icons/icon256.png</file>
         <file>icons/icon64.png</file>
         <file>icons/icon90.png</file>
         <file>icons/icon200.png</file>
+        <file>icons/icon256.png</file>
         <file alias="cursor.png">icons/cursor.png</file>
     </qresource>
 </RCC>

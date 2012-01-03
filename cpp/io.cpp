@@ -12,13 +12,17 @@ using namespace std;
 io::io(dart *TDart) : myDart(TDart) {
 	bPortable=false;
 	bDeterminedPortable=false;
+	
+	qslPlaceTypesNamesRegExps << "state" << "capitalOfState" << "country" << "capitalOfCountry" << "county" << "city" << "town";
 }
  
 io::~io() {
 	delete settings;
 }
 
-// looks for .qcfx files and adds valid files to qlQcfxFiles;
+/*!
+  Looks for .qcfx files, and adds valid files to qlQcfxFiles.
+  */
 int io::iFindQcf() {
 	myDart->qlQcfxFiles.clear();
 	
@@ -49,10 +53,28 @@ int io::iFindQcf() {
 				f.path=file.fileName().left(file.fileName().length()-5);
 				vGetMetaData(doc, f);
 				qDebug() << f.path;
-				myDart->qlQcfxFiles << f; // TODO check if some name already exists
-			}
-		}
-	}
+				
+				QString suffix="";
+				int c=-1;
+				for(int i=2; qsGetQcfFilePath(f.mapName+suffix, c)!="NULL"; i++) {
+					//: this string is appended to the name of the map when there is already a map with the same name; %1 is a number
+					suffix=tr(" #%1").arg(i);
+					qDebug() << "[w] there is already a map with the mapName" << f.mapName << ", trying" << f.mapName+suffix;
+				}
+				f.mapName+=suffix;
+				
+				int i=0;
+				for(; i<myDart->qlQcfxFiles.count(); i++) {
+					if(myDart->qlQcfxFiles[i].id==f.id) {
+						qDebug() << "[W] there is already a map with the id" << f.id << "-> won't add it";
+						i=myDart->qlQcfxFiles.count()+1;
+					}
+				}
+				
+				if(i==myDart->qlQcfxFiles.count()) vInsertQcfxFile(f);
+			} // if(iCheckQcf)
+		} // for(lQcfDirs[i].entryList())
+	} // for(qlQcfDirs)
 	
 	if(myDart->qlQcfxFiles.count()==0) {
 		qcfFile f;
@@ -64,6 +86,19 @@ int io::iFindQcf() {
 	}
 	
 	return myDart->qlQcfxFiles.count();
+}
+
+/*!
+  Adds the given qcfFile to qlQcfxFiles, keeping alphabetical order.
+  @param f the qcfFile which is added to qlQcfxFiles
+  */
+void io::vInsertQcfxFile(qcfFile &f) {
+	int i=0;
+	while(i<myDart->qlQcfxFiles.count()
+	      && QString::localeAwareCompare(f.mapName, myDart->qlQcfxFiles[i].mapName) > 0) {
+		i++;
+	}
+	myDart->qlQcfxFiles.insert(i, f);
 }
 
 int io::iCheckQcf(QFile &file, QDomDocument &doc) {
@@ -115,6 +150,8 @@ void io::vGetMetaData(QDomDocument &doc, qcfFile &file) {
 			file.mapName=n;
 			file.mapShortName=e.attribute("short","NOSHORTNAME");
 			if(file.mapShortName=="NOSHORTNAME") file.mapShortName=file.mapName.left(2);
+			file.id=e.attribute("id","NOID_"+file.mapShortName.toUpper());
+			if(file.id.startsWith("NOID_")) qDebug() << "[W] map with mapName" << file.mapName << "does not have an id, using" << file.id;
 		} else {
 			qDebug() << "[W] file has broken <name>";
 			file.mapName="NONAME";
@@ -141,6 +178,22 @@ void io::vGetMetaData(QDomDocument &doc, qcfFile &file) {
 	}
 }
 
+/*!
+  @return the path of the qcfx-file with the given mapname; "NULL" when the file does not exist
+  @param mapname the name of the map for which the path is determined
+  @param index will be set to the index of the qcfx-file in qlQcfxFiles
+  */
+QString io::qsGetQcfFilePath(QString mapname, int &index) {
+	for(int i=0; i<myDart->qlQcfxFiles.count(); i++) {
+		if(myDart->qlQcfxFiles[i].mapName==mapname) {
+			index=i;
+			return myDart->qlQcfxFiles[i].path+".qcfx";
+		}
+	}
+	
+	return "NULL";
+}
+
 int io::iReadQcf(QString mapname) {
 	
 	if(mapname=="dummyfile") {
@@ -161,13 +214,8 @@ int io::iReadQcf(QString mapname) {
 	
 	QString filename;
 	
-	// find the file with the given mapname in the list
-	for(int i=0; i<myDart->qlQcfxFiles.count(); i++) {
-		if(myDart->qlQcfxFiles[i].mapName==mapname) {
-			filename=myDart->qlQcfxFiles[i].path+".qcfx";
-			myDart->iCurrentQcf=i;
-		}
-	}
+	// find the file with the given mapname and set iCurrentQcf to its index
+	filename=qsGetQcfFilePath(mapname, myDart->iCurrentQcf);
 	
 	qDebug() << "[i] Reading file" << filename << "with mapName" << mapname;
 	
@@ -185,13 +233,8 @@ int io::iReadQcf(QString mapname) {
 	
 	myDart->qlAllPlaces.clear();
 	
-	myDart->actionStates->setVisible(FALSE);
-	myDart->actionCapitals_of_States->setVisible(FALSE);
-	myDart->actionCountries->setVisible(FALSE);
-	myDart->actionCapitals_of_Countries->setVisible(FALSE);
-	myDart->actionCounties->setVisible(FALSE);
-	myDart->actionCities->setVisible(FALSE);
-	myDart->actionTowns->setVisible(FALSE);
+	QList<int> qlPlaceTypeCount; // TODO is there a more flexible way?
+	qlPlaceTypeCount << 0 << 0 << 0 << 0 << 0 << 0 << 0;
 	
 	myDart->dPxToKm=-1;
 	
@@ -241,13 +284,9 @@ int io::iReadQcf(QString mapname) {
 					qDebug() << "[W] place" << myDart->qlAllPlaces.count() << "has at least one coordinate out of range";
 				}
 				
-				if(newPlace.placeType.contains("state")) myDart->actionStates->setVisible(TRUE); // TODO count + show count; actiongroup caption with total count? [x of y]
-				if(newPlace.placeType.contains("capitalOfState")) myDart->actionCapitals_of_States->setVisible(TRUE);
-				if(newPlace.placeType.contains("country")) myDart->actionCountries->setVisible(TRUE);
-				if(newPlace.placeType.contains("capitalOfCountry")) myDart->actionCapitals_of_Countries->setVisible(TRUE);
-				if(newPlace.placeType.contains("county")) myDart->actionCounties->setVisible(TRUE);
-				if(newPlace.placeType.contains("city")) myDart->actionCities->setVisible(TRUE);
-				if(newPlace.placeType.contains("town")) myDart->actionTowns->setVisible(TRUE);
+				for(int i=0; i<qslPlaceTypesNamesRegExps.count(); i++) {
+					if(newPlace.placeType.contains(qslPlaceTypesNamesRegExps[i])) qlPlaceTypeCount[i]++;
+				}
 				
 			} else if(e.tagName()!="name" && e.tagName()!="copyright") {
 				
@@ -273,6 +312,13 @@ int io::iReadQcf(QString mapname) {
 		msgBox.setText(QString(tr("The file %1 contains no <place>.\nQeoDart will be quit.")).arg(filename));
 		msgBox.exec();
 		return -1;
+	}
+	
+	for(int i=0; i<myDart->qlPlaceTypesNames.count(); i++) {
+		myDart->agPlaceTypes->actions()[i]->setVisible(qlPlaceTypeCount[i]>0);
+		myDart->agPlaceTypes->actions()[i]->setText(QString(tr("%1 (%2)")
+		                                                    .arg(myDart->qlPlaceTypesNames[i])
+		                                                    .arg(qlPlaceTypeCount[i])));
 	}
 	
 	qDebug() << "[i] current placetype is" << myDart->qsCurrentPlaceType;
@@ -318,7 +364,6 @@ void io::vFillCurrentTypePlaces() {
 	myDart->vCreatePlacesSubsetsActions();
 	myDart->vUpdatePlacesSubsetActive();
 	
-	qDebug()<<myDart->bPlacesSubsetActive<<"<<<";
 	if(myDart->bPlacesSubsetActive) {
 		qDebug() << "[i] found" << myDart->qlCurrentTypePlaces.count() << "places for current place type, will remove some of them";
 		for(int i=0; i<myDart->qlPlacesSubsetsActions.count(); i++) {
@@ -350,6 +395,11 @@ void io::vFillCurrentTypePlaces() {
 	settings->setValue("qsCurrentPlaceType", myDart->qsCurrentPlaceType);
 }
 
+/*!
+  Converts a svg created by osmarender to a qcfx-file.
+  @param filename the svg-file
+  @see io::iReadQcf
+  */
 int io::iReadOsm(QString filename) {
 	qDebug() << "[i] Reading" << filename;
 	
@@ -439,7 +489,12 @@ int io::iReadOsm(QString filename) {
 	return 0;
 }
 
-// writes a qcfx-file containing places to the path specified in f
+/*!
+  Writes a qcfx-file containing the given places to the path specified in f.
+  @param places the list of places which are written
+  @param f the file which contains the path of the destination directory
+  @see io::iReadQcf
+  */
 int io::iWriteQcf(QList<place> &places, qcfFile &f) {
 	
 	qDebug() << "[i] going to write file" << f.path;
@@ -556,13 +611,9 @@ void io::vLoadSettings() {
 	myDart->iToolMenuBarState=static_cast<enToolMenuBarState>(settings->value("iToolMenuBarState",enBoth).toInt());
 	if(myDart->iToolMenuBarState!=enBoth && myDart->iToolMenuBarState!=enMenuBarOnly && myDart->iToolMenuBarState!=enToolBarOnly) myDart->iToolMenuBarState=enBoth;
 	
-	qDebug()<<(settings->value("bBorders",true).toBool());
-	myDart->actionBorders->setChecked(settings->value("bBorders",true).toBool());
-	myDart->actionRivers->setChecked(settings->value("bRivers",true).toBool());
-	myDart->actionElevations->setChecked(settings->value("bElevations",true).toBool());
-	
-	myDart->cbMatchBehaviour->setCurrentIndex(settings->value("iMatchBehaviour",1).toInt()); // TODO doesn't work
-	myDart->cbSearchDistance->setCurrentIndex(settings->value("iSearchDistance",2).toInt());
+	myDart->actionBorders->setChecked(settings->value("borders",true).toBool());
+	myDart->actionRivers->setChecked(settings->value("rivers",true).toBool());
+	myDart->actionElevations->setChecked(settings->value("elevations",true).toBool());
 	
 	for(int i=0; i<3; i++) {
 		myDart->agLayers->actions()[i]->setChecked(settings->value(myDart->qlLayersNames[i+1],true).toBool());
@@ -611,11 +662,17 @@ void io::vLoadSettings() {
 #endif
 }
 
+/*!
+  Clears qlHighScores and loads the the high score for the given map.
+  @param mapName the name of the map for which the high scores are loaded
+  @see io::vSaveHighScores(QString id)
+  @see highScoreWindow::vLoadHighScores(int index)
+  */
 void io::vLoadHighScores(QString mapName) {
 	myDart->qlHighScores.clear();
 	
 	for(int i=0; i<10; i++) {
-		QStringList list=settings->value(QString("Highscores/%1.%2").arg(mapName).arg(i),"---||0").toString().split("||"); // TODO mapid
+		QStringList list=settings->value(QString("Highscores/%1.%2").arg(qsGetIdFromMapName(mapName)).arg(i),"---||0").toString().split("||");
 		qDebug() << list;
 		if(list.count()<2) list=QString("---||0").split("||");
 		
@@ -628,18 +685,36 @@ void io::vLoadHighScores(QString mapName) {
 	}
 }
 
-void io::vSaveHighScores(QString mapName) {
+/*!
+  Saves the high scores stored in qlHighScores using the given id.
+  @param id the id of the map for which the high scores are saved
+  @see io::vLoadHighScores(QString mapName)
+  */
+void io::vSaveHighScores(QString id) {
 	for(int i=0; i<10; i++) {
-		settings->setValue(QString("Highscores/%1.%2").arg(mapName).arg(i),
+		settings->setValue(QString("Highscores/%1.%2").arg(id).arg(i),
 		                   QString("%1||%2").arg(myDart->qlHighScores[i].name).arg(myDart->qlHighScores[i].score));
 		
 		qDebug() << myDart->qlHighScores[i].name << "W highsc" << myDart->qlHighScores[i].score;
 	}
 }
 
-// returns the location of the directory for temporary files, and ensures that it ends with "/"
+/*!
+  @return the location of the directory for temporary files, ensures that it ends with "/"
+  */
 QString io::qsGetTempDir() {
 	QString tempDir = bPortable ? QCoreApplication::applicationDirPath() : QDir::tempPath();
 	if(!tempDir.endsWith("\\") && !tempDir.endsWith("/")) tempDir+="/";
 	return tempDir;
+}
+
+/*!
+  @return the id of the map with the given name
+  @param mapName the name of the map for which the id is determined
+  */
+QString io::qsGetIdFromMapName(QString mapName) {
+	for(int i=0; i<myDart->qlQcfxFiles.count(); i++) {
+		if(myDart->qlQcfxFiles[i].mapName==mapName) return myDart->qlQcfxFiles[i].id;
+	}
+	return "NULL";
 }

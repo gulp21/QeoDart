@@ -390,7 +390,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuGame">
@@ -406,6 +406,9 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="actionHelp"/>
+    <addaction name="action_Whats_this"/>
+    <addaction name="separator"/>
     <addaction name="actionHint"/>
     <addaction name="separator"/>
     <addaction name="actionReport_Bug"/>
@@ -602,7 +605,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Cities</string>
+    <string notr="true">Cities</string>
    </property>
   </action>
   <action name="actionAbout_Qt">
@@ -665,7 +668,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Counties</string>
+    <string notr="true">Counties</string>
    </property>
   </action>
   <action name="actionCountries">
@@ -673,7 +676,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Countries</string>
+    <string notr="true">Countries</string>
    </property>
   </action>
   <action name="actionStates">
@@ -681,7 +684,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>States</string>
+    <string notr="true">States</string>
    </property>
   </action>
   <action name="actionCapitals_of_States">
@@ -689,7 +692,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Capitals of States</string>
+    <string notr="true">Capitals of States</string>
    </property>
   </action>
   <action name="actionCapitals_of_Countries">
@@ -697,7 +700,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Capitals of Countries</string>
+    <string notr="true">Capitals of Countries</string>
    </property>
   </action>
   <action name="actionTowns">
@@ -705,7 +708,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Towns</string>
+    <string notr="true">Towns</string>
    </property>
   </action>
   <action name="actionBorders">
@@ -856,6 +859,22 @@ p, li { white-space: pre-wrap; }
      <weight>75</weight>
      <bold>true</bold>
     </font>
+   </property>
+  </action>
+  <action name="action_Whats_this">
+   <property name="text">
+    <string>&amp;What's this?</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+F1</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
    </property>
   </action>
  </widget>

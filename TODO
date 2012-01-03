@@ -3,19 +3,18 @@ bugs:	refusing new game results in iPlaceCount++
 
 would this work: #ifdef wince #define no_cursor
 
---log -> README
+edit-clear.svg
+window-close.svg
 
 FAQ: slow Linux (raster)
-sort maps alphabetically
-//TODO icon
-add helpmenu to game menu
+update check
 
 highscore: date (today), time (x ago, api?), pref lang
 
 http://la.wikipedia.org/wiki/Index_civitatum_Europaearum
 http://de.wikipedia.org/wiki/Liste_der_Gro%C3%9Fst%C3%A4dte_in_Deutschland
 http://de.wikipedia.org/wiki/Liste_der_Millionenst%C3%A4dte
-indien
+indien: cities
 git update-index --assume-unchanged
 
 cat lang/de.ts | grep translation\> | sed -e "s/.*<translation>//g" | sed -e "s/<\/translation>.*//g" | sed -e "s/&amp;//g" > out

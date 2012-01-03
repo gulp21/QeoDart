@@ -89,8 +89,11 @@ resultWindow::resultWindow(bool &ShowHighScores, dart *TDart, int PLayer, io *TI
 	
 	lblPlaces->setText(places.left(places.length()-2)); // remove the last ", "
 	
-	if(myDart->qlHighScores[9].score>=myDart->qlTotalScores[player].score
-	   || (myDart->iGameMode==enNetwork && myDart->iCurrentPlayer!=player) ) {
+	// do not show lineEdit when the score is not good enough, or when too few places are selected (otherwise you could play with just one place and get a very good score), or when it is a network player
+	qDebug() << (myDart->qlHighScores[9].score>=myDart->qlTotalScores[player].score && !(myDart->qlCurrentTypePlaces.count()<myDart->iMaxPlaceCount && myDart->qlCurrentTypePlaces.count()>myDart->iMaxPlaceCount)) << myDart->qlHighScores[9].score << myDart->qlTotalScores[player].score << myDart->qlCurrentTypePlaces.count() << myDart->iMaxPlaceCount << myDart->qlCurrentTypePlaces.count() << myDart->iMaxPlaceCount;
+	if(myDart->qlHighScores[9].score>=myDart->qlTotalScores[player].score ||
+	   (myDart->qlCurrentTypePlaces.count()<myDart->iMaxPlaceCount && myDart->qlAllPlaces.count()>myDart->iMaxPlaceCount) ||
+	   (myDart->iGameMode==enNetwork && myDart->iCurrentPlayer!=player)) {
 		lblName->hide();
 		leName->hide();
 		connect(btOk, SIGNAL(clicked()), this, SLOT(close()));
@@ -135,7 +138,7 @@ void resultWindow::vClose() {
 	
 	qDebug() << "[i] saved" << name<< score;
 	
-	myIO->vSaveHighScores(myDart->qlQcfxFiles[myDart->iCurrentQcf].mapName);
+	myIO->vSaveHighScores(myDart->qlQcfxFiles[myDart->iCurrentQcf].id);
 	
 	*bShowHighScores=true;
 	
