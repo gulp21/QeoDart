@@ -35,6 +35,7 @@ class network : public QWidget {
 		
 		void vNewNetworkGame();
 		void vSendCommand(QString command);
+		void vStopNetworking();
 		
  	private:
 		bool bGameStarted, bExpectingImageData;
@@ -50,7 +51,6 @@ class network : public QWidget {
 		void vConnectToServer();
 		void vShowProgress(QString message);
 		void vDestroyProgressDialog();
-		void vStopNetworking();
 		
 		bool bAskForIp(QHostAddress &ip);
 		

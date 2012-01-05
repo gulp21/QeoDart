@@ -127,7 +127,11 @@ void network::vConnectToServer(){
 	
 	QHostAddress ip;
 	
-	if(!bAskForIp(ip)){return;} // TODO
+	if(!bAskForIp(ip)) {
+		myDart->actionLocal->trigger();
+		deleteTimer->start();
+		return;
+	}
 	
 	vShowProgress(tr("Waiting for connection being accepted"));
 	
@@ -195,7 +199,7 @@ void network::vReadCommand() {
 	QTcpSocket *commandSocket;
 	commandSocket=static_cast<QTcpSocket*>(QObject::sender());
 	
-	if(!commandSocket->canReadLine()) qDebug() << "ERROR: vReadCommand: Cannot read line";
+	if(!commandSocket->canReadLine()) qDebug() << "[E] vReadCommand: Cannot read line";
 	
 	while(commandSocket->canReadLine()) {
 		
@@ -321,8 +325,6 @@ void network::vReadCommand() {
 			             .toAscii().data()); // TODO send qcffile info
 			
 //			actionNetwork->setChecked(TRUE);
-			
-//			vDisableSettings(); TODO
 			
 //			vNetworkReady();
 			

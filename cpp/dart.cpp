@@ -872,7 +872,12 @@ void dart::vShowResultWindows() {
 	iPlaceCount=0; // needed for quit?-dialog
 	
 	if(iGameMode==enNetwork) {
-		if(bContinueNetworkMode()) vNewGame();
+		if(bContinueNetworkMode()) {
+			vNewGame();
+		} else {
+			myNetwork->vStopNetworking();
+			actionLocal->trigger();
+		}
 		return;
 	}
 	
@@ -881,13 +886,15 @@ void dart::vShowResultWindows() {
 	if(bAutoNewGame) vNewGame();
 }
 
-// returns true when the player wants to continue network mode
+/*!
+  @return true when the player wants to continue network mode
+  */
 bool dart::bContinueNetworkMode() {
 	QMessageBox msgBox;
 	msgBox.setWindowTitle(tr("Network mode"));
 	msgBox.setText(tr("Do you want to start a new game in network mode?"));
-	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-	msgBox.setDefaultButton(QMessageBox::Cancel);
+	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+	msgBox.setDefaultButton(QMessageBox::No);
 	if(msgBox.exec()==QMessageBox::Yes) return true;
 	else return false;
 }
@@ -927,7 +934,7 @@ void dart::vShowScores() {
 }
 
 void dart::vShowTotalScores() {
-	for(int i=0; i<qlPlayerLabels.count(); i++) { // show score for each player
+	for(int i=0; i<qlPlayerLabels.count() && i<qlTotalScores.count(); i++) { // show score for each player
 		if(width()>300)
 			qlPlayerLabels[i][0]->setText(QString(tr("%n Point(s) &Oslash; %1, %2","",qlTotalScores[i].score)).arg(dGetAverageScoreOfPlayer(i),0,'f',1).arg(qlTotalScores[i].mark,0,'f',1));
 		else
@@ -1196,7 +1203,9 @@ void dart::vResetForNewGame() {
 	vRepaintCommonLabels();
 }
 
-// appends empty totalScore to qlTotalScores
+/*!
+  Appends empty totalScore to qlTotalScores.
+  */
 void dart::vAppendEmptyTotalScore() {
 	totalScore ts;
 	ts.score=0;
