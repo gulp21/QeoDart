@@ -14,7 +14,7 @@
 	name="Nordrhein-Westfalen"
 	name_de="Nordrhein-Westfalen"
 	name_en="North Rhine-Westphalia"
-	name_la="Rhenania Septentrionalis-Guestfalia"
+	name_la="Rhenania Septentrionalis-Vestfalia"
 	placetype="state"
 	/>
 	<place
@@ -87,7 +87,7 @@
 	name="Rheinland-Pfalz"
 	name_de="Rheinland-Pfalz"
 	name_en="Rhineland-Palatinate"
-	name_la="Rhenania Septentrionalis-Guestfalia"
+	name_la="Rhenania-Palatinatus"
 	placetype="state"
 	/>
 	<place
