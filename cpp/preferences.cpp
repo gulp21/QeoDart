@@ -60,7 +60,8 @@ void preferences::vReset() {
 	//General
 	if(myDart->qsLanguage=="de") cobLanguage->setCurrentIndex(1);
 	else if(myDart->qsLanguage=="en") cobLanguage->setCurrentIndex(2);
-	else if(myDart->qsLanguage=="la") cobLanguage->setCurrentIndex(3);
+	else if(myDart->qsLanguage=="fr") cobLanguage->setCurrentIndex(3);
+	else if(myDart->qsLanguage=="la") cobLanguage->setCurrentIndex(4);
 	else cobLanguage->setCurrentIndex(0);
 	lePreferedQcfLanguage->setText(myDart->qsPreferedQcfLanguage);
 	spbMaxPlaceCount->setValue(myDart->iMaxPlaceCount);
@@ -122,7 +123,7 @@ void preferences::vSettingChanged() {
 			lblStatusText->setVisible(true);
 			qDebug()<<"ffsf";
 			lblStatusText->setStyleSheet("font-weight:bold; color:red;");
-			lblStatusText->setText(tr("Chancing this setting will start a new game automatically."));
+			lblStatusText->setText(tr("Changing this setting will start a new game automatically."));
 		} else {
 			lblStatusText->setVisible(false);
 		}
@@ -146,9 +147,10 @@ void preferences::vAccepted() {
 	// General
 	
 	QString lang="default";
-	if(cobLanguage->currentText()=="Deutsch") lang="de";
-	else if(cobLanguage->currentText()=="English") lang="en";
-	else if(cobLanguage->currentText()=="Latina") lang="la";
+	if(cobLanguage->currentIndex()==1) lang="de";
+	else if(cobLanguage->currentIndex()==2) lang="en";
+	else if(cobLanguage->currentIndex()==3) lang="fr";
+	else if(cobLanguage->currentIndex()==4) lang="la";
 	myIO->settings->setValue("qsLanguage",lang);
 	
 	myDart->qsPreferedQcfLanguage=lePreferedQcfLanguage->text();

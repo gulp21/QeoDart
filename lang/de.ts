@@ -12,6 +12,29 @@
         <translation>QeoDart</translation>
     </message>
     <message>
+        <location filename="../ui/mainWindow.ui" line="164"/>
+        <source>Change the search behavior of the search box:
+
+Match beginning of names:
+&quot;K&quot; finds &quot;Kosovo&quot; but not &quot;United Kingdom&quot;
+
+Match beginning of words:
+&quot;Ki&quot; finds &quot;United Kingdom&quot; but not &quot;Slovakia&quot;
+
+Search within names:
+&quot;Ki&quot; finds &quot;United Kingdom&quot; and &quot;Slovakia&quot;</source>
+        <translation>Verhalten des Suchfeldes ändern:
+
+Am Namensanfang suchen:
+&quot;K&quot; findet &quot;Kosovo&quot; aber nicht &quot;Vereinigtes Königreich&quot;
+
+Am Wortanfang suchen:
+&quot;Ka&quot; findet &quot;Kasachstan&quot; aber nicht &quot;Ankara&quot;
+
+Innerhalb von Namen suchen:
+&quot;Ka&quot; findet &quot;Kasachstan&quot; und &quot;Ankara&quot;</translation>
+    </message>
+    <message>
         <location filename="../ui/mainWindow.ui" line="180"/>
         <source>Match beginning of names</source>
         <translation>Am Namensanfang suchen</translation>
@@ -104,29 +127,6 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Fragen nach</translation>
     </message>
     <message>
-        <location filename="../ui/mainWindow.ui" line="164"/>
-        <source>Chance the search behavior of the search box:
-
-Match beginning of names:
-&quot;K&quot; finds &quot;Kosovo&quot; but not &quot;United Kingdom&quot;
-
-Match beginning of words:
-&quot;Ki&quot; finds &quot;United Kingdom&quot; but not &quot;Slovakia&quot;
-
-Search within names:
-&quot;Ki&quot; finds &quot;United Kingdom&quot; and &quot;Slovakia&quot;</source>
-        <translation>Verhalten des Suchfeldes ändern:
-
-Am Namensanfang suchen:
-&quot;K&quot; findet &quot;Kosovo&quot; aber nicht &quot;Vereinigtes Königreich&quot;
-
-Am Wortanfang suchen:
-&quot;Ka&quot; findet &quot;Kasachstan&quot; aber nicht &quot;Ankara&quot;
-
-Innerhalb von Namen suchen:
-&quot;Ka&quot; findet &quot;Kasachstan&quot; und &quot;Ankara&quot;</translation>
-    </message>
-    <message>
         <location filename="../ui/mainWindow.ui" line="431"/>
         <source>Place Type</source>
         <translation>Ortstyp</translation>
@@ -202,10 +202,6 @@ Innerhalb von Namen suchen:
         <translation>F10</translation>
     </message>
     <message>
-        <source>Cities</source>
-        <translation type="obsolete">Großstädte</translation>
-    </message>
-    <message>
         <location filename="../ui/mainWindow.ui" line="616"/>
         <source>About &amp;Qt</source>
         <translation>Über &amp;Qt</translation>
@@ -259,30 +255,6 @@ Innerhalb von Namen suchen:
         <location filename="../ui/mainWindow.ui" line="663"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
-    </message>
-    <message>
-        <source>Counties</source>
-        <translation type="obsolete">Kreise</translation>
-    </message>
-    <message>
-        <source>Countries</source>
-        <translation type="obsolete">Staaten</translation>
-    </message>
-    <message>
-        <source>States</source>
-        <translation type="obsolete">Länder</translation>
-    </message>
-    <message>
-        <source>Capitals of States</source>
-        <translation type="obsolete">Hauptstädte von Ländern</translation>
-    </message>
-    <message>
-        <source>Capitals of Countries</source>
-        <translation type="obsolete">Hauptstädte von Staaten</translation>
-    </message>
-    <message>
-        <source>Towns</source>
-        <translation type="obsolete">Städte</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="719"/>
@@ -407,7 +379,7 @@ Innerhalb von Namen suchen:
     <message>
         <location filename="../ui/mainWindow.ui" line="872"/>
         <source>Shift+F1</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+F1</translation>
     </message>
     <message>
         <location filename="../ui/mainWindow.ui" line="877"/>
@@ -417,7 +389,7 @@ Innerhalb von Namen suchen:
     <message>
         <location filename="../ui/mainWindow.ui" line="880"/>
         <source>F1</source>
-        <translation type="unfinished">F1</translation>
+        <translation>F1</translation>
     </message>
 </context>
 <context>
@@ -433,12 +405,12 @@ Innerhalb von Namen suchen:
         <translation>QeoDart</translation>
     </message>
     <message>
-        <location filename="../ui/about.ui" line="114"/>
+        <location filename="../ui/about.ui" line="117"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../ui/about.ui" line="120"/>
+        <location filename="../ui/about.ui" line="123"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -467,39 +439,51 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Programm erhalten haben. Falls nicht, siehe &lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;http://www.gnu.org/licenses/&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../ui/about.ui" line="162"/>
+        <location filename="../ui/about.ui" line="165"/>
         <source>Translation</source>
         <translation>Übersetzung</translation>
     </message>
     <message>
-        <location filename="../ui/about.ui" line="168"/>
+        <location filename="../ui/about.ui" line="171"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;English&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Markus Brenneis&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;French&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Stéphane Aulery&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;German&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Markus Brenneis&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Latin&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Markus Brenneis&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Markus Brenneis&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;QeoDart can be found at &lt;a href=&quot;https://www.transifex.net/projects/p/qeodart/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Transifex&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Englisch&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Markus Brenneis&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Französisch&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Stéphane Aulery&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Deutsch&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Markus Brenneis&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Latein&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Markus Brenneis&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Markus Brenneis&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;QeoDart can be found at &lt;a href=&quot;https://www.transifex.net/projects/p/qeodart/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Transifex&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../ui/about.ui" line="203"/>
+        <location filename="../ui/about.ui" line="215"/>
         <source>Map</source>
         <translation>Karte</translation>
     </message>
@@ -726,6 +710,26 @@ Wollen Sie trotzdem fortfahren?</translation>
         <translation>Spieler: %1</translation>
     </message>
     <message>
+        <location filename="../cpp/dart.cpp" line="828"/>
+        <source>What is the name of the marked place?</source>
+        <translation>Wie heißt der markierte Ort?</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="1063"/>
+        <source>Change Game Mode</source>
+        <translation>Spielmodus ändern</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="1184"/>
+        <source>Change Mode</source>
+        <translation>Modus ändern</translation>
+    </message>
+    <message>
+        <location filename="../cpp/dart.cpp" line="1643"/>
+        <source>Change Map</source>
+        <translation>Karte ändern</translation>
+    </message>
+    <message>
         <location filename="../cpp/dart.cpp" line="1929"/>
         <source>https://github.com/gulp21/QeoDart/wiki/Maps</source>
         <extracomment>the translated wiki pages are called DE:Maps etc. Please do NOT translate when there is no such wiki page in your language</extracomment>
@@ -890,11 +894,6 @@ Wollen Sie trotzdem fortfahren?</translation>
         <translation>Spieler %1</translation>
     </message>
     <message>
-        <location filename="../cpp/dart.cpp" line="828"/>
-        <source>Which place is marked?</source>
-        <translation>Welcher Ort ist markiert?</translation>
-    </message>
-    <message>
         <location filename="../cpp/dart.cpp" line="975"/>
         <source>Hit the mark </source>
         <translation>Genau getroffen </translation>
@@ -936,20 +935,10 @@ Wollen Sie trotzdem fortfahren?</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="1063"/>
-        <source>Chance Game Mode</source>
-        <translation>Spielmodus ändern</translation>
-    </message>
-    <message>
-        <location filename="../cpp/dart.cpp" line="1063"/>
         <source>When you change the game mode, your current score will be lost.
 Do you want to continue?</source>
         <translation>Wenn Sie den Spielmodus ändern, wird ihre jetzige Punktzahl verloren gehen.
 Wollen Sie fortfahren?</translation>
-    </message>
-    <message>
-        <location filename="../cpp/dart.cpp" line="1184"/>
-        <source>Chance Mode</source>
-        <translation>Modus ändern</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="1256"/>
@@ -968,11 +957,6 @@ Wollen Sie fortfahren?</translation>
         <location filename="../cpp/dart.cpp" line="1338"/>
         <source>Place %1 of %2</source>
         <translation>Ort %1 von %2</translation>
-    </message>
-    <message>
-        <location filename="../cpp/dart.cpp" line="1643"/>
-        <source>Chance Map</source>
-        <translation>Karte auswählen</translation>
     </message>
     <message>
         <location filename="../cpp/dart.cpp" line="1643"/>
@@ -1165,102 +1149,92 @@ Wollen Sie, dass QeoDart diesen Fehler ignoriert und ohne das Speichern von Eins
         <translation>Sprache:</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="103"/>
-        <source>ui,en,default</source>
-        <translation>ui,en,default</translation>
-    </message>
-    <message>
-        <location filename="../ui/preferences.ui" line="149"/>
+        <location filename="../ui/preferences.ui" line="154"/>
         <source>Gameplay</source>
         <translation>Spielablauf</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="157"/>
+        <location filename="../ui/preferences.ui" line="162"/>
         <source>Ask for</source>
         <translation>Nach</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="180"/>
+        <location filename="../ui/preferences.ui" line="185"/>
         <source>places</source>
         <translation>Orten fragen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="204"/>
+        <location filename="../ui/preferences.ui" line="209"/>
         <source>When playing against time, wait at most</source>
         <translation>Beim Spiel auf Zeit, warte höchstens</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="217"/>
+        <location filename="../ui/preferences.ui" line="222"/>
         <source>s</source>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="245"/>
-        <source>When you are playing with more than one player, you do not want the other players to see where you have clicked. Now you can either move the cursor to another position yourself, or you enable this feature which automatically moves the curosr.</source>
-        <translation>Wenn Sie mit mehr als einem Spieler spielen, dann wollen Sie nach, dass die anderen Spieler sehen, wohin Sie geklickt haben. Sie können nun entweder den Mauszeiger selbst woanders hin bewegen oder Sie aktivieren diese Funktion, die dies automatisch erledigt.</translation>
-    </message>
-    <message>
-        <location filename="../ui/preferences.ui" line="248"/>
+        <location filename="../ui/preferences.ui" line="253"/>
         <source>Reset cursor when playing with more than one player</source>
         <translation>Mauszeiger beim Spiel mit mehr als einem Spieler zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="255"/>
+        <location filename="../ui/preferences.ui" line="260"/>
         <source>Start a new game automatically after showing the results</source>
         <translation>Nach dem Anzeigen der Ergebnisse automatisch ein neues Spiel beginnen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="262"/>
+        <location filename="../ui/preferences.ui" line="267"/>
         <source>Show high score list after adding a new high score</source>
         <translation>Highscoreliste nach dem Hinzufügen eines neuen Highscores anzeigen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="291"/>
+        <location filename="../ui/preferences.ui" line="296"/>
         <source>Scores and Marks</source>
         <translation>Punkte und Noten</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="310"/>
+        <location filename="../ui/preferences.ui" line="315"/>
         <source>the point only</source>
         <translation>nur den Punkt</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="315"/>
+        <location filename="../ui/preferences.ui" line="320"/>
         <source>25% of the area</source>
         <translation>25% des Gebietes</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="320"/>
+        <location filename="../ui/preferences.ui" line="325"/>
         <source>100% of the area</source>
         <translation>100% des Gebietes</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="328"/>
+        <location filename="../ui/preferences.ui" line="333"/>
         <source>Use the following grade system:</source>
         <translation>Das folgende Bewertungssystem verwenden:</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="339"/>
+        <location filename="../ui/preferences.ui" line="344"/>
         <source>German (best: 1.0 - worst: 6.0)</source>
         <translation>Deutsch (Bestnote: 1.0 - Schlechteste Note: 6.0)</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="344"/>
+        <location filename="../ui/preferences.ui" line="349"/>
         <source>Do not display marks</source>
         <translation>Keine Noten anzeigen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="352"/>
+        <location filename="../ui/preferences.ui" line="357"/>
         <source>Letters per Second:</source>
         <translation>Buchstaben pro Sekunde:</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="359"/>
+        <location filename="../ui/preferences.ui" line="364"/>
         <source>Penalty</source>
         <translation>Punktabzug</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="366"/>
+        <location filename="../ui/preferences.ui" line="371"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1291,70 +1265,70 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;- falsche Nutzung von doppelten Buchstaben und Dehnungsbuchstaben&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="386"/>
+        <location filename="../ui/preferences.ui" line="391"/>
         <source>do not penalize</source>
         <translation>kein Punktabzug</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="391"/>
+        <location filename="../ui/preferences.ui" line="396"/>
         <source>for spelling errors</source>
         <translation>für Rechtschreibfehler</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="396"/>
+        <location filename="../ui/preferences.ui" line="401"/>
         <source>for severe spelling errors</source>
         <translation>für schwere Rechtschreibfehler</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="415"/>
+        <location filename="../ui/preferences.ui" line="420"/>
         <source>In the mode &quot;Ask for: Name of Place&quot; in combination with &quot;Against Time&quot;, you get some &quot;free seconds&quot; depending on the length of the name and the number of letters you can type per second.</source>
         <translation>Im Modus &quot;Fragen nach: Ortsname&quot; in Kombination mit &quot;Auf Zeit&quot; bekommen Sie &quot;Bonussekunden&quot; in Abhängigkeit von der Länge des Namen und die Anzahl der Buchstaben, die Sie pro Sekunde eingeben können.</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="447"/>
+        <location filename="../ui/preferences.ui" line="452"/>
         <source>Determine…</source>
         <translation>Bestimmen…</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="476"/>
+        <location filename="../ui/preferences.ui" line="481"/>
         <source>Advanced</source>
         <translation>Erweitert</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="497"/>
+        <location filename="../ui/preferences.ui" line="502"/>
         <source>Delays</source>
         <translation>Verzögerungen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="503"/>
+        <location filename="../ui/preferences.ui" line="508"/>
         <source>between distance circles</source>
         <translation>Zwischen Entfernungskreisen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="510"/>
+        <location filename="../ui/preferences.ui" line="515"/>
         <source>before next player</source>
         <translation>Vor nächstem Spieler</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="569"/>
+        <location filename="../ui/preferences.ui" line="574"/>
         <source>before next place</source>
         <translation>Vor nächstem Ort</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="576"/>
+        <location filename="../ui/preferences.ui" line="581"/>
         <source>before next place (training)</source>
         <translation>Vor nächstem Ort (Training)</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="634"/>
+        <location filename="../ui/preferences.ui" line="639"/>
         <source>Shorten tool bar labels, so that all buttons fit into the window</source>
         <translation>Symbolleistentext kürzen, damit alle Schaltflächen in das Fenster passen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="517"/>
-        <location filename="../ui/preferences.ui" line="530"/>
-        <location filename="../ui/preferences.ui" line="543"/>
-        <location filename="../ui/preferences.ui" line="556"/>
+        <location filename="../ui/preferences.ui" line="522"/>
+        <location filename="../ui/preferences.ui" line="535"/>
+        <location filename="../ui/preferences.ui" line="548"/>
+        <location filename="../ui/preferences.ui" line="561"/>
         <source>ms</source>
         <translation>ms</translation>
     </message>
@@ -1364,12 +1338,12 @@ p, li { white-space: pre-wrap; }
         <translation>Systemsprache</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="90"/>
+        <location filename="../ui/preferences.ui" line="95"/>
         <source>The names of the places are available in different languages. Please specify which language you prefer:</source>
         <translation>Die Namen der Orte sind in verschieden Sprachen verfügbar. Bitte geben Sie an, welche Sprache Sie bevorzugen:</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="110"/>
+        <location filename="../ui/preferences.ui" line="115"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1382,57 +1356,62 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Sie können durch Komma getrennte, aus zwei Buchstaben bestehende Sprachcodes gemäß dem alpha-2 Code von &lt;a href=&quot;http://www.loc.gov/standards/iso639-2/php/code_list.php&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;ISO&amp;nbsp;639-1&lt;/span&gt;&lt;/a&gt; verwenden; außerdem können Sie &amp;quot;ui&amp;quot; für die oben gewählte Sprache und &amp;quot;default&amp;quot; für den Namen in der Landessprache verwenden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="299"/>
+        <location filename="../ui/preferences.ui" line="250"/>
+        <source>When you are playing with more than one player, you do not want the other players to see where you have clicked. Now you can either move the cursor to another position yourself, or you enable this feature which automatically moves the cursor.</source>
+        <translation>Wenn Sie mit mehr als einem Spieler spielen, dann wollen Sie nach, dass die anderen Spieler sehen, wohin Sie geklickt haben. Sie können nun entweder den Mauszeiger selbst woanders hin bewegen oder Sie aktivieren diese Funktion, die dies automatisch erledigt.</translation>
+    </message>
+    <message>
+        <location filename="../ui/preferences.ui" line="304"/>
         <source>When calculating the score, accept</source>
         <translation>Beim berechnen der Punktzahl akzeptiere</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="306"/>
+        <location filename="../ui/preferences.ui" line="311"/>
         <source>When calculating the scores, QeoDart respects the whole area of the place. This area is described by a rectangle put around the place. As the area of this rectangle often includes areas of other places, the default is accepting only the inner 25% of the rectangle.</source>
         <translation>Beim Berechnen der Punktzahl beachtet QeoDart das ganze Gebiet des Ortes. Dieses Gebiet wird durch ein Rechteck, dass um den Ort gelegt wird, beschrieben. Da die Rechtecksfläche meist Gebiete anderer Orte enthält, werden standardmäßig nur die inneren 25% des Rechtecks akzeptiert.</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="605"/>
+        <location filename="../ui/preferences.ui" line="610"/>
         <source>Warnings</source>
         <translation>Warnungen</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="618"/>
+        <location filename="../ui/preferences.ui" line="623"/>
         <source>Miscellaneous</source>
         <translation>Verschiedenes</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="624"/>
+        <location filename="../ui/preferences.ui" line="629"/>
         <source>Enable this option if QeoDart doesn&apos;t recognize the positions of your clicks properly.</source>
         <translation>Aktivieren Sie diese Option, falls QeoDart die Position Ihrer Klicke nicht richtig erkennt.</translation>
     </message>
     <message>
-        <location filename="../ui/preferences.ui" line="627"/>
+        <location filename="../ui/preferences.ui" line="632"/>
         <source>Use non-default cursor image</source>
         <translation>Anderes Mauszeigerbild verwenden</translation>
     </message>
     <message>
-        <location filename="../cpp/preferences.cpp" line="111"/>
+        <location filename="../cpp/preferences.cpp" line="112"/>
         <source>Changing this language setting will require reloading the map.</source>
         <translation>Das Ändern dieser Spracheinstellung erfordert das Neuladen der Karte.</translation>
     </message>
     <message>
-        <location filename="../cpp/preferences.cpp" line="116"/>
+        <location filename="../cpp/preferences.cpp" line="117"/>
         <source>Setting the number of places smaller than the current place number will start a new game automatically.</source>
         <translation>Durch das Setzen der Anzahl der Orte kleiner als die Nummer des aktuellen Ortes wird automatisch ein neues Spiel begonnen.</translation>
     </message>
     <message>
-        <location filename="../cpp/preferences.cpp" line="125"/>
-        <source>Chancing this setting will start a new game automatically.</source>
+        <location filename="../cpp/preferences.cpp" line="126"/>
+        <source>Changing this setting will start a new game automatically.</source>
         <translation>Durch das Ändern dieser Einstellung wird automatisch ein neues Spiel begonnen.</translation>
     </message>
     <message>
-        <location filename="../cpp/preferences.cpp" line="134"/>
+        <location filename="../cpp/preferences.cpp" line="135"/>
         <source>A new user interface language will be completely applied after restarting QeoDart.</source>
         <translation>Eine neue Benutzeroberflächen-Sprache wird nach einem Neustart von QeoDart komplett angewendet.</translation>
     </message>
     <message>
-        <location filename="../cpp/preferences.cpp" line="197"/>
+        <location filename="../cpp/preferences.cpp" line="199"/>
         <source>Place %1 of %2</source>
         <translation>Ort %1 von %2</translation>
     </message>

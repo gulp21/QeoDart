@@ -42,7 +42,7 @@
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>159</height>
+            <height>164</height>
            </rect>
           </property>
           <attribute name="label">
@@ -77,6 +77,11 @@
                </item>
                <item>
                 <property name="text">
+                 <string notr="true">Français</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
                  <string notr="true">Latina</string>
                 </property>
                </item>
@@ -100,7 +105,7 @@
               <bool>true</bool>
              </property>
              <property name="text">
-              <string>ui,en,default</string>
+              <string notr="true">ui,en,default</string>
              </property>
             </widget>
            </item>
@@ -142,7 +147,7 @@ p, li { white-space: pre-wrap; }
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>159</height>
+            <height>164</height>
            </rect>
           </property>
           <attribute name="label">
@@ -242,7 +247,7 @@ p, li { white-space: pre-wrap; }
            <item>
             <widget class="QCheckBox" name="cbResetCursor">
              <property name="whatsThis">
-              <string>When you are playing with more than one player, you do not want the other players to see where you have clicked. Now you can either move the cursor to another position yourself, or you enable this feature which automatically moves the curosr.</string>
+              <string>When you are playing with more than one player, you do not want the other players to see where you have clicked. Now you can either move the cursor to another position yourself, or you enable this feature which automatically moves the cursor.</string>
              </property>
              <property name="text">
               <string>Reset cursor when playing with more than one player</string>
@@ -283,8 +288,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>479</width>
-            <height>159</height>
+            <width>462</width>
+            <height>120</height>
            </rect>
           </property>
           <attribute name="label">
@@ -490,7 +495,7 @@ p, li { white-space: pre-wrap; }
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>159</height>
+            <height>164</height>
            </rect>
           </property>
           <attribute name="label">
@@ -610,8 +615,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>479</width>
-            <height>159</height>
+            <width>345</width>
+            <height>58</height>
            </rect>
           </property>
           <attribute name="label">

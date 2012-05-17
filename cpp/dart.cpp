@@ -825,7 +825,7 @@ void dart::vMouseClickEvent(int x, int y) {
 	if(iAskForMode!=enPositions) {
 		QString text=lineEdit->text();
 		lineEdit->blockSignals(true);
-		lineEdit->setText(tr("Which place is marked?"));
+		lineEdit->setText(tr("What is the name of the marked place?"));
 		for(int i=0; i<3; i++) {
 			lineEdit->setStyleSheet("background-color: red");
 			mySleep(400);
@@ -1060,7 +1060,7 @@ QColor dart::qcGetColorOfPlayer(int player) {
 void dart::vSetGameMode() {
 	if(!bNewGameIsSafe() ||
 	   (bCanLoseScore() &&
-	    !bStartNewGameWarning(tr("Chance Game Mode"), tr("When you change the game mode, your current score will be lost.\nDo you want to continue?"))) ) {
+	    !bStartNewGameWarning(tr("Change Game Mode"), tr("When you change the game mode, your current score will be lost.\nDo you want to continue?"))) ) {
 		vUpdateActionsIsCheckedStates();
 		return;
 	}
@@ -1181,7 +1181,7 @@ void dart::vSetGameMode(enGameModes mode) {
 void dart::vSetAskForMode() {
 	if(!bNewGameIsSafe() ||
 	   (bCanLoseScore() &&
-	    !bStartNewGameWarning(tr("Chance Mode"), tr("When you change this setting, your current score will be lost.\nDo you want to continue?"))) ) {
+	    !bStartNewGameWarning(tr("Change Mode"), tr("When you change this setting, your current score will be lost.\nDo you want to continue?"))) ) {
 		vUpdateActionsIsCheckedStates();
 		return;
 	}
@@ -1640,7 +1640,7 @@ void dart::vReturnPressedEvent() { // TODO split (net!)
 void dart::vReadQcf() {
 	if(!bNewGameIsSafe() ||
 	   (bCanLoseScore() &&
-	    !bStartNewGameWarning(tr("Chance Map"), tr("When you change the map, your current score will be lost.\nDo you want to continue?"))) ) {
+	    !bStartNewGameWarning(tr("Change Map"), tr("When you change the map, your current score will be lost.\nDo you want to continue?"))) ) {
 		vUpdateActionsIsCheckedStates();
 		return;
 	}
