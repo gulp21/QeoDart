@@ -1,6 +1,6 @@
 <!DOCTYPE qcfx>
 <qcfx version="0.2">
-	<name id="DEUTSCHLAND" default="Deutschland" short="DE" de="Deutschland" en="Germany" la="Germania" />
+	<name id="DEUTSCHLAND" default="Deutschland" short="DE" de="Deutschland" en="Germany" la="Germania" fr="Allemagne" />
 	<pxtokm value="1.438" />
 	<copyright
 	file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
@@ -15,6 +15,7 @@
 	name_de="Nordrhein-Westfalen"
 	name_en="North Rhine-Westphalia"
 	name_la="Rhenania Septentrionalis-Vestfalia"
+	name_fr="Rhénanie-du-Nord-Westphalie"
 	placetype="state"
 	/>
 	<place
@@ -23,6 +24,7 @@
 	name_de="Niedersachsen"
 	name_en="Lower Saxony"
 	name_la="Saxonia Inferior"
+	name_fr="Basse-Saxe"
 	placetype="state"
 	/>
 	<place
@@ -31,6 +33,7 @@
 	name_de="Mecklenburg-Vorpommern"
 	name_en="Mecklenburg-Vorpommern"
 	name_la="Megapolis et Pomerania Citerior"
+	name_fr="Mecklembourg-Poméranie-Occidentale"
 	placetype="state"
 	/>
 	<place
@@ -39,6 +42,7 @@
 	name_de="Schleswig-Holstein"
 	name_en="Schleswig-Holstein"
 	name_la="Slesvicum et Holsatia"
+	name_fr="Schleswig-Holstein"
 	placetype="state"
 	/>
 	<place
@@ -47,6 +51,7 @@
 	name_de="Brandenburg"
 	name_en="Brandenburg"
 	name_la="Brandenburgum"
+	name_fr="Brandebourg"
 	placetype="state"
 	/>
 	<place
@@ -55,6 +60,7 @@
 	name_de="Sachsen-Anhalt"
 	name_en="Saxony-Anhalt"
 	name_la="Saxonia-Anhaltinum"
+	name_fr="Saxe-Anhalt"
 	placetype="state"
 	/>
 	<place
@@ -63,6 +69,7 @@
 	name_de="Sachsen"
 	name_en="Saxon"
 	name_la="Saxonia"
+	name_fr="Saxe"
 	placetype="state"
 	/>
 	<place
@@ -71,6 +78,7 @@
 	name_de="Thüringen"
 	name_en="Thuringia"
 	name_la="Thuringia"
+	name_fr="Thuringe"
 	placetype="state"
 	/>
 	<place
@@ -79,6 +87,7 @@
 	name_de="Hessen"
 	name_en="Hesse"
 	name_la="Hessia"
+	name_fr="Hesse"
 	placetype="state"
 	/>
 	<!--10-->
@@ -88,6 +97,7 @@
 	name_de="Rheinland-Pfalz"
 	name_en="Rhineland-Palatinate"
 	name_la="Rhenania-Palatinatus"
+	name_fr="Rhénanie-Palatinat"
 	placetype="state"
 	/>
 	<place
@@ -96,6 +106,7 @@
 	name_de="Saarland"
 	name_en="Saarland"
 	name_la="Saravia"
+	name_fr="Sarre"
 	placetype="state"
 	/>
 	<place
@@ -104,6 +115,7 @@
 	name_de="Bayern"
 	name_en="Bavaria"
 	name_la="Bavaria"
+	name_fr="Bavière"
 	placetype="state"
 	/>
 	<place
@@ -112,6 +124,7 @@
 	name_de="Baden-Württemberg"
 	name_en="Baden-Württemberg"
 	name_la="Badenia-Virtembergia"
+	name_fr="Bade-Wurtemberg"
 	placetype="state"
 	/>
 	<!--.....both.....-->
@@ -121,6 +134,7 @@
 	name_de="Berlin"
 	name_en="Berlin"
 	name_la="Berolinum"
+	name_fr="Berlin"
 	placetype="state;city;capitalOfState;capitalOfCountry"
 	/>
 	<place
@@ -129,6 +143,7 @@
 	name_de="Bremen"
 	name_en="Bremen"
 	name_la="Brema"
+	name_fr="Brême"
 	placetype="state;city;capitalOfState"
 	/>
 	<place
@@ -137,6 +152,7 @@
 	name_de="Hamburg"
 	name_en="Hamburg"
 	name_la="Hamburgum"
+	name_fr="Hambourg"
 	placetype="state;city;capitalOfState"
 	/>
 	<!--.....CapitalOfState.....-->
@@ -146,6 +162,7 @@
 	name_de="Düsseldorf"
 	name_en="Düsseldorf"
 	name_la="Dusseldorpium"
+	name_fr="Düsseldorf"
 	placetype="city;capitalOfState"
 	/>
 	<place
@@ -154,6 +171,7 @@
 	name_de="Hannover"
 	name_en="Hannover"
 	name_la="Hannovera"
+	name_fr="Hanovre"
 	placetype="city;capitalOfState"
 	/>
 	<place
@@ -162,6 +180,7 @@
 	name_de="Schwerin"
 	name_en="Schwerin"
 	name_la="Schwerinum"
+	name_fr="Schwerin"
 	placetype="town;capitalOfState"
 	/>
 	<!--20-->
@@ -171,6 +190,7 @@
 	name_de="Kiel"
 	name_en="Kiel"
 	name_la="Kielia"
+	name_fr="Kiel"
 	placetype="city;capitalOfState"
 	/>
 	<place
@@ -179,6 +199,7 @@
 	name_de="Potsdam"
 	name_en="Potsdam"
 	name_la="Potestampium"
+	name_fr="Potsdam"
 	placetype="city;capitalOfState"
 	/>
 	<place
@@ -187,6 +208,7 @@
 	name_de="Magdeburg"
 	name_en="Magdeburg"
 	name_la="Magdeburgum"
+	name_fr="Magdebourg"
 	placetype="city;capitalOfState"
 	/>
 	<place
@@ -195,6 +217,7 @@
 	name_de="Dresden"
 	name_en="Dresden"
 	name_la="Dresda"
+	name_fr="Dresde"
 	placetype="city;capitalOfState"
 	/>
 	<place
@@ -203,6 +226,7 @@
 	name_de="Erfurt"
 	name_en="Erfurt"
 	name_la="Erfordia"
+	name_fr="Erfurt"
 	placetype="city;capitalOfState"
 	/>
 	<place
@@ -211,6 +235,7 @@
 	name_de="Wiesbaden"
 	name_en="Wiesbaden"
 	name_la="Aquae Mattiacae"
+	name_fr="Wiesbaden"
 	placetype="city;capitalOfState"
 	/>
 	<place
@@ -219,6 +244,7 @@
 	name_de="Mainz"
 	name_en="Mainz"
 	name_la="Moguntiacum"
+	name_fr="Mayence"
 	placetype="city;capitalOfState"
 	/>
 	<place
@@ -227,6 +253,7 @@
 	name_de="Saarbrücken"
 	name_en="Saarbrücken"
 	name_la="Saravipontus"
+	name_fr="Sarrebruck"
 	placetype="city;capitalOfState"
 	/>
 	<place
@@ -235,6 +262,7 @@
 	name_de="München"
 	name_en="Munich"
 	name_la="Mon&aacute;cum"
+	name_fr="Munich"
 	placetype="city;capitalOfState"
 	/>
 	<place
@@ -243,6 +271,7 @@
 	name_de="Stuttgart"
 	name_en="Stuttgart"
 	name_la="Stutgardia"
+	name_fr="Stuttgart"
 	placetype="city;capitalOfState"
 	/>
 	<!--30-->
