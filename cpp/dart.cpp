@@ -1,5 +1,5 @@
 /*
-QeoDart Copyright (C) 2011 Markus Brenneis
+QeoDart Copyright (C) 2012 Markus Brenneis
 This program comes with ABSOLUTELY NO WARRANTY.
 This is free software, and you are welcome to redistribute it under certain conditions.
 See main.cpp for details. */
@@ -575,17 +575,17 @@ void dart::vSetNumberOfPlayers(int n) {
 		gridLayout->addWidget(lblCurrentPlayer,1,4);
 		gridLayout->addWidget(lblComment,1,2);
 		gridLayout->addWidget(lineEdit,1*(iGameMode!=enTraining && iGameMode!=enFind),0);
-                gridLayout->addWidget(lblTime,1*(iGameMode!=enTraining && iGameMode!=enFind),4);
+        gridLayout->addWidget(lblTime,1*(iGameMode!=enTraining && iGameMode!=enFind),4);
 		lblComment->setText("");
 		lblComment->show();
-                lblCurrentPlayer->hide();
+        lblCurrentPlayer->hide();
 	} else {
 		gridLayout->addWidget(lblCurrentPlace,iNumberOfPlayers,0);
 		gridLayout->addWidget(lblCurrentPlayer,iNumberOfPlayers,4);
 		gridLayout->addWidget(lineEdit,iNumberOfPlayers,0);
-                gridLayout->addWidget(lblTime,iNumberOfPlayers-1,4);
+        gridLayout->addWidget(lblTime,iNumberOfPlayers-1,4);
 		lblComment->hide();
-                lblCurrentPlayer->show();
+        lblCurrentPlayer->show();
 	}
 	
 	gridLayout->removeItem(spGridLayoutVertical);
@@ -823,10 +823,26 @@ void dart::vShowAllPlaces() {
 }
 
 void dart::vMouseClickEvent(int x, int y) {
-	if(iGameMode==enFind) { vFindPlaceAround(iGetUnzoomed(x),iGetUnzoomed(y)); return; }
+	if(iGameMode==enFind) {
+		vFindPlaceAround(iGetUnzoomed(x),iGetUnzoomed(y));
+		return;
+	}
+	if(iAskForMode!=enPositions) {
+		QString text=lineEdit->text();
+		lineEdit->blockSignals(true);
+		lineEdit->setText(tr("What is the name of the marked place?"));
+		for(int i=0; i<3; i++) {
+			lineEdit->setStyleSheet("background-color: red");
+			mySleep(400);
+			lineEdit->setStyleSheet("");
+			mySleep(400);
+		}
+		lineEdit->setText(text);
+		lineEdit->blockSignals(false);
+		return;
+	}
 	if(!bAcceptingClickEvent) return;
 	bAcceptingClickEvent=false;
-	if(iAskForMode!=enPositions) return;
 	
 	x=iGetUnzoomed(x);
 	y=iGetUnzoomed(y);
@@ -1007,7 +1023,7 @@ QColor dart::qcGetColorOfPlayer(int player) {
 void dart::vSetGameMode() {
 	if(!bNewGameIsSafe() ||
 	   (bCanLoseScore() &&
-	    !bStartNewGameWarning(tr("Chance Game Mode"), tr("When you change the game mode, your current score will be lost.\nDo you want to continue?"))) ) {
+	    !bStartNewGameWarning(tr("Change Game Mode"), tr("When you change the game mode, your current score will be lost.\nDo you want to continue?"))) ) {
 		vUpdateActionsIsCheckedStates();
 		return;
 	}
@@ -1137,7 +1153,7 @@ void dart::vSetGameMode(enGameModes mode) {
 void dart::vSetAskForMode() {
 	if(!bNewGameIsSafe() ||
 	   (bCanLoseScore() &&
-	    !bStartNewGameWarning(tr("Chance Mode"), tr("When you change this setting, your current score will be lost.\nDo you want to continue?"))) ) {
+	    !bStartNewGameWarning(tr("Change Mode"), tr("When you change this setting, your current score will be lost.\nDo you want to continue?"))) ) {
 		vUpdateActionsIsCheckedStates();
 		return;
 	}
@@ -1646,7 +1662,7 @@ void dart::vShowResults() {
 void dart::vReadQcf() {
 	if(!bNewGameIsSafe() ||
 	   (bCanLoseScore() &&
-	    !bStartNewGameWarning(tr("Chance Map"), tr("When you change the map, your current score will be lost.\nDo you want to continue?"))) ) {
+	    !bStartNewGameWarning(tr("Change Map"), tr("When you change the map, your current score will be lost.\nDo you want to continue?"))) ) {
 		vUpdateActionsIsCheckedStates();
 		return;
 	}
@@ -1898,7 +1914,7 @@ void dart::vTextEditedEvent() {
 //#include <QPropertyAnimation>
 //#include <QGraphicsOpacityEffect>
 void dart::vGiveHint() {
-	if(qlPlacesHistory.size()<1) return;
+	if(qlPlacesHistory.size()<1 || iPlaceCount==0) return;
 	
 	if(iAskForMode==enPositions) {
 		QRectangleLabel *lblHint;

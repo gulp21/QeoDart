@@ -161,7 +161,7 @@
      <item row="3" column="1">
       <widget class="QComboBox" name="cbMatchBehaviour">
        <property name="whatsThis">
-        <string>Chance the search behavior of the search box:
+        <string>Change the search behavior of the search box:
 
 Match beginning of names:
 &quot;K&quot; finds &quot;Kosovo&quot; but not &quot;United Kingdom&quot;
