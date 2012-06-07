@@ -1,6 +1,8 @@
 bugs:	refusing new game results in iPlaceCount++
 	game end dialog shown to early when player 2 clicks first (test w/ 2 places)
 
+enable give hint in network mode
+
 would this work: #ifdef wince #define no_cursor
 
 edit-clear.svg
