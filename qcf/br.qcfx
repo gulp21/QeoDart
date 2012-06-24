@@ -1,0 +1,283 @@
+<!DOCTYPE qcfx>
+<qcfx version="0.2">
+	<name id="BRAZIL" default="Brasil" short="BR" de="Brasilien" en="Brazil" />
+	<pxtokm value="10.06" /> TODO
+	<copyright
+	file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
+	background="Felipe Menegaz: CC BY-SA 3.0 (derived from http://en.wikipedia.org/wiki/File:Brazil_Labelled_Map.svg)"
+	borders="Felipe Menegaz: CC BY-SA 3.0 (derived from http://en.wikipedia.org/wiki/File:Brazil_Labelled_Map.svg)"
+	/>
+	<!--.....state.....-->
+	<place
+	x="71" y="223" dimx="107" dimy="60"
+	name="Acre"
+	placetype="state"
+	/>
+	<place
+	x="564" y="230" dimx="44" dimy="24"
+	name="Alagoas"
+	placetype="state"
+	/>
+	<place
+	x="334" y="60" dimx="72" dimy="85"
+	name="Amapá"
+	placetype="state"
+	/>
+	<place
+	x="150" y="141" dimx="258" dimy="181"
+	name="Amazonas"
+	placetype="state"
+	/>
+	<place
+	x="486" y="287" dimx="134" dimy="147"
+	name="Bahia"
+	placetype="state"
+	/>
+	<place
+	x="525" y="165" dimx="60" dimy="76"
+	name="Ceará"
+	placetype="state"
+	/>
+	<place
+	x="401" y="323" dimx="14" dimy="10"
+	name="Distrito Federal"
+	placetype="state"
+	/>
+	<place
+	x="505" y="380" dimx="31" dimy="51"
+	name="Espírito Santo"
+	placetype="state"
+	/>
+	<place
+	x="374" y="325" dimx="107" dimy="107"
+	name="Goiás"
+	placetype="state"
+	/>
+	<place
+	x="440" y="171" dimx="97" dimy="137"
+	name="Maranhão"
+	placetype="state"
+	/>
+	<place
+	x="282" y="277" dimx="166" dimy="161"
+	name="Mato Grosso"
+	placetype="state"
+	/>
+	<place
+	x="303" y="395" dimx="106" dimy="104"
+	name="Mato Grosso do Sul"
+	placetype="state"
+	/>
+	<place
+	x="436" y="365" dimx="163" dimy="131"
+	name="Minas Gerais"
+	placetype="state"
+	/>
+	<place
+	x="332" y="139" dimx="187" dimy="187"
+	name="Pará"
+	placetype="state"
+	/>
+	<place
+	x="563" y="193" dimx="58" dimy="34"
+	name="Paraíba"
+	placetype="state"
+	/>
+	<place
+	x="350" y="456" dimx="96" dimy="63"
+	name="Paraná"
+	placetype="state"
+	/>
+	<place
+	x="545" y="211" dimx="94" dimy="33"
+	name="Pernambuco"
+	placetype="state"
+	/>
+	<place
+	x="469" y="189" dimx="81" dimy="122"
+	name="Piauí"
+	placetype="state"
+	/>
+	<place
+	x="475" y="417" dimx="56" dimy="33"
+	name="Rio de Janeiro"
+	placetype="state"
+	/>
+	<place
+	x="563" y="174" dimx="52" dimy="32"
+	name="Rio Grande do Norte"
+	placetype="state"
+	/>
+	<place
+	x="315" y="544" dimx="115" dimy="100"
+	name="Rio Grande do Sul"
+	placetype="state"
+	/>
+	<place
+	x="175" y="248" dimx="102" dimy="86"
+	name="Rondônia"
+	placetype="state"
+	/>
+	<place
+	x="196" y="57" dimx="87" dimy="102"
+	name="Roraima"
+	placetype="state"
+	/>
+	<place
+	x="353" y="502" dimx="78" dimy="50"
+	name="Santa Catarina"
+	placetype="state"
+	/>
+	<place
+	x="390" y="425" dimx="128" dimy="82"
+	name="São Paulo"
+	placetype="state"
+	/>
+	<place
+	x="554" y="243" dimx="27" dimy="30"
+	name="Sergipe"
+	placetype="state"
+	/>
+	<place
+	x="395" y="225" dimx="72" dimy="126"
+	name="Tocantins"
+	placetype="state"
+	/>
+	<!--.....capitalOfState.....-->
+	<place
+	x="105" y="234"
+	name="Rio Branco"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="578" y="230"
+	name="Maceió"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="359" y="77" dimx="24" dimy="21"
+	name="Macapá"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="215" y="126" dimx="17" dimy="17"
+	name="Manaus"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="538" y="279"
+	name="Salvador"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="536" y="142"
+	name="Fortaleza"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="401" y="323"
+	name="Brasília"
+	placetype="capitalOfState;city;capitalOfCountry"
+	/>
+	<place
+	x="511" y="390"
+	name="Vitória"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="378" y="337"
+	name="Goiânia"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="453" y="122"
+	name="São Luís"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="284" y="319"
+	name="Cuiabá"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="558" y="250" dimx="2" dimy="3"
+	name="Aracaju"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="309" y="400" dimx="18" dimy="22"
+	name="Campo Grande"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="456" y="382"
+	name="Belo Horizonte"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="379" y="469"
+	name="Curitiba"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="590" y="192"
+	name="João Pessoa"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="390" y="105"
+	name="Belém"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="590" y="205"
+	name="Recife"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="474" y="166" dimx="6" dimy="11"
+	name="Teresina"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="464" y="431" dimx="9" dimy="3"
+	name="Rio de Janeiro"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="585" y="173"
+	name="Natal"
+	placetype="capitalOfState;city"
+	/>
+	<!-- TODO recheck with better background -->
+	<place
+	x="350" y="537"
+	name="Porto Alegre"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="165" y="215"
+	name="Porto Velho"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="212" y="39" dimx="9" dimy="18"
+	name="Boa Vista"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="390" y="503" dimx="3" dimy="7"
+	name="Florianópolis"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="418" y="442" dimx="5" dimy="10"
+	name="São Paulo"
+	placetype="capitalOfState;city"
+	/>
+	<place
+	x="393" y="239"
+	name="Palmas"
+	placetype="capitalOfState;city"
+	/>
+</qcfx>
