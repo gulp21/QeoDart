@@ -17,11 +17,11 @@ highScoreWindow::highScoreWindow(int highlightHighScore, dart *TDart, io *TIO, Q
 	for(int i=0; i<myDart->qlQcfxFiles.count(); i++) {
 		comboBox->addItem(myDart->qlQcfxFiles[i].mapName);
 	}
-    
-    //addItem should not trigger currentIndexChanged
-    connect(comboBox, SIGNAL (currentIndexChanged(int)), this, SLOT(vLoadHighScores(int)));
-    
-    comboBox->setCurrentIndex(myDart->iCurrentQcf);
+	
+	//addItem should not trigger currentIndexChanged
+	connect(comboBox, SIGNAL (currentIndexChanged(int)), this, SLOT(vLoadHighScores(int)));
+	
+	comboBox->setCurrentIndex(myDart->iCurrentQcf);
 	
 	myIO->vLoadHighScores(comboBox->itemText(comboBox->currentIndex()));
 }

@@ -515,7 +515,7 @@ void dart::vSetNumberOfPlayers(int n) {
 				qDebug()<<"ff";
 			}
 			qlPlayerLabels[i].clear();
-// 			~qlPlayerLabels[i];			//TODO we should do it somehow, shouldn't we?
+// 			delete qlPlayerLabels[i];			//TODO we should do it somehow, shouldn't we?
 			qlPlayerLabels.removeAt(i);
 			
 			qlScoreHistory[i].clear(); //TODO must delete sub-lists?
@@ -623,7 +623,9 @@ void dart::resizeEvent(QResizeEvent *event) {
 	resizeTimer->start(200);
 }
 
-// this function shortens the labels when the window becomes too narrow
+/*!
+ * shortens the toolbar labels when the window becomes too narrow
+ */
 void dart::vToolbarOverflow() {
 	if(!bAcceptingResizeEvent) return;
 	mySleep(1);

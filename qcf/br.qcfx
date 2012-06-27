@@ -1,7 +1,7 @@
 <!DOCTYPE qcfx>
 <qcfx version="0.2">
 	<name id="BRAZIL" default="Brasil" short="BR" de="Brasilien" en="Brazil" />
-	<pxtokm value="10.06" /> TODO
+	<pxtokm value="7.35" />
 	<copyright
 	file="Markus Brenneis: GNU GPL v3, or (at your option) any later version"
 	background="Felipe Menegaz: CC BY-SA 3.0 (derived from http://en.wikipedia.org/wiki/File:Brazil_Labelled_Map.svg)"
