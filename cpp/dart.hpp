@@ -241,7 +241,7 @@ Q_OBJECT
 		void vSetNumberOfPlayers();
 		void vSetAgainstTime();
 		void vShowPreferences();
-		void vShowHighScores();
+		void vShowHighScores(int iHighlightHighScore=-1);
 		void vShowAboutWindow();
 		void vToolbarOverflow();
 		void vToggleMapLayer();

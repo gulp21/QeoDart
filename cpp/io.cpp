@@ -680,8 +680,6 @@ void io::vLoadHighScores(QString mapName) {
 		entry.name=list[0];
 		entry.score=list[1].toDouble();
 		myDart->qlHighScores.append(entry);
-		
-		qDebug() << entry.name << "R highsc" << entry.score;
 	}
 }
 

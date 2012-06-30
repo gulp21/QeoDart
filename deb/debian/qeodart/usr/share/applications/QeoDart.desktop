@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=2.0-120629
+Name=QeoDart
+GenericName=Qt Geography Dart
+Exec=qeodart
+Terminal=false
+Type=Application
+Icon=qeodart
+Categories=Application\;Education\;
+StartupNotify=true

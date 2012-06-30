@@ -16,9 +16,10 @@ class highScoreWindow : public QDialog, public Ui::highScoreWindow {
 	
 	dart *myDart;
 	io *myIO;
+	int iHighlightHighScore;
 	
 	public:
-		explicit highScoreWindow(dart*, io*, QWidget *parent = 0);
+		explicit highScoreWindow(int, dart*, io*, QWidget *parent = 0);
 		~highScoreWindow();
 	private slots:
 		void vLoadHighScores(int index);

@@ -9,12 +9,12 @@ See main.cpp for details. */
 
 using namespace std;
 
-resultWindow::resultWindow(bool &ShowHighScores, dart *TDart, int PLayer, io *TIO, QDialog *parent) : myDart(TDart), player(PLayer), myIO(TIO), QDialog(parent) {
+resultWindow::resultWindow(int &HighlightHighScore, dart *TDart, int PLayer, io *TIO, QDialog *parent) : myDart(TDart), player(PLayer), myIO(TIO), QDialog(parent) {
 	const int R1=15, G1=135, B1=28, R2=255, G2=25, B2=25;
 	
 	myIO->vLoadHighScores(myDart->qlQcfxFiles[myDart->iCurrentQcf].mapName);
 	
-	bShowHighScores=&ShowHighScores;
+	iHighlightHighScore=&HighlightHighScore;
 	
 	setParent(myDart);
 
@@ -140,7 +140,7 @@ void resultWindow::vClose() {
 	
 	myIO->vSaveHighScores(myDart->qlQcfxFiles[myDart->iCurrentQcf].id);
 	
-	*bShowHighScores=true;
+	*iHighlightHighScore=i;
 	
 	close();
 }
