@@ -1,0 +1,11 @@
+Package: qeodart
+Version: 2.0-120629
+Architecture: i386
+Maintainer: Markus Brenneis <support.gulp21@googlemail.com>
+Installed-Size: 3347
+Depends: libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libqt4-xml (>= 4:4.5.3), libqtcore4 (>= 4:4.7.0~beta1), libqtgui4 (>= 4:4.6.1), libstdc++6 (>= 4.4.0), libqt4-dev, qt4-qmake
+Section: unknown
+Priority: extra
+Homepage: http://gulp21.github.com/qeodart.html
+Description: Geography Education Game
+ Geography Education Game

@@ -1,0 +1,26 @@
+Format: http://dep.debian.net/deps/dep5
+Upstream-Name: qeodart
+Source: https://github.com/gulp21/QeoDart/
+
+Files: *
+Copyright: Copyright (C) 2012 by Markus Brenneis <support.gulp21@googlemail.com>
+License: GPL-3+
+ This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>.
+
+Files: debian/*
+Copyright: 2012 Markus <support.gulp21@googlemail.com>
+License: GPL-3+
+ This package is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>.
+
+Files: qcf/*
+Copyright: Various Authors
+License: Different
+ Please have a look at the individual COPYING files, or choose Help -> About QeoDart -> Map.

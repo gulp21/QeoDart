@@ -1,0 +1,33 @@
+#!/bin/bash
+# basing on https://wiki.ubuntu.com/PackagingGuide/QtApplication
+
+workingdir=`pwd`
+cd
+
+echo $(tput setaf 2) Checking if pbuilder is set up... $(tput sgr0)
+if [ ! -f .pbuilderrc ]; then
+	tput setf 6
+	echo $(tput setaf 2) Installing and setting up pbuilder... $(tput sgr0)
+	tput setf 7
+	sudo apt-get install build-essential devscripts ubuntu-dev-tools debhelper dh-make diff patch gnupg fakeroot lintian pbuilder
+	echo COMPONENTS=\"main restricted universe multiverse\" > .pbuilderrc
+fi
+
+cd $workingdir
+
+echo $(tput setaf 2) Creating orig.tar.gz... $(tput sgr0)
+find . -print | grep -v -E "/deb[/$]|template|/doc[/$]|/osm|de1|qcf.*svg|qcf.*xcf|\.o|\.user|\.conf|ui_|/\.|\.ts|/moc_|/svg/|RIVERS|BORDERS|BACKGROUND|ELEVATIONS|qrc_|wikipedianames|makedeb|icon_old|doxygen|Doxygen|test\.svg|\.tar|~" | xargs -t tar --no-recursion -PSczf ./qeodart_2.0.orig.tar.gz
+
+echo $(tput setaf 2) Preparing source directory... $(tput sgr0)
+mv qeodart_2.0.orig.tar.gz deb
+cd deb
+rm -r qeodart-2.0-120629
+mkdir qeodart-2.0-120629
+tar -xzf qeodart_2.0.orig.tar.gz -C qeodart-2.0-120629
+cp -r debian qeodart-2.0-120629
+cd qeodart-2.0-120629
+
+echo $(tput setaf 2) Creating package... $(tput sgr0)
+debuild -uc -us
+
+echo $(tput setaf 2) Finished $(tput sgr0)
