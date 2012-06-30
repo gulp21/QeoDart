@@ -6,11 +6,10 @@ cd
 
 echo $(tput setaf 2) Checking if pbuilder is set up... $(tput sgr0)
 if [ ! -f .pbuilderrc ]; then
-	tput setf 6
 	echo $(tput setaf 2) Installing and setting up pbuilder... $(tput sgr0)
-	tput setf 7
 	sudo apt-get install build-essential devscripts ubuntu-dev-tools debhelper dh-make diff patch gnupg fakeroot lintian pbuilder
 	echo COMPONENTS=\"main restricted universe multiverse\" > .pbuilderrc
+	sudo pbuilder create
 fi
 
 cd $workingdir
