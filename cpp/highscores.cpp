@@ -6,10 +6,9 @@ See main.cpp for details. */
 
 #include "highscores.hpp"
 
-highScoreWindow::highScoreWindow(dart *TDart, io *TIO, QWidget *parent) : myDart(TDart), myIO(TIO), QDialog(parent) {
+highScoreWindow::highScoreWindow(int highlightHighScore, dart *TDart, io *TIO, QWidget *parent) : iHighlightHighScore(highlightHighScore), myDart(TDart), myIO(TIO), QDialog(parent) {
 	setupUi(this);
 	
-	connect(comboBox, SIGNAL (currentIndexChanged(int)), this, SLOT(vLoadHighScores(int)));
 	connect(btClear, SIGNAL (clicked()), this, SLOT(vClear()));
 	btClear->setIcon(QIcon::fromTheme("edit-clear", QIcon(":/icons/oxygen/edit-clear.png")));
 	connect(btClose, SIGNAL (clicked()), this, SLOT(close()));
@@ -17,8 +16,12 @@ highScoreWindow::highScoreWindow(dart *TDart, io *TIO, QWidget *parent) : myDart
 	
 	for(int i=0; i<myDart->qlQcfxFiles.count(); i++) {
 		comboBox->addItem(myDart->qlQcfxFiles[i].mapName);
-		if(i==myDart->iCurrentQcf) comboBox->setCurrentIndex(i);
 	}
+	
+	//addItem should not trigger currentIndexChanged
+	connect(comboBox, SIGNAL (currentIndexChanged(int)), this, SLOT(vLoadHighScores(int)));
+	
+	comboBox->setCurrentIndex(myDart->iCurrentQcf);
 	
 	myIO->vLoadHighScores(comboBox->itemText(comboBox->currentIndex()));
 }
@@ -35,9 +38,14 @@ void highScoreWindow::vLoadHighScores(int index) {
 	myIO->vLoadHighScores(comboBox->itemText(index));
 	
 	for(int i=0; i<10; i++) {
+		QString style=(iHighlightHighScore==i ? "font-weight:bold" : "font-weight:normal");
 		static_cast<QLabel*>(gridLayout->itemAtPosition(i+1,1)->widget())->setText(myDart->qlHighScores[i].name);
+		static_cast<QLabel*>(gridLayout->itemAtPosition(i+1,1)->widget())->setStyleSheet(style);
 		static_cast<QLabel*>(gridLayout->itemAtPosition(i+1,2)->widget())->setText(QString("%1").arg(myDart->qlHighScores[i].score,0,'f',1));
+		static_cast<QLabel*>(gridLayout->itemAtPosition(i+1,2)->widget())->setStyleSheet(style);
 	}
+	
+	iHighlightHighScore=-1;
 }
 
 /*!

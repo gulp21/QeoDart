@@ -3,7 +3,6 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
 DEPENDPATH += . cpp ui
 INCLUDEPATH += . cpp
 
@@ -35,3 +34,20 @@ QMAKE_CXXFLAGS_WARN_OFF += -Wno-reorder
 
 RESOURCES += \
     icons.qrc
+
+TARGET = qeodart
+target.path = /usr/bin
+INSTALLS += target
+langfiles.path += /usr/share/QeoDart/lang
+langfiles.files += lang/*.qm
+qcf.path += /usr/share/QeoDart/qcf
+qcf.files += qcf/*
+icon.path +=  /usr/share/pixmaps
+icon.files += icons/qeodart.svg
+desktop.path +=  /usr/share/applications
+desktop.files += QeoDart.desktop
+INSTALLS += langfiles
+INSTALLS += qcf
+INSTALLS += icon
+INSTALLS += desktop
+

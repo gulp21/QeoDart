@@ -16,13 +16,13 @@ See main.cpp for details. */
 class resultWindow : public QDialog, public Ui::resultWindow {
 	Q_OBJECT
 	
-	bool *bShowHighScores;
+	int *iHighlightHighScore;
 	dart *myDart;
 	int player;
 	io *myIO;
 	
 	public:
-		resultWindow (bool &ShowHighScores, dart*, int PLayer, io*, QDialog *parent = 0);
+		resultWindow (int &HighlightHighScore, dart*, int PLayer, io*, QDialog *parent = 0);
 		~resultWindow();
 	private slots:
 		void vClose();

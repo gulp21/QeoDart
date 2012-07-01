@@ -81,11 +81,19 @@ int main(int argc, char* argv[]) {
 	qtOwnTranslator.load(QString(QCoreApplication::applicationDirPath()+"/lang/qt_%1").arg(lang));
 	a.installTranslator(&qtOwnTranslator);
 	
-	//English fallback
-	QTranslator translatore;
-	translatore.load(QString(QCoreApplication::applicationDirPath()+"/lang/en"));
-	a.installTranslator(&translatore);
+	// English fallback
+	// translations installed on Linux
+	QTranslator translatorEnglishLinux;
+	translatorEnglishLinux.load("/usr/share/QeoDart/lang/en");
+	a.installTranslator(&translatorEnglishLinux);
+	// "portable" translations
+	QTranslator translatorEnglish;
+	translatorEnglish.load(QString(QCoreApplication::applicationDirPath()+"/lang/en"));
+	a.installTranslator(&translatorEnglish);
 	
+	QTranslator translatorLinux;
+	translatorLinux.load(QString("/usr/share/QeoDart/lang/%1").arg(lang));
+	a.installTranslator(&translatorLinux);
 	QTranslator translator;
 	translator.load(QString(QCoreApplication::applicationDirPath()+"/lang/%1").arg(lang));
 	a.installTranslator(&translator);

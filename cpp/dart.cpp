@@ -115,7 +115,7 @@ dart::dart(QMainWindow *parent) : QMainWindow(parent) {
 	connect(actionFind_Place, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
 	actionFind_Place->setIcon(QIcon::fromTheme("edit-find", QIcon(":/icons/oxygen/edit-find.png")));
 	connect(actionTraining, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
-	actionTraining->setIcon(QIcon::fromTheme("user-identity", QIcon::fromTheme("emblem-personal", QIcon(":/icons/oxygen/system-users.png"))));
+	actionTraining->setIcon(QIcon::fromTheme("user-identity", QIcon::fromTheme("emblem-personal", QIcon(":/icons/oxygen/user-identity.png"))));
 	connect(actionLocal, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
 	actionLocal->setIcon(QIcon::fromTheme("system-users", QIcon(":/icons/oxygen/system-users.png")));
 //	connect(actionNetwork, SIGNAL(triggered()), this, SLOT(vSetGameMode()));
@@ -515,7 +515,7 @@ void dart::vSetNumberOfPlayers(int n) {
 				qDebug()<<"ff";
 			}
 			qlPlayerLabels[i].clear();
-// 			~qlPlayerLabels[i];			//TODO we should do it somehow, shouldn't we?
+// 			delete qlPlayerLabels[i];			//TODO we should do it somehow, shouldn't we?
 			qlPlayerLabels.removeAt(i);
 			
 			qlScoreHistory[i].clear(); //TODO must delete sub-lists?
@@ -623,7 +623,9 @@ void dart::resizeEvent(QResizeEvent *event) {
 	resizeTimer->start(200);
 }
 
-// this function shortens the labels when the window becomes too narrow
+/*!
+ * shortens the toolbar labels when the window becomes too narrow
+ */
 void dart::vToolbarOverflow() {
 	if(!bAcceptingResizeEvent) return;
 	mySleep(1);
@@ -934,20 +936,20 @@ void dart::vShowComment() {
 
 void dart::vShowResultWindows() {
 	bAcceptingClickEvent=false;
-	bool bShowHighScores=false;
+	int iHighlightHighScore=-1;
 	
 	for(int i=0,max=qlPlacesHistory.count(); i<max; i++) {
 		vDrawPoint(qlPlacesHistory[i]->x, qlPlacesHistory[i]->y, qlPointLabels, qlPlacesHistory[i]->name);
 	}
 	
 	for(int i=0; i<iNumberOfPlayers; i++) {
-		resultWindow dialog(bShowHighScores,this,i,myIO);
+		resultWindow dialog(iHighlightHighScore,this,i,myIO);
 		dialog.exec();
 	}
 	
 	iPlaceCount=0; // needed for quit?-dialog
 	
-	if(bShowHighScores && bAutoShowHighScores) vShowHighScores();
+	if(iHighlightHighScore>-1 && bAutoShowHighScores) vShowHighScores(iHighlightHighScore);
 	
 	if(bAutoNewGame) vNewGame();
 }
@@ -1745,8 +1747,8 @@ void dart::vShowPreferences() {
 	dialog.exec();
 }
 
-void dart::vShowHighScores() {
-	highScoreWindow dialog(this,myIO,this);
+void dart::vShowHighScores(int iHighlightHighScore) {
+	highScoreWindow dialog(iHighlightHighScore,this,myIO,this);
 	dialog.exec();
 }
 
