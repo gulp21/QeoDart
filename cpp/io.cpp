@@ -674,7 +674,6 @@ void io::vLoadHighScores(QString mapName) {
 	for(int i=0; i<10; i++) {
 		QStringList list=settings->value(QString("Highscores/%1.%2").arg(qsGetIdFromMapName(mapName)).arg(i),"---||0").toString().split("||");
 		qDebug() << list;
-		if(list.count()<2) list=QString("---||0").split("||");
 		
 		highScoreEntry entry;
 		entry.name=list[0];

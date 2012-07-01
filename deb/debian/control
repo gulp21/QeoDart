@@ -10,7 +10,7 @@ Homepage: http://gulp21.github.com/qeodart.html
 
 Package: qeodart
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-dev, qt4-qmake
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Geography Education Game
  QeoDart is a free geography education game.
  .
