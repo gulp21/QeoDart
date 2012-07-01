@@ -1,5 +1,5 @@
 #!/bin/bash
-# basing on https://wiki.ubuntu.com/PackagingGuide/QtApplication
+# basing on https://wiki.ubuntu.com/PackagingGuide/QtApplication and http://wiki.ubuntuusers.de/pBuilder
 
 workingdir=`pwd`
 cd
@@ -9,13 +9,17 @@ if [ ! -f .pbuilderrc ]; then
 	echo $(tput setaf 2) Installing and setting up pbuilder... $(tput sgr0)
 	sudo apt-get install build-essential devscripts ubuntu-dev-tools debhelper dh-make diff patch gnupg fakeroot lintian pbuilder
 	echo COMPONENTS=\"main restricted universe multiverse\" > .pbuilderrc
-	sudo pbuilder create
+	cp pbuilderrc ~/.pbuilderrc
+	pbuilder-dist lucid i386 create
+	pbuilder-dist lucid i386 update
+	pbuilder-dist lucid amd64 create
+	pbuilder-dist lucid amd64 update
 fi
 
 cd $workingdir
 
 echo $(tput setaf 2) Creating orig.tar.gz... $(tput sgr0)
-find . -print | grep -v -E "/deb[/$]|template|/doc[/$]|/osm|de1|qcf.*svg|qcf.*xcf|\.o|\.user|\.conf|ui_|/\.|\.ts|/moc_|/svg/|RIVERS|BORDERS|BACKGROUND|ELEVATIONS|qrc_|wikipedianames|makedeb|icon_old|doxygen|Doxygen|test\.svg|\.tar|~" | xargs -t tar --no-recursion -PSczf ./qeodart_2.0.orig.tar.gz
+find . -print | grep -v -E "/deb[/$]|template|/doc[/$]|/osm|de1|qcf.*svg|qcf.*xcf|\.o|\.user|\.conf|ui_|/\.|\.ts|/moc_|/svg/|RIVERS|BORDERS|BACKGROUND|ELEVATIONS|qrc_|wikipedianames|makedeb|icon_old|doxygen|Doxygen|test\.svg|\.tar|~|de2|de3" | xargs -t tar --no-recursion -PSczf ./qeodart_2.0.orig.tar.gz
 
 echo $(tput setaf 2) Preparing source directory... $(tput sgr0)
 mv qeodart_2.0.orig.tar.gz deb
@@ -27,6 +31,14 @@ cp -r debian qeodart-2.0-120629
 cd qeodart-2.0-120629
 
 echo $(tput setaf 2) Creating package... $(tput sgr0)
-debuild -uc -us
+# debuild -uc -us
+echo $(tput setaf 2) debuild... $(tput sgr0)
+debuild -S -uc -us
+echo $(tput setaf 2) pbuilder-dist i386... $(tput sgr0)
+pbuilder-dist lucid i386 build ../*.dsc
+cp ~/pbuilder/lucid-i386_result/*.deb ..
+echo $(tput setaf 2) pbuilder-dist amd64... $(tput sgr0)
+pbuilder-dist lucid amd64 build ../*.dsc
+cp ~/pbuilder/lucid_result/*.deb ..
 
 echo $(tput setaf 2) Finished $(tput sgr0)
