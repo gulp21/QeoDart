@@ -13,14 +13,11 @@ highScoreWindow::highScoreWindow(int highlightHighScore, dart *TDart, io *TIO, Q
 	btClear->setIcon(QIcon::fromTheme("edit-clear", QIcon(":/icons/oxygen/edit-clear.png")));
 	connect(btClose, SIGNAL (clicked()), this, SLOT(close()));
 	btClose->setIcon(QIcon::fromTheme("window-close", QIcon(":/icons/oxygen/window-close.png")));
+	connect(comboBox, SIGNAL (currentIndexChanged(int)), this, SLOT(vLoadHighScores(int)));
 	
 	for(int i=0; i<myDart->qlQcfxFiles.count(); i++) {
 		comboBox->addItem(myDart->qlQcfxFiles[i].mapName);
 	}
-	
-	comboBox->setCurrentIndex(-1); // TODO WORKAROUND just make sure that current index will be changed, so that the signal is emitted (we should use mapId or name for highlighting new highscores)
-	//addItem should not trigger currentIndexChanged
-	connect(comboBox, SIGNAL (currentIndexChanged(int)), this, SLOT(vLoadHighScores(int)));
 	
 	comboBox->setCurrentIndex(myDart->iCurrentQcf);
 	
@@ -39,14 +36,12 @@ void highScoreWindow::vLoadHighScores(int index) {
 	myIO->vLoadHighScores(comboBox->itemText(index));
 	
 	for(int i=0; i<10; i++) {
-		QString style=(iHighlightHighScore==i ? "font-weight:bold" : "font-weight:normal");
+		QString style=( (iHighlightHighScore==i && myDart->iCurrentQcf==index) ? "font-weight:bold" : "font-weight:normal");
 		static_cast<QLabel*>(gridLayout->itemAtPosition(i+1,1)->widget())->setText(myDart->qlHighScores[i].name);
 		static_cast<QLabel*>(gridLayout->itemAtPosition(i+1,1)->widget())->setStyleSheet(style);
 		static_cast<QLabel*>(gridLayout->itemAtPosition(i+1,2)->widget())->setText(QString("%1").arg(myDart->qlHighScores[i].score,0,'f',1));
 		static_cast<QLabel*>(gridLayout->itemAtPosition(i+1,2)->widget())->setStyleSheet(style);
 	}
-	
-	iHighlightHighScore=-1;
 }
 
 /*!
