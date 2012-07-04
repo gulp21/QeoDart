@@ -18,6 +18,7 @@ highScoreWindow::highScoreWindow(int highlightHighScore, dart *TDart, io *TIO, Q
 		comboBox->addItem(myDart->qlQcfxFiles[i].mapName);
 	}
 	
+	comboBox->setCurrentIndex(-1); // TODO WORKAROUND just make sure that current index will be changed, so that the signal is emitted (we should use mapId or name for highlighting new highscores)
 	//addItem should not trigger currentIndexChanged
 	connect(comboBox, SIGNAL (currentIndexChanged(int)), this, SLOT(vLoadHighScores(int)));
 	
