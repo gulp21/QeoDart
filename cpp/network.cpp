@@ -251,46 +251,14 @@ void network::vReadCommand() {
 			
 			progressDialog->setMaximum(12);
 			
-			progressDialog->setLabelText(tr("Sending coordinates..."));
-			progressDialog->setValue(progressDialog->value()+1);
-			QString command="COORDS||NAMES||";
-			for(int i=0;i<myDart->qlAllPlaces.size();i++){
-				command=QString("%1%2||").arg(command).arg(myDart->qlAllPlaces[i].name);
-			}
-			vSendCommand(command);
-			progressDialog->setValue(progressDialog->value()+1);
-			command="COORDS||DIMX||";
-			for(int i=0;i<myDart->qlAllPlaces.size();i++){
-				command=QString("%1%2||").arg(command).arg(myDart->qlAllPlaces[i].dimx);
-			}
-			vSendCommand(command);
-			progressDialog->setValue(progressDialog->value()+1);
-			command="COORDS||DIMY||";
-			for(int i=0;i<myDart->qlAllPlaces.size();i++){
-				command=QString("%1%2||").arg(command).arg(myDart->qlAllPlaces[i].dimy);
-			}
-			vSendCommand(command);
-			progressDialog->setValue(progressDialog->value()+1);
-			command="COORDS||X||";
-			for(int i=0;i<myDart->qlAllPlaces.size();i++){
-				command=QString("%1%2||").arg(command).arg(myDart->qlAllPlaces[i].x);
-			}
-			vSendCommand(command);
-			progressDialog->setValue(progressDialog->value()+1);
-			command="COORDS||Y||";
-			for(int i=0;i<myDart->qlAllPlaces.size();i++){
-				command=QString("%1%2||").arg(command).arg(myDart->qlAllPlaces[i].y);
-			}
-			vSendCommand(command);
-			
 			progressDialog->setLabelText(tr("Sending images…"));
 			for(int i=0;i<4;i++) {
-				command="IMAGE||"+myDart->qlLayersNames[i].toUpper()+"||";
+				QString command="IMAGE||"+myDart->qlLayersNames[i].toUpper()+"||";
 				progressDialog->setValue(progressDialog->value()+1);
 				
 				QString imgfile=myDart->qlQcfxFiles[myDart->iCurrentQcf].path+"/"+myDart->qlLayersNames[i]+".png";
 				
-				if(QFile::exists(imgfile)){
+				if(QFile::exists(imgfile)) {
 					QPixmap pixmap(imgfile);
 					QDataStream socketstream(commandSocket);
 					
@@ -310,7 +278,29 @@ void network::vReadCommand() {
 				}
 			}
 			
-			progressDialog->setLabelText(tr("Sende Einstellungen..."));
+			progressDialog->setLabelText(tr("Sending qcfx-file..."));
+			
+			QFile qcfxfile(myDart->qlQcfxFiles[myDart->iCurrentQcf].path+".qcfx");
+			if(!qcfxfile.open(QIODevice::ReadOnly))
+				return;
+			QDataStream socketstream(commandSocket);
+			
+			QByteArray block=qcfxfile.readAll();
+			
+			qDebug() << block.size() << "is size";
+			vSendCommand(QString("QCFX||%1").arg(block.size()));
+			myDart->mySleep(200);
+			socketstream << block;
+			commandSocket->write(block);
+			commandSocket->flush();
+			myDart->mySleep(200);
+			vSendCommand("");
+			
+			qcfxfile.close();
+			
+			progressDialog->setValue(progressDialog->value()+5);
+			
+			progressDialog->setLabelText(tr("Sending settings..."));
 			QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
 			
 			vSendCommand(QString("SETTINGS||%1||%2||%3||%4||%5||%6||%7||%8||%9")
@@ -322,7 +312,7 @@ void network::vReadCommand() {
 			             .arg(myDart->agLayers->actions()[0]->isChecked() && myDart->agLayers->actions()[0]->isVisible())
 			             .arg(myDart->agLayers->actions()[1]->isChecked() && myDart->agLayers->actions()[1]->isVisible())
 			             .arg(myDart->agLayers->actions()[2]->isChecked() && myDart->agLayers->actions()[2]->isVisible())
-			             .toAscii().data()); // TODO send qcffile info
+			             .toAscii().data());
 			
 //			actionNetwork->setChecked(TRUE);
 			
@@ -344,33 +334,32 @@ void network::vReadCommand() {
 		} else if(command[0]==("OKTOCONNECT")) {
 			
 			progressDialog->setLabelText(tr("Connection request has been accepted."));
-		
-		} else if(command[0]==("COORDS") && command.size()>2) {
 			
-			if(command[1]==("NAMES")) {
-				progressDialog->setMaximum(12);
-				progressDialog->setLabelText(tr("Receiving coordinates…"));
-				progressDialog->setValue(progressDialog->value()+1);
-				
-				myDart->qlAllPlaces.clear();
-				
-				for(int i=2;i<command.size();i++) {
-					place p;
-					p.name=command[i];
-					myDart->qlAllPlaces.append(p);
-				}
-			} else if(command[1]==("DIMX") || command[1]==("DIMY") || command[1]==("X") || command[1]==("Y")) {
-				progressDialog->setValue(progressDialog->value()+1);
-				
-				for(int i=2;i<command.size()&&i<myDart->qlAllPlaces.size()+2;i++) {
-					if(command[1]==("DIMX")) myDart->qlAllPlaces[i-2].dimx=command[i].toInt();
-					else if(command[1]==("DIMY")) myDart->qlAllPlaces[i-2].dimy=command[i].toInt();
-					else if(command[1]==("X")) myDart->qlAllPlaces[i-2].x=command[i].toInt();
-					else if(command[1]==("Y")) myDart->qlAllPlaces[i-2].y=command[i].toInt();
-				}
-			} else {
-				qDebug() << "[E] broken command"; return;
-			}
+		} else if (command[0]=="QCFX") {
+			
+			QDataStream socketstream(commandSocket);
+			int blockSize=command[1].toInt();
+			QFile qcfxfile(myIO->qsGetTempDir()+"NETWORK.qcfx");
+			if(!qcfxfile.open(QIODevice::WriteOnly))
+				return; // TODO msgbox
+			
+			while(commandSocket->bytesAvailable() < blockSize)
+				myDart->mySleep(20);
+			
+			QByteArray block;
+			socketstream >> block;
+			qcfxfile.write(block);
+			qcfxfile.close();
+			
+			qcfFile f;
+			f.path=qcfxfile.fileName().left(qcfxfile.fileName().length()-5);
+			QDomDocument doc("qcfx");
+			myIO->iCheckQcf(qcfxfile, doc);
+			myIO->vGetMetaData(doc, f);
+			qDebug() << f.path;
+			
+			myIO->vInsertQcfxFile(f);
+			myIO->iReadQcf(f.mapName);
 		
 		} else if (command[0]=="IMAGE") {
 			
@@ -379,15 +368,14 @@ void network::vReadCommand() {
 			progressDialog->setLabelText(tr("Receiving images…"));
 			progressDialog->setValue(progressDialog->value()+1);
 			
-			int blockSize=0;
-			
 			QDataStream socketstream(commandSocket);
 			
-			blockSize=command[2].toInt();
+			int blockSize=command[2].toInt();
 			
 			qDebug() << blockSize << "reported size";
 			
-			while(commandSocket->bytesAvailable() < blockSize)  myDart->mySleep(20);
+			while(commandSocket->bytesAvailable() < blockSize)
+				myDart->mySleep(20);
 			
 			qDebug() << commandSocket->bytesAvailable() << "is size";
 			
@@ -396,30 +384,11 @@ void network::vReadCommand() {
 			
 			socketstream >> pixmap;
 			
-			QString filename=myIO->qsGetTempDir()+command[1]+".png";
+			QDir(myIO->qsGetTempDir()).mkdir("NETWORK");
+			QString filename=myIO->qsGetTempDir()+"NETWORK/"+command[1].toLower()+".png";
 			
 			qDebug() << "Saving" << filename;
 			qDebug() << "successfull?" << pixmap.save(filename);
-			
-			int i=0;
-			
-			if(command[1]=="BACKGROUND") i=0;
-			else if(command[1]=="ELEVATIONS") i=1;
-			else if(command[1]=="BORDERS") i=2;
-			else if(command[1]=="RIVERS") i=3;
-			else {
-				qDebug() << "[E] broken command";
-				QFile(filename).remove();
-				return;
-			}
-			
-			myDart->qlMapLayers[i]->setText("");
-			myDart->qlMapLayers[i]->setText(QString("<img src=\"%2\" height=\"%1\" width=\"%1\"/>").arg(600*myDart->dZoomFactor).arg(filename));
-			
-			/*
-			actionFlusse->setVisible(TRUE);
-			actionHohen->setVisible(TRUE);
-			actionGrenzen_Kreise->setVisible(TRUE); TODO*/	
 			
 		} else if(command[0]=="SETTINGS" && command.size()>=10) {
 			

@@ -39,6 +39,8 @@ class io : public QWidget {
 		int iFindQcf();
 		int iCheckQcf(QFile &file, QDomDocument &doc);
 		void vFillCurrentTypePlaces();
+		void vGetMetaData(QDomDocument &doc, qcfFile &file);
+		void vInsertQcfxFile(qcfFile &f);
 		void vLoadSettings();
 		void vLoadHighScores(QString mapName);
 		void vSaveHighScores(QString id);
@@ -50,8 +52,5 @@ class io : public QWidget {
 		QStringList qslGetPreferedQcfLanguage(), qslPlaceTypesNamesRegExps;
 		
 		bool bDeterminedPortable;
-		
-		void vInsertQcfxFile(qcfFile &f);
-		void vGetMetaData(QDomDocument &doc, qcfFile &file);
 };
 #endif //IO_HPP 
