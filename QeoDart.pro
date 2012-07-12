@@ -44,6 +44,7 @@ qcf.path += /usr/share/QeoDart/qcf
 qcf.files += qcf/*
 icon.path +=  /usr/share/pixmaps
 icon.files += icons/qeodart.svg
+icon.files += icons/qeodart.png
 desktop.path +=  /usr/share/applications
 desktop.files += QeoDart.desktop
 INSTALLS += langfiles

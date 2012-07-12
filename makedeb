@@ -1,12 +1,28 @@
 #!/bin/bash
 # basing on https://wiki.ubuntu.com/PackagingGuide/QtApplication and http://wiki.ubuntuusers.de/pBuilder
 
+make32=true
+make64=true
+
+if [ $# -eq 1 ]; then
+	if [ $1 -eq 32 ]; then
+		make64=false
+	elif [ $1 -eq 64 ]; then
+		make32=false
+	else
+		echo $1 ?
+		exit -1
+	fi
+fi
+
 workingdir=`pwd`
 cd
 
 echo $(tput setaf 2) Checking if pbuilder is set up... $(tput sgr0)
 if [ ! -f .pbuilderrc ]; then
+	tput setf 6
 	echo $(tput setaf 2) Installing and setting up pbuilder... $(tput sgr0)
+	tput setf 7
 	sudo apt-get install build-essential devscripts ubuntu-dev-tools debhelper dh-make diff patch gnupg fakeroot lintian pbuilder
 	echo COMPONENTS=\"main restricted universe multiverse\" > .pbuilderrc
 	cp pbuilderrc ~/.pbuilderrc
@@ -34,11 +50,15 @@ echo $(tput setaf 2) Creating package... $(tput sgr0)
 # debuild -uc -us
 echo $(tput setaf 2) debuild... $(tput sgr0)
 debuild -S -uc -us
-echo $(tput setaf 2) pbuilder-dist i386... $(tput sgr0)
-pbuilder-dist lucid i386 build ../*.dsc
-cp ~/pbuilder/lucid-i386_result/*.deb ..
-echo $(tput setaf 2) pbuilder-dist amd64... $(tput sgr0)
-pbuilder-dist lucid amd64 build ../*.dsc
-cp ~/pbuilder/lucid_result/*.deb ..
+if $make32; then
+	echo $(tput setaf 2) pbuilder-dist i386... $(tput sgr0)
+	pbuilder-dist lucid i386 build ../*.dsc
+	cp ~/pbuilder/lucid-i386_result/*.deb ..
+fi
+if $make64; then
+	echo $(tput setaf 2) pbuilder-dist amd64... $(tput sgr0)
+	pbuilder-dist lucid amd64 build ../*.dsc
+	cp ~/pbuilder/lucid_result/*.deb ..
+fi
 
 echo $(tput setaf 2) Finished $(tput sgr0)
