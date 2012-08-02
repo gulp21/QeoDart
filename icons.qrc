@@ -20,12 +20,12 @@
         <file alias="index.theme">icons/oxygen/index.theme</file>
     </qresource>
     <qresource prefix="/icons">
-        <file>icons/icon16.png</file>
-        <file>icons/icon48.png</file>
-        <file>icons/icon64.png</file>
-        <file>icons/icon90.png</file>
-        <file>icons/icon200.png</file>
-        <file>icons/icon256.png</file>
+        <file alias="icons/icon16.png">icons/16x16/qeodart.png</file>
+        <file alias="icons/icon48.png">icons/48x48/qeodart.png</file>
+        <file alias="icons/icon64.png">icons/64x64/qeodart.png</file>
+        <file alias="icons/icon90.png">icons/90x90/qeodart.png</file>
+        <file alias="icons/icon200.png">icons/200x200/qeodart.png</file>
+        <file alias="icons/icon256.png">icons/256x256/qeodart.png</file>
         <file alias="cursor.png">icons/cursor.png</file>
     </qresource>
 </RCC>

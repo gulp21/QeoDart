@@ -35,7 +35,7 @@ fi
 cd $workingdir
 
 echo $(tput setaf 2) Creating orig.tar.gz... $(tput sgr0)
-find . -print | grep -v -E "/deb[/$]|template|/doc[/$]|/osm|de1|qcf.*svg|qcf.*xcf|\.o|\.user|\.conf|ui_|/\.|\.ts|/moc_|/svg/|RIVERS|BORDERS|BACKGROUND|ELEVATIONS|qrc_|wikipedianames|makedeb|icon_old|doxygen|Doxygen|test\.svg|\.tar|~|de2|de3" | xargs -t tar --no-recursion -PSczf ./qeodart_2.0.orig.tar.gz
+find . -print | grep -v -E "/deb[/$]|template|/doc[/$]|/osm|de1|qcf.*svg|qcf.*xcf|\.o|\.user|\.conf|ui_|/\.|\.ts|/moc_|/svg/|RIVERS|BORDERS|BACKGROUND|ELEVATIONS|qrc_|wikipedianames|makedeb|icon_old|doxygen|Doxygen|test\.svg|\.tar|~|de2|de3|India_Kerala_locator_map" | xargs -t tar --no-recursion -PSczf ./qeodart_2.0.orig.tar.gz
 
 echo $(tput setaf 2) Preparing source directory... $(tput sgr0)
 mv qeodart_2.0.orig.tar.gz deb

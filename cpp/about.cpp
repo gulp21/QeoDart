@@ -18,7 +18,7 @@ aboutWindow::aboutWindow(dart *TDart, QWidget *parent) : myDart(TDart), QDialog(
 	// WORKAROUND Qt Bug? Does only accept month names in the current locale
 	if((date=QDate::fromString(date,"MMM dd yyyy").toString())=="") date=__DATE__;
 	
-	lblCompiled->setText(tr("compiled on %1").arg(date));
+	lblCompiled->setText(tr("Date of compilation: %1").arg(date));
 	
 	QString s;
 	qcfFile *f; f=&(myDart->qlQcfxFiles[myDart->iCurrentQcf]);
