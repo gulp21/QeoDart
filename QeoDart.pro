@@ -35,6 +35,8 @@ QMAKE_CXXFLAGS_WARN_OFF += -Wno-reorder
 RESOURCES += \
     icons.qrc
 
+RC_FILE = QeoDart.rc
+
 TARGET = qeodart
 target.path = /usr/bin
 INSTALLS += target
