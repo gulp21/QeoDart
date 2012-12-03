@@ -37,7 +37,7 @@ class QCircleLabel : public QLabel {
 		  @param r radius
 		  @param color bordor color
 		  */
-		QCircleLabel(dart *TDart, int X, int Y, int R, QColor COlor, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), x(X), y(Y), r(R), color(COlor), QLabel(parent, f) {
+		QCircleLabel(dart *TDart, int X, int Y, int R, QColor COlor, QWidget *parent = 0, Qt::WindowFlags f = 0) : QLabel(parent, f), myDart(TDart), x(X), y(Y), r(R), color(COlor) {
 			resize(1,1); // otherwise the circles would be visible at the wrong position, as paintEvent hasn't been triggered yet
 			setParent(myDart->centralwidget);
 			setVisible(true);
@@ -97,7 +97,7 @@ class QPointLabel : public QLabel {
 		  @param r radius
 		  @param color bordor color
 		  */
-		QPointLabel(dart *TDart, QString Name, int X, int Y, QColor COlor, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), name(Name), x(X), y(Y), color(COlor), QLabel(parent, f) {
+		QPointLabel(dart *TDart, QString Name, int X, int Y, QColor COlor, QWidget *parent = 0, Qt::WindowFlags f = 0) : QLabel(parent, f), myDart(TDart), name(Name), x(X), y(Y), color(COlor) {
 			resize(1,1);
 			setParent(myDart->centralwidget);
 			setVisible(true);
@@ -155,7 +155,7 @@ class QMouseReleaseLabel : public QLabel {
 		dart *myDart;
 
 	public:
-		QMouseReleaseLabel(dart *TDart, QWidget *parent = 0, Qt::WindowFlags f = 0) : myDart(TDart), QLabel(parent, f) {}
+		QMouseReleaseLabel(dart *TDart, QWidget *parent = 0, Qt::WindowFlags f = 0) : QLabel(parent, f), myDart(TDart) {}
 		~QMouseReleaseLabel() {}
 
 		void mouseReleaseEvent(QMouseEvent * event) {

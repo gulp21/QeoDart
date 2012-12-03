@@ -1,4 +1,0 @@
-#!/bin/bash 
-# I do not know a better way to add Wno's
-cat Makefile | sed -e "s/D_REENTRANT -Wno-reorder/D_REENTRANT/g" | sed -e "s/D_REENTRANT -Wno-reorder/D_REENTRANT/g" | sed -e "s/D_REENTRANT/D_REENTRANT -Wno-reorder/g" > Makefile2 && mv Makefile2 Makefile
-exit 0

@@ -1083,7 +1083,7 @@ Wollen Sie fortfahren?</translation>
         <location filename="../cpp/io.cpp" line="228"/>
         <source>An unexpected error occurred while reading %1.
 QeoDart will be quit.</source>
-        <translation>Beim lesen von %1 ist ein unerwarteter Fehler aufgetreten.
+        <translation>Beim Lesen von %1 ist ein unerwarteter Fehler aufgetreten.
 QeoDart wird nun beendet.</translation>
     </message>
     <message>
@@ -1363,7 +1363,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/preferences.ui" line="304"/>
         <source>When calculating the score, accept</source>
-        <translation>Beim berechnen der Punktzahl akzeptiere</translation>
+        <translation>Beim Berechnen der Punktzahl akzeptiere</translation>
     </message>
     <message>
         <location filename="../ui/preferences.ui" line="311"/>
