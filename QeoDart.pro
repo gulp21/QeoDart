@@ -22,7 +22,7 @@ SOURCES += cpp/dart.cpp cpp/io.cpp cpp/main.cpp cpp/qtwin.cpp \
     cpp/results.cpp \
     cpp/highscores.cpp \
     cpp/about.cpp
-QT += xml
+QT += xml widgets
 
 TRANSLATIONS = lang/de.ts \
     lang/la.ts \

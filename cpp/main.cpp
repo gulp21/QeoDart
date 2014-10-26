@@ -36,7 +36,8 @@ int main(int argc, char* argv[]) {
 	}
 #endif
 	
-	qInstallMsgHandler(MyOutputHandler);
+	//TODO qt 5 needs QtMessageHandler
+	//qInstallMsgHandler(MyOutputHandler);
 	
 	if(argc>=2 && (static_cast<string>(argv[1])=="-l" || static_cast<string>(argv[1])=="--log") ) {
 		ofstream logfile;
@@ -50,8 +51,6 @@ int main(int argc, char* argv[]) {
 		}
 		logfile.close();
 	}
-	
-	QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8")); 
 	
 	QApplication a(argc, argv);
 	a.setAutoSipEnabled(true);
@@ -112,16 +111,16 @@ void MyOutputHandler(QtMsgType type, const char *msg) {
 		if(logfile){
 			switch(type){
 				case QtDebugMsg:
-					logfile << QTime::currentTime().toString().toAscii().data() << " Debug: " << msg << "\n";
+					logfile << QTime::currentTime().toString().toLatin1().data() << " Debug: " << msg << "\n";
 					break;
 				case QtCriticalMsg:
-					logfile << QTime::currentTime().toString().toAscii().data() << " Critical: " << msg << "\n";
+					logfile << QTime::currentTime().toString().toLatin1().data() << " Critical: " << msg << "\n";
 					break;
 				case QtWarningMsg:
-					logfile << QTime::currentTime().toString().toAscii().data() << " Warning: " << msg << "\n";
+					logfile << QTime::currentTime().toString().toLatin1().data() << " Warning: " << msg << "\n";
 					break;
 				case QtFatalMsg:
-					logfile << QTime::currentTime().toString().toAscii().data() <<  " Fatal: " << msg << "\n";
+					logfile << QTime::currentTime().toString().toLatin1().data() <<  " Fatal: " << msg << "\n";
 					logfile.close();
 					abort();
 			}

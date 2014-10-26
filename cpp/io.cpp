@@ -603,7 +603,7 @@ void io::vLoadSettings() {
 	
 	myDart->qsCurrentPlaceType=settings->value("qsCurrentPlaceType","").toString();
 	
-	myDart->bAgainstTime=settings->value("bAgainstTime",FALSE).toBool();
+	myDart->bAgainstTime=settings->value("bAgainstTime",false).toBool();
 	
 	myDart->iGameMode=static_cast<enGameModes>(settings->value("iGameMode",enLocal).toInt());
 	if(myDart->iGameMode!=enFind && myDart->iGameMode!=enTraining && myDart->iGameMode!=enLocal && myDart->iGameMode!=enNetwork) myDart->iGameMode=enLocal;

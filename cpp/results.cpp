@@ -96,7 +96,7 @@ resultWindow::resultWindow(int &HighlightHighScore, dart *TDart, int PLayer, io 
 		leName->hide();
 		connect(btOk, SIGNAL(clicked()), this, SLOT(close()));
 	} else {
-        leName->setText(myIO->settings->value("qsHighScoreLastName").toString());
+		leName->setText(myIO->settings->value("qsHighScoreLastName").toString());
 		connect(btOk, SIGNAL(clicked()), this, SLOT(vClose()));
 	}
 	
@@ -138,7 +138,7 @@ void resultWindow::vClose() {
 	qDebug() << "[i] saved" << name << score;
 	
 	myIO->vSaveHighScores(myDart->qlQcfxFiles[myDart->iCurrentQcf].id);
-    myIO->settings->setValue("qsHighScoreLastName", name);
+	myIO->settings->setValue("qsHighScoreLastName", name);
 	
 	*iHighlightHighScore=i;
 	
